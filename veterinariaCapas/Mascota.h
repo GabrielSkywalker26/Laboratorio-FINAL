@@ -1,0 +1,25 @@
+#ifndef MASCOTA
+#define MASCOTA
+#include "Genero.h"
+#include<iostream>
+
+using namespace std;
+
+class Mascota{
+	private:
+		string nombre;
+		Genero genero;
+		float peso;
+	public:
+		Mascota();
+		Mascota(string,Genero,float);
+		string getNombre();
+		void setNombre(string);
+		Genero getGenero();
+		void setGenero(Genero);
+		float getPeso();
+		void setPeso(float);
+		~Mascota();
+		virtual float obtenerRacionDiaria()=0;
+};
+#endif
