@@ -1,18 +1,44 @@
 #include "Fabrica.h"
-#include "Controlador.h"
+
+#include "ControladorAltaCine.h"
+#include "ControladorAltaFuncion.h"
+#include "ControladorPelicula.h"
+#include "ControladorReserva.h"
+#include "ControladorSesion.h"
+#include "ControladorUsuario.h"
+
 Fabrica* Fabrica::instancia = NULL;
 
-Fabrica::Fabrica(){}
+Fabrica::Fabrica() {}
 
-Fabrica* Fabrica::getInstancia(){
-    if (instancia == NULL) 
+Fabrica* Fabrica::getInstancia() {
+    if (instancia == NULL)
         instancia = new Fabrica();
     return instancia;
 }
 
-IControlador* Fabrica::getIControlador(){
-    return new Controlador();    
+IControladorAltaCine* Fabrica::getIControladorAltaCine() {
+    return new ControladorAltaCine();
 }
 
-Fabrica::~Fabrica(){}
+IControladorAltaFuncion* Fabrica::getIControladorAltaFuncion() {
+    return new ControladorAltaFuncion();
+}
 
+IControladorPelicula* Fabrica::getIControladorPelicula() {
+    return new ControladorPelicula();
+}
+
+IControladorReserva* Fabrica::getIControladorReserva() {
+    return new ControladorReserva();
+}
+
+IControladorSesion* Fabrica::getIControladorSesion() {
+    return new ControladorSesion();
+}
+
+IControladorUsuario* Fabrica::getIControladorUsuario() {
+    return new ControladorUsuario();
+}
+
+Fabrica::~Fabrica() {}

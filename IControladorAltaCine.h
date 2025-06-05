@@ -1,5 +1,5 @@
-#ifndef ICONTROLADOR
-#define ICONTROLADOR
+#ifndef ICONTROLADORALTACINE
+#define ICONTROLADORALTACINE
 #include<list>
 #include<string>
 #include"DtMascota.h"
