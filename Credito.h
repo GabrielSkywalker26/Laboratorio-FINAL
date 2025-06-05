@@ -5,21 +5,13 @@
 
 using namespace std;
 
-class Cine{
+class Credito{
 	private:
-		int id;
-		string direccion;
+		Financiera* financiera;
 	public:
-		Cine();
-		Cine(direccion);
-		int getId();
-		void setId(string);
-		string getDireccion();
-		void setDireccion(direccion);
-		~Cine();
-		DtCine obtenerDtCine(int idCine);
-		DtSala obtenerDtSalas(int idCine);
-		//void agregarFuncion();
-		void agregarSalas();
+		Credito();
+		Credito(Financiera*);
+		~Credito();
+		DtFinanciera obtenerDtFinanciera(string);
 };
 #endif

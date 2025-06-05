@@ -42,5 +42,3 @@ void Cine::agregarSalas(Sala* sala){
 }
 
 //void agregarFuncion();
-
-		

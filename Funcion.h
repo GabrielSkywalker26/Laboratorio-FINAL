@@ -1,5 +1,5 @@
-#ifndef SALA
-#define SALA
+#ifndef FUNCION
+#define FUNCION
 
 #include "Pelicula.h"
 #include "DtFuncion.h"
