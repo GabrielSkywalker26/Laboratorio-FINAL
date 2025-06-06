@@ -2,10 +2,20 @@
 #define CONTROLADORUSUARIO
 
 #include "IControladorUsuario.h"
+#include "ManejadorUsuario.h"
+#include "Usuario.h"
 #include <list>
+#include <string>
 
-class ControladorUsuario: public IControladorUsuario{
+using namespace std;
+
+class ControladorUsuario : public IControladorUsuario {
     public:
-        bool altaUsuario(string, string, string);
+        ControladorUsuario();
+        void altaUsuario(string nickname, string contrasena, string urlFoto);
+        list<Usuario*> listarUsuarios();
+        bool existeUsuario(string nickname);
+        virtual ~ControladorUsuario();
 };
+
 #endif

@@ -11,19 +11,17 @@ using namespace std;
 class Cine{
 	private:
 		int id;
-		string direccion;
+		DtDireccion direccion;
 		Sala* salas[MAX_SALAS];
 		int topeCines;
 	public:
 		Cine();
-		Cine(string);
+		Cine(DtDireccion);//Obtiene id de cine anterior + 1
 		int getId();
 		void setId(int);
-		string getDireccion();
-		void setDireccion(string);
+		DtDireccion getDtDireccion();
+		void setDtDireccion(DtDireccion);
 		~Cine();
-		DtCine obtenerDtCine();
-		DtSala obtenerDtSalas();
 		//void agregarFuncion();
 		void agregarSalas(Sala*);
 };

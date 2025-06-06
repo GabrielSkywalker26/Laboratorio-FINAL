@@ -1,5 +1,6 @@
-#ifndef MANEJADORSOCIO
-#define MANEJADORSOCIO
+#ifndef MANEJADORUSUARIO
+#define MANEJADORUSUARIO
+
 #include "Usuario.h"
 #include <map>
 #include <list>
@@ -7,18 +8,19 @@
 
 using namespace std;
 
-class ManejadorSocio{
+class ManejadorUsuario{
     private:
-        static ManejadorSocio* instancia;
-        map<string,Socio*> socios;
-        ManejadorSocio();
+        static ManejadorUsuario* instancia;
+        map<string,Usuario*> usuarios;
+        ManejadorUsuario();
     public:
-        static ManejadorSocio* getInstancia();
-        list<Socio*> getSocios();
-        Socio* buscarSocio(string);
-        void agregarSocio(Socio*);
-        bool existeSocio(string);
-        void eliminarSocio(string);
-        virtual ~ManejadorSocio();
+        static ManejadorUsuario* getInstancia();
+        list<Usuario*> getUsuarios();
+        Usuario* buscarUsuario(string);
+        void agregarUsuario(Usuario*);
+        bool existeUsuario(string);
+        void eliminarUsuario(string);
+        virtual ~ManejadorUsuario();
 };
+
 #endif

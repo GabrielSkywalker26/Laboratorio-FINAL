@@ -1,42 +1,42 @@
 #include "Usuario.h"
-#include <list>
 #include "ManejadorUsuario.h"
+
 using namespace std;
 
-ManejadorSocio* ManejadorSocio::instancia = NULL;
+ManejadorUsuario* ManejadorUsuario::instancia = NULL;
 
-ManejadorSocio::ManejadorSocio(){}
+ManejadorUsuario::ManejadorUsuario(){}
 
-ManejadorSocio* ManejadorSocio::getInstancia(){
+ManejadorUsuario* ManejadorUsuario::getInstancia(){
     if (instancia == NULL)
-        instancia = new ManejadorSocio();
+        instancia = new ManejadorUsuario();
     return instancia;
 }
 
-list<Socio*> ManejadorSocio::getSocios(){
-    list<Socio*> lstSocios;
-    for (map<string,Socio*>::iterator it=this->socios.begin(); it!=socios.end(); ++it)
-        lstSocios.push_back(it->second);
-    return lstSocios;
+list<Usuario*> ManejadorUsuario::getUsuarios(){
+    list<Usuario*> lstUsuarios;
+    for (map<string,Usuario*>::iterator it=this->usuarios.begin(); it!=usuarios.end(); ++it)
+        lstUsuarios.push_back(it->second);
+    return lstUsuarios;
 }
 
-Socio* ManejadorSocio::buscarSocio(string socio){
-  map<string,Socio*>::iterator it = this->socios.find(socio);
-  return it->second;
+Usuario* ManejadorUsuario::buscarUsuario(string usuario){
+    map<string,Usuario*>::iterator it = this->usuarios.find(usuario);
+    return it->second;
 }
 
-void ManejadorSocio::agregarSocio(Socio* socio){
-    socios.insert(std::pair<string,Socio*>(socio->getCi(),socio));
+void ManejadorUsuario::agregarUsuario(Usuario* usuario){
+    usuarios.insert(std::pair<string,Usuario*>(usuario->getNickname(),usuario));
 }
 
-bool ManejadorSocio::existeSocio(string socio){ 
-  map<string,Socio*>::iterator it = this->socios.find(socio);
-  return (it != this->socios.end());
+bool ManejadorUsuario::existeUsuario(string usuario){
+    map<string,Usuario*>::iterator it = this->usuarios.find(usuario);
+    return (it != this->usuarios.end());
 }
 
-void ManejadorSocio::eliminarSocio(string socio){
-  map<string,Socio*>::iterator it = this->socios.find(socio);
-  this->socios.erase(it);
+void ManejadorUsuario::eliminarUsuario(string usuario){
+    map<string,Usuario*>::iterator it = this->usuarios.find(usuario);
+    this->usuarios.erase(it);
 }
 
-ManejadorSocio::~ManejadorSocio(){}
+ManejadorUsuario::~ManejadorUsuario(){}

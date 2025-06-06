@@ -1,16 +1,14 @@
 #ifndef ICONTROLADORUSUARIO
 #define ICONTROLADORUSUARIO
 
-#include<list>
-#include<string>
-#include"DtMascota.h"
-#include"DtFecha.h"
-#include"DtConsulta.h"
-
+#include <string>
 using namespace std;
 
-class IControladorUsuario{
-    public:
-        virtual bool altaUsuario(string, string, string)=0;
+class IControladorUsuario {
+public:
+    virtual void altaUsuario(string nickname, string contrasenia, string urlFoto) = 0;
+    virtual bool existeUsuario(string nickname) = 0;
+    virtual ~IControladorUsuario() {}
 };
+
 #endif
