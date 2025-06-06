@@ -1,17 +1,17 @@
-#ifndef CONTROLADOR
-#define CONTROLADOR
-#include "IControlador.h"
+#ifndef CONTROLADORALTAFUNCION
+#define CONTROLADORALTAFUNCION
+#include "IControladorAltaFuncion.h"
 #include <list>
-class Controlador: public IControlador{
-    public:
-        void registrarSocio(string,string,DtMascota&);
-        void agregarMascota(string,DtMascota&);
-        void ingresarConsulta(string,string,DtFecha&);
-        list<DtConsulta*> verConsultasAntesDeFecha(DtFecha&,string,int&);
-        void eliminarSocio(string ci);
-        list<DtMascota*> obtenerMascotas(string,int&);
-        void cargarDatos();
-        void existeSocio(string);
-   };
-#endif
 
+class ControladorAltaFuncion: public IControladorAltaFuncion{
+    private:
+        string titulo;
+        string idCine;
+    public:
+        list<DtPelicula*> listarPeliculas();
+        void selectPeli(string);
+        list<DtCine*> listarCines();
+        list<DtSala*> selectCine(string);
+        void altaFuncion(string, DtHorario, DtFecha);
+};
+#endif
