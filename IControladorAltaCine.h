@@ -1,5 +1,6 @@
 #ifndef ICONTROLADORALTACINE
 #define ICONTROLADORALTACINE
+
 #include<list>
 #include<string>
 #include"DtMascota.h"
@@ -9,7 +10,7 @@
 using namespace std;
 
 class IControladorAltaCine{
-    public:        
+    public:
         virtual void ingresarDir(string)=0;
         virtual void ingresarCap(int)=0;
         virtual void altaCine()=0;

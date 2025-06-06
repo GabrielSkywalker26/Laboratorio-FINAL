@@ -1,5 +1,6 @@
 #ifndef ICONTROLADORRESERVA
 #define ICONTROLADORRESERVA
+
 #include<list>
 #include<string>
 #include"DtMascota.h"
@@ -9,7 +10,7 @@
 using namespace std;
 
 class IControladorReserva{
-    public:        
+    public:
         virtual list<DtPelicula*> listarPeliculas()=0;
         virtual DtPeliInfo* selectPeli(string)=0;
         virtual list<DtCine*> listarCinesPeli(string)=0;
