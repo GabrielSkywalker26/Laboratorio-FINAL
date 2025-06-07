@@ -1,42 +1,42 @@
-#include "Usuario.h"
+#include "Pelicula.h"
 #include <list>
-#include "ManejadorUsuario.h"
+#include "ManejadorPelicula.h"
 using namespace std;
 
-ManejadorSocio* ManejadorSocio::instancia = NULL;
+ManejadorPelicula* ManejadorPelicula::instancia = NULL;
 
-ManejadorSocio::ManejadorSocio(){}
+ManejadorPelicula::ManejadorPelicula(){}
 
-ManejadorSocio* ManejadorSocio::getInstancia(){
+ManejadorPelicula* ManejadorPelicula::getInstancia(){
     if (instancia == NULL)
-        instancia = new ManejadorSocio();
+        instancia = new ManejadorPelicula();
     return instancia;
 }
 
-list<Socio*> ManejadorSocio::getSocios(){
-    list<Socio*> lstSocios;
-    for (map<string,Socio*>::iterator it=this->socios.begin(); it!=socios.end(); ++it)
-        lstSocios.push_back(it->second);
-    return lstSocios;
+list<Pelicula*> ManejadorPelicula::getPeliculas(){
+    list<Pelicula*> lstPeliculas;
+    for (map<string,Pelicula*>::iterator it=this->Peliculas.begin(); it!=Peliculas.end(); ++it)
+        lstPeliculas.push_back(it->second);
+    return lstPeliculas;
 }
 
-Socio* ManejadorSocio::buscarSocio(string socio){
-  map<string,Socio*>::iterator it = this->socios.find(socio);
+Pelicula* ManejadorPelicula::buscarPelicula(string Pelicula){
+  map<string,Pelicula*>::iterator it = this->Peliculas.find(Pelicula);
   return it->second;
 }
 
-void ManejadorSocio::agregarSocio(Socio* socio){
-    socios.insert(std::pair<string,Socio*>(socio->getCi(),socio));
+void ManejadorPelicula::agregarPelicula(Pelicula* Pelicula){
+    Peliculas.insert(std::pair<string,Pelicula*>(Pelicula->getCi(),Pelicula));
 }
 
-bool ManejadorSocio::existeSocio(string socio){ 
-  map<string,Socio*>::iterator it = this->socios.find(socio);
-  return (it != this->socios.end());
+bool ManejadorPelicula::existePelicula(string Pelicula){ 
+  map<string,Pelicula*>::iterator it = this->Peliculas.find(Pelicula);
+  return (it != this->Peliculas.end());
 }
 
-void ManejadorSocio::eliminarSocio(string socio){
-  map<string,Socio*>::iterator it = this->socios.find(socio);
-  this->socios.erase(it);
+void ManejadorPelicula::eliminarPelicula(string Pelicula){
+  map<string,Pelicula*>::iterator it = this->Peliculas.find(Pelicula);
+  this->Peliculas.erase(it);
 }
 
-ManejadorSocio::~ManejadorSocio(){}
+ManejadorPelicula::~ManejadorPelicula(){}

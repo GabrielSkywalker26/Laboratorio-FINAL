@@ -1,42 +1,42 @@
-#include "Usuario.h"
+#include "Financiera.h"
 #include <list>
-#include "ManejadorUsuario.h"
+#include "ManejadorFinanciera.h"
 using namespace std;
 
-ManejadorSocio* ManejadorSocio::instancia = NULL;
+ManejadorFinanciera* ManejadorFinanciera::instancia = NULL;
 
-ManejadorSocio::ManejadorSocio(){}
+ManejadorFinanciera::ManejadorFinanciera(){}
 
-ManejadorSocio* ManejadorSocio::getInstancia(){
+ManejadorFinanciera* ManejadorFinanciera::getInstancia(){
     if (instancia == NULL)
-        instancia = new ManejadorSocio();
+        instancia = new ManejadorFinanciera();
     return instancia;
 }
 
-list<Socio*> ManejadorSocio::getSocios(){
-    list<Socio*> lstSocios;
-    for (map<string,Socio*>::iterator it=this->socios.begin(); it!=socios.end(); ++it)
-        lstSocios.push_back(it->second);
-    return lstSocios;
+list<Financiera*> ManejadorFinanciera::getFinancieras(){
+    list<Financiera*> lstFinancieras;
+    for (map<string,Financiera*>::iterator it=this->Financieras.begin(); it!=Financieras.end(); ++it)
+        lstFinancieras.push_back(it->second);
+    return lstFinancieras;
 }
 
-Socio* ManejadorSocio::buscarSocio(string socio){
-  map<string,Socio*>::iterator it = this->socios.find(socio);
+Financiera* ManejadorFinanciera::buscarFinanciera(string Financiera){
+  map<string,Financiera*>::iterator it = this->Financieras.find(Financiera);
   return it->second;
 }
 
-void ManejadorSocio::agregarSocio(Socio* socio){
-    socios.insert(std::pair<string,Socio*>(socio->getCi(),socio));
+void ManejadorFinanciera::agregarFinanciera(Financiera* Financiera){
+    Financieras.insert(std::pair<string,Financiera*>(Financiera->getCi(),Financiera));
 }
 
-bool ManejadorSocio::existeSocio(string socio){ 
-  map<string,Socio*>::iterator it = this->socios.find(socio);
-  return (it != this->socios.end());
+bool ManejadorFinanciera::existeFinanciera(string Financiera){ 
+  map<string,Financiera*>::iterator it = this->Financieras.find(Financiera);
+  return (it != this->Financieras.end());
 }
 
-void ManejadorSocio::eliminarSocio(string socio){
-  map<string,Socio*>::iterator it = this->socios.find(socio);
-  this->socios.erase(it);
+void ManejadorFinanciera::eliminarFinanciera(string Financiera){
+  map<string,Financiera*>::iterator it = this->Financieras.find(Financiera);
+  this->Financieras.erase(it);
 }
 
-ManejadorSocio::~ManejadorSocio(){}
+ManejadorFinanciera::~ManejadorFinanciera(){}

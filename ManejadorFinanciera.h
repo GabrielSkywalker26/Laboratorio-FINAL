@@ -1,24 +1,25 @@
-#ifndef MANEJADORSOCIO
-#define MANEJADORSOCIO
-#include "Usuario.h"
+#ifndef MANEJADORFINANCIERA
+#define MANEJADORFINANCIERA
+
+#include "Financiera.h"
 #include <map>
 #include <list>
 #include <string>
 
 using namespace std;
 
-class ManejadorSocio{
+class ManejadorFinanciera{
     private:
-        static ManejadorSocio* instancia;
-        map<string,Socio*> socios;
-        ManejadorSocio();
+        static ManejadorFinanciera* instancia;
+        map<string,Financiera*> Financieras;
+        ManejadorFinanciera();
     public:
-        static ManejadorSocio* getInstancia();
-        list<Socio*> getSocios();
-        Socio* buscarSocio(string);
-        void agregarSocio(Socio*);
-        bool existeSocio(string);
-        void eliminarSocio(string);
-        virtual ~ManejadorSocio();
+        static ManejadorFinanciera* getInstancia();
+        list<Financiera*> getFinancieras();
+        Financiera* buscarFinanciera(string);
+        void agregarFinanciera(Financiera*);
+        bool existeFinanciera(string);
+        void eliminarFinanciera(string);
+        virtual ~ManejadorFinanciera();
 };
 #endif

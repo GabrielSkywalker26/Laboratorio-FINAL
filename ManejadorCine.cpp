@@ -1,42 +1,42 @@
-#include "Usuario.h"
+#include "Cine.h"
 #include <list>
-#include "ManejadorUsuario.h"
+#include "ManejadorCine.h"
 using namespace std;
 
-ManejadorSocio* ManejadorSocio::instancia = NULL;
+ManejadorCine* ManejadorCine::instancia = NULL;
 
-ManejadorSocio::ManejadorSocio(){}
+ManejadorCine::ManejadorCine(){}
 
-ManejadorSocio* ManejadorSocio::getInstancia(){
+ManejadorCine* ManejadorCine::getInstancia(){
     if (instancia == NULL)
-        instancia = new ManejadorSocio();
+        instancia = new ManejadorCine();
     return instancia;
 }
 
-list<Socio*> ManejadorSocio::getSocios(){
-    list<Socio*> lstSocios;
-    for (map<string,Socio*>::iterator it=this->socios.begin(); it!=socios.end(); ++it)
-        lstSocios.push_back(it->second);
-    return lstSocios;
+list<Cine*> ManejadorCine::getCines(){
+    list<Cine*> lstCines;
+    for (map<string,Cine*>::iterator it=this->Cines.begin(); it!=Cines.end(); ++it)
+        lstCines.push_back(it->second);
+    return lstCines;
 }
 
-Socio* ManejadorSocio::buscarSocio(string socio){
-  map<string,Socio*>::iterator it = this->socios.find(socio);
+Cine* ManejadorCine::buscarCine(string Cine){
+  map<string,Cine*>::iterator it = this->Cines.find(Cine);
   return it->second;
 }
 
-void ManejadorSocio::agregarSocio(Socio* socio){
-    socios.insert(std::pair<string,Socio*>(socio->getCi(),socio));
+void ManejadorCine::agregarCine(Cine* Cine){
+    Cines.insert(std::pair<string,Cine*>(Cine->getCi(),Cine));
 }
 
-bool ManejadorSocio::existeSocio(string socio){ 
-  map<string,Socio*>::iterator it = this->socios.find(socio);
-  return (it != this->socios.end());
+bool ManejadorCine::existeCine(string Cine){ 
+  map<string,Cine*>::iterator it = this->Cines.find(Cine);
+  return (it != this->Cines.end());
 }
 
-void ManejadorSocio::eliminarSocio(string socio){
-  map<string,Socio*>::iterator it = this->socios.find(socio);
-  this->socios.erase(it);
+void ManejadorCine::eliminarCine(string Cine){
+  map<string,Cine*>::iterator it = this->Cines.find(Cine);
+  this->Cines.erase(it);
 }
 
-ManejadorSocio::~ManejadorSocio(){}
+ManejadorCine::~ManejadorCine(){}

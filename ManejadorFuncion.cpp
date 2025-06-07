@@ -1,42 +1,42 @@
-#include "Usuario.h"
+#include "Funcion.h"
 #include <list>
-#include "ManejadorUsuario.h"
+#include "ManejadorFuncion.h"
 using namespace std;
 
-ManejadorSocio* ManejadorSocio::instancia = NULL;
+ManejadorFuncion* ManejadorFuncion::instancia = NULL;
 
-ManejadorSocio::ManejadorSocio(){}
+ManejadorFuncion::ManejadorFuncion(){}
 
-ManejadorSocio* ManejadorSocio::getInstancia(){
+ManejadorFuncion* ManejadorFuncion::getInstancia(){
     if (instancia == NULL)
-        instancia = new ManejadorSocio();
+        instancia = new ManejadorFuncion();
     return instancia;
 }
 
-list<Socio*> ManejadorSocio::getSocios(){
-    list<Socio*> lstSocios;
-    for (map<string,Socio*>::iterator it=this->socios.begin(); it!=socios.end(); ++it)
-        lstSocios.push_back(it->second);
-    return lstSocios;
+list<Funcion*> ManejadorFuncion::getFuncions(){
+    list<Funcion*> lstFuncions;
+    for (map<string,Funcion*>::iterator it=this->Funcions.begin(); it!=Funcions.end(); ++it)
+        lstFuncions.push_back(it->second);
+    return lstFuncions;
 }
 
-Socio* ManejadorSocio::buscarSocio(string socio){
-  map<string,Socio*>::iterator it = this->socios.find(socio);
+Funcion* ManejadorFuncion::buscarFuncion(string Funcion){
+  map<string,Funcion*>::iterator it = this->Funcions.find(Funcion);
   return it->second;
 }
 
-void ManejadorSocio::agregarSocio(Socio* socio){
-    socios.insert(std::pair<string,Socio*>(socio->getCi(),socio));
+void ManejadorFuncion::agregarFuncion(Funcion* Funcion){
+    Funcions.insert(std::pair<string,Funcion*>(Funcion->getCi(),Funcion));
 }
 
-bool ManejadorSocio::existeSocio(string socio){ 
-  map<string,Socio*>::iterator it = this->socios.find(socio);
-  return (it != this->socios.end());
+bool ManejadorFuncion::existeFuncion(string Funcion){ 
+  map<string,Funcion*>::iterator it = this->Funcions.find(Funcion);
+  return (it != this->Funcions.end());
 }
 
-void ManejadorSocio::eliminarSocio(string socio){
-  map<string,Socio*>::iterator it = this->socios.find(socio);
-  this->socios.erase(it);
+void ManejadorFuncion::eliminarFuncion(string Funcion){
+  map<string,Funcion*>::iterator it = this->Funcions.find(Funcion);
+  this->Funcions.erase(it);
 }
 
-ManejadorSocio::~ManejadorSocio(){}
+ManejadorFuncion::~ManejadorFuncion(){}
