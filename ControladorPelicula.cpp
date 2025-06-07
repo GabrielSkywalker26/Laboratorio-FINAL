@@ -1,7 +1,5 @@
 #include "ControladorPelicula.h"
 
-ControladorPelicula::ControladorPelicula(){}
-
 void ControladorPelicula::altaPelicula(string nickname, string contrasena, string urlFoto){
     Pelicula* u = new Pelicula(nickname, contrasena, urlFoto);
     ManejadorPelicula::getInstancia()->agregarPelicula(u);

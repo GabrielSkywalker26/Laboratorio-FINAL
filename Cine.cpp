@@ -25,12 +25,14 @@ void Cine::setDtDireccion(DtDireccion direccion){
 
 Cine::~Cine(){
 	int i;
+	/*
 	for(i=0;i<this->topeCines;i++)
-		delete this->salas[i];
+		delete this->salas[i];*/
 }
 
 
-void Cine::agregarSalas(Sala* sala){
+//void Cine::agregarSalas(Sala* sala){
+void Cine::agregarSalas(DtSala sala){
 	this->salas[this->topeCines]=sala;
 	this->topeCines++;
 }

@@ -25,7 +25,7 @@ list<DtPelicula*> listarPeliculas(){};
 DtPeliInfo* selectPeli(string){};
 
 //se listan para esa película y ese cine las funciones existentes en el sistema posterior a la fecha y hora actual
-list<DtCine*> listarCines(){}; 
+list<DtCine*> listarCinesPeli(){}; 
 list<DtFuncion*> selectCine(string){};
 list<DtFuncion*> selectFuncion(int){};
 bool reservarAsientos(int){};
@@ -35,18 +35,3 @@ string ingresarFinanciera(string){};
 bool confirmar(){};
 void reiniciar(){};
 void finalizar(){};
-
-
-        DtPeliInfo* selectPeli(string);
-
-        //se listan para esa película y ese cine las funciones existentes en el sistema posterior a la fecha y hora actual
-        list<DtCine*> listarCines(); 
-        list<DtFuncion*> selectCine(string);
-        list<DtFuncion*> selectFuncion(int);
-        bool reservarAsientos(int);
-        void ingresarModoPago(int);
-        string ingresarBanco(string);
-        string ingresarFinanciera(string);
-        bool confirmar();
-        void reiniciar();
-        void finalizar();

@@ -2,6 +2,11 @@
 #define CONTROLADORRESERVA
 
 #include "IControladorReserva.h"
+#include "DtCine.h"
+#include "DtFuncion.h"
+#include "DtPelicula.h"
+
+
 #include <list>
 
 class ControladorReserva: public IControladorReserva{
@@ -13,7 +18,7 @@ class ControladorReserva: public IControladorReserva{
         DtPeliInfo* selectPeli(string);
 
         //se listan para esa película y ese cine las funciones existentes en el sistema posterior a la fecha y hora actual
-        list<DtCine*> listarCines(); 
+        list<DtCine*> listarCinesPeli(); 
         list<DtFuncion*> selectCine(string);
         list<DtFuncion*> selectFuncion(int);
         bool reservarAsientos(int);

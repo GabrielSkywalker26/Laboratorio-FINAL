@@ -1,7 +1,5 @@
 #include "ControladorSesion.h"
 
-ControladorSesion::ControladorSesion(){}
-
 void ControladorSesion::altaSesion(string nickname, string contrasena, string urlFoto){
     Sesion* u = new Sesion(nickname, contrasena, urlFoto);
     ManejadorSesion::getInstancia()->agregarSesion(u);

@@ -5,6 +5,8 @@
 #include<string>
 
 #include"DtFecha.h"
+#include"DtFuncion.h"
+#include"DtPeliInfo.h"
 
 
 using namespace std;
@@ -13,7 +15,7 @@ class IControladorReserva{
     public:
         virtual list<DtPelicula*> listarPeliculas()=0;
         virtual DtPeliInfo* selectPeli(string)=0;
-        virtual list<DtCine*> listarCinesPeli(string)=0;
+        virtual list<DtCine*> listarCinesPeli()=0;
         virtual list<DtFuncion*> selectCine(string)=0;
         virtual void selectFuncion(string)=0;
         virtual bool reservarAsientos(int)=0;

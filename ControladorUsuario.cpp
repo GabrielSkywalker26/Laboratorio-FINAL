@@ -1,7 +1,5 @@
 #include "ControladorUsuario.h"
 
-ControladorUsuario::ControladorUsuario(){}
-
 void ControladorUsuario::altaUsuario(string nickname, string contrasena, string urlFoto){
     Usuario* u = new Usuario(nickname, contrasena, urlFoto);
     ManejadorUsuario::getInstancia()->agregarUsuario(u);
