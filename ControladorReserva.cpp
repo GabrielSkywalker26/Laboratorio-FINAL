@@ -1,28 +1,41 @@
-#include "ControladorAltaCine.h"
+#include "ControladorReserva.h"
 #include <list>
 
-ControladorAltaCine::ControladorAltaCine(){}
+ControladorReserva::ControladorReserva(){}
 
-void ControladorAltaCine::altaCine(DtDireccion dtDireccion){
+ControladorReserva::~ControladorReserva(){}
+
+
+/*
+void ControladorReserva::altaCine(DtDireccion dtDireccion){
     Cine* u = new Cine(dtDireccion);
     ManejadorCine::getInstancia()->agregarCine(u);
 }
 
-list<Cine*> ControladorAltaCine::listarCines(){
+list<Cine*> ControladorReserva::listarCines(){
     return ManejadorCine::getInstancia()->getCines();
 }
 
-bool ControladorAltaCine::existeCine(string direccion){
+bool ControladorReserva::existeCine(string direccion){
     return ManejadorCine::getInstancia()->existeCine(direccion);
 }
-
-ControladorAltaCine::~ControladorAltaCine(){}
+*/
 
 
 // del .h
 // @TODO: comentar que realiza la funcion
 // Implementar metodo
-void ControladorAltaCine::ingresarDir(string){};
-void ControladorAltaCine::ingresarCap(int){};
-bool ControladorAltaCine::altaCine(){};
-void ControladorAltaCine::finalizar(){};
+list<DtPelicula*> listarPeliculas();
+DtPeliInfo* selectPeli(string);
+
+//se listan para esa película y ese cine las funciones existentes en el sistema posterior a la fecha y hora actual
+list<DtCine*> ControladorReserva::listarCinesPeli(){}; 
+list<DtFuncion*> ControladorReserva::selectCine(string){};
+void ControladorReserva::selectFuncion(int){};
+bool ControladorReserva::reservarAsientos(int){};
+void ControladorReserva::ingresarModoPago(int){};
+string ControladorReserva::ingresarBanco(string){};
+string ControladorReserva::ingresarFinanciera(string){};
+bool ControladorReserva::confirmar(){};
+void ControladorReserva::reiniciar(){};
+void ControladorReserva::finalizar(){};

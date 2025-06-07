@@ -8,6 +8,8 @@ class ControladorSesion: public IControladorSesion{
     private:
         string nickname;
     public:
+		ControladorSesion();
+		~ControladorSesion();
         bool iniciarSesion(string,string);
         bool cerrarSesion();
 };

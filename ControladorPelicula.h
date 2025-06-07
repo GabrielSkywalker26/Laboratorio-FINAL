@@ -10,6 +10,8 @@ class ControladorPelicula: public IControladorPelicula{
     private:
         string pelicula;
     public:
+		ControladorPelicula();
+		~ControladorPelicula();
         bool altaPelicula(string, string, string);
         bool eliminarPelicula(string);
    };
