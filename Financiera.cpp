@@ -24,7 +24,9 @@ void Financiera::setDescuento(float descuento){
 
 Financiera::~Financiera(){}
 
+/*
 DtFinanciera* DtFinanciera::obtenerDtFinanciera(){
 	DtFinanciera* dtFinanciera = new DtFinanciera(this->nombre);
 	return dtFinanciera;
 }
+*/

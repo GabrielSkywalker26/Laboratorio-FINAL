@@ -2,6 +2,7 @@
 #define RESERVA
 
 #include "DtPelicula.h"
+
 #include<iostream>
 
 using namespace std;
@@ -18,7 +19,7 @@ class Reserva{
 		int getCantEntradas();
 		void setCantEntradas(int);
 		~Reserva();
-		DtReserva obtenerDtReserva();
+		//DtReserva obtenerDtReserva();
 		DtPelicula obtenerDtPelicula();
 };
 #endif

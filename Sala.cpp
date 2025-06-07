@@ -24,13 +24,15 @@ void Sala::setCapacidad(int capacidad){
 
 Sala::~Sala(){}
 
-DtSala* DtSala::obtenerDtSala(){
-	DtSala* dtSala = new DtSala(this->idSala);
+DtSala Sala::obtenerDtSala(){
+	//DtSala* dtSala = new DtSala(this->idSala);
+	DtSala dtSala;
 	return dtSala;
 }
 
+
 void Sala::agregarFuncion(int idF){
 	// buscar funcion con idf
-    this->funciones[this->topeFunciones]=funcion;
+    //this->funciones[this->topeFunciones]=funcion;
 	this->topeFunciones++;
 }

@@ -5,19 +5,17 @@ Sesion::Sesion(DtUsuario usuario){
 	this->usuario=usuario;
 }
 
-Sesion::~Sesion(){
-	int i;
-	for(i=0;i<this->topeSesions;i++)
-		delete this->salas[i];
-}
+Sesion::~Sesion(){}
 
-DtUsuario* DtUsuario::obtenerDtUsuario(){
-	DtSesion* dtSesion = new DtSesion(this->idSesion);
-	return dtSesion;
+DtUsuario Sesion::obtenerDtUsuario(){
+	//DtSesion dtSesion = new DtSesion(this->idSesion);
+	DtUsuario dtUsuario;
+	return dtUsuario;
 }
 
 
-DtUsuario* dtUsuario::setDtUsuario(DtUsuario) usuario{
-	DtUsuario* dtUsuario = new DtUsuario();
+DtUsuario Sesion::setDtUsuario(DtUsuario){
+	//DtUsuario dtUsuario = new DtUsuario();
+	DtUsuario dtUsuario;
 	return dtUsuario;
 }

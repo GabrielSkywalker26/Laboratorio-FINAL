@@ -10,7 +10,7 @@ using namespace std;
 class ManejadorPelicula{
     private:
         static ManejadorPelicula* instancia;
-        map<string,Pelicula*> Peliculas;
+        map<string,Pelicula*> peliculas;
         ManejadorPelicula();
     public:
         static ManejadorPelicula* getInstancia();

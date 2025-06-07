@@ -7,7 +7,7 @@ Debito::Debito(string banco){
 	this->banco=banco;
 }
 
-int Debito::getBanco(){
+string Debito::getBanco(){
 	return this->banco;
 }
 void Debito::setBanco(string banco){
@@ -16,10 +16,12 @@ void Debito::setBanco(string banco){
 
 Debito::~Debito(){}
 
+/*
 DtReserva* DtReserva::obtenerDtReserva(){
 	DtDebito* dtDebito = new DtDebito(this->idDebito);
 	return dtDebito;
 }
+*/
 
 void Debito::agregarDtReserva(){
 }

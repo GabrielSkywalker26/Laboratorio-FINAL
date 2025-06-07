@@ -9,7 +9,8 @@ Credito::Credito(Financiera* financiera){
 
 Credito::~Credito(){}
 
-DtFinanciera* DtFinanciera::obtenerDtFinanciera(string financiera){
-	DtFinanciera* dtFinanciera = new DtFinanciera(financiera);
+DtFinanciera Credito::obtenerDtFinanciera(string financiera){
+	//DtFinanciera* dtFinanciera = new DtFinanciera(financiera);
+	DtFinanciera dtFinanciera;
 	return dtFinanciera;
 }

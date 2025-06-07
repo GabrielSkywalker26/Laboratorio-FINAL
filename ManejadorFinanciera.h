@@ -11,7 +11,7 @@ using namespace std;
 class ManejadorFinanciera{
     private:
         static ManejadorFinanciera* instancia;
-        map<string,Financiera*> Financieras;
+        map<string,Financiera*> financieras;
         ManejadorFinanciera();
     public:
         static ManejadorFinanciera* getInstancia();

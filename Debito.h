@@ -2,7 +2,6 @@
 #define DEBITO
 
 #include "Reserva.h"
-#include "DtReserva.h"
 #include<iostream>
 
 using namespace std;
@@ -13,10 +12,10 @@ class Debito{
 	public:
 		Debito();
 		Debito(string);
-		int getBanco();
+		string getBanco();
 		void setBanco(string);
 		~Debito();
-		DtReserva obtenerDtReserva();
+		//DtReserva obtenerDtReserva();
 		void agregarDtReserva();
 };
 #endif

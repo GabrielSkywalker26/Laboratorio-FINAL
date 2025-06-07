@@ -2,6 +2,7 @@
 #define FINANCIERA
 
 #include "DtFinanciera.h"
+
 #include<iostream>
 
 using namespace std;
@@ -15,9 +16,9 @@ class Financiera{
 		Financiera(string, float);
 		string getNombre();
 		void setNombre(string);
-		string getDescuento();
-		void setDescuent(float);
+		float getDescuento();
+		void setDescuento(float);
 		~Financiera();
-		DtFinanciera obtenerDtFinanciera();
+		//DtFinanciera obtenerDtFinanciera();
 };
 #endif

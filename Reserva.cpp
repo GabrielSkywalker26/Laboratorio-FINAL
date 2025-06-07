@@ -24,7 +24,9 @@ void Reserva::setCantEntradas(int cantEntradas){
 
 Reserva::~Reserva(){}
 
+/*
 DtReserva* DtReserva::obtenerDtReserva(){
 	DtReserva* dtReserva = new DtReserva(this->id);
 	return dtReserva;
 }
+*/

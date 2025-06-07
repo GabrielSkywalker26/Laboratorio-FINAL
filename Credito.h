@@ -1,6 +1,9 @@
 #ifndef CREDITO
 #define CREDITO
 
+#include "Financiera.h"
+#include "DtFinanciera.h"
+
 #include<iostream>
 
 using namespace std;

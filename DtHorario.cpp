@@ -16,6 +16,7 @@ DtHorario::~DtHorario(){}
 
 bool operator <(const DtHorario& dth1,const DtHorario& dth2){
 	bool retorno;
+	/*
 	if (dth1.anio < dth2.anio){
 		retorno=true;
 	}else if(dth1.anio == dth2.anio){
@@ -25,9 +26,10 @@ bool operator <(const DtHorario& dth1,const DtHorario& dth2){
 			retorno=false;
 		}
 	}
+	*/
 	return retorno;
 }
 ostream& operator <<(ostream& salida,const DtHorario& dth){
-	cout << "Hora comienzo: " << dth.dia << "\nHora fin: " << dth.mes <<endl;
+	//cout << "Hora comienzo: " << dth.dia << "\nHora fin: " << dth.mes <<endl;
 	return salida;
 }
