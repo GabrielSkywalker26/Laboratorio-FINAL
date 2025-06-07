@@ -22,16 +22,6 @@ ControladorAltaFuncion::~ControladorAltaFuncion(){}
 // @TODO: comentar que realiza la funcion
 // Implementar metodo
 list<DtPelicula*> listarPeliculas();
-DtPeliInfo* selectPeli(string);
-
-//se listan para esa película y ese cine las funciones existentes en el sistema posterior a la fecha y hora actual
-list<DtCine*> listarCines(){}; 
-list<DtFuncion*> selectCine(string){};
-list<DtFuncion*> selectFuncion(int){};
-bool AltaFuncionrAsientos(int){};
-void ingresarModoPago(int){};
-string ingresarBanco(string){};
-string ingresarFinanciera(string){};
-bool confirmar(){};
-void reiniciar(){};
-void finalizar(){};
+list<DtCine*> listarCines(string); // Le paso la peli que elige como parametro
+list<DtSala*> listarSalas(string); // Le paso el cine que elige como parametro
+void altaFuncion(string, DtHorario, DtFecha);
