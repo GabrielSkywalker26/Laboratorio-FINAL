@@ -3,9 +3,9 @@
 
 #include<list>
 #include<string>
-#include"DtMascota.h"
+
 #include"DtFecha.h"
-#include"DtConsulta.h"
+
 
 using namespace std;
 
