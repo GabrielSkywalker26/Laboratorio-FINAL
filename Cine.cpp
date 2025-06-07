@@ -32,7 +32,7 @@ Cine::~Cine(){
 
 
 //void Cine::agregarSalas(Sala* sala){
-void Cine::agregarSalas(DtSala sala){
+void Cine::agregarSalas(DtSala* sala){
 	this->salas[this->topeCines]=sala;
 	this->topeCines++;
 }

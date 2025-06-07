@@ -7,6 +7,7 @@ ControladorPelicula::~ControladorPelicula(){}
 bool ControladorPelicula::altaPelicula(string titulo, string sinopsis, string poster){
     Pelicula* u = new Pelicula(titulo, sinopsis, poster);
     ManejadorPelicula::getInstancia()->agregarPelicula(u);
+    return true;
 }
 
 
@@ -14,7 +15,4 @@ bool ControladorPelicula::altaPelicula(string titulo, string sinopsis, string po
 // del .h
 // @TODO: comentar que realiza la funcion
 // Implementar metodo
-bool altaPelicula(string, string, string){
-    return true;
-};
-bool eliminarPelicula(string){};
+bool ControladorPelicula::eliminarPelicula(string){};

@@ -23,7 +23,7 @@ class Sala{
 		int getCapacidad();
 		void setCapacidad(int);
 		~Sala();
-		DtSala obtenerDtSala();
+		//DtSala* obtenerDtSala();
 		void agregarFuncion(int);
 };
 #endif

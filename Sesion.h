@@ -8,12 +8,12 @@ using namespace std;
 
 class Sesion{
 	private:
-		DtUsuario usuario;
+		DtUsuario* usuario;
 	public:
 		Sesion();
-		Sesion(DtUsuario);
+		Sesion(DtUsuario*);
 		~Sesion();
-		DtUsuario obtenerDtUsuario();
-		DtUsuario setDtUsuario(DtUsuario);
+		DtUsuario* obtenerDtUsuario();
+		//void setDtUsuario(DtUsuario*);
 };
 #endif

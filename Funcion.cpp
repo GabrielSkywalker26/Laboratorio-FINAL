@@ -41,8 +41,8 @@ void Funcion::setPelicula(Pelicula* pelicula){
 
 Funcion::~Funcion(){}
 
-DtFuncion Funcion::obtenerDtFuncion(){
+DtFuncion* Funcion::obtenerDtFuncion(){
 	//DtFuncion dtFuncion = new DtFuncion();
-	DtFuncion dtFuncion;
+	DtFuncion* dtFuncion;
 	return dtFuncion;
 }

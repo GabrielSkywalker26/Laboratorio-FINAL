@@ -24,11 +24,13 @@ void Sala::setCapacidad(int capacidad){
 
 Sala::~Sala(){}
 
-DtSala Sala::obtenerDtSala(){
+/*
+DtSala* Sala::obtenerDtSala(){
 	//DtSala* dtSala = new DtSala(this->idSala);
-	DtSala dtSala;
+	DtSala* dtSala;
 	return dtSala;
 }
+*/
 
 
 void Sala::agregarFuncion(int idF){

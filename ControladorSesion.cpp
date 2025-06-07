@@ -23,5 +23,5 @@ bool ControladorSesion::existeSesion(string nickname){
 // del .h
 // @TODO: comentar que realiza la funcion
 // Implementar metodo
-bool iniciarSesion(string,string){};
-bool cerrarSesion(){};
+bool ControladorSesion::iniciarSesion(string,string){};
+bool ControladorSesion::cerrarSesion(){};

@@ -25,8 +25,8 @@ bool ControladorReserva::existeCine(string direccion){
 // del .h
 // @TODO: comentar que realiza la funcion
 // Implementar metodo
-list<DtPelicula*> listarPeliculas();
-DtPeliInfo* selectPeli(string);
+list<DtPelicula*> ControladorReserva::listarPeliculas(){};
+DtPeliInfo* ControladorReserva::selectPeli(string){};
 
 //se listan para esa película y ese cine las funciones existentes en el sistema posterior a la fecha y hora actual
 list<DtCine*> ControladorReserva::listarCinesPeli(){}; 

@@ -15,6 +15,6 @@ class Credito{
 		Credito();
 		Credito(Financiera*);
 		~Credito();
-		DtFinanciera obtenerDtFinanciera(string);
+		DtFinanciera* obtenerDtFinanciera(string);
 };
 #endif

@@ -27,6 +27,6 @@ class Funcion{
 		DtHorario getHorario();
 		void setHorario(DtHorario);
 		~Funcion();
-		DtFuncion obtenerDtFuncion();
+		DtFuncion* obtenerDtFuncion();
 };
 #endif
