@@ -2,8 +2,9 @@
 #define CONTROLADORALTACINE
 
 #include "IControladorAltaCine.h"
-#include "Cine.h"
 #include "ManejadorCine.h"
+#include "Cine.h"
+#include "DtDireccion.h"
 
 #include <list>
 

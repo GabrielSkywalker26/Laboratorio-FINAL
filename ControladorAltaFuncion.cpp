@@ -1,18 +1,16 @@
 #include "ControladorAltaFuncion.h"
 
-ControladorAltaFuncion::ControladorAltaFuncion(){}
-
-void ControladorAltaFuncion::altaAltaFuncion(string nickname, string contrasena, string urlFoto){
-    AltaFuncion* u = new AltaFuncion(nickname, contrasena, urlFoto);
-    ManejadorAltaFuncion::getInstancia()->agregarAltaFuncion(u);
+void ControladorAltaFuncion::altaFuncion(string peli, DtHorario horario, DtFecha fecha){
+    Funcion* u = new Funcion(peli, horario, fecha);
+    ManejadorFuncion::getInstancia()->agregarFuncion(u);
 }
 
-list<AltaFuncion*> ControladorAltaFuncion::listarAltaFuncions(){
-    return ManejadorAltaFuncion::getInstancia()->getAltaFuncions();
+list<Funcion*> ControladorAltaFuncion::listarFunciones(){
+    return ManejadorFuncion::getInstancia()->getFuncions();
 }
 
-bool ControladorAltaFuncion::existeAltaFuncion(string nickname){
-    return ManejadorAltaFuncion::getInstancia()->existeAltaFuncion(nickname);
+bool ControladorAltaFuncion::existeFuncion(string funcion){
+    return ManejadorFuncion::getInstancia()->existeFuncion(funcion);
 }
 
 ControladorAltaFuncion::~ControladorAltaFuncion(){}

@@ -1,8 +1,6 @@
 #include "ControladorAltaCine.h"
 #include <list>
 
-ControladorAltaCine::ControladorAltaCine(){}
-
 void ControladorAltaCine::altaCine(DtDireccion dtDireccion){
     Cine* u = new Cine(dtDireccion);
     ManejadorCine::getInstancia()->agregarCine(u);
