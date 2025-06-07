@@ -2,6 +2,7 @@
 #define CINE
 #define MAX_SALAS 100
 
+#include "DtDireccion.h"
 #include "DtSala.h"
 #include "DtCine.h"
 #include<iostream>

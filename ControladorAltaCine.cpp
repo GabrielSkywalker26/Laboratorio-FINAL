@@ -3,17 +3,17 @@
 
 ControladorAltaCine::ControladorAltaCine(){}
 
-void ControladorAltaCine::altaAltaCine(string nickname, string contrasena, string urlFoto){
-    AltaCine* u = new AltaCine(nickname, contrasena, urlFoto);
-    ManejadorAltaCine::getInstancia()->agregarAltaCine(u);
+void ControladorAltaCine::altaCine(DtDireccion dtDireccion){
+    Cine* u = new Cine(dtDireccion);
+    ManejadorCine::getInstancia()->agregarCine(u);
 }
 
-list<AltaCine*> ControladorAltaCine::listarAltaCines(){
-    return ManejadorAltaCine::getInstancia()->getAltaCines();
+list<Cine*> ControladorAltaCine::listarCines(){
+    return ManejadorCine::getInstancia()->getCines();
 }
 
-bool ControladorAltaCine::existeAltaCine(string nickname){
-    return ManejadorAltaCine::getInstancia()->existeAltaCine(nickname);
+bool ControladorAltaCine::existeCine(string direccion){
+    return ManejadorCine::getInstancia()->existeCine(direccion);
 }
 
 ControladorAltaCine::~ControladorAltaCine(){}
