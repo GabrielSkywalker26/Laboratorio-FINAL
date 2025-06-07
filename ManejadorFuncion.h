@@ -1,5 +1,7 @@
 #ifndef MANEJADORFUNCION
 #define MANEJADORFUNCION
+
+#include "Funcion.h"
 #include "Usuario.h"
 #include <map>
 #include <list>
@@ -10,11 +12,11 @@ using namespace std;
 class ManejadorFuncion{
     private:
         static ManejadorFuncion* instancia;
-        map<string,Funcion*> Funcions;
+        map<string,Funcion*> funciones;
         ManejadorFuncion();
     public:
         static ManejadorFuncion* getInstancia();
-        list<Funcion*> getFuncions();
+        list<Funcion*> getFunciones();
         Funcion* buscarFuncion(string);
         void agregarFuncion(Funcion*);
         bool existeFuncion(string);

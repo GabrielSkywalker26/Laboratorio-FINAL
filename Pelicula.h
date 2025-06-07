@@ -11,14 +11,17 @@ using namespace std;
 class Pelicula{
 	private:
 		string titulo;
+		string sinopsis;
 		string poster;
 	public:
 		Pelicula();
-		Pelicula(string, string);
+		Pelicula(string, string, string);
 		string getTitulo();
 		void setTitulo(string);
+		string getSinopsis();
+		void setSinopsis(string);
 		string getPoster();
-		void settPoster(string);
+		void setPoster(string);
 		~Pelicula();
 		DtPelicula getDtPelicula();
 		DtCine getDtCines();

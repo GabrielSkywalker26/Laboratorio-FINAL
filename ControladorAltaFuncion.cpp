@@ -11,7 +11,7 @@ void ControladorAltaFuncion::altaFuncion(string peli, DtHorario horario, DtFecha
 }
 */
 list<Funcion*> ControladorAltaFuncion::listarFunciones(){
-    return ManejadorFuncion::getInstancia()->getFuncions();
+    return ManejadorFuncion::getInstancia()->getFunciones();
 }
 
 bool ControladorAltaFuncion::existeFuncion(string funcion){

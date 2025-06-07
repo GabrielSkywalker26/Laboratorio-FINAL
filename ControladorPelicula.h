@@ -2,6 +2,7 @@
 #define CONTROLADORPELICULA
 
 #include "IControladorPelicula.h"
+#include "ManejadorPelicula.h"
 #include "Pelicula.h"
 #include <list>
 

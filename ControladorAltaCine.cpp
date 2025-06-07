@@ -7,6 +7,7 @@ ControladorAltaCine::ControladorAltaCine(){}
 bool ControladorAltaCine::altaCine(DtDireccion dtDireccion){
     Cine* u = new Cine(dtDireccion);
     ManejadorCine::getInstancia()->agregarCine(u);
+    return true;
 }
 
 list<Cine*> ControladorAltaCine::listarCines(){

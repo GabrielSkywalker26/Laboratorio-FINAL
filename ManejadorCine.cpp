@@ -15,28 +15,28 @@ ManejadorCine* ManejadorCine::getInstancia(){
 
 list<Cine*> ManejadorCine::getCines(){
     list<Cine*> lstCines;
-    for (map<string,Cine*>::iterator it=this->Cines.begin(); it!=Cines.end(); ++it)
+    for (map<string,Cine*>::iterator it=this->cines.begin(); it!=cines.end(); ++it)
         lstCines.push_back(it->second);
     return lstCines;
 }
 
-Cine* ManejadorCine::buscarCine(string Cine){
-  map<string,Cine*>::iterator it = this->Cines.find(Cine);
+Cine* ManejadorCine::buscarCine(string cine){
+  map<string,Cine*>::iterator it = this->cines.find(cine);
   return it->second;
 }
 
-void ManejadorCine::agregarCine(Cine* Cine){
-    Cines.insert(std::pair<string,Cine*>(Cine->getCi(),Cine));
+void ManejadorCine::agregarCine(Cine* cine){
+    //Cines.insert(std::pair<string,Cine*>(cine->getCi(),cine));
 }
 
-bool ManejadorCine::existeCine(string Cine){ 
-  map<string,Cine*>::iterator it = this->Cines.find(Cine);
-  return (it != this->Cines.end());
+bool ManejadorCine::existeCine(string cine){ 
+  map<string,Cine*>::iterator it = this->cines.find(cine);
+  return (it != this->cines.end());
 }
 
-void ManejadorCine::eliminarCine(string Cine){
-  map<string,Cine*>::iterator it = this->Cines.find(Cine);
-  this->Cines.erase(it);
+void ManejadorCine::eliminarCine(string cine){
+  map<string,Cine*>::iterator it = this->cines.find(cine);
+  this->cines.erase(it);
 }
 
 ManejadorCine::~ManejadorCine(){}
