@@ -5,6 +5,10 @@
 #include<string>
 
 #include"DtFecha.h"
+#include"DtPelicula.h"
+#include"DtCine.h"
+#include"DtSala.h"
+#include"DtHorario.h"
 
 
 using namespace std;

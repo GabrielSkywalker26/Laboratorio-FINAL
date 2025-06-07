@@ -5,6 +5,8 @@
 #include "DtDireccion.h"
 #include "DtSala.h"
 #include "DtCine.h"
+#include "Sala.h"
+
 #include<iostream>
 
 using namespace std;
@@ -13,7 +15,8 @@ class Cine{
 	private:
 		int id;
 		DtDireccion direccion;
-		Sala* salas[MAX_SALAS];
+		//Sala* salas[MAX_SALAS];
+		DtSala salas[MAX_SALAS];
 		int topeCines;
 	public:
 		Cine();
@@ -24,6 +27,7 @@ class Cine{
 		void setDtDireccion(DtDireccion);
 		~Cine();
 		//void agregarFuncion();
-		void agregarSalas(Sala*);
+		//void agregarSalas(Sala*);
+		void agregarSalas(DtSala);
 };
 #endif

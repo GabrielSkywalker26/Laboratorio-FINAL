@@ -1,38 +1,33 @@
 #include "Pelicula.h"
 
 Pelicula::Pelicula(){}
-Pelicula::Pelicula(DtDireccion direccion){
+Pelicula::Pelicula(string pelicula, string poster){
 	// Obtengo id del Pelicula anterior y le sumo 1
     //this->id=ci;
-	this->direccion=direccion;
-	this->topePeliculas=0;
+	this->titulo=titulo;
+	this->poster=poster;
 }
 
-int Pelicula::getId(){
-	return this->id;
-}
-void Pelicula::setId(int id){
-	this->id=id;
-}
-
-DtDireccion Pelicula::getDtDireccion(){
-	return this->direccion;
-}
-
-void Pelicula::setDtDireccion(DtDireccion direccion){
-    this->direccion = direccion;
-}
+string Pelicula::getTitulo(){
+	return this->titulo;
+};
+void Pelicula::setTitulo(string titulo){
+	this->titulo = titulo;
+};
+string Pelicula::getPoster(){
+	return this->poster;
+};
+void Pelicula::settPoster(string poster){
+	this->poster = poster;
+};
 
 Pelicula::~Pelicula(){
 	int i;
+	/*
 	for(i=0;i<this->topePeliculas;i++)
-		delete this->salas[i];
+		delete this->salas[i];*/
 }
 
+DtPelicula getDtPelicula();
 
-void Pelicula::agregarSalas(Sala* sala){
-	this->salas[this->topePeliculas]=sala;
-	this->topePeliculas++;
-}
-
-//void agregarFuncion();
+DtCine getDtCines();

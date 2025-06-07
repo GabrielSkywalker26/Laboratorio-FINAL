@@ -1,25 +1,26 @@
 #ifndef PELICULA
 #define PELICULA
 
+#include "DtPelicula.h"
+#include "DtCine.h"
+
 #include<iostream>
 
 using namespace std;
 
 class Pelicula{
 	private:
-		int id;
-		DtDireccion direccion;
-		Sala* salas[MAX_SALAS];
-		int topePeliculas;
+		string titulo;
+		string poster;
 	public:
 		Pelicula();
-		Pelicula(DtDireccion);//Obtiene id de Pelicula anterior + 1
-		int getId();
-		void setId(int);
-		DtDireccion getDtDireccion();
-		void setDtDireccion(DtDireccion);
+		Pelicula(string, string);
+		string getTitulo();
+		void setTitulo(string);
+		string getPoster();
+		void settPoster(string);
 		~Pelicula();
-		//void agregarFuncion();
-		void agregarSalas(Sala*);
+		DtPelicula getDtPelicula();
+		DtCine getDtCines();
 };
 #endif
