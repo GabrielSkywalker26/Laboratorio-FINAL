@@ -1,11 +1,10 @@
 #include "ControladorAltaCine.h"
+
 #include <list>
 
 ControladorAltaCine::ControladorAltaCine(){}
 
-ControladorAltaCine::~ControladorAltaCine(){}
-
-void ControladorAltaCine::altaCine(DtDireccion dtDireccion){
+bool ControladorAltaCine::altaCine(DtDireccion dtDireccion){
     Cine* u = new Cine(dtDireccion);
     ManejadorCine::getInstancia()->agregarCine(u);
 }
@@ -26,5 +25,4 @@ ControladorAltaCine::~ControladorAltaCine(){}
 // Implementar metodo
 void ControladorAltaCine::ingresarDir(string){};
 void ControladorAltaCine::ingresarCap(int){};
-bool ControladorAltaCine::altaCine(){};
 void ControladorAltaCine::finalizar(){};
