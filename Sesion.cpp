@@ -1,4 +1,5 @@
 #include "Sesion.h"
+
 Sesion::Sesion(){}
 Sesion::Sesion(DtUsuario usuario){
 	this->usuario=usuario;

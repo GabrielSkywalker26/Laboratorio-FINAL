@@ -1,7 +1,7 @@
 #ifndef FINANCIERA
 #define FINANCIERA
 
-#include "DFinanciera.h"
+#include "DtFinanciera.h"
 #include<iostream>
 
 using namespace std;

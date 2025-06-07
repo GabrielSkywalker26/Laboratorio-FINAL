@@ -1,4 +1,5 @@
 #include "Credito.h"
+
 Credito::Credito(){}
 Credito::Credito(Financiera* financiera){
 	// Obtengo id del Credito anterior y le sumo 1

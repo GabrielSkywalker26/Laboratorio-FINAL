@@ -1,4 +1,5 @@
 #include "Funcion.h"
+
 Funcion::Funcion(){}
 Funcion::Funcion(DtFecha fecha, string horario, Pelicula* pelicula){
 	// Obtengo id de la Funcion anterior y le sumo 1

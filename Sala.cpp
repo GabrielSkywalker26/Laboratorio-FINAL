@@ -1,4 +1,5 @@
 #include "Sala.h"
+
 Sala::Sala(){}
 Sala::Sala(int capacidad){
 	// Obtengo id de la sala anterior y le sumo 1

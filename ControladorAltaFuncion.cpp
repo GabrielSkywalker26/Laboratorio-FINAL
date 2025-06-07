@@ -21,7 +21,7 @@ ControladorAltaFuncion::~ControladorAltaFuncion(){}
 // del .h
 // @TODO: comentar que realiza la funcion
 // Implementar metodo
-list<DtPelicula*> listarPeliculas();
-list<DtCine*> listarCines(string); // Le paso la peli que elige como parametro
-list<DtSala*> listarSalas(string); // Le paso el cine que elige como parametro
-void altaFuncion(string, DtHorario, DtFecha);
+list<DtPelicula*> listarPeliculas(){};
+list<DtCine*> listarCines(string){}; // Le paso la peli que elige como parametro
+list<DtSala*> listarSalas(string){}; // Le paso el cine que elige como parametro
+void altaFuncion(string, DtHorario, DtFecha){};

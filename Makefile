@@ -1,33 +1,73 @@
-main: Fabrica.o Controlador.o ManejadorSocio.o DtFecha.o DtConsulta.o DtMascota.o DtPerro.o DtGato.o Mascota.o Perro.o Gato.o Consulta.o Socio.o main.o
-	g++ Fabrica.o Controlador.o ManejadorSocio.o DtFecha.o DtConsulta.o DtMascota.o DtPerro.o DtGato.o Mascota.o Perro.o Gato.o Consulta.o Socio.o main.o -o veterinaria
+main: Fabrica.o ControladorAltaCine.o ControladorAltaFuncion.o ControladorPelicula.o ControladorReserva.o ControladorSesion.o ControladorUsuario.o 
+	ManejadorCine.o ManejadorFinanciera.o ManejadorFuncion.o ManejadorPelicula.o ManejadorUsuario.o 
+	DtFecha.o DtDireccion.o DtHorario.o 
+	Cine.o Credito.o Debito.o Financiera.o Funcion.o Pelicula.o Reserva.o Sala.o Sesion.o Usuario.o main.o
 
-ManejadorSocio.o: ManejadorSocio.cpp
+	g++ Fabrica.o ControladorAltaCine.o ControladorAltaFuncion.o ControladorPelicula.o ControladorReserva.o ControladorSesion.o ControladorUsuario.o 
+	ManejadorCine.o ManejadorFinanciera.o ManejadorFuncion.o ManejadorPelicula.o ManejadorUsuario.o 
+	DtFecha.o DtDireccion.o DtHorario.o 
+	Cine.o Credito.o Debito.o Financiera.o Funcion.o Pelicula.o Reserva.o Sala.o Sesion.o Usuario.o main.o -o pelicenter
 
-Controlador.o: Controlador.cpp
 
-Fabrica.o: Fabrica.cpp
+Controlador.o: ControladorAltaCine.cpp
+Controlador.o: ControladorAltaFuncion.cpp
+Controlador.o: ControladorPelicula.cpp
+Controlador.o: ControladorReserva.cpp
+Controlador.o: ControladorSesion.cpp
+Controlador.o: ControladorUsuario.cpp
+
+
+ManejadorSocio.o: ManejadorCine.cpp
+ManejadorSocio.o: ManejadorFinanciera.cpp
+ManejadorSocio.o: ManejadorFuncion.cpp
+ManejadorSocio.o: ManejadorPelicula.cpp
+ManejadorSocio.o: ManejadorUsuario.cpp
+
+
+DtCine.o: DtCine.cpp
+
+DtConsulta.o: DtDireccion.cpp
 
 DtFecha.o: DtFecha.cpp
 
-DtConsulta.o: DtConsulta.cpp
+DtFecha.o: DtFinanciera.cpp
 
-DtMascota.o: DtMascota.cpp
+DtFecha.o: DtFuncion.cpp
 
-DtPerro.o: DtPerro.cpp
+DtMascota.o: DtHorario.cpp
 
-DtGato.o: DtGato.cpp
+DtMascota.o: DtPelicula.cpp
 
-Mascota.o: Mascota.cpp
+DtMascota.o: DtSala.cpp
 
-Perro.o: Perro.cpp
+DtMascota.o: DtUsuario.cpp
 
-Gato.o: Gato.cpp
 
-Consulta.o: Consulta.cpp
+Fabrica.o: Fabrica.cpp
 
-Socio.o: Socio.cpp
+
+Cine.o: Cine.cpp
+
+Credito.o: Credito.cpp
+
+Debito.o: Debito.cpp
+
+Financiera.o: Financiera.cpp
+
+Funcion.o: Funcion.cpp
+
+Pelicula.o: Pelicula.cpp
+
+Reserva.o: Reserva.cpp
+
+Sala.o: Sala.cpp
+
+Sesion.o: Sesion.cpp
+
+Usuario.o: Usuario.cpp
+
 
 main.o: main.cpp
 
 clean:
-	rm -rf *.o veterinaria
+	rm -rf *.o pelicenter

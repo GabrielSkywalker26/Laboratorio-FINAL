@@ -1,4 +1,5 @@
 #include "Financiera.h"
+
 Financiera::Financiera(){}
 Financiera::Financiera(string nombre, float descuento){
 	// Obtengo id de la Financiera anterior y le sumo 1

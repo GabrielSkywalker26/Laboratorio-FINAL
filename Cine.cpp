@@ -1,4 +1,5 @@
 #include "Cine.h"
+
 Cine::Cine(){}
 Cine::Cine(DtDireccion direccion){
 	// Obtengo id del cine anterior y le sumo 1
