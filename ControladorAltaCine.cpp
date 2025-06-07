@@ -1,6 +1,10 @@
 #include "ControladorAltaCine.h"
 #include <list>
 
+ControladorAltaCine::ControladorAltaCine(){}
+
+ControladorAltaCine::~ControladorAltaCine(){}
+
 void ControladorAltaCine::altaCine(DtDireccion dtDireccion){
     Cine* u = new Cine(dtDireccion);
     ManejadorCine::getInstancia()->agregarCine(u);
@@ -20,7 +24,7 @@ ControladorAltaCine::~ControladorAltaCine(){}
 // del .h
 // @TODO: comentar que realiza la funcion
 // Implementar metodo
-void ingresarDir(string){};
-void ingresarCap(int){};
-void altaCine(){};
-void finalizar(){};
+void ControladorAltaCine::ingresarDir(string){};
+void ControladorAltaCine::ingresarCap(int){};
+bool ControladorAltaCine::altaCine(){};
+void ControladorAltaCine::finalizar(){};

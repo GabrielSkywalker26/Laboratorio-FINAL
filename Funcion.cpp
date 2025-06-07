@@ -1,7 +1,7 @@
 #include "Funcion.h"
 
 Funcion::Funcion(){}
-Funcion::Funcion(DtFecha fecha, string horario, Pelicula* pelicula){
+Funcion::Funcion(DtFecha fecha, DtHorario horario, Pelicula* pelicula){
 	// Obtengo id de la Funcion anterior y le sumo 1
     //this->id=id;
 	this->fecha=fecha;
@@ -16,31 +16,33 @@ void Funcion::setId(int id){
 	this->id=id;
 }
 
-int Funcion::getFecha(){
+DtFecha Funcion::getFecha(){
 	return this->fecha;
 }
 void Funcion::setFecha(DtFecha fecha){
 	this->fecha=fecha;
 }
 
-string Funcion::getHorario(){
+DtHorario Funcion::getHorario(){
 	return this->horario;
 }
-void Funcion::setHorario(string horario){
+void Funcion::setHorario(DtHorario horario){
 	this->horario=horario;
 }
 
-
+/*
 Pelicula* Funcion::getPelicula(){
 	return this->pelicula;
 }
 void Funcion::setPelicula(Pelicula* pelicula){
 	this->pelicula=pelicula;
 }
+*/
 
 Funcion::~Funcion(){}
 
-DtFuncion* DtFuncion::obtenerDtFuncion(){
-	DtFuncion* dtFuncion = new DtFuncion(this->idFuncion);
+DtFuncion Funcion::obtenerDtFuncion(){
+	//DtFuncion dtFuncion = new DtFuncion();
+	DtFuncion dtFuncion;
 	return dtFuncion;
 }

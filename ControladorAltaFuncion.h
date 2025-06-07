@@ -18,6 +18,8 @@ class ControladorAltaFuncion: public IControladorAltaFuncion{
         string titulo;
         string idCine;
     public:
+		ControladorAltaFuncion();
+		~ControladorAltaFuncion();
         list<DtPelicula*> listarPeliculas();
         list<DtCine*> listarCines(string); // Le paso la peli que elige como parametro
         list<DtSala*> listarSalas(string); // Le paso el cine que elige como parametro

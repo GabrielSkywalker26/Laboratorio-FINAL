@@ -13,10 +13,13 @@ class ControladorAltaCine: public IControladorAltaCine{
         string direccion;
         list<int> capacidades;
     public:
+		ControladorAltaCine();
+		~ControladorAltaCine();
         void ingresarDir(string);
         void ingresarCap(int);
         void altaCine(DtDireccion dtDireccion);
         bool existeCine(string direccion);
+        bool altaCine();
         list<Cine*> listarCines();
         void finalizar();
    };
