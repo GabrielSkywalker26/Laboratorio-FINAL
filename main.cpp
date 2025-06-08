@@ -61,33 +61,24 @@ void menu(){
 
 // Estructura de funciones (vacías por ahora)
 void iniciarSesion() {
-	system("clear");
-	cout << "=== Iniciar sesión ===" << endl;
-	// TO DO: implementar lógica con iSesion
-	
-
-	string nickname, pass;
-	//int id;
-	//float peso;
-
-	cout << "Nickname: ";
-	cin >> nickname;
-	cout << endl << "Clave: ";
-	cin >> pass;
-
-	if (iSesion->iniciarSesion(nickname,pass)){
-		cout << "Inicio de sesion realizada con exito" << endl;
-	}else {
-		cout << "Inicio de sesion fallida. Usuario y clave incorrectos" << endl;
-	}
-
-
+    system("clear");
+    cout << "________I N I C I A R  S E S I O N________" << endl;
+    string nickname, contrasenia;
+    cout << "Nickname: ";
+    cin >> nickname;
+    cout << "Contrasenia: ";
+    cin >> contrasenia;
+    if (iSesion->iniciarSesion(nickname, contrasenia))
+        cout << "Sesion iniciada correctamente." << endl;
+    else
+        cout << "Error al iniciar sesion." << endl;
 }
 
 void cerrarSesion() {
-	system("clear");
-	cout << "=== Cerrar sesión ===" << endl;
-	// TO DO: implementar lógica con iSesion
+    system("clear");
+    cout << "________C E R R A R  S E S I O N________" << endl;
+    iSesion->cerrarSesion();
+    cout << "Sesion cerrada." << endl;
 }
 
 void altaUsuario() {

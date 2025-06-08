@@ -2,18 +2,20 @@
 #define SESION
 
 #include "DtUsuario.h"
-#include<iostream>
-
+#include <iostream>
 using namespace std;
 
-class Sesion{
-	private:
-		DtUsuario* usuario;
-	public:
-		Sesion();
-		Sesion(DtUsuario*);
-		~Sesion();
-		DtUsuario* obtenerDtUsuario();
-		//void setDtUsuario(DtUsuario*);
+class Sesion {
+private:
+    static Sesion* instancia;
+    DtUsuario* usuario;
+    Sesion();
+public:
+    static Sesion* getInstancia();
+    void setDtUsuario(DtUsuario*);
+    DtUsuario* getDtUsuario();
+    void cerrarSesion();
+    ~Sesion();
 };
+
 #endif

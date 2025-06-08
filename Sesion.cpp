@@ -1,21 +1,27 @@
 #include "Sesion.h"
 
-Sesion::Sesion(){}
-Sesion::Sesion(DtUsuario* usuario){
-	this->usuario=usuario;
+Sesion* Sesion::instancia = NULL;
+
+Sesion::Sesion() {
+    this->usuario = NULL;
 }
 
-Sesion::~Sesion(){}
-
-DtUsuario* Sesion::obtenerDtUsuario(){
-	//DtSesion dtSesion = new DtSesion(this->idSesion);
-	DtUsuario* dtUsuario;
-	return dtUsuario;
+Sesion* Sesion::getInstancia() {
+    if (instancia == NULL)
+        instancia = new Sesion();
+    return instancia;
 }
 
-/*
-void Sesion::setDtUsuario(DtUsuario*){
-	//DtUsuario dtUsuario = new DtUsuario();
-	DtUsuario dtUsuario;
+void Sesion::setDtUsuario(DtUsuario* usuario) {
+    this->usuario = usuario;
 }
-*/
+
+DtUsuario* Sesion::getDtUsuario() {
+    return this->usuario;
+}
+
+void Sesion::cerrarSesion() {
+    this->usuario = NULL;
+}
+
+Sesion::~Sesion() {}

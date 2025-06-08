@@ -1,4 +1,7 @@
 #include "ControladorSesion.h"
+#include "ManejadorUsuario.h"
+#include "Sesion.h"
+#include "DtUsuario.h"
 
 ControladorSesion::ControladorSesion(){}
 
@@ -23,7 +26,21 @@ bool ControladorSesion::existeSesion(string nickname){
 // del .h
 // @TODO: comentar que realiza la funcion
 // Implementar metodo
-bool ControladorSesion::iniciarSesion(string,string){
+
+bool ControladorSesion::iniciarSesion(string nickname, string contrasenia) {
+    ManejadorUsuario* manejador = ManejadorUsuario::getInstancia();
+    if (manejador->existeUsuario(nickname)) {
+        Usuario* user = manejador->buscarUsuario(nickname);
+        if (user->getContrasena() == contrasenia) {
+            DtUsuario* dt = new DtUsuario(user->getNickname(), user->getContrasena());
+            Sesion::getInstancia()->setDtUsuario(dt);
+            return true;
+        }
+    }
+    return false;
+}
+
+bool ControladorSesion::cerrarSesion() {
+    Sesion::getInstancia()->cerrarSesion();
     return true;
-};
-bool ControladorSesion::cerrarSesion(){};
+}
