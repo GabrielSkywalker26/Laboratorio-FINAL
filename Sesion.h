@@ -1,7 +1,6 @@
 #ifndef SESION
 #define SESION
 
-#include "DtUsuario.h"
 #include <iostream>
 using namespace std;
 
@@ -13,7 +12,6 @@ private:
 public:
     static Sesion* getInstancia();
     void setDtUsuario(DtUsuario*);
-    DtUsuario* getDtUsuario();
     void cerrarSesion();
     ~Sesion();
 };

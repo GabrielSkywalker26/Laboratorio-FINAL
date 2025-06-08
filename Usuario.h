@@ -1,6 +1,7 @@
 #ifndef USUARIO
 #define USUARIO
 
+#include "DtUsuario.h"
 #include <string>
 
 using namespace std;
@@ -22,6 +23,8 @@ public:
     void setNickname(string nickname);
     void setContrasena(string contrasena);
     void setUrlFoto(string urlFoto);
+
+    DtUsuario* Usuario::getDtUsuario();
 
     ~Usuario();
 };

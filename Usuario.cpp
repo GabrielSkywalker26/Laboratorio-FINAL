@@ -32,4 +32,8 @@ void Usuario::setUrlFoto(string urlFoto) {
     this->urlFoto = urlFoto;
 }
 
+DtUsuario* Usuario::getDtUsuario() {
+    return new DtUsuario(this->nickname, this->contrasena);
+}
+
 Usuario::~Usuario() {}
