@@ -1,18 +1,18 @@
-#include "DtPelicula.h"
+#include "DtPeliInfo.h"
 
-DtPelicula::DtPelicula(){}
-DtPelicula::DtPelicula(int id,string direccion){
+DtPeliInfo::DtPeliInfo(){}
+DtPeliInfo::DtPeliInfo(int id,string direccion){
 	this->id=id;
 	this->direccion=direccion;
 }
 
-DtPelicula::~DtPelicula(){}
+DtPeliInfo::~DtPeliInfo(){}
 
-bool operator <(const DtPelicula& dtf1,const DtPelicula& dtf2){}
+bool operator <(const DtPeliInfo& dtf1,const DtPeliInfo& dtf2){}
 
-ostream& operator <<(ostream& salida,const DtPelicula& dtf){}
+ostream& operator <<(ostream& salida,const DtPeliInfo& dtf){}
 /*
-bool operator <(const DtPelicula& dtf1,const DtPelicula& dtf2){
+bool operator <(const DtPeliInfo& dtf1,const DtPeliInfo& dtf2){
 	bool retorno;
 	if (dtf1.anio < dtf2.anio){
 		retorno=true;
@@ -29,7 +29,7 @@ bool operator <(const DtPelicula& dtf1,const DtPelicula& dtf2){
 	}
 	return retorno;
 }
-ostream& operator <<(ostream& salida,const DtPelicula& dtf){
+ostream& operator <<(ostream& salida,const DtPeliInfo& dtf){
 	cout << dtf.dia << "/" << dtf.mes << "/" << dtf.anio <<endl;
 	return salida;
 }

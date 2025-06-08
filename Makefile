@@ -1,6 +1,6 @@
-main: Fabrica.o ControladorAltaCine.o ControladorAltaFuncion.o ControladorPelicula.o ControladorReserva.o ControladorSesion.o ControladorUsuario.o ManejadorCine.o ManejadorFinanciera.o ManejadorFuncion.o ManejadorPelicula.o ManejadorUsuario.o DtFecha.o DtDireccion.o DtHorario.o Cine.o Credito.o Debito.o Financiera.o Funcion.o Pelicula.o Reserva.o Sala.o Sesion.o Usuario.o main.o
+main: Fabrica.o ControladorAltaCine.o ControladorAltaFuncion.o ControladorPelicula.o ControladorReserva.o ControladorSesion.o ControladorUsuario.o ManejadorCine.o ManejadorFinanciera.o ManejadorFuncion.o ManejadorPelicula.o ManejadorUsuario.o DtCine.o DtDireccion.o DtFecha.o DtFinanciera.o DtFuncion.o DtHorario.o DtPelicula.o DtPeliInfo.o DtSala.o DtUsuario.o Cine.o Credito.o Debito.o Financiera.o Funcion.o Pelicula.o Reserva.o Sala.o Sesion.o Usuario.o main.o
 
-	g++ Fabrica.o ControladorAltaCine.o ControladorAltaFuncion.o ControladorPelicula.o ControladorReserva.o ControladorSesion.o ControladorUsuario.o ManejadorCine.o ManejadorFinanciera.o ManejadorFuncion.o ManejadorPelicula.o ManejadorUsuario.o DtFecha.o DtDireccion.o DtHorario.o Cine.o Credito.o Debito.o Financiera.o Funcion.o Pelicula.o Reserva.o Sala.o Sesion.o Usuario.o main.o -o pelicenter
+	g++ Fabrica.o ControladorAltaCine.o ControladorAltaFuncion.o ControladorPelicula.o ControladorReserva.o ControladorSesion.o ControladorUsuario.o ManejadorCine.o ManejadorFinanciera.o ManejadorFuncion.o ManejadorPelicula.o ManejadorUsuario.o DtCine.o DtDireccion.o DtFecha.o DtFinanciera.o DtFuncion.o DtHorario.o DtPelicula.o DtPeliInfo.o DtSala.o DtUsuario.o Cine.o Credito.o Debito.o Financiera.o Funcion.o Pelicula.o Reserva.o Sala.o Sesion.o Usuario.o main.o -o pelicenter
 
 
 ControladorAltaCine.o: ControladorAltaCine.cpp
@@ -25,6 +25,7 @@ DtFinanciera.o: DtFinanciera.cpp
 DtFuncion.o: DtFuncion.cpp
 DtHorario.o: DtHorario.cpp
 DtPelicula.o: DtPelicula.cpp
+DtPeliInfo.o: DtPeliInfo.cpp
 DtSala.o: DtSala.cpp
 DtUsuario.o: DtUsuario.cpp
 

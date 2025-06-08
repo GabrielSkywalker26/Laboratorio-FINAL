@@ -11,7 +11,7 @@ class DtFinanciera{
 		float descuento;
 	public:
 		DtFinanciera();
-		DtFinanciera(int,string);
+		DtFinanciera(string, int);
 		~DtFinanciera();
 
 		friend bool operator <(const DtFinanciera&,const DtFinanciera&);
