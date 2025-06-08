@@ -1,6 +1,7 @@
 #ifndef SESION
 #define SESION
 
+#include "DtUsuario.h"
 #include <iostream>
 using namespace std;
 
