@@ -23,5 +23,7 @@ bool ControladorSesion::existeSesion(string nickname){
 // del .h
 // @TODO: comentar que realiza la funcion
 // Implementar metodo
-bool ControladorSesion::iniciarSesion(string,string){};
+bool ControladorSesion::iniciarSesion(string,string){
+    return true;
+};
 bool ControladorSesion::cerrarSesion(){};

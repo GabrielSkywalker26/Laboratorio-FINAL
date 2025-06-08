@@ -64,6 +64,24 @@ void iniciarSesion() {
 	system("clear");
 	cout << "=== Iniciar sesión ===" << endl;
 	// TO DO: implementar lógica con iSesion
+	
+
+	string nickname, pass;
+	//int id;
+	//float peso;
+
+	cout << "Nickname: ";
+	cin >> nickname;
+	cout << endl << "Clave: ";
+	cin >> pass;
+
+	if (iSesion->iniciarSesion(nickname,pass)){
+		cout << "Inicio de sesion realizada con exito" << endl;
+	}else {
+		cout << "Inicio de sesion fallida. Usuario y clave incorrectos" << endl;
+	}
+
+
 }
 
 void cerrarSesion() {
@@ -134,6 +152,7 @@ void cargarDatosPrueba() {
 
 // Main principal
 int main() {
+	
 	int opcion;
 	menu();
 	cin >> opcion;
