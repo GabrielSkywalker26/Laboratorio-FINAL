@@ -1,12 +1,21 @@
 #include "ControladorPelicula.h"
+#include "ManejadorPelicula.h"
+#include "Pelicula.h"
+
 
 ControladorPelicula::ControladorPelicula(){}
 
 ControladorPelicula::~ControladorPelicula(){}
 
 bool ControladorPelicula::altaPelicula(string titulo, string sinopsis, string poster){
-    Pelicula* u = new Pelicula(titulo, sinopsis, poster);
-    ManejadorPelicula::getInstancia()->agregarPelicula(u);
+
+    ManejadorPelicula* manejador = ManejadorPelicula::getInstancia();
+       
+    if (manejador->existePelicula(titulo))
+        return false;
+
+    Pelicula* peli = new Pelicula(titulo, sinopsis, poster);
+    manejador->agregarPelicula(peli);
     return true;
 }
 
@@ -15,4 +24,13 @@ bool ControladorPelicula::altaPelicula(string titulo, string sinopsis, string po
 // del .h
 // @TODO: comentar que realiza la funcion
 // Implementar metodo
-bool ControladorPelicula::eliminarPelicula(string){};
+bool ControladorPelicula::eliminarPelicula(string titulo){
+
+    ManejadorPelicula* manejador = ManejadorPelicula::getInstancia();
+
+    if (!manejador->existePelicula(titulo))
+        return false;
+
+    manejador->eliminarPelicula(titulo);
+    return true;
+}

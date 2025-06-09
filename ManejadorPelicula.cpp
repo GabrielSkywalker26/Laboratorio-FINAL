@@ -26,7 +26,7 @@ Pelicula* ManejadorPelicula::buscarPelicula(string pelicula){
 }
 
 void ManejadorPelicula::agregarPelicula(Pelicula* pelicula){
-    //peliculas.insert(std::pair<string,Pelicula*>(pelicula->getCi(),pelicula));
+    peliculas.insert(std::pair<string,Pelicula*>(pelicula->getTitulo(),pelicula));
 }
 
 bool ManejadorPelicula::existePelicula(string pelicula){ 
