@@ -5,8 +5,8 @@ ControladorUsuario::ControladorUsuario(){}
 ControladorUsuario::~ControladorUsuario(){}
 
 void ControladorUsuario::altaUsuario(string nickname, string contrasena, string urlFoto){
-    Usuario* u = new Usuario(nickname, contrasena, urlFoto);
-    ManejadorUsuario::getInstancia()->agregarUsuario(u);
+    Usuario* user = new Usuario(nickname, contrasena, urlFoto);
+    ManejadorUsuario::getInstancia()->agregarUsuario(user);
 }
 
 list<Usuario*> ControladorUsuario::listarUsuarios(){

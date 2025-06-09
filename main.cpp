@@ -82,10 +82,22 @@ void cerrarSesion() {
 }
 
 void altaUsuario() {
-	system("clear");
-	cout << "=== Alta usuario ===" << endl;
-	// TO DO: implementar lógica con iUsuario
+    system("clear");
+    cout << "_________A L T A   U S U A R I O_________" << endl;
+    
+    string nickname, contrasena, url;
+    cout << "Nickname: ";
+    cin >> nickname;
+    cout << "Contrasena: ";
+    cin >> contrasena;
+    cout << "URL de la foto: ";
+    cin >> url;
+
+    iUsuario->altaUsuario(nickname, contrasena, url);
+
+    cout << "Usuario registrado correctamente." << endl;
 }
+
 
 void altaPelicula() {
 	system("clear");

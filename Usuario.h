@@ -24,7 +24,7 @@ public:
     void setContrasena(string contrasena);
     void setUrlFoto(string urlFoto);
 
-    DtUsuario* Usuario::getDtUsuario();
+    DtUsuario* getDtUsuario();
 
     ~Usuario();
 };

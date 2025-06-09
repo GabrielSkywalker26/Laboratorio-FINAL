@@ -16,10 +16,6 @@ void Sesion::setDtUsuario(DtUsuario* usuario) {
     this->usuario = usuario;
 }
 
-DtUsuario* Sesion::getDtUsuario() {
-    return this->usuario;
-}
-
 void Sesion::cerrarSesion() {
     this->usuario = NULL;
 }
