@@ -1,10 +1,11 @@
 #include "Pelicula.h"
 
 Pelicula::Pelicula(){}
-Pelicula::Pelicula(string pelicula, string sinopsis, string poster){
+Pelicula::Pelicula(string titulo, string sinopsis, string poster){
 	// Obtengo id del Pelicula anterior y le sumo 1
     //this->id=ci;
 	this->titulo=titulo;
+	this->sinopsis=sinopsis;
 	this->poster=poster;
 }
 
