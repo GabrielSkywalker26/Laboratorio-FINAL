@@ -7,6 +7,7 @@
 #include "DtDireccion.h"
 
 #include <list>
+#include <iostream>
 
 class ControladorAltaCine: public IControladorAltaCine{
     private:

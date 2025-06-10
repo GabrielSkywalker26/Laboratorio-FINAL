@@ -108,7 +108,40 @@ void altaPelicula() {
 void altaCine() {
 	system("clear");
 	cout << "=== Alta cine ===" << endl;
-	// TO DO: implementar lógica con iAltaCine
+	
+    string direccion;
+    int numero;
+
+    cout << "Direccion: ";
+    cin >> direccion;
+    cout << "Numero: ";
+    scanf("%d", &numero);
+
+	DtDireccion dtDir = DtDireccion(direccion, numero);
+
+    iAltaCine->altaCine(dtDir);
+	
+    int capacidad, opcion;
+    bool seguir = true;
+
+    // usuario quiere agregar sala
+    while(seguir){
+        
+        cout << "Capacidad: ";
+        scanf("%d", &capacidad);
+
+		iAltaCine->ingresarCap(capacidad);
+
+        cout << "Continuar agregando salas? " << endl;
+        cout << "1. Seguir" << endl;
+	    cout << "2. Terminar" << endl;
+        scanf("%d", &opcion);
+        
+        if (opcion == 2) seguir = false;
+    }
+
+
+    cout << "Cine registrado correctamente." << endl;
 }
 
 void altaFuncion() {

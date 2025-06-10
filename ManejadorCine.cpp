@@ -26,7 +26,7 @@ Cine* ManejadorCine::buscarCine(string cine){
 }
 
 void ManejadorCine::agregarCine(Cine* cine){
-    //Cines.insert(std::pair<string,Cine*>(cine->getCi(),cine));
+    cines.insert(std::pair<string,Cine*>(cine->getId(),cine));
 }
 
 bool ManejadorCine::existeCine(string cine){ 

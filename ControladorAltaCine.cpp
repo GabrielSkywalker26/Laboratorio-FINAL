@@ -5,10 +5,20 @@
 ControladorAltaCine::ControladorAltaCine(){}
 
 bool ControladorAltaCine::altaCine(DtDireccion dtDireccion){
-    Cine* u = new Cine(dtDireccion);
-    ManejadorCine::getInstancia()->agregarCine(u);
+    Cine* cine = new Cine(dtDireccion);
+
+    
+    ManejadorCine::getInstancia()->agregarCine(cine);
     return true;
 }
+
+void ControladorAltaCine::ingresarCap(int capacidad){
+    //capacidades
+    //DtSala* dtSala = new DtSala(capacidad);
+    //cine->agregarSalas(dtSala);
+    
+
+};
 
 list<Cine*> ControladorAltaCine::listarCines(){
     return ManejadorCine::getInstancia()->getCines();
@@ -25,5 +35,4 @@ ControladorAltaCine::~ControladorAltaCine(){}
 // @TODO: comentar que realiza la funcion
 // Implementar metodo
 void ControladorAltaCine::ingresarDir(string){};
-void ControladorAltaCine::ingresarCap(int){};
 void ControladorAltaCine::finalizar(){};

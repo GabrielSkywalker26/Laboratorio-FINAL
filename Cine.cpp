@@ -3,7 +3,7 @@
 Cine::Cine(){}
 Cine::Cine(DtDireccion direccion){
 	// Obtengo id del cine anterior y le sumo 1
-    //this->id=ci;
+    this->id=1;
 	this->direccion=direccion;
 	this->topeCines=0;
 }
