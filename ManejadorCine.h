@@ -15,10 +15,10 @@ class ManejadorCine{
     public:
         static ManejadorCine* getInstancia();
         list<Cine*> getCines();
-        Cine* buscarCine(string);
+        Cine* buscarCine(int);
         void agregarCine(Cine*);
-        bool existeCine(string);
-        void eliminarCine(string);
+        bool existeCine(int);
+        void eliminarCine(int);
         virtual ~ManejadorCine();
 };
 #endif

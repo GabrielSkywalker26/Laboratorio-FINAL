@@ -4,31 +4,34 @@
 
 ControladorAltaCine::ControladorAltaCine(){}
 
-bool ControladorAltaCine::altaCine(DtDireccion dtDireccion){
-    Cine* cine = new Cine(dtDireccion);
+ControladorAltaCine::~ControladorAltaCine(){}
 
+bool ControladorAltaCine::altaCine(){
+    Cine* cine = new Cine(this->direccion);
     
+    DtSala* dtSala;
+    for (int capacidad : this->capacidades) {
+        //cout << capacidad << "\n";
+        dtSala = new DtSala(capacidad);
+        cine->agregarSalas(dtSala);
+    }
     ManejadorCine::getInstancia()->agregarCine(cine);
     return true;
 }
 
 void ControladorAltaCine::ingresarCap(int capacidad){
-    //capacidades
-    //DtSala* dtSala = new DtSala(capacidad);
-    //cine->agregarSalas(dtSala);
-    
-
+    this->capacidades.push_back(capacidad);
 };
 
 list<Cine*> ControladorAltaCine::listarCines(){
     return ManejadorCine::getInstancia()->getCines();
 }
 
-bool ControladorAltaCine::existeCine(string direccion){
-    return ManejadorCine::getInstancia()->existeCine(direccion);
+//bool ControladorAltaCine::existeCine(string direccion){
+bool ControladorAltaCine::existeCine(int idCine){
+    return ManejadorCine::getInstancia()->existeCine(idCine);
 }
 
-ControladorAltaCine::~ControladorAltaCine(){}
 
 
 // del .h

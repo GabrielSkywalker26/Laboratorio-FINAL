@@ -136,14 +136,11 @@ void altaCine() {
 
 	DtDireccion dtDir = DtDireccion(direccion, numero);
 
-    iAltaCine->altaCine(dtDir);
-	
     int capacidad, opcion;
     bool seguir = true;
 
     // usuario quiere agregar sala
     while(seguir){
-        
         cout << "Capacidad: ";
         scanf("%d", &capacidad);
 
@@ -157,6 +154,8 @@ void altaCine() {
         if (opcion == 2) seguir = false;
     }
 
+    iAltaCine->altaCine();
+	
 
     cout << "Cine registrado correctamente." << endl;
 }

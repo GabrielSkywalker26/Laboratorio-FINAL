@@ -5,22 +5,22 @@
 #include "ManejadorCine.h"
 #include "Cine.h"
 #include "DtDireccion.h"
+#include "DtSala.h"
 
 #include <list>
 #include <iostream>
 
 class ControladorAltaCine: public IControladorAltaCine{
     private:
-        string direccion;
+        DtDireccion direccion;
         list<int> capacidades;
     public:
 		ControladorAltaCine();
 		~ControladorAltaCine();
         void ingresarDir(string);
         void ingresarCap(int);
-        bool altaCine(DtDireccion dtDireccion);
-        bool existeCine(string direccion);
         bool altaCine();
+        bool existeCine(int);
         list<Cine*> listarCines();
         void finalizar();
    };
