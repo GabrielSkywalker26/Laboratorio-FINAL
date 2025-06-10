@@ -101,9 +101,26 @@ void altaUsuario() {
 
 void altaPelicula() {
 	system("clear");
-	cout << "=== Alta película ===" << endl;
-	// TO DO: implementar lógica con iPelicula
+	cout << "_________A L T A   P E L I C U L A_________" << endl;
+
+	string titulo, sinopsis, poster;
+
+	cout << "Titulo: ";
+	cin.ignore(); // limpia el salto de línea previo
+	getline(cin, titulo);
+
+	cout << "Sinopsis: ";
+	getline(cin, sinopsis);
+
+	cout << "URL del poster: ";
+	getline(cin, poster);
+
+	if (iPelicula->altaPelicula(titulo, sinopsis, poster))
+		cout << "Pelicula registrada correctamente." << endl;
+	else
+		cout << "Error: ya existe una pelicula con ese titulo." << endl;
 }
+
 
 void altaCine() {
 	system("clear");
@@ -164,9 +181,19 @@ void verReservasPorPelicula() {
 
 void eliminarPelicula() {
 	system("clear");
-	cout << "=== Eliminar película ===" << endl;
-	// TO DO: implementar lógica con iPelicula
+	cout << "_______E L I M I N A R   P E L I C U L A______" << endl;
+
+	string titulo;
+	cout << "Titulo de la pelicula a eliminar: ";
+	cin.ignore(); // limpia el salto de línea previo
+	getline(cin, titulo);
+
+	if (iPelicula->eliminarPelicula(titulo))
+		cout << "Pelicula eliminada correctamente." << endl;
+	else
+		cout << "Error: no se encontro la pelicula." << endl;
 }
+
 
 void modificarFechaSistema() {
 	system("clear");
