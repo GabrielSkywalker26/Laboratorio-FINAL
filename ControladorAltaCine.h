@@ -17,7 +17,7 @@ class ControladorAltaCine: public IControladorAltaCine{
     public:
 		ControladorAltaCine();
 		~ControladorAltaCine();
-        void ingresarDir(string);
+        void ingresarDir(string, int);
         void ingresarCap(int);
         bool altaCine();
         bool existeCine(int);

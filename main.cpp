@@ -42,15 +42,15 @@ void menu(){
 	system("clear");
 	cout <<"_____________________________________________" <<endl;
 	cout <<"_____________S I S T E M A__C I N E__________"<< endl;
-	cout <<"1. Iniciar sesión" << endl;
-	cout <<"2. Cerrar sesión" << endl;
+	cout <<"1. Iniciar sesion" << endl;
+	cout <<"2. Cerrar sesion" << endl;
 	cout <<"3. Alta usuario" << endl;
-	cout <<"4. Alta película" << endl;
+	cout <<"4. Alta pelicula" << endl;
 	cout <<"5. Alta cine" << endl;
-	cout <<"6. Alta función" << endl;
+	cout <<"6. Alta funcion" << endl;
 	cout <<"7. Crear reserva" << endl;
-	cout <<"8. Ver reservas por película" << endl;
-	cout <<"9. Eliminar película" << endl;
+	cout <<"8. Ver reservas por pelicula" << endl;
+	cout <<"9. Eliminar pelicula" << endl;
 	cout <<"10. Modificar fecha del sistema" << endl;
 	cout <<"11. Consultar fecha del sistema" << endl;
 	cout <<"12. Cargar datos de prueba" << endl;
@@ -124,40 +124,42 @@ void altaPelicula() {
 
 void altaCine() {
 	system("clear");
-	cout << "=== Alta cine ===" << endl;
+	cout << "_________A L T A   C I N E_________" << endl;
 	
     string direccion;
     int numero;
 
     cout << "Direccion: ";
-    cin >> direccion;
-    cout << "Numero: ";
-    scanf("%d", &numero);
+    cin.ignore();
+	getline(cin, direccion);
+    cout << "Numero de puerta: ";
+    cin >> numero;
 
-	DtDireccion dtDir = DtDireccion(direccion, numero);
+	iAltaCine->ingresarDir(direccion, numero);
 
     int capacidad, opcion;
     bool seguir = true;
 
     // usuario quiere agregar sala
     while(seguir){
-        cout << "Capacidad: ";
-        scanf("%d", &capacidad);
+        cout << "Capacidad de la sala: ";
+        cin >> capacidad;
 
 		iAltaCine->ingresarCap(capacidad);
 
         cout << "Continuar agregando salas? " << endl;
         cout << "1. Seguir" << endl;
 	    cout << "2. Terminar" << endl;
-        scanf("%d", &opcion);
+		cout << "Opcion: ";
+        cin >> opcion;
         
         if (opcion == 2) seguir = false;
     }
 
-    iAltaCine->altaCine();
-	
-
-    cout << "Cine registrado correctamente." << endl;
+    if (iAltaCine->altaCine())
+		cout << "\n Cine registrado correctamente." << endl;
+	else
+		cout << "\n Error al registrar cine." << endl;
 }
 
 void altaFuncion() {

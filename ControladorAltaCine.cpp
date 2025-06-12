@@ -16,6 +16,7 @@ bool ControladorAltaCine::altaCine(){
         cine->agregarSalas(dtSala);
     }
     ManejadorCine::getInstancia()->agregarCine(cine);
+    this->capacidades.clear();
     return true;
 }
 
@@ -31,11 +32,14 @@ list<Cine*> ControladorAltaCine::listarCines(){
 bool ControladorAltaCine::existeCine(int idCine){
     return ManejadorCine::getInstancia()->existeCine(idCine);
 }
-
-
+void ControladorAltaCine::ingresarDir(string calle, int numero){
+    this->direccion = DtDireccion(calle, numero);
+}
+void ControladorAltaCine::finalizar(){
+    this->capacidades.clear();
+}
 
 // del .h
 // @TODO: comentar que realiza la funcion
 // Implementar metodo
-void ControladorAltaCine::ingresarDir(string){};
-void ControladorAltaCine::finalizar(){};
+

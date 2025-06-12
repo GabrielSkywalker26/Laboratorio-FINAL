@@ -1,11 +1,13 @@
 #include "Cine.h"
 
+int Cine::ultimoId = 0;
+
 Cine::Cine(){}
 Cine::Cine(DtDireccion direccion){
-	// Obtengo id del cine anterior y le sumo 1
-    this->id=1;
+	
+    this->id = ++ultimoId; // Obtenemos id del cine anterior y le sumo 1
 	this->direccion=direccion;
-	this->topeCines=0;
+	this->topeSalas=0;
 }
 
 int Cine::getId(){
@@ -26,15 +28,17 @@ void Cine::setDtDireccion(DtDireccion direccion){
 Cine::~Cine(){
 	int i;
 	/*
-	for(i=0;i<this->topeCines;i++)
+	for(i=0;i<this->topeSalas;i++)
 		delete this->salas[i];*/
 }
 
 
 //void Cine::agregarSalas(Sala* sala){
 void Cine::agregarSalas(DtSala* sala){
-	this->salas[this->topeCines]=sala;
-	this->topeCines++;
+	if (topeSalas < MAX_SALAS) {
+		this->salas[this->topeSalas]=sala;
+		this->topeSalas++;
+	}
 }
 
 //void agregarFuncion();

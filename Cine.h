@@ -17,7 +17,8 @@ class Cine{
 		DtDireccion direccion;
 		//Sala* salas[MAX_SALAS];
 		DtSala* salas[MAX_SALAS];
-		int topeCines;
+		int topeSalas;
+		static int ultimoId;
 	public:
 		Cine();
 		Cine(DtDireccion);//Obtiene id de cine anterior + 1

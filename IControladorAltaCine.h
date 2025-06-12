@@ -12,7 +12,7 @@ using namespace std;
 
 class IControladorAltaCine{
     public:
-        virtual void ingresarDir(string)=0;
+        virtual void ingresarDir(string, int)=0;
         virtual void ingresarCap(int)=0;
         virtual bool altaCine()=0;
         virtual void finalizar()=0;
