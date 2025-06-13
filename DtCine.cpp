@@ -34,9 +34,9 @@ bool operator <(const DtCine& dtf1,const DtCine& dtf2){
 	}
 	return retorno;
 }
-ostream& operator <<(ostream& salida,const DtCine& dtf){
-	cout << dtf.dia << "/" << dtf.mes << "/" << dtf.anio <<endl;
+*/
+
+ostream& operator <<(ostream& salida,const DtCine& dtc){
+	cout << "IdCine: " << dtc.id << " | Direccion: " << dtc.direccion << " " << dtc.numero <<endl;
 	return salida;
 }
-
-*/

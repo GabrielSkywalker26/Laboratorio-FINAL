@@ -133,6 +133,7 @@ void altaCine() {
     cin.ignore();
 	getline(cin, direccion);
     cout << "Numero de puerta: ";
+    cin.ignore();
     cin >> numero;
 
 	iAltaCine->ingresarDir(direccion, numero);
@@ -167,7 +168,6 @@ void altaFuncion() {
     cout << "_________A L T A   F U N C I O N_________" << endl;
 
     list<DtPelicula*> pelis = iAltaFuncion->listarPeliculas();
-
     cout << "Peliculas disponibles:\n";
     for (DtPelicula* p : pelis) {
         cout << "- " << *p << endl;
@@ -177,8 +177,29 @@ void altaFuncion() {
     cout << "Ingrese el titulo de la pelicula: ";
     cin.ignore();
     getline(cin, titulo);
+	// Guardo el titulo ingresado
+	iAltaFuncion->ingresarTitulo(titulo);
 
-    //list<DtCine*> cines = iAltaFuncion->listarCines(titulo);
+	int idCine;
+    list<DtCine*> cines = iAltaFuncion->listarCines();
+    cout << "Peliculas disponibles:\n";
+    for (DtPelicula* p : pelis) {
+        cout << "- " << *p << endl;
+    }
+    cin.ignore();
+    cin >> idCine;
+	// Guardo el id del cine ingresado
+	iAltaFuncion->ingresarIdCine(idCine);
+
+	// Listar salas del cine seleccionado
+	int idSala;
+    list<DtSala*> salas = iAltaFuncion->listarSalas();
+    cout << "Peliculas disponibles:\n";
+    for (DtPelicula* p : pelis) {
+        cout << "- " << *p << endl;
+    }
+    cin.ignore();
+    cin >> idCine;
 
     /*cout << "\nCines donde se exhibe \"" << titulo << "\":" << endl;
     for (DtCine* c : cines) {

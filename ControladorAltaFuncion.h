@@ -3,6 +3,8 @@
 
 #include "IControladorAltaFuncion.h"
 #include "ManejadorFuncion.h"
+#include "ManejadorPelicula.h"
+#include "ManejadorCine.h"
 #include "Funcion.h"
 #include "DtCine.h"
 #include "DtFecha.h"
@@ -15,14 +17,16 @@
 
 class ControladorAltaFuncion: public IControladorAltaFuncion{
     private:
-        string titulo;
+        string titulo; // Titulo de la pelicula
         string idCine;
     public:
 		ControladorAltaFuncion();
 		~ControladorAltaFuncion();
+        void ingresarTitulo(string);
+        void ingresarIdCine(int);
         list<DtPelicula*> listarPeliculas();
-        //list<DtCine*> listarCines(string); // Le paso la peli que elige como parametro
-        list<DtSala*> listarSalas(string); // Le paso el cine que elige como parametro
+        list<DtCine*> listarCines();
+        list<DtSala*> listarSalas();
         void altaFuncion(string, DtHorario, DtFecha);
         bool existeFuncion(int);
         list<Funcion*> listarFunciones();

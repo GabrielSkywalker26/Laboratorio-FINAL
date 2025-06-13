@@ -1,5 +1,5 @@
 #include "ControladorAltaFuncion.h"
-#include "ManejadorPelicula.h"
+
 #include <list>
 
 ControladorAltaFuncion::ControladorAltaFuncion(){}
@@ -23,6 +23,17 @@ bool ControladorAltaFuncion::existeFuncion(int idf){
 // del .h
 // @TODO: comentar que realiza la funcion
 // Implementar metodo
+
+// Guardo el titulo de la pelicula seleccionada
+void ControladorAltaFuncion::ingresarTitulo(string titulo){
+    this->titulo = titulo;
+}
+
+// Guardo el id del cine seleccionado
+void ControladorAltaFuncion::ingresarIdCine(int idCine){
+    this->idCine = idCine;
+}
+
 list<DtPelicula*> ControladorAltaFuncion::listarPeliculas(){
 
     list<DtPelicula*> infoPeliculas;
@@ -34,14 +45,36 @@ list<DtPelicula*> ControladorAltaFuncion::listarPeliculas(){
 
     return infoPeliculas;
 }
- // Le pasamos la peli que elige como parametro
-/*list<DtCine*>ControladorAltaFuncion::listarCines(string titulo){
 
-    this->titulo = titulo;
 
-    Pelicula* p = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
-    return p->getDtCines();
-}*/
+list<DtCine*>ControladorAltaFuncion::listarCines(){
 
-list<DtSala*> ControladorAltaFuncion::listarSalas(string){}; // Le paso el cine que elige como parametro
+    //this->titulo = titulo;
+
+    //Pelicula* p = ManejadorPelicula::getInstancia()->buscarPelicula();
+    //Pelicula* p = ManejadorPelicula::getInstancia()->buscarPelicula();
+
+
+    list<DtCine*> infoCines;
+    list<Cine*> cines = ManejadorCine::getInstancia()->getCines();
+    
+    for (Cine* c : cines) {
+        infoCines.push_back(c->obtenerDtCine());
+    }
+
+    return infoCines;
+}
+
+// Le paso el cine que elige como parametro
+list<DtSala*> ControladorAltaFuncion::listarSalas(){
+    list<DtSala*> infoSalas;
+    list<Sala*> salas = ManejadorCine::getInstancia()->getCines();
+
+    for (Sala* s : salas) {
+        infoSalas.push_back(s->obtenerDtPelicula());
+    }
+
+    return infoSalas;
+};
 void ControladorAltaFuncion::altaFuncion(string, DtHorario, DtFecha){};
+

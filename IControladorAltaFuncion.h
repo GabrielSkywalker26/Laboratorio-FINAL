@@ -15,9 +15,11 @@ using namespace std;
 
 class IControladorAltaFuncion{
     public:
+        virtual void ingresarTitulo(string)=0;
+        virtual void ingresarIdCine(int)=0;
         virtual list<DtPelicula*> listarPeliculas()=0;
-        //virtual list<DtCine*> listarCines(string)=0;
-        virtual list<DtSala*> listarSalas(string)=0;
+        virtual list<DtCine*> listarCines()=0;
+        virtual list<DtSala*> listarSalas()=0;
         virtual void altaFuncion(string, DtHorario, DtFecha)=0;
 };
 #endif

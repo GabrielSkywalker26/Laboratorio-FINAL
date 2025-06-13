@@ -16,7 +16,7 @@ class DtCine{
 		DtCine(int,DtDireccion);
 		~DtCine();
 
-		friend bool operator <(const DtCine&,const DtCine&);
+		//friend bool operator <(const DtCine&,const DtCine&);
 		friend ostream& operator <<(ostream&,const DtCine&);
 
 };

@@ -8,16 +8,16 @@ ManejadorCine* ManejadorCine::instancia = NULL;
 ManejadorCine::ManejadorCine(){}
 
 ManejadorCine* ManejadorCine::getInstancia(){
-    if (instancia == NULL)
-        instancia = new ManejadorCine();
-    return instancia;
+  if (instancia == NULL)
+      instancia = new ManejadorCine();
+  return instancia;
 }
 
 list<Cine*> ManejadorCine::getCines(){
-    list<Cine*> lstCines;
-    for (map<int,Cine*>::iterator it=this->cines.begin(); it!=cines.end(); ++it)
-        lstCines.push_back(it->second);
-    return lstCines;
+  list<Cine*> lstCines;
+  for (map<int,Cine*>::iterator it=this->cines.begin(); it!=cines.end(); ++it)
+      lstCines.push_back(it->second);
+  return lstCines;
 }
 
 Cine* ManejadorCine::buscarCine(int idCine){
@@ -26,7 +26,7 @@ Cine* ManejadorCine::buscarCine(int idCine){
 }
 
 void ManejadorCine::agregarCine(Cine* cine){
-    cines.insert(std::pair<int,Cine*>(cine->getId(),cine));
+  cines.insert(std::pair<int,Cine*>(cine->getId(),cine));
 }
 
 bool ManejadorCine::existeCine(int idCine){ 
@@ -38,5 +38,16 @@ void ManejadorCine::eliminarCine(int idCine){
   map<int,Cine*>::iterator it = this->cines.find(idCine);
   this->cines.erase(it);
 }
+
+
+DtSala* ManejadorCine::getDtSalas(int idCine){
+  DtSala* dtSalas;
+  map<int,Cine*>::iterator it = this->cines.find(idCine);
+  if (it != this->cines.end()){
+    
+  }
+  return (it != this->cines.end());
+}
+
 
 ManejadorCine::~ManejadorCine(){}
