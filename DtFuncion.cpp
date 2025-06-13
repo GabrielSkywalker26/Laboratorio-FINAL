@@ -1,10 +1,14 @@
 #include "DtFuncion.h"
 
+
 DtFuncion::DtFuncion(){}
-DtFuncion::DtFuncion(int id,string direccion){
+DtFuncion::DtFuncion(DtFecha fecha,DtHorario horario,int id){
+	
+	this->fecha=fecha;
+	this->horario=horario;
 	this->id=id;
-	this->direccion=direccion;
 }
+
 
 DtFuncion::~DtFuncion(){}
 

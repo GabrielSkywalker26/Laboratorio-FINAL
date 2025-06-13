@@ -9,11 +9,11 @@ ControladorAltaCine::~ControladorAltaCine(){}
 bool ControladorAltaCine::altaCine(){
     Cine* cine = new Cine(this->direccion);
     
-    DtSala* dtSala;
+    Sala* nuevaSala;
     for (int capacidad : this->capacidades) {
         //cout << capacidad << "\n";
-        dtSala = new DtSala(capacidad);
-        cine->agregarSalas(dtSala);
+        nuevaSala = new Sala(capacidad);
+        cine->agregarSalas(nuevaSala);
     }
     ManejadorCine::getInstancia()->agregarCine(cine);
     this->capacidades.clear();

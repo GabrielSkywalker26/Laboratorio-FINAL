@@ -8,10 +8,11 @@ using namespace std;
 class DtPelicula{
 	private:
 		int id;
-		string direccion;
+		string titulo;
+		string poster;
 	public:
 		DtPelicula();
-		DtPelicula(int,string);
+		DtPelicula(int,string,string);
 		~DtPelicula();
 
 		friend bool operator <(const DtPelicula&,const DtPelicula&);

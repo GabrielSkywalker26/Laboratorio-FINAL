@@ -10,9 +10,12 @@ using namespace std;
 
 class Pelicula{
 	private:
+		int id;
 		string titulo;
 		string sinopsis;
 		string poster;
+
+		static int ultimoId;
 	public:
 		Pelicula();
 		Pelicula(string, string, string);
@@ -23,7 +26,7 @@ class Pelicula{
 		string getPoster();
 		void setPoster(string);
 		~Pelicula();
-		DtPelicula getDtPelicula();
-		DtCine getDtCines();
+		DtPelicula* obtenerDtPelicula();
+		//DtCine getDtCines();
 };
 #endif

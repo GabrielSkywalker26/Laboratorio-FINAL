@@ -1,16 +1,21 @@
 #include "DtPelicula.h"
 
 DtPelicula::DtPelicula(){}
-DtPelicula::DtPelicula(int id,string direccion){
+DtPelicula::DtPelicula(int id,string titulo, string poster){
 	this->id=id;
-	this->direccion=direccion;
+	this->titulo=titulo;
+	this->poster=poster;
+
 }
 
 DtPelicula::~DtPelicula(){}
 
 bool operator <(const DtPelicula& dtf1,const DtPelicula& dtf2){}
 
-ostream& operator <<(ostream& salida,const DtPelicula& dtf){}
+ostream& operator<<(ostream& salida, const DtPelicula& p) {
+    salida << "Id: " << p.id << ", Titulo: " << p.titulo << ", Poster: " << p.poster;
+    return salida;
+}
 /*
 bool operator <(const DtPelicula& dtf1,const DtPelicula& dtf2){
 	bool retorno;

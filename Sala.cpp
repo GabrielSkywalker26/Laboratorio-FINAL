@@ -1,9 +1,12 @@
 #include "Sala.h"
+#include "ManejadorFuncion.h"
+
+int Sala::ultimoId = 0;
 
 Sala::Sala(){}
 Sala::Sala(int capacidad){
-	// Obtengo id de la sala anterior y le sumo 1
-    //this->id=ci;
+	
+    this->id= ++ultimoId;// Obtengo id de la sala anterior y le sumo 1
 	this->capacidad=capacidad;
 	this->topeFunciones=0;
 }
@@ -34,7 +37,10 @@ DtSala* Sala::obtenerDtSala(){
 
 
 void Sala::agregarFuncion(int idF){
-	// buscar funcion con idf
-    //this->funciones[this->topeFunciones]=funcion;
-	this->topeFunciones++;
+	Funcion* funcion = ManejadorFuncion::getInstancia()->buscarFuncion(idF);
+	if (this->topeFunciones < MAX_FUNCIONES) {
+        this->funciones[this->topeFunciones] = funcion;
+        this->topeFunciones++;
+    }
 }
+

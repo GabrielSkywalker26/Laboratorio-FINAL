@@ -2,6 +2,7 @@
 #define DTCINE
 
 #include<iostream>
+#include "DtDireccion.h"
 
 using namespace std;
 
@@ -9,9 +10,10 @@ class DtCine{
 	private:
 		int id;
 		string direccion;
+		int numero;
 	public:
 		DtCine();
-		DtCine(int,string);
+		DtCine(int,DtDireccion);
 		~DtCine();
 
 		friend bool operator <(const DtCine&,const DtCine&);

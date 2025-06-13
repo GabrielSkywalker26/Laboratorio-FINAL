@@ -7,10 +7,11 @@ using namespace std;
 
 class DtSala{
 	private:
+		int id;
 		int capacidad;
 	public:
 		DtSala();
-		DtSala(int);
+		DtSala(int,int);
 		~DtSala();
 
 		friend bool operator <(const DtSala&,const DtSala&);

@@ -12,15 +12,15 @@ using namespace std;
 class ManejadorFuncion{
     private:
         static ManejadorFuncion* instancia;
-        map<string,Funcion*> funciones;
+        map<int,Funcion*> funciones;
         ManejadorFuncion();
     public:
         static ManejadorFuncion* getInstancia();
         list<Funcion*> getFunciones();
-        Funcion* buscarFuncion(string);
+        Funcion* buscarFuncion(int);
         void agregarFuncion(Funcion*);
-        bool existeFuncion(string);
-        void eliminarFuncion(string);
+        bool existeFuncion(int);
+        void eliminarFuncion(int);
         virtual ~ManejadorFuncion();
 };
 #endif

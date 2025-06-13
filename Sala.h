@@ -15,6 +15,7 @@ class Sala{
 		int capacidad;
 		Funcion* funciones[MAX_FUNCIONES];
 		int topeFunciones;
+		static int ultimoId;
 	public:
 		Sala();
 		Sala(int);

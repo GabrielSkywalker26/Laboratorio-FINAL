@@ -33,12 +33,17 @@ Cine::~Cine(){
 }
 
 
-//void Cine::agregarSalas(Sala* sala){
-void Cine::agregarSalas(DtSala* sala){
+void Cine::agregarSalas(Sala* sala){
 	if (topeSalas < MAX_SALAS) {
 		this->salas[this->topeSalas]=sala;
 		this->topeSalas++;
 	}
 }
 
-//void agregarFuncion();
+//void agregarFuncion(int idS, int idF){
+DtCine* Cine::obtenerDtCine(){
+	DtCine* dtc = new DtCine(this->id, this->direccion);
+	return dtc;
+}
+
+

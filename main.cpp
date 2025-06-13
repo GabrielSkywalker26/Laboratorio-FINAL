@@ -163,10 +163,32 @@ void altaCine() {
 }
 
 void altaFuncion() {
-	system("clear");
-	cout << "=== Alta función ===" << endl;
-	// TO DO: implementar lógica con iAltaFuncion
+    system("clear");
+    cout << "_________A L T A   F U N C I O N_________" << endl;
+
+    list<DtPelicula*> pelis = iAltaFuncion->listarPeliculas();
+
+    cout << "Peliculas disponibles:\n";
+    for (DtPelicula* p : pelis) {
+        cout << "- " << *p << endl;
+    }
+
+    string titulo;
+    cout << "Ingrese el titulo de la pelicula: ";
+    cin.ignore();
+    getline(cin, titulo);
+
+    //list<DtCine*> cines = iAltaFuncion->listarCines(titulo);
+
+    /*cout << "\nCines donde se exhibe \"" << titulo << "\":" << endl;
+    for (DtCine* c : cines) {
+        cout << "- " << *c << endl;
+    }*/
+
+
 }
+
+
 
 void crearReserva() {
 	system("clear");

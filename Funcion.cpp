@@ -1,9 +1,11 @@
 #include "Funcion.h"
 
+int Funcion::ultimoId = 0;
+
 Funcion::Funcion(){}
 Funcion::Funcion(DtFecha fecha, DtHorario horario, Pelicula* pelicula){
-	// Obtengo id de la Funcion anterior y le sumo 1
-    //this->id=id;
+	
+	this->id= ++ultimoId;// Obtengo id de la sala anterior y le sumo 1
 	this->fecha=fecha;
 	this->horario=horario;
 	this->pelicula=pelicula;
@@ -42,7 +44,6 @@ void Funcion::setPelicula(Pelicula* pelicula){
 Funcion::~Funcion(){}
 
 DtFuncion* Funcion::obtenerDtFuncion(){
-	//DtFuncion dtFuncion = new DtFuncion();
-	DtFuncion* dtFuncion;
+	DtFuncion* dtFuncion = new DtFuncion(this->fecha, this->horario, this->id);
 	return dtFuncion;
 }

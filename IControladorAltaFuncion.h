@@ -16,7 +16,7 @@ using namespace std;
 class IControladorAltaFuncion{
     public:
         virtual list<DtPelicula*> listarPeliculas()=0;
-        virtual list<DtCine*> listarCines(string)=0;
+        //virtual list<DtCine*> listarCines(string)=0;
         virtual list<DtSala*> listarSalas(string)=0;
         virtual void altaFuncion(string, DtHorario, DtFecha)=0;
 };

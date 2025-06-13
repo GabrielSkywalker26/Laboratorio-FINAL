@@ -14,13 +14,13 @@ ManejadorFuncion* ManejadorFuncion::getInstancia(){
 
 list<Funcion*> ManejadorFuncion::getFunciones(){
     list<Funcion*> lstFunciones;
-    for (map<string,Funcion*>::iterator it=this->funciones.begin(); it!=this->funciones.end(); ++it)
+    for (map<int,Funcion*>::iterator it=this->funciones.begin(); it!=this->funciones.end(); ++it)
         lstFunciones.push_back(it->second);
     return lstFunciones;
 }
 
-Funcion* ManejadorFuncion::buscarFuncion(string funcion){
-  map<string,Funcion*>::iterator it = this->funciones.find(funcion);
+Funcion* ManejadorFuncion::buscarFuncion(int idFuncion){
+  map<int,Funcion*>::iterator it = this->funciones.find(idFuncion);
   return it->second;
 }
 
@@ -28,13 +28,13 @@ void ManejadorFuncion::agregarFuncion(Funcion* funcion){
     //Funciones.insert(std::pair<string,Funcion*>(funcion->getCi(),funcion));
 }
 
-bool ManejadorFuncion::existeFuncion(string funcion){ 
-  map<string,Funcion*>::iterator it = this->funciones.find(funcion);
+bool ManejadorFuncion::existeFuncion(int idFuncion){ 
+  map<int,Funcion*>::iterator it = this->funciones.find(idFuncion);
   return (it != this->funciones.end());
 }
 
-void ManejadorFuncion::eliminarFuncion(string funcion){
-  map<string,Funcion*>::iterator it = this->funciones.find(funcion);
+void ManejadorFuncion::eliminarFuncion(int idFuncion){
+  map<int,Funcion*>::iterator it = this->funciones.find(idFuncion);
   this->funciones.erase(it);
 }
 

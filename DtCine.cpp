@@ -1,16 +1,21 @@
 #include "DtCine.h"
 
+
 DtCine::DtCine(){}
-DtCine::DtCine(int id,string direccion){
+DtCine::DtCine(int id, DtDireccion direccion){
 	this->id=id;
-	this->direccion=direccion;
+	this->direccion=direccion.getCalle();
+	this->numero=direccion.getNumero();
 }
 
 DtCine::~DtCine(){}
 
-bool operator <(const DtCine& dtf1,const DtCine& dtf2){}
+//bool operator <(const DtCine& dtf1,const DtCine& dtf2){}
 
-ostream& operator <<(ostream& salida,const DtCine& dtf){}
+ostream& operator<<(ostream& salida, const DtCine& c) {
+    salida << "ID: " << c.id << ", Direccion: " << c.direccion << c.numero;
+    return salida;
+}
 /*
 bool operator <(const DtCine& dtf1,const DtCine& dtf2){
 	bool retorno;

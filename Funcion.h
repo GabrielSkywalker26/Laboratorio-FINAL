@@ -17,6 +17,7 @@ class Funcion{
 		DtFecha fecha;
 		DtHorario horario; //cambiar por horario (horas mins)
 		Pelicula* pelicula;
+		static int ultimoId;
 	public:
 		Funcion();
 		Funcion(DtFecha, DtHorario, Pelicula*);

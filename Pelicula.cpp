@@ -1,9 +1,11 @@
 #include "Pelicula.h"
 
+int Pelicula::ultimoId = 0;
+
 Pelicula::Pelicula(){}
 Pelicula::Pelicula(string titulo, string sinopsis, string poster){
-	// Obtengo id del Pelicula anterior y le sumo 1
-    //this->id=ci;
+
+	this->id= ++ultimoId;// Obtengo id de la sala anterior y le sumo 1
 	this->titulo=titulo;
 	this->sinopsis=sinopsis;
 	this->poster=poster;
@@ -35,6 +37,11 @@ Pelicula::~Pelicula(){
 		delete this->salas[i];*/
 }
 
-DtPelicula getDtPelicula();
+DtPelicula* Pelicula::obtenerDtPelicula(){
+	DtPelicula* dtPelicula = new DtPelicula(this->id,this->titulo,this->poster);
+	return dtPelicula;
+}
 
-DtCine getDtCines();
+/*DtCine* getDtCines(){
+
+}*/

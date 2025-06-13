@@ -16,7 +16,7 @@ class Cine{
 		int id;
 		DtDireccion direccion;
 		//Sala* salas[MAX_SALAS];
-		DtSala* salas[MAX_SALAS];
+		Sala* salas[MAX_SALAS];
 		int topeSalas;
 		static int ultimoId;
 	public:
@@ -26,9 +26,10 @@ class Cine{
 		void setId(int);
 		DtDireccion getDtDireccion();
 		void setDtDireccion(DtDireccion);
+		DtCine* obtenerDtCine();
 		~Cine();
-		//void agregarFuncion();
+		void agregarFuncion(int,int);
 		//void agregarSalas(Sala*);
-		void agregarSalas(DtSala*);
+		void agregarSalas(Sala*);
 };
 #endif

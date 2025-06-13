@@ -21,10 +21,10 @@ class ControladorAltaFuncion: public IControladorAltaFuncion{
 		ControladorAltaFuncion();
 		~ControladorAltaFuncion();
         list<DtPelicula*> listarPeliculas();
-        list<DtCine*> listarCines(string); // Le paso la peli que elige como parametro
+        //list<DtCine*> listarCines(string); // Le paso la peli que elige como parametro
         list<DtSala*> listarSalas(string); // Le paso el cine que elige como parametro
         void altaFuncion(string, DtHorario, DtFecha);
-        bool existeFuncion(string funcion);
+        bool existeFuncion(int);
         list<Funcion*> listarFunciones();
         //void finalizar();
 };
