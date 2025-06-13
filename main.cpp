@@ -279,9 +279,50 @@ void consultarFechaSistema() {
 
 void cargarDatosPrueba() {
 	system("clear");
-	cout << "=== Cargar datos de prueba ===" << endl;
-	// TO DO: invocar cargas en todos los controladores
+	cout << "_____C A R G A R   D A T O S   D E   P R U E B A_____" << endl;
+
+	// --- Alta de usuarios ---
+	iUsuario->altaUsuario("bob", "bobpass", "https://img.com/bob.jpg");
+	iUsuario->altaUsuario("alice", "alicepass", "https://img.com/alice.jpg");
+	iUsuario->altaUsuario("trudy", "trudypass", "https://img.com/trudy.jpg");
+
+	// --- Alta de películas ---
+	iPelicula->altaPelicula("Pulp Fiction", "Historias entrecruzadas del crimen en Los Angeles", "pulpfiction.jpg");
+	iPelicula->altaPelicula("Kill Bill", "Una ex asesina busca venganza", "killbill.jpg");
+	iPelicula->altaPelicula("Django Unchained", "Un esclavo liberado en busca de su esposa", "django.jpg");
+
+	// --- Alta de Cine 1: Life 21 (21 de Setiembre) ---
+	iAltaCine->ingresarDir("21 de Setiembre", 2721);
+	iAltaCine->ingresarCap(120); // Sala 1
+	iAltaCine->ingresarCap(80);  // Sala 2
+	iAltaCine->altaCine(); // ID asumido: 1
+
+	// --- Alta de Cine 2: Cinemateca (Bartolomé Mitre) ---
+	iAltaCine->ingresarDir("Bartolome Mitre", 1236);
+	iAltaCine->ingresarCap(90); // Sala 3
+	iAltaCine->ingresarCap(60); // Sala 4
+	iAltaCine->altaCine(); // ID asumido: 2
+
+	// --- Alta de funciones ---
+
+	// Función Pulp Fiction en Cine 1, Sala 1
+	iAltaFuncion->ingresarTitulo("Pulp Fiction");
+	iAltaFuncion->ingresarIdCine(1);
+	iAltaFuncion->altaFuncion(1, DtHorario("20", "23"), DtFecha(14, 6, 2025));
+
+	// Función Kill Bill en Cine 1, Sala 2
+	iAltaFuncion->ingresarTitulo("Kill Bill");
+	iAltaFuncion->ingresarIdCine(1);
+	iAltaFuncion->altaFuncion(2, DtHorario("18", "20"), DtFecha(15, 6, 2025));
+
+	// Función Django en Cine 2, Sala 3
+	iAltaFuncion->ingresarTitulo("Django Unchained");
+	iAltaFuncion->ingresarIdCine(2);
+	iAltaFuncion->altaFuncion(3, DtHorario("21", "00"), DtFecha(16, 6, 2025));
+
+	cout << "Datos de prueba cargados correctamente." << endl;
 }
+
 
 // Main principal
 int main() {
