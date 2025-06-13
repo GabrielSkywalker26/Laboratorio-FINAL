@@ -18,7 +18,7 @@
 class ControladorAltaFuncion: public IControladorAltaFuncion{
     private:
         string titulo; // Titulo de la pelicula
-        string idCine;
+        int idCine;
     public:
 		ControladorAltaFuncion();
 		~ControladorAltaFuncion();

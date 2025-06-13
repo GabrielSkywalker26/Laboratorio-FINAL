@@ -180,11 +180,14 @@ void altaFuncion() {
 	// Guardo el titulo ingresado
 	iAltaFuncion->ingresarTitulo(titulo);
 
+	// Filtramos por los cines donde se pasa la pelicula?
+	// O le sumamos esta pelicula al cine si no la tiene?
+
 	int idCine;
     list<DtCine*> cines = iAltaFuncion->listarCines();
-    cout << "Peliculas disponibles:\n";
-    for (DtPelicula* p : pelis) {
-        cout << "- " << *p << endl;
+    cout << "Cines disponibles:\n";
+    for (DtCine* c : cines) {
+        cout << "- " << *c << endl;
     }
     cin.ignore();
     cin >> idCine;
@@ -194,17 +197,37 @@ void altaFuncion() {
 	// Listar salas del cine seleccionado
 	int idSala;
     list<DtSala*> salas = iAltaFuncion->listarSalas();
-    cout << "Peliculas disponibles:\n";
-    for (DtPelicula* p : pelis) {
-        cout << "- " << *p << endl;
+    cout << "Salas disponibles:\n";
+    for (DtSala* s : salas) {
+        cout << "- " << *s << endl;
     }
     cin.ignore();
-    cin >> idCine;
+    cin >> idSala;
 
-    /*cout << "\nCines donde se exhibe \"" << titulo << "\":" << endl;
-    for (DtCine* c : cines) {
-        cout << "- " << *c << endl;
-    }*/
+
+    int dia, mes, anio;
+    cout << "Ingrese la fecha de la funcion: " << endl;
+    cout << "Dia: ";
+    cin.ignore();
+    cin >> dia;
+    cout << "\nMes: ";
+    cin.ignore();
+    cin >> mes;
+    cout << "\nAnio: ";
+    cin.ignore();
+    cin >> anio;
+
+	string horaComienzo, horaFin;
+    cout << "Ingrese la hora de comienzo de la funcion: " << endl;
+    cin.ignore();
+    cin >> horaComienzo;
+    cout << "Ingrese la hora de finalizacion de la funcion: " << endl;
+    cin.ignore();
+    cin >> horaFin;
+
+	// Ver de agregar la funcion
+	// Si todo salio bien agrego la peli a la lista de pelis del cine
+	// preguntar si el usuario quiere seguir agregando funciones
 
 
 }

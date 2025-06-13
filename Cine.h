@@ -15,9 +15,10 @@ class Cine{
 	private:
 		int id;
 		DtDireccion direccion;
-		//Sala* salas[MAX_SALAS];
+		// Pasar a map<int,Sala*>
 		Sala* salas[MAX_SALAS];
 		int topeSalas;
+		list<int> peliculas;
 		static int ultimoId;
 	public:
 		Cine();

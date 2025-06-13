@@ -27,14 +27,12 @@ void Sala::setCapacidad(int capacidad){
 
 Sala::~Sala(){}
 
-/*
+
 DtSala* Sala::obtenerDtSala(){
 	//DtSala* dtSala = new DtSala(this->idSala);
-	DtSala* dtSala;
+	DtSala* dtSala = new DtSala(this->id, this->capacidad);
 	return dtSala;
 }
-*/
-
 
 void Sala::agregarFuncion(int idF){
 	Funcion* funcion = ManejadorFuncion::getInstancia()->buscarFuncion(idF);

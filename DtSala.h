@@ -14,7 +14,6 @@ class DtSala{
 		DtSala(int,int);
 		~DtSala();
 
-		friend bool operator <(const DtSala&,const DtSala&);
 		friend ostream& operator <<(ostream&,const DtSala&);
 
 };

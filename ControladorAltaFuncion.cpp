@@ -54,6 +54,7 @@ list<DtCine*>ControladorAltaFuncion::listarCines(){
     //Pelicula* p = ManejadorPelicula::getInstancia()->buscarPelicula();
     //Pelicula* p = ManejadorPelicula::getInstancia()->buscarPelicula();
 
+    Pelicula* p = ManejadorCine::getInstancia()->getCines();
 
     list<DtCine*> infoCines;
     list<Cine*> cines = ManejadorCine::getInstancia()->getCines();
@@ -67,11 +68,13 @@ list<DtCine*>ControladorAltaFuncion::listarCines(){
 
 // Le paso el cine que elige como parametro
 list<DtSala*> ControladorAltaFuncion::listarSalas(){
+    //Cine* cine = ManejadorCine::getInstancia()->buscarCine(this->idCine);
+    
     list<DtSala*> infoSalas;
-    list<Sala*> salas = ManejadorCine::getInstancia()->getCines();
+    list<DtSala*> salas = ManejadorCine::getInstancia()->getDtSalas(this->idCine);
 
     for (Sala* s : salas) {
-        infoSalas.push_back(s->obtenerDtPelicula());
+        infoSalas.push_back(s);
     }
 
     return infoSalas;
