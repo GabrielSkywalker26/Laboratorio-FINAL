@@ -19,7 +19,7 @@ class ManejadorCine{
         void agregarCine(Cine*);
         bool existeCine(int);
         void eliminarCine(int);
-        DtSala* getDtSalas(int);
+        list<DtSala*> getDtSalas(int);
         virtual ~ManejadorCine();
 };
 #endif

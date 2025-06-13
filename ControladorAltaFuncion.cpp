@@ -49,12 +49,7 @@ list<DtPelicula*> ControladorAltaFuncion::listarPeliculas(){
 
 list<DtCine*>ControladorAltaFuncion::listarCines(){
 
-    //this->titulo = titulo;
-
-    //Pelicula* p = ManejadorPelicula::getInstancia()->buscarPelicula();
-    //Pelicula* p = ManejadorPelicula::getInstancia()->buscarPelicula();
-
-    Pelicula* p = ManejadorCine::getInstancia()->getCines();
+    //Cine* c = ManejadorCine::getInstancia()->getCines();
 
     list<DtCine*> infoCines;
     list<Cine*> cines = ManejadorCine::getInstancia()->getCines();
@@ -73,7 +68,7 @@ list<DtSala*> ControladorAltaFuncion::listarSalas(){
     list<DtSala*> infoSalas;
     list<DtSala*> salas = ManejadorCine::getInstancia()->getDtSalas(this->idCine);
 
-    for (Sala* s : salas) {
+    for (DtSala* s : salas) {
         infoSalas.push_back(s);
     }
 
