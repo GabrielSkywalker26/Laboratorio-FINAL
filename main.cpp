@@ -95,7 +95,6 @@ void altaUsuario() {
 
     iUsuario->altaUsuario(nickname, contrasena, url);
 
-    cout << "Usuario registrado correctamente." << endl;
 }
 
 
