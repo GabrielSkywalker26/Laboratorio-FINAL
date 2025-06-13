@@ -25,7 +25,7 @@ Funcion* ManejadorFuncion::buscarFuncion(int idFuncion){
 }
 
 void ManejadorFuncion::agregarFuncion(Funcion* funcion){
-    //Funciones.insert(std::pair<string,Funcion*>(funcion->getCi(),funcion));
+    funciones.insert(std::pair<int,Funcion*>(funcion->getId(),funcion));
 }
 
 bool ManejadorFuncion::existeFuncion(int idFuncion){ 
