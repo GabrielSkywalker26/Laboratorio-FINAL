@@ -39,15 +39,4 @@ void ManejadorCine::eliminarCine(int idCine){
   this->cines.erase(it);
 }
 
-
-list<DtSala*> ManejadorCine::getDtSalas(int idCine){
-  DtSala* dtSalas;
-  map<int,Cine*>::iterator it = this->cines.find(idCine);
-  if (it != this->cines.end()){
-    
-  }
-  return (it != this->cines.end());
-}
-
-
 ManejadorCine::~ManejadorCine(){}

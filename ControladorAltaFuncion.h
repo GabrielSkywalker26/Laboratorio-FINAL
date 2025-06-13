@@ -27,7 +27,7 @@ class ControladorAltaFuncion: public IControladorAltaFuncion{
         list<DtPelicula*> listarPeliculas();
         list<DtCine*> listarCines();
         list<DtSala*> listarSalas();
-        void altaFuncion(string, DtHorario, DtFecha);
+        void altaFuncion(int, DtHorario, DtFecha);
         bool existeFuncion(int);
         list<Funcion*> listarFunciones();
         //void finalizar();

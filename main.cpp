@@ -126,17 +126,17 @@ void altaCine() {
 	system("clear");
 	cout << "_________A L T A   C I N E_________" << endl;
 	
-    string direccion;
+    string calle;
     int numero;
 
-    cout << "Direccion: ";
+    cout << "Calle: ";
     cin.ignore();
-	getline(cin, direccion);
+	getline(cin, calle);
     cout << "Numero de puerta: ";
     cin.ignore();
     cin >> numero;
 
-	iAltaCine->ingresarDir(direccion, numero);
+	iAltaCine->ingresarDir(calle, numero);
 
     int capacidad, opcion;
     bool seguir = true;
@@ -177,7 +177,7 @@ void altaFuncion() {
     cout << "Ingrese el titulo de la pelicula: ";
     cin.ignore();
     getline(cin, titulo);
-	// Guardo el titulo ingresado
+	
 	iAltaFuncion->ingresarTitulo(titulo);
 
 	// Filtramos por los cines donde se pasa la pelicula?
@@ -189,42 +189,45 @@ void altaFuncion() {
     for (DtCine* c : cines) {
         cout << "- " << *c << endl;
     }
-    cin.ignore();
+
+	cout << "Ingrese id del cine: ";
     cin >> idCine;
-	// Guardo el id del cine ingresado
+
 	iAltaFuncion->ingresarIdCine(idCine);
 
 	// Listar salas del cine seleccionado
-	int idSala;
+
     list<DtSala*> salas = iAltaFuncion->listarSalas();
     cout << "Salas disponibles:\n";
     for (DtSala* s : salas) {
         cout << "- " << *s << endl;
     }
-    cin.ignore();
+
+	cout << "Ingrese id de la sala: ";
+	int idSala;
     cin >> idSala;
 
 
     int dia, mes, anio;
     cout << "Ingrese la fecha de la funcion: " << endl;
     cout << "Dia: ";
-    cin.ignore();
     cin >> dia;
     cout << "\nMes: ";
-    cin.ignore();
     cin >> mes;
     cout << "\nAnio: ";
-    cin.ignore();
     cin >> anio;
 
 	string horaComienzo, horaFin;
     cout << "Ingrese la hora de comienzo de la funcion: " << endl;
-    cin.ignore();
     cin >> horaComienzo;
     cout << "Ingrese la hora de finalizacion de la funcion: " << endl;
-    cin.ignore();
     cin >> horaFin;
 
+	DtFecha fechaFuncion(dia, mes, anio);
+	DtHorario horarioFuncion(horaComienzo, horaFin);
+
+	iAltaFuncion->altaFuncion(idSala, horarioFuncion, fechaFuncion);
+	
 	// Ver de agregar la funcion
 	// Si todo salio bien agrego la peli a la lista de pelis del cine
 	// preguntar si el usuario quiere seguir agregando funciones

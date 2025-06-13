@@ -8,6 +8,6 @@ DtSala::DtSala(int id,int capacidad){
 DtSala::~DtSala(){}
 
 ostream& operator <<(ostream& salida,const DtSala& dts){
-	cout << "Id Sala: " << dts.id << " capadidad: " << dts.capacidad <<endl;
+	cout << "Id Sala: " << dts.id << " ,capadidad: " << dts.capacidad <<endl;
 	return salida;
 }

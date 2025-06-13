@@ -63,16 +63,19 @@ list<DtCine*>ControladorAltaFuncion::listarCines(){
 
 // Le paso el cine que elige como parametro
 list<DtSala*> ControladorAltaFuncion::listarSalas(){
-    //Cine* cine = ManejadorCine::getInstancia()->buscarCine(this->idCine);
     
-    list<DtSala*> infoSalas;
-    list<DtSala*> salas = ManejadorCine::getInstancia()->getDtSalas(this->idCine);
+	Cine* cine = ManejadorCine::getInstancia()->buscarCine(this->idCine);
+	list<DtSala*> listaDtSalas;
+    list<Sala*> salas = cine->obtenerSalas();
 
-    for (DtSala* s : salas) {
-        infoSalas.push_back(s);
+	for (Sala* s : salas) {
+        listaDtSalas.push_back(s->obtenerDtSala());
     }
+	return listaDtSalas;
+}
 
-    return infoSalas;
-};
-void ControladorAltaFuncion::altaFuncion(string, DtHorario, DtFecha){};
+void ControladorAltaFuncion::altaFuncion(int, DtHorario, DtFecha){
+
+
+}
 

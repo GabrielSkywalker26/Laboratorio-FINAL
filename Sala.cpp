@@ -29,7 +29,7 @@ Sala::~Sala(){}
 
 
 DtSala* Sala::obtenerDtSala(){
-	//DtSala* dtSala = new DtSala(this->idSala);
+	
 	DtSala* dtSala = new DtSala(this->id, this->capacidad);
 	return dtSala;
 }

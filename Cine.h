@@ -7,6 +7,7 @@
 #include "DtCine.h"
 #include "Sala.h"
 
+#include<list>
 #include<iostream>
 
 using namespace std;
@@ -28,6 +29,7 @@ class Cine{
 		DtDireccion getDtDireccion();
 		void setDtDireccion(DtDireccion);
 		DtCine* obtenerDtCine();
+		list<Sala*> obtenerSalas();
 		~Cine();
 		void agregarFuncion(int,int);
 		//void agregarSalas(Sala*);
