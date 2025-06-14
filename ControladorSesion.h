@@ -12,5 +12,6 @@ class ControladorSesion: public IControladorSesion{
 		~ControladorSesion();
         bool iniciarSesion(string,string);
         bool cerrarSesion();
+        bool sesionIniciada();
 };
 #endif

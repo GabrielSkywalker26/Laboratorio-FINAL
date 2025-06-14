@@ -13,6 +13,7 @@ private:
 public:
     static Sesion* getInstancia();
     void setDtUsuario(DtUsuario*);
+    DtUsuario* getDtUsuario();
     void cerrarSesion();
     ~Sesion();
 };

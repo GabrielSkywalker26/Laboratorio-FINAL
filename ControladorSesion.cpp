@@ -43,3 +43,15 @@ bool ControladorSesion::cerrarSesion() {
     Sesion::getInstancia()->cerrarSesion();
     return true;
 }
+
+//bool ControladorSesion::sesionActual(string nickname) {
+bool ControladorSesion::sesionIniciada() {
+    DtUsuario* dtu = Sesion::getInstancia()->getDtUsuario();
+
+    //if (dtu != nullptr && dtu->getNickname() == nickname)
+    if (dtu != nullptr && dtu->getNickname() != "")
+        return true;
+    else
+        return false;
+
+}

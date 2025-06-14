@@ -73,7 +73,7 @@ void iniciarSesion() {
     cin >> contrasenia;
     if (iSesion->iniciarSesion(nickname, contrasenia))
         cout << "Sesion iniciada correctamente." << endl;
-    else
+	else
         cout << "Error al iniciar sesion." << endl;
 }
 
@@ -86,6 +86,12 @@ void cerrarSesion() {
 
 void altaUsuario() {
     system("clear");
+
+    if (!iSesion->sesionIniciada()){
+        cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
+		return;
+	}
+
     cout << "_________A L T A   U S U A R I O_________" << endl;
     
     string nickname, contrasena, url;
@@ -103,6 +109,12 @@ void altaUsuario() {
 
 void altaPelicula() {
 	system("clear");
+
+    if (!iSesion->sesionIniciada()){
+        cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
+		return;
+	}
+
 	cout << "_________A L T A   P E L I C U L A_________" << endl;
 
 	string titulo, sinopsis, poster;
@@ -126,6 +138,12 @@ void altaPelicula() {
 
 void altaCine() {
 	system("clear");
+
+    if (!iSesion->sesionIniciada()){
+        cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
+		return;
+	}
+
 	cout << "_________A L T A   C I N E_________" << endl;
 	
     string calle;
@@ -167,6 +185,12 @@ void altaCine() {
 
 void altaFuncion() {
     system("clear");
+
+    if (!iSesion->sesionIniciada()){
+        cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
+		return;
+	}
+
     cout << "_________A L T A   F U N C I O N_________" << endl;
 
     list<DtPelicula*> pelis = iAltaFuncion->listarPeliculas();
@@ -253,6 +277,12 @@ void verReservasPorPelicula() {
 
 void eliminarPelicula() {
 	system("clear");
+
+    if (!iSesion->sesionIniciada()){
+        cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
+		return;
+	}
+
 	cout << "_______E L I M I N A R   P E L I C U L A______" << endl;
 
 	string titulo;
@@ -269,6 +299,12 @@ void eliminarPelicula() {
 
 void modificarFechaSistema() {
     system("clear");
+
+    if (!iSesion->sesionIniciada()){
+        cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
+		return;
+	}
+
     cout << "_____M O D I F I C A R   F E C H A   D E L   S I S T E M A_____" << endl;
 
     int dia, mes, anio;
@@ -303,6 +339,12 @@ void modificarFechaSistema() {
 
 void consultarFechaSistema() {
     system("clear");
+
+    if (!iSesion->sesionIniciada()){
+        cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
+		return;
+	}
+
     cout << "_____F E C H A   D E L   S I S T E M A_____" << endl;
 
     DtFecha fecha = iFecha->getFecha();
@@ -315,6 +357,12 @@ void consultarFechaSistema() {
 
 void cargarDatosPrueba() {
 	system("clear");
+
+    if (!iSesion->sesionIniciada()){
+        cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
+		return;
+	}
+
 	cout << "_____C A R G A R   D A T O S   D E   P R U E B A_____" << endl;
 
 	// --- Alta de usuarios ---
@@ -366,6 +414,9 @@ int main() {
 	int opcion;
 	menu();
 	cin >> opcion;
+	
+	// --- Alta de administrador ---
+	iUsuario->altaUsuario("admin", "admin", "https://pelicenter.com/admin.jpg");
 
 	while(opcion != 13){
 		switch(opcion){
