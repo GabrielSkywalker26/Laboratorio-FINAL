@@ -34,6 +34,6 @@ bool operator <(const DtFecha& dtf1,const DtFecha& dtf2){
 	return retorno;
 }
 ostream& operator <<(ostream& salida,const DtFecha& dtf){
-	cout << dtf.dia << "/" << dtf.mes << "/" << dtf.anio <<endl;
+	salida << dtf.dia << "/" << dtf.mes << "/" << dtf.anio <<endl;
 	return salida;
 }

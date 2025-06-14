@@ -9,6 +9,7 @@
 #include "IControladorReserva.h"
 #include "IControladorSesion.h"
 #include "IControladorUsuario.h"
+#include "IControladorFecha.h"
 
 using namespace std;
 
@@ -20,6 +21,8 @@ IControladorPelicula* iPelicula = fabrica->getIControladorPelicula();
 IControladorReserva* iReserva = fabrica->getIControladorReserva();
 IControladorSesion* iSesion = fabrica->getIControladorSesion();
 IControladorUsuario* iUsuario = fabrica->getIControladorUsuario();
+IControladorFecha* iFecha = fabrica->getIControladorFecha();
+
 
 // Declaración de operaciones
 void iniciarSesion();
@@ -265,16 +268,50 @@ void eliminarPelicula() {
 
 
 void modificarFechaSistema() {
-	system("clear");
-	cout << "=== Modificar fecha del sistema ===" << endl;
-	// TO DO: usar clase FechaSistema
+    system("clear");
+    cout << "_____M O D I F I C A R   F E C H A   D E L   S I S T E M A_____" << endl;
+
+    int dia, mes, anio;
+    string horaS;
+
+    // Ingreso paso a paso
+    cout << "Ingrese el dia: ";
+    cin >> dia;
+    
+    cout << "Ingrese el mes: ";
+    cin >> mes;
+    
+    cout << "Ingrese el anio: ";
+    cin >> anio;
+
+    cout << "Ingrese la hora del sitema (formato HH:MM): ";
+    cin >> horaS;
+
+    // Crear objetos de fecha y horario
+    DtFecha nuevaFecha(dia, mes, anio);
+    DtHorarioSistema nuevoHorario(horaS);
+
+    // Aplicar en controlador
+    iFecha->modificarFecha(nuevaFecha, nuevoHorario);
+
+    cout << "Fecha del sistema actualizada a: " << nuevaFecha << " " << nuevoHorario << endl;
 }
 
+
+
+
+
 void consultarFechaSistema() {
-	system("clear");
-	cout << "=== Consultar fecha del sistema ===" << endl;
-	// TO DO: usar clase FechaSistema
+    system("clear");
+    cout << "_____F E C H A   D E L   S I S T E M A_____" << endl;
+
+    DtFecha fecha = iFecha->getFecha();
+    DtHorarioSistema horario = iFecha->getHorario();
+
+    cout << "Fecha del sistema: " << fecha << " " << horario << endl;
 }
+
+
 
 void cargarDatosPrueba() {
 	system("clear");

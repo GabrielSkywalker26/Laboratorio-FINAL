@@ -1,4 +1,5 @@
 #include "DtHorario.h"
+
 DtHorario::DtHorario(){}
 DtHorario::DtHorario(string horaComienzo, string horaFin){
 	this->horaComienzo=horaComienzo;
@@ -29,7 +30,8 @@ bool operator <(const DtHorario& dth1,const DtHorario& dth2){
 	*/
 	return retorno;
 }
-ostream& operator <<(ostream& salida,const DtHorario& dth){
-	//cout << "Hora comienzo: " << dth.dia << "\nHora fin: " << dth.mes <<endl;
-	return salida;
+
+ostream &operator<<(ostream & salida, const DtHorario & h){
+    salida << "Inicio: " << h.horaComienzo << ", Fin: " << h.horaFin;
+    return salida;
 }
