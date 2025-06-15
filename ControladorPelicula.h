@@ -16,7 +16,8 @@ class ControladorPelicula: public IControladorPelicula{
 		ControladorPelicula();
 		~ControladorPelicula();
         bool altaPelicula(string, string, string);
-        bool eliminarPelicula(string);
+        bool eliminarPelicula();
+        void ingresarTitulo(string);
         list<DtPelicula*> listarPeliculas();
    };
 #endif

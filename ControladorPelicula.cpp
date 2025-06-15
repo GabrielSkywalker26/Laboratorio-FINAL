@@ -17,6 +17,9 @@ bool ControladorPelicula::altaPelicula(string titulo, string sinopsis, string po
     return true;
 }
 
+void ControladorPelicula::ingresarTitulo(string titulo){
+    this->pelicula=titulo;
+}
 
 list<DtPelicula*> ControladorPelicula::listarPeliculas() {
     list<DtPelicula*> infoPeliculas;
@@ -30,7 +33,7 @@ list<DtPelicula*> ControladorPelicula::listarPeliculas() {
 }
 
 
-bool ControladorPelicula::eliminarPelicula(string titulo) {
+bool ControladorPelicula::eliminarPelicula() {
 
     ManejadorPelicula* manejadorP = ManejadorPelicula::getInstancia();
     ManejadorFuncion* manejadorF = ManejadorFuncion::getInstancia();
@@ -38,16 +41,15 @@ bool ControladorPelicula::eliminarPelicula(string titulo) {
     //ManejadorReserva* manejadorR = ManejadorReserva::getInstancia();
 
     // 1. Verificar existencia
-    if (!manejadorP->existePelicula(titulo)) {
+    if (!manejadorP->existePelicula(pelicula)) {
         return false;
     }
 
     // 2. Obtener puntero a la película
-    Pelicula* peli = manejadorP->buscarPelicula(titulo);
+    Pelicula* peli = manejadorP->buscarPelicula(pelicula);
 
     // 3. Obtener ID
     int idPelicula = peli->getId();
-
 
 
     // 4. Eliminar funciones y reservas asociadas
@@ -57,6 +59,7 @@ bool ControladorPelicula::eliminarPelicula(string titulo) {
             int idFuncion = f->getId();
             //manejadorR->eliminarReservasPorFuncion(idFuncion);
             manejadorF->eliminarFuncion(idFuncion);
+            delete f;
         }
     }
     
@@ -66,7 +69,8 @@ bool ControladorPelicula::eliminarPelicula(string titulo) {
     }
 
     // 6. Eliminar película del manejador
-    manejadorP->eliminarPelicula(titulo);
-
+    manejadorP->eliminarPelicula(pelicula);
+    this->pelicula.clear();
+    delete peli;
     return true;
 }

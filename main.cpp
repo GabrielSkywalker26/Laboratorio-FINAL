@@ -295,8 +295,9 @@ void eliminarPelicula() {
 	cout << "Ingrese el titulo de la pelicula a eliminar: ";
 	cin.ignore(); // limpia el salto de línea previo
 	getline(cin, titulo);
+	iPelicula->ingresarTitulo(titulo);
 
-	if (iPelicula->eliminarPelicula(titulo))
+	if (iPelicula->eliminarPelicula())
 		cout << "Pelicula eliminada correctamente." << endl;
 	else
 		cout << "Error: no se encontro la pelicula." << endl;
