@@ -43,6 +43,11 @@ void Funcion::setPelicula(Pelicula* pelicula){
 
 Funcion::~Funcion(){}
 
+Pelicula *Funcion::getPelicula(){
+	return this->pelicula;
+}
+
+
 DtFuncion* Funcion::obtenerDtFuncion(){
 	DtFuncion* dtFuncion = new DtFuncion(this->fecha, this->horario, this->id);
 	return dtFuncion;

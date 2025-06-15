@@ -48,22 +48,18 @@ bool ControladorPelicula::eliminarPelicula(string titulo) {
     // 3. Obtener ID
     int idPelicula = peli->getId();
 
-    /*   ----------------------------------------------------------------------------
+
 
     // 4. Eliminar funciones y reservas asociadas
-        list<Funcion*> funciones = manejadorF->getFunciones();
-        for (Funcion* f : funciones) {
-            if (f->getPelicula()->getId() == idPelicula) {
-                int idFuncion = f->getId();
-                manejadorR->eliminarReservasPorFuncion(idFuncion);
-                manejadorF->eliminarFuncion(idFuncion);
-            }
+    list<Funcion*> funciones = manejadorF->getFunciones();
+    for (Funcion* f : funciones) {
+        if (f->getPelicula()->getId() == idPelicula) {
+            int idFuncion = f->getId();
+            //manejadorR->eliminarReservasPorFuncion(idFuncion);
+            manejadorF->eliminarFuncion(idFuncion);
         }
-
-
-    ---------------------------------------------------------------------  */
-
-
+    }
+    
     // 5. Eliminar película de todos los cines que la tengan registrada
     for (Cine* c : manejadorC->getCines()) {
         c->eliminarPelicula(idPelicula);

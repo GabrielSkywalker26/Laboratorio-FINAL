@@ -101,6 +101,7 @@ void ControladorAltaFuncion::altaFuncion(int idSala, DtHorario horario, DtFecha 
     for (Sala* sala : cine->obtenerSalas()) {
         if (sala->getId() == idSala) {
             sala->agregarFuncion(idFuncion);
+            cine->agregarPelicula(idPeli);
             cout << "Funcion registrada correctamente con ID: " << idFuncion << endl;
             return;
         }
@@ -109,7 +110,6 @@ void ControladorAltaFuncion::altaFuncion(int idSala, DtHorario horario, DtFecha 
     // Si no encontró la sala
     cout << "Error: sala no encontrada en el cine." << endl;
 
-    cine->agregarPelicula(idPeli);
 }
 
 

@@ -27,6 +27,7 @@ class Funcion{
 		void setFecha(DtFecha);
 		DtHorario getHorario();
 		void setHorario(DtHorario);
+		Pelicula* getPelicula();
 		~Funcion();
 		DtFuncion* obtenerDtFuncion();
 };
