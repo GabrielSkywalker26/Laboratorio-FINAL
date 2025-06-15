@@ -285,8 +285,14 @@ void eliminarPelicula() {
 
 	cout << "_______E L I M I N A R   P E L I C U L A______" << endl;
 
+	list<DtPelicula*> pelis = iPelicula->listarPeliculas();
+	cout << "Peliculas disponibles:\n";
+	for (DtPelicula* p : pelis) {
+		cout << "- " << *p << endl;
+	}
+
 	string titulo;
-	cout << "Titulo de la pelicula a eliminar: ";
+	cout << "Ingrese el titulo de la pelicula a eliminar: ";
 	cin.ignore(); // limpia el salto de línea previo
 	getline(cin, titulo);
 

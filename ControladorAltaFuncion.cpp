@@ -82,7 +82,7 @@ void ControladorAltaFuncion::altaFuncion(int idSala, DtHorario horario, DtFecha 
         cout << "Error: no se encontro la pelicula." << endl;
         return;
     }
-
+    int idPeli = peli->getId();
     // 2. Crear la función
     Funcion* funcion = new Funcion(fecha, horario, peli);
     int idFuncion = funcion->getId();
@@ -105,9 +105,11 @@ void ControladorAltaFuncion::altaFuncion(int idSala, DtHorario horario, DtFecha 
             return;
         }
     }
-
+    
     // Si no encontró la sala
     cout << "Error: sala no encontrada en el cine." << endl;
+
+    cine->agregarPelicula(idPeli);
 }
 
 

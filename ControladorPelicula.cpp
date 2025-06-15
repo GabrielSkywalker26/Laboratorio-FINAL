@@ -1,6 +1,4 @@
 #include "ControladorPelicula.h"
-#include "ManejadorPelicula.h"
-#include "Pelicula.h"
 
 
 ControladorPelicula::ControladorPelicula(){}
@@ -20,17 +18,59 @@ bool ControladorPelicula::altaPelicula(string titulo, string sinopsis, string po
 }
 
 
+list<DtPelicula*> ControladorPelicula::listarPeliculas() {
+    list<DtPelicula*> infoPeliculas;
+    list<Pelicula*> pelis = ManejadorPelicula::getInstancia()->getPeliculas();
 
-// del .h
-// @TODO: comentar que realiza la funcion
-// Implementar metodo
-bool ControladorPelicula::eliminarPelicula(string titulo){
+    for (Pelicula* p : pelis) {
+        infoPeliculas.push_back(p->obtenerDtPelicula());
+    }
 
-    ManejadorPelicula* manejador = ManejadorPelicula::getInstancia();
+    return infoPeliculas;
+}
 
-    if (!manejador->existePelicula(titulo))
+
+bool ControladorPelicula::eliminarPelicula(string titulo) {
+
+    ManejadorPelicula* manejadorP = ManejadorPelicula::getInstancia();
+    ManejadorFuncion* manejadorF = ManejadorFuncion::getInstancia();
+    ManejadorCine* manejadorC = ManejadorCine::getInstancia();
+    //ManejadorReserva* manejadorR = ManejadorReserva::getInstancia();
+
+    // 1. Verificar existencia
+    if (!manejadorP->existePelicula(titulo)) {
         return false;
+    }
 
-    manejador->eliminarPelicula(titulo);
+    // 2. Obtener puntero a la película
+    Pelicula* peli = manejadorP->buscarPelicula(titulo);
+
+    // 3. Obtener ID
+    int idPelicula = peli->getId();
+
+    /*   ----------------------------------------------------------------------------
+
+    // 4. Eliminar funciones y reservas asociadas
+        list<Funcion*> funciones = manejadorF->getFunciones();
+        for (Funcion* f : funciones) {
+            if (f->getPelicula()->getId() == idPelicula) {
+                int idFuncion = f->getId();
+                manejadorR->eliminarReservasPorFuncion(idFuncion);
+                manejadorF->eliminarFuncion(idFuncion);
+            }
+        }
+
+
+    ---------------------------------------------------------------------  */
+
+
+    // 5. Eliminar película de todos los cines que la tengan registrada
+    for (Cine* c : manejadorC->getCines()) {
+        c->eliminarPelicula(idPelicula);
+    }
+
+    // 6. Eliminar película del manejador
+    manejadorP->eliminarPelicula(titulo);
+
     return true;
 }

@@ -10,6 +10,9 @@ Pelicula::Pelicula(string titulo, string sinopsis, string poster){
 	this->sinopsis=sinopsis;
 	this->poster=poster;
 }
+int Pelicula::getId(){
+	return this->id;
+}
 
 string Pelicula::getTitulo(){
 	return this->titulo;

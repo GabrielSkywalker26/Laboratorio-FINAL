@@ -19,6 +19,7 @@ class Pelicula{
 	public:
 		Pelicula();
 		Pelicula(string, string, string);
+		int getId();
 		string getTitulo();
 		void setTitulo(string);
 		string getSinopsis();

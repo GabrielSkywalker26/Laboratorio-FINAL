@@ -30,9 +30,11 @@ class Cine{
 		void setDtDireccion(DtDireccion);
 		DtCine* obtenerDtCine();
 		list<Sala*> obtenerSalas();
-		~Cine();
+		void eliminarPelicula(int idPelicula);
 		void agregarFuncion(int,int);
 		//void agregarSalas(Sala*);
 		void agregarSalas(Sala*);
+		void agregarPelicula(int idPelicula);
+		~Cine();
 };
 #endif

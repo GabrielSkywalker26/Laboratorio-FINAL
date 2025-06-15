@@ -3,7 +3,10 @@
 
 #include "IControladorPelicula.h"
 #include "ManejadorPelicula.h"
-#include "Pelicula.h"
+#include "ManejadorCine.h"
+#include "ManejadorFuncion.h"
+//#include "ManejadorReserva.h"
+
 #include <list>
 
 class ControladorPelicula: public IControladorPelicula{
@@ -14,6 +17,7 @@ class ControladorPelicula: public IControladorPelicula{
 		~ControladorPelicula();
         bool altaPelicula(string, string, string);
         bool eliminarPelicula(string);
+        list<DtPelicula*> listarPeliculas();
    };
 #endif
 

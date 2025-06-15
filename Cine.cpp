@@ -54,3 +54,15 @@ list<Sala *> Cine::obtenerSalas(){
 	}
 	return listaSalas;
 }
+void Cine::agregarPelicula(int idPelicula) {
+    // Evita duplicados
+    for (int id : peliculas) {
+        if (id == idPelicula) return;
+    }
+
+    peliculas.push_back(idPelicula);
+}
+
+void Cine::eliminarPelicula(int idPelicula) {
+    peliculas.remove(idPelicula);
+}
