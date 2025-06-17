@@ -45,6 +45,11 @@ DtPelicula* Pelicula::obtenerDtPelicula(){
 	return dtPelicula;
 }
 
+DtPeliInfo* Pelicula::obtenerDtPeliInfo(){
+	DtPeliInfo* dtPelInfo = new DtPeliInfo(this->getSinopsis(), this->getPoster());
+	return dtPelInfo;
+}
+
 /*DtCine* getDtCines(){
 
 }*/

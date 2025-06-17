@@ -66,3 +66,15 @@ void Cine::agregarPelicula(int idPelicula) {
 void Cine::eliminarPelicula(int idPelicula) {
     peliculas.remove(idPelicula);
 }
+
+list<int> Cine::getPeliculas(){
+	return this->peliculas;
+}
+
+bool Cine::checkPeliculas(int idPelicula){
+	for (int idABuscar : this->peliculas){
+		if (idABuscar == idPelicula)
+			return true;
+	}
+	return false;
+}

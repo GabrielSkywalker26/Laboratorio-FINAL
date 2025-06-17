@@ -266,7 +266,61 @@ void altaFuncion() {
 void crearReserva() {
 	system("clear");
 	cout << "=== Crear reserva ===" << endl;
-	// TO DO: implementar lógica con iReserva
+	
+	if (!iSesion->sesionIniciada()){
+        cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
+		return;
+	}
+
+	list<DtPelicula*> pelis = iReserva->listarPeliculas();
+    cout << "Peliculas disponibles:\n";
+    for (DtPelicula* p : pelis) {
+        cout << "- " << *p << endl;
+    }
+
+    string titulo;
+    cout << "Ingrese el titulo de la pelicula: ";
+    cin.ignore();
+    getline(cin, titulo);
+	
+	DtPeliInfo* dtPeliInfo = iReserva->selectPeli(titulo);
+	cout << "- " << *dtPeliInfo << endl;
+
+	int eleccion;
+	cout << "Desea ver informacion adicional de la pelicula?" << endl;
+	cout << "1 si, 2 no" << endl;
+	cin.ignore();
+	getline(cin, eleccion);
+
+	/*El usuario puede elegir si
+finalizar el caso de uso, o ver información adicional de dicha película. Si
+desea ver la información adicional, se listan los cines en los que pasan
+esa película. Se puede optar por finalizar, o seleccionar un cine. Si se
+selecciona un cine, se listan para esa película y ese cine las funciones
+existentes en el sistema posterior a la fecha y hora actual. El usuario
+puede repetir este proceso para otra película, si lo desea. Una vez elegida
+la película, selecciona la función que desea ver, y el sistema le solicita la
+cantidad de asientos que desea reservar. Una vez ingresada la cantidad, el
+sistema le pide que ingrese el modo de pago. El usuario debe indicar
+si se trata de una tarjeta de crédito o de débito. En caso de ser de débito
+debe ingresar el nombre del banco. En caso de ser de crédito debe
+especificar el nombre de la financiera, y el sistema le indica para esa
+financiera si tiene descuento y cuánto es. Finalmente, el usuario ve el
+precio total y puede confirmar o cancelar. Si confirma se crea la reserva
+en el sistema.
+*/
+
+// si eige 1 muestro los cines donde se pasa esa peli
+// obtengo el listado de cines filtrado
+// uso listarCinesPeli para tener la lista, printear en main
+// el usuario elige un cine
+// al elegir un cine, miro dentro de sus salas 
+// en cada sala obtengo el listado de funciones
+// devuelvo las que sean mi pelicula
+// si son despues de la fecha hora sistema, las sumo a lista para devolver.
+
+
+
 }
 
 void verReservasPorPelicula() {

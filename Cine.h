@@ -35,6 +35,8 @@ class Cine{
 		//void agregarSalas(Sala*);
 		void agregarSalas(Sala*);
 		void agregarPelicula(int idPelicula);
+		bool checkPeliculas(int);
+		list<int> getPeliculas();
 		~Cine();
 };
 #endif

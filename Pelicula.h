@@ -3,6 +3,7 @@
 
 #include "DtPelicula.h"
 #include "DtCine.h"
+#include "DtPeliInfo.h"
 
 #include<iostream>
 
@@ -28,6 +29,7 @@ class Pelicula{
 		void setPoster(string);
 		~Pelicula();
 		DtPelicula* obtenerDtPelicula();
+		DtPeliInfo* obtenerDtPeliInfo();
 		//DtCine getDtCines();
 };
 #endif

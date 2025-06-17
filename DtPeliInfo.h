@@ -7,14 +7,14 @@ using namespace std;
 
 class DtPeliInfo{
 	private:
-		int id;
-		string direccion;
+		string poster;
+		string sinopsis;
 	public:
 		DtPeliInfo();
-		DtPeliInfo(int,string);
+		DtPeliInfo(string,string);
 		~DtPeliInfo();
 
-		friend bool operator <(const DtPeliInfo&,const DtPeliInfo&);
+		
 		friend ostream& operator <<(ostream&,const DtPeliInfo&);
 
 };
