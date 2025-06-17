@@ -13,8 +13,9 @@ class Sala{
 	private:
 		int id;
 		int capacidad;
-		Funcion* funciones[MAX_FUNCIONES];
-		int topeFunciones;
+		//Funcion* funciones[MAX_FUNCIONES];
+		//int topeFunciones;
+		list<int> funciones;
 		static int ultimoId;
 	public:
 		Sala();
@@ -26,5 +27,6 @@ class Sala{
 		~Sala();
 		DtSala* obtenerDtSala();
 		void agregarFuncion(int);
+		list<DtFuncion*> obtenerDtFunciones();
 };
 #endif

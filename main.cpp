@@ -286,11 +286,13 @@ void crearReserva() {
 	DtPeliInfo* dtPeliInfo = iReserva->selectPeli(titulo);
 	cout << "- " << *dtPeliInfo << endl;
 
-	int eleccion;
+	int eleccionInfo;
 	cout << "Desea ver informacion adicional de la pelicula?" << endl;
-	cout << "1 si, 2 no" << endl;
+	cout << "1. Si" << endl;
+	cout << "2. No" << endl;
+	cout << "Opcion: ";
 	cin.ignore();
-	getline(cin, eleccion);
+    cin >> eleccionInfo;
 
 	/*El usuario puede elegir si
 finalizar el caso de uso, o ver información adicional de dicha película. Si
@@ -310,10 +312,44 @@ precio total y puede confirmar o cancelar. Si confirma se crea la reserva
 en el sistema.
 */
 
-// si eige 1 muestro los cines donde se pasa esa peli
+// si eige "si" muestro los cines donde se pasa esa peli. "no" vuelve al principio?
 // obtengo el listado de cines filtrado
 // uso listarCinesPeli para tener la lista, printear en main
-// el usuario elige un cine
+if (eleccionInfo == 1){
+	list<DtCine*> cines = iReserva->listarCinesPeli();
+	cout << "Cines disponibles:\n";
+    for (DtCine* c : cines) {
+        cout << "- " << *c << endl;
+    }
+
+	int eleccionCine;
+	cout << "Desea continuar?" << endl;
+	cout << "1. Seleccionar cine" << endl;
+	cout << "2. Finalizar" << endl;
+	cout << "Opcion: ";
+	cin.ignore();
+    cin >> eleccionCine;
+
+	if (eleccionCine == 1){
+
+		// el usuario elige un cine
+		cout << "\nIngrese id del cine: ";
+		int idCine;
+		cin >> idCine;
+
+		list<DtFuncion*> funciones = iReserva->selectCine(idCine);
+
+	} else {
+		// borrar memoria
+		// finalizar();
+	}
+} else {
+	// borrar memoria
+	// finalizar();
+}
+
+
+
 // al elegir un cine, miro dentro de sus salas 
 // en cada sala obtengo el listado de funciones
 // devuelvo las que sean mi pelicula

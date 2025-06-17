@@ -47,7 +47,7 @@ DtCine* Cine::obtenerDtCine(){
 }
 
 
-list<Sala *> Cine::obtenerSalas(){
+list<Sala*> Cine::obtenerSalas(){
 	list<Sala*> listaSalas;
 	for (int i = 0; i < this->topeSalas; i++) {
 		listaSalas.push_back(this->salas[i]);

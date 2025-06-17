@@ -35,6 +35,7 @@ list<DtPelicula*> ControladorReserva::listarPeliculas(){
 
     return infoPeliculas;
 };
+
 DtPeliInfo* ControladorReserva::selectPeli(string nombrePel){
     this->titulo = nombrePel;
     DtPeliInfo* dtPeli;
@@ -45,28 +46,66 @@ DtPeliInfo* ControladorReserva::selectPeli(string nombrePel){
     return dtPeli;
 };
 
-//se listan para esa película y ese cine las funciones existentes en el sistema posterior a la fecha y hora actual
+// Lista los cines donde se pasa la pelicula seleccionada
 list<DtCine*> ControladorReserva::listarCinesPeli(){
     list<DtCine*> listaRetorno;
     list<Cine*> listaCines = ManejadorCine::getInstancia()->getCines();
-    Pelicula* peliEle = ManejadorPelicula::getInstancia()->buscarPelicula(this->titulo);
+    Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(this->titulo);
+    int idPeli = peli->getId();
     for (Cine* c : listaCines){
-        if (c->checkPeliculas(peliEle->getId())){
+        if (c->checkPeliculas(idPeli)){
             DtCine* cineRet = c->obtenerDtCine();
             listaRetorno.push_back(cineRet);
         }
     }
     return listaRetorno;
-}; 
+};
+
+// Con el cine elegido, se buscan las funciones dentro de las salas donde pasen la pelicula elegida
 list<DtFuncion*> ControladorReserva::selectCine(int cineElegido){
-    list<DtFuncion*> listaRetorno;
-    list<Funcion*> listaFunciones = ManejadorFuncion::getInstancia()->getFunciones();
-    Cine* buscaCine = ManejadorCine::getInstancia()->buscarCine(cineElegido);
+    list<DtFuncion*> listaFuncionesRetorno;
+    //list<Funcion*> listaFunciones = ManejadorFuncion::getInstancia()->getFunciones();
+    Cine* cine = ManejadorCine::getInstancia()->buscarCine(cineElegido);
+    
+    list<Sala*> salas = cine->obtenerSalas();
+    list<DtFuncion*> funciones;
+
+    // Para cada sala dentro del cine seleccionado
+    for (Sala* s : salas){
+
+        // Obtengo las funciones de la sala actual
+        funciones = s->obtenerDtFunciones();
+        
+        // Para cada dtfuncion dentro de la sala seleccionada
+        for (DtFuncion* dtf : funciones){
+           
+            // Chequeo si es para la pelicula seleccionada
+            if (dtf->getPeli() == this->titulo){
+                
+                // Cheque si es posterior a fecha y hora actual
+                DtFecha* dtfecha = 
+                DtFecha fechaActual = FechaSistema::getInstancia()->getFecha();
+                // Chequeo si es posterior a la fecha actual
+                if (fechaActual == dtf->){
+
+                    // Chequeo si la hora de comienzo es posterior a la hora actual
+                    if (fechaActual == dtf->){
+
+                    }
+
+                }
+                
+            }
+
+        }
+        
+    }
+
     DtFecha fechaActual = FechaSistema::getInstancia()->getFecha();
-    //Suponiendo que arreglamos eso:
+    
     for (Funcion* f : listaFunciones){
         if (f->getFecha() <  /*TODO: Revisar como compararlos*/){
-            if (f.getCine->getDtDireccion == buscaCine->getDtDireccion()){
+            if (f.getCine->getDtDireccion == cine->getDtDireccion()){
                 // Dentro de cada cine, buscar en cada sala, las funciones de la pelicula elegida.
                 // Si lo encuentra, devolver sus funciones.
                 // Para lo de arriba, sobrecargar el operador pero con strcmp para dirección.
@@ -75,8 +114,9 @@ list<DtFuncion*> ControladorReserva::selectCine(int cineElegido){
             }
         }
     }
-    return listaRetorno;
+    return listaFuncionesRetorno;
 };
+
 void ControladorReserva::selectFuncion(int){};
 bool ControladorReserva::reservarAsientos(int){};
 void ControladorReserva::ingresarModoPago(int){};

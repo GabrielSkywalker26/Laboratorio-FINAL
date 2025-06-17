@@ -8,7 +8,7 @@ Sala::Sala(int capacidad){
 	
     this->id= ++ultimoId;// Obtengo id de la sala anterior y le sumo 1
 	this->capacidad=capacidad;
-	this->topeFunciones=0;
+	//this->topeFunciones=0;
 }
 
 int Sala::getId(){
@@ -36,9 +36,20 @@ DtSala* Sala::obtenerDtSala(){
 
 void Sala::agregarFuncion(int idF){
 	Funcion* funcion = ManejadorFuncion::getInstancia()->buscarFuncion(idF);
+	/*
 	if (this->topeFunciones < MAX_FUNCIONES) {
         this->funciones[this->topeFunciones] = funcion;
         this->topeFunciones++;
-    }
+    }*/
+	funciones.push_back(idF);
 }
 
+list<DtFuncion*> Sala::obtenerDtFunciones(){
+	list<DtFuncion*> dTFunciones;
+	ManejadorFuncion* manejadorFuncion = ManejadorFuncion::getInstancia();
+	for (int f : funciones) {
+        DtFuncion* dtf = manejadorFuncion->buscarFuncion(f)->obtenerDtFuncion();
+		dTFunciones.push_back(dtf);
+    }
+	return dTFunciones;
+}
