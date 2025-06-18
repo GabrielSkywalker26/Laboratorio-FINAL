@@ -49,6 +49,24 @@ Pelicula *Funcion::getPelicula(){
 
 
 DtFuncion* Funcion::obtenerDtFuncion(){
-	DtFuncion* dtFuncion = new DtFuncion(this->fecha, this->horario, this->id);
+	DtFuncion* dtFuncion = new DtFuncion(this->fecha, this->horario);
 	return dtFuncion;
+}
+
+bool Funcion::hayAsientosDisponibles(int cantidad) {
+    int asientosReservados = 0;
+    for (Reserva* r : reservas) {
+        asientosReservados += r->getCantEntradas();
+    }
+    // Suponiendo que la sala tiene una capacidad fija de 100 (ajustar si hay acceso a la sala real)
+    int capacidadSala = 100;
+    return (asientosReservados + cantidad) <= capacidadSala;
+}
+
+float Funcion::getPrecio() {
+    return precio;
+}
+
+void Funcion::agregarReserva(Reserva* reserva) {
+    reservas.push_back(reserva);
 }

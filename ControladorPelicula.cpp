@@ -45,7 +45,7 @@ bool ControladorPelicula::eliminarPelicula() {
         return false;
     }
 
-    // 2. Obtener puntero a la película
+    // 2. Obtener puntero a la pelicula
     Pelicula* peli = manejadorP->buscarPelicula(pelicula);
 
     // 3. Obtener ID
@@ -59,16 +59,25 @@ bool ControladorPelicula::eliminarPelicula() {
             int idFuncion = f->getId();
             //manejadorR->eliminarReservasPorFuncion(idFuncion);
             manejadorF->eliminarFuncion(idFuncion);
+            
+            // Eliminar la funcion de todas las salas
+            list<Cine*> cines = manejadorC->getCines();
+            for (Cine* c : cines) {
+                list<Sala*> salas = c->obtenerSalas();
+                for (Sala* s : salas) {
+                    s->eliminarFuncion(idFuncion);
+                }
+            }
             delete f;
         }
     }
     
-    // 5. Eliminar película de todos los cines que la tengan registrada
+    // 5. Eliminar pelicula de todos los cines que la tengan registrada
     for (Cine* c : manejadorC->getCines()) {
         c->eliminarPelicula(idPelicula);
     }
 
-    // 6. Eliminar película del manejador
+    // 6. Eliminar pelicula del manejador
     manejadorP->eliminarPelicula(pelicula);
     this->pelicula.clear();
     delete peli;

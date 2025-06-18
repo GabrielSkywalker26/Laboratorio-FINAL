@@ -1,21 +1,22 @@
 #ifndef DEBITO
 #define DEBITO
 
-#include "Reserva.h"
-#include<iostream>
+#include "Pago.h"
+#include <string>
 
-using namespace std;
+class Debito : public Pago {
+private:
+	std::string banco;
 
-class Debito{
-	private:
-		string banco;
-	public:
-		Debito();
-		Debito(string);
-		string getBanco();
-		void setBanco(string);
-		~Debito();
-		//DtReserva obtenerDtReserva();
-		void agregarDtReserva();
+public:
+	Debito();
+	void setBanco(std::string banco);
+	std::string getBanco();
+	float getMonto() override;
+	void setMonto(float m) override;
+	~Debito();
+	//DtReserva obtenerDtReserva();
+	void agregarDtReserva();
 };
+
 #endif

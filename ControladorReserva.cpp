@@ -1,127 +1,137 @@
 #include "ControladorReserva.h"
+#include "Fabrica.h"
+#include "ManejadorPelicula.h"
+#include "ManejadorCine.h"
+#include "ManejadorFinanciera.h"
 
+ControladorReserva* ControladorReserva::instancia = NULL;
 
-ControladorReserva::ControladorReserva(){}
-
-ControladorReserva::~ControladorReserva(){}
-
-
-/*
-void ControladorReserva::altaCine(DtDireccion dtDireccion){
-    Cine* u = new Cine(dtDireccion);
-    ManejadorCine::getInstancia()->agregarCine(u);
+ControladorReserva::ControladorReserva() {
+    tituloPelicula = "";
+    idCine = 0;
+    idFuncion = 0;
+    cantidadAsientos = 0;
+    tipoPago = 0;
+    bancoFinanciera = "";
+    funcion = NULL;
+    usuario = NULL;
+    pago = NULL;
 }
 
-list<Cine*> ControladorReserva::listarCines(){
-    return ManejadorCine::getInstancia()->getCines();
+ControladorReserva* ControladorReserva::getInstancia() {
+    if (instancia == NULL)
+        instancia = new ControladorReserva();
+    return instancia;
 }
 
-bool ControladorReserva::existeCine(string direccion){
-    return ManejadorCine::getInstancia()->existeCine(direccion);
+ControladorReserva::~ControladorReserva() {
+    // No eliminamos los punteros ya que son referencias a objetos que no son propiedad del controlador
 }
-*/
 
-
-// del .h
-// @TODO: comentar que realiza la funcion
-// Implementar metodo
-list<DtPelicula*> ControladorReserva::listarPeliculas(){
-    list<DtPelicula*> infoPeliculas;
-    list<Pelicula*> pelis = ManejadorPelicula::getInstancia()->getPeliculas();
-
-    for (Pelicula* p : pelis) {
-        infoPeliculas.push_back(p->obtenerDtPelicula());
+list<DtPelicula*> ControladorReserva::listarPeliculas() {
+    list<DtPelicula*> resultado;
+    list<Pelicula*> peliculas = ManejadorPelicula::getInstancia()->getPeliculas();
+    for (Pelicula* p : peliculas) {
+        resultado.push_back(p->obtenerDtPelicula());
     }
+    return resultado;
+}
 
-    return infoPeliculas;
-};
+DtPeliInfo* ControladorReserva::selectPeli(string titulo) {
+    tituloPelicula = titulo;
+    Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
+    return peli ? peli->obtenerDtPeliInfo() : nullptr;
+}
 
-DtPeliInfo* ControladorReserva::selectPeli(string nombrePel){
-    this->titulo = nombrePel;
-    DtPeliInfo* dtPeli;
-    Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(nombrePel);
-    if (peli != nullptr){
-        dtPeli = new DtPeliInfo(peli->getPoster(), peli->getSinopsis());
-    }
-    return dtPeli;
-};
-
-// Lista los cines donde se pasa la pelicula seleccionada
-list<DtCine*> ControladorReserva::listarCinesPeli(){
-    list<DtCine*> listaRetorno;
-    list<Cine*> listaCines = ManejadorCine::getInstancia()->getCines();
-    Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(this->titulo);
-    int idPeli = peli->getId();
-    for (Cine* c : listaCines){
-        if (c->checkPeliculas(idPeli)){
-            DtCine* cineRet = c->obtenerDtCine();
-            listaRetorno.push_back(cineRet);
-        }
-    }
-    return listaRetorno;
-};
-
-// Con el cine elegido, se buscan las funciones dentro de las salas donde pasen la pelicula elegida
-list<DtFuncion*> ControladorReserva::selectCine(int cineElegido){
-    list<DtFuncion*> listaFuncionesRetorno;
-    //list<Funcion*> listaFunciones = ManejadorFuncion::getInstancia()->getFunciones();
-    Cine* cine = ManejadorCine::getInstancia()->buscarCine(cineElegido);
-    
-    list<Sala*> salas = cine->obtenerSalas();
-    list<DtFuncion*> funciones;
-
-    // Para cada sala dentro del cine seleccionado
-    for (Sala* s : salas){
-
-        // Obtengo las funciones de la sala actual
-        funciones = s->obtenerDtFunciones();
-        
-        // Para cada dtfuncion dentro de la sala seleccionada
-        for (DtFuncion* dtf : funciones){
-           
-            // Chequeo si es para la pelicula seleccionada
-            if (dtf->getPeli() == this->titulo){
-                
-                // Cheque si es posterior a fecha y hora actual
-                DtFecha* dtfecha = 
-                DtFecha fechaActual = FechaSistema::getInstancia()->getFecha();
-                // Chequeo si es posterior a la fecha actual
-                if (fechaActual == dtf->){
-
-                    // Chequeo si la hora de comienzo es posterior a la hora actual
-                    if (fechaActual == dtf->){
-
-                    }
-
-                }
-                
-            }
-
-        }
-        
-    }
-
-    DtFecha fechaActual = FechaSistema::getInstancia()->getFecha();
-    
-    for (Funcion* f : listaFunciones){
-        if (f->getFecha() <  /*TODO: Revisar como compararlos*/){
-            if (f.getCine->getDtDireccion == cine->getDtDireccion()){
-                // Dentro de cada cine, buscar en cada sala, las funciones de la pelicula elegida.
-                // Si lo encuentra, devolver sus funciones.
-                // Para lo de arriba, sobrecargar el operador pero con strcmp para dirección.
-                DtFuncion* FunRet = f->obtenerDtFuncion();
-                listaRetorno.push_back(FunRet);
+list<DtCine*> ControladorReserva::listarCinesPeli() {
+    list<DtCine*> resultado;
+    Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(tituloPelicula);
+    if (peli) {
+        list<Cine*> cines = ManejadorCine::getInstancia()->getCines();
+        for (Cine* c : cines) {
+            // Si el cine tiene la pelicula
+            if (c->checkPeliculas(peli->getId())) {
+                resultado.push_back(c->obtenerDtCine());
             }
         }
     }
-    return listaFuncionesRetorno;
-};
+    return resultado;
+}
 
-void ControladorReserva::selectFuncion(int){};
-bool ControladorReserva::reservarAsientos(int){};
-void ControladorReserva::ingresarModoPago(int){};
-string ControladorReserva::ingresarBanco(string){};
-string ControladorReserva::ingresarFinanciera(string){};
-bool ControladorReserva::confirmar(){};
-void ControladorReserva::reiniciar(){};
-void ControladorReserva::finalizar(){};
+list<DtFuncion*> ControladorReserva::selectCine(int id) {
+    Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(tituloPelicula);
+    Cine* cine = ManejadorCine::getInstancia()->buscarCine(id);
+    return cine ? cine->listarFuncionesPeli(peli) : list<DtFuncion*>();
+}
+
+void ControladorReserva::selectFuncion(int id) {
+    funcion = ManejadorFuncion::getInstancia()->buscarFuncion(id);
+}
+
+bool ControladorReserva::reservarAsientos(int cant) {
+    cantidadAsientos = cant;
+    return funcion && funcion->hayAsientosDisponibles(cant);
+}
+
+void ControladorReserva::ingresarModoPago(int tipo) {
+    tipoPago = tipo;
+    if (tipo == 1) {
+        pago = new Debito();
+    } else {
+        pago = new Credito();
+    }
+}
+
+string ControladorReserva::ingresarBanco(string banco) {
+    bancoFinanciera = banco;
+    if (pago && dynamic_cast<Debito*>(pago))
+        dynamic_cast<Debito*>(pago)->setBanco(banco);
+    return banco;
+}
+
+string ControladorReserva::ingresarFinanciera(string financiera) {
+    bancoFinanciera = financiera;
+    if (pago && dynamic_cast<Credito*>(pago))
+        dynamic_cast<Credito*>(pago)->setFinanciera(financiera);
+    return financiera;
+}
+
+float ControladorReserva::obtenerDescuento(string financiera) {
+    Financiera* fin = ManejadorFinanciera::getInstancia()->buscarFinanciera(financiera);
+    return fin ? fin->getDescuento() : 0;
+}
+
+float ControladorReserva::calcularPrecioTotal(int idFuncion, int cantidadAsientos, int tipoPago, string bancoFinanciera) {
+    float precioBase = funcion->getPrecio() * cantidadAsientos;
+    if (tipoPago == 2) { // Si es credito
+        float descuento = obtenerDescuento(bancoFinanciera);
+        return precioBase * (1 - descuento/100);
+    }
+    return precioBase;
+}
+
+bool ControladorReserva::confirmar() {
+    if (funcion != NULL && usuario != NULL && pago != NULL) {
+        Reserva* reserva = new Reserva(funcion, usuario, cantidadAsientos, pago);
+        funcion->agregarReserva(reserva);
+        usuario->agregarReserva(reserva);
+        return true;
+    }
+    return false;
+}
+
+void ControladorReserva::finalizar() {
+    tituloPelicula = "";
+    idCine = 0;
+    idFuncion = 0;
+    cantidadAsientos = 0;
+    tipoPago = 0;
+    bancoFinanciera = "";
+    funcion = NULL;
+    usuario = NULL;
+    pago = NULL;
+}
+
+void ControladorReserva::reiniciar() {
+    // No se implementa en la nueva version
+}

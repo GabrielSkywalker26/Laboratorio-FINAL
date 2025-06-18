@@ -1,20 +1,22 @@
 #ifndef CREDITO
 #define CREDITO
 
-#include "Financiera.h"
+#include "Pago.h"
 #include "DtFinanciera.h"
+#include <string>
 
-#include<iostream>
+class Credito : public Pago {
+private:
+	std::string financiera;
 
-using namespace std;
-
-class Credito{
-	private:
-		Financiera* financiera;
-	public:
-		Credito();
-		Credito(Financiera*);
-		~Credito();
-		DtFinanciera* obtenerDtFinanciera(string);
+public:
+	Credito();
+	void setFinanciera(std::string financiera);
+	std::string getFinanciera();
+	float getMonto() override;
+	void setMonto(float m) override;
+	DtFinanciera* obtenerDtFinanciera(std::string financiera);
+	~Credito();
 };
+
 #endif

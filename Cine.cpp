@@ -1,4 +1,5 @@
 #include "Cine.h"
+#include "ManejadorFuncion.h"
 
 int Cine::ultimoId = 0;
 
@@ -77,4 +78,18 @@ bool Cine::checkPeliculas(int idPelicula){
 			return true;
 	}
 	return false;
+}
+
+list<DtFuncion*> Cine::listarFuncionesPeli(Pelicula* pelicula) {
+    list<DtFuncion*> funcionesPeli;
+    for (Sala* sala : this->obtenerSalas()) {
+        for (DtFuncion* dtf : sala->obtenerDtFunciones()) {
+            // Obtener la función real para verificar la película
+            Funcion* f = ManejadorFuncion::getInstancia()->buscarFuncion(dtf->getId());
+            if (f && f->getPelicula()->getId() == pelicula->getId()) {
+                funcionesPeli.push_back(dtf);
+            }
+        }
+    }
+    return funcionesPeli;
 }

@@ -76,21 +76,21 @@ list<DtSala*> ControladorAltaFuncion::listarSalas(){
 
 
 void ControladorAltaFuncion::altaFuncion(int idSala, DtHorario horario, DtFecha fecha) {
-    // 1. Buscar la película
+    // 1. Buscar la pelicula
     Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(this->titulo);
     if (peli == nullptr) {
         cout << "Error: no se encontro la pelicula." << endl;
         return;
     }
     int idPeli = peli->getId();
-    // 2. Crear la función
+    // 2. Crear la funcion
     Funcion* funcion = new Funcion(fecha, horario, peli);
     int idFuncion = funcion->getId();
 
     // 3. Registrar en ManejadorFuncion
     ManejadorFuncion::getInstancia()->agregarFuncion(funcion);
 
-    // 4. Agregar la función a la sala correspondiente
+    // 4. Agregar la funcion a la sala correspondiente
     Cine* cine = ManejadorCine::getInstancia()->buscarCine(this->idCine);
     if (cine == nullptr) {
         cout << "Error: no se encontro el cine." << endl;
@@ -107,7 +107,7 @@ void ControladorAltaFuncion::altaFuncion(int idSala, DtHorario horario, DtFecha 
         }
     }
     
-    // Si no encontró la sala
+    // Si no encontro la sala
     cout << "Error: sala no encontrada en el cine." << endl;
 
 }

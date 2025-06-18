@@ -1,28 +1,58 @@
 #include "Reserva.h"
+#include "Funcion.h"
+#include "Usuario.h"
 
-Reserva::Reserva(){}
-Reserva::Reserva(float costo, int cantEntradas){
-	// Obtengo id del Reserva anterior y le sumo 1
-    //this->id=id;
-	this->costo=costo;
-	this->cantEntradas=cantEntradas;
-}
-
-float Reserva::getCosto(){
-	return this->costo;
-}
-void Reserva::setCosto(float costo){
-	this->costo=costo;
+Reserva::Reserva() {
+    costo = 0;
+    cantEntradas = 0;
+    funcion = NULL;
+    usuario = NULL;
+    pago = NULL;
 }
 
-int Reserva::getCantEntradas(){
-	return this->cantEntradas;
-}
-void Reserva::setCantEntradas(int cantEntradas){
-	this->cantEntradas=cantEntradas;
+Reserva::Reserva(Funcion* f, Usuario* u, int cant, Pago* p) {
+    funcion = f;
+    usuario = u;
+    cantEntradas = cant;
+    pago = p;
+    costo = p ? p->getMonto() : 0;
 }
 
-Reserva::~Reserva(){}
+float Reserva::getCosto() {
+    return costo;
+}
+
+void Reserva::setCosto(float c) {
+    costo = c;
+}
+
+int Reserva::getCantEntradas() {
+    return cantEntradas;
+}
+
+void Reserva::setCantEntradas(int c) {
+    cantEntradas = c;
+}
+
+Funcion* Reserva::getFuncion() {
+    return funcion;
+}
+
+Usuario* Reserva::getUsuario() {
+    return usuario;
+}
+
+Pago* Reserva::getPago() {
+    return pago;
+}
+
+Reserva::~Reserva() {
+    // No eliminamos los punteros porque son referencias a objetos que no nos pertenecen
+}
+
+DtPelicula* Reserva::obtenerDtPelicula() {
+    return funcion->getPelicula()->obtenerDtPelicula();
+}
 
 /*
 DtReserva* DtReserva::obtenerDtReserva(){

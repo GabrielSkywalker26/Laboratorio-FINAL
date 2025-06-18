@@ -1,13 +1,30 @@
 #include "Credito.h"
+#include "DtFinanciera.h"
+#include <string>
 
-Credito::Credito(){}
-Credito::Credito(Financiera* financiera){
-	// Obtengo id del Credito anterior y le sumo 1
-    //this->id=ci;
-	this->financiera=financiera;
+Credito::Credito() : Pago() {
+    financiera = "";
 }
 
-Credito::~Credito(){}
+void Credito::setFinanciera(std::string financiera) {
+    this->financiera = financiera;
+}
+
+std::string Credito::getFinanciera() {
+    return financiera;
+}
+
+float Credito::getMonto() {
+    return monto;
+}
+
+void Credito::setMonto(float m) {
+    monto = m;
+}
+
+Credito::~Credito() {
+    // Destructor
+}
 
 DtFinanciera* Credito::obtenerDtFinanciera(string financiera){
 	//DtFinanciera* dtFinanciera = new DtFinanciera(financiera);

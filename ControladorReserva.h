@@ -2,38 +2,62 @@
 #define CONTROLADORRESERVA
 
 #include "IControladorReserva.h"
-#include "ControladorPelicula.h"
-#include "ControladorFecha.h"
-#include "FechaSistema.h"
-#include "DtCine.h"
-#include "DtFecha.h"
-#include "DtFuncion.h"
-#include "DtPeliInfo.h"
-#include "DtPelicula.h"
-
-
+#include "ManejadorPelicula.h"
+#include "ManejadorCine.h"
+#include "ManejadorFuncion.h"
+#include "ManejadorUsuario.h"
+#include "ManejadorFinanciera.h"
+#include "Reserva.h"
+#include "Credito.h"
+#include "Debito.h"
+#include "Pago.h"
 #include <list>
-class ControladorReserva: public IControladorReserva{
-    private:
-        string titulo;
-        string idCine;
-    public:
-		ControladorReserva();
-		~ControladorReserva();
-        //void setTitulo(string);
-        list<DtPelicula*> listarPeliculas();
-        DtPeliInfo* selectPeli(string);
+#include <string>
 
-        //se listan para esa película y ese cine las funciones existentes en el sistema posterior a la fecha y hora actual
-        list<DtCine*> listarCinesPeli(); 
-        list<DtFuncion*> selectCine(int);
-        void selectFuncion(int);
-        bool reservarAsientos(int);
-        void ingresarModoPago(int);
-        string ingresarBanco(string);
-        string ingresarFinanciera(string);
-        bool confirmar();
-        void reiniciar();
-        void finalizar();
+using namespace std;
+
+class ControladorReserva : public IControladorReserva {
+private:
+    static ControladorReserva* instancia;
+    
+    // Atributos para el caso de uso
+    Pelicula* pelicula;
+    Cine* cine;
+    Funcion* funcion;
+    Usuario* usuario;
+    int cantidadAsientos;
+    int tipoPago;
+    string bancoFinanciera;
+    Pago* pago;
+    list<Reserva*> reservas; // Lista local de reservas
+    string tituloPelicula;
+    int idCine;
+    int idFuncion;
+
+    // Metodos privados
+    void liberarMemoria();
+    bool verificarDisponibilidadAsientos(int cantidad);
+
+public:
+    ControladorReserva();
+    static ControladorReserva* getInstancia();
+    ~ControladorReserva();
+
+    // Metodos de la interfaz
+    list<DtPelicula*> listarPeliculas();
+    DtPeliInfo* selectPeli(string titulo);
+    list<DtCine*> listarCinesPeli();
+    list<DtFuncion*> selectCine(int idCine);
+    void selectFuncion(int idFuncion);
+    bool reservarAsientos(int cantidad);
+    void ingresarModoPago(int tipoPago);
+    string ingresarBanco(string banco);
+    string ingresarFinanciera(string financiera);
+    float obtenerDescuento(string financiera);
+    float calcularPrecioTotal(int idFuncion, int cantidadAsientos, int tipoPago, string bancoFinanciera);
+    bool confirmar();
+    void finalizar();
+    void reiniciar();
 };
+
 #endif

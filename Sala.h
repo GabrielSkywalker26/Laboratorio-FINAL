@@ -4,6 +4,8 @@
 
 #include "Funcion.h"
 #include "DtSala.h"
+#include "DtFuncion.h"
+#include <list>
 
 #include<iostream>
 
@@ -26,7 +28,8 @@ class Sala{
 		void setCapacidad(int);
 		~Sala();
 		DtSala* obtenerDtSala();
-		void agregarFuncion(int);
+		void agregarFuncion(int idFuncion);
+		void eliminarFuncion(int idFuncion);
 		list<DtFuncion*> obtenerDtFunciones();
 };
 #endif

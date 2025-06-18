@@ -30,6 +30,7 @@ class Pelicula{
 		~Pelicula();
 		DtPelicula* obtenerDtPelicula();
 		DtPeliInfo* obtenerDtPeliInfo();
+		DtPeliInfo* getDtPeliInfo();
 		//DtCine getDtCines();
 };
 #endif

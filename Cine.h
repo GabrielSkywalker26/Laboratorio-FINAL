@@ -37,6 +37,8 @@ class Cine{
 		void agregarPelicula(int idPelicula);
 		bool checkPeliculas(int);
 		list<int> getPeliculas();
+		list<DtFuncion*> listarFuncionesPeli(Pelicula* pelicula);
+		Funcion* findFuncion(int idFuncion);
 		~Cine();
 };
 #endif

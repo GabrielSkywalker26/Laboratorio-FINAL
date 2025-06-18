@@ -1,6 +1,7 @@
 #ifndef USUARIO
 #define USUARIO
 
+#include "Reserva.h"
 #include "DtUsuario.h"
 #include <string>
 
@@ -25,6 +26,8 @@ public:
     void setUrlFoto(string urlFoto);
 
     DtUsuario* getDtUsuario();
+
+    void agregarReserva(Reserva* reserva);
 
     ~Usuario();
 };

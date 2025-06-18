@@ -6,6 +6,8 @@
 #include "Pelicula.h"
 #include "DtFuncion.h"
 #include "DtHorario.h"
+#include "Reserva.h"
+#include <list>
 
 #include<iostream>
 
@@ -18,6 +20,8 @@ class Funcion{
 		DtHorario horario; //cambiar por horario (horas mins)
 		Pelicula* pelicula;
 		static int ultimoId;
+		std::list<Reserva*> reservas;
+		float precio;
 	public:
 		Funcion();
 		Funcion(DtFecha, DtHorario, Pelicula*);
@@ -30,5 +34,8 @@ class Funcion{
 		Pelicula* getPelicula();
 		~Funcion();
 		DtFuncion* obtenerDtFuncion();
+		bool hayAsientosDisponibles(int cantidad);
+		float getPrecio();
+		void agregarReserva(Reserva* reserva);
 };
 #endif

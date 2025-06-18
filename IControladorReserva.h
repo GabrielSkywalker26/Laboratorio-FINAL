@@ -24,8 +24,11 @@ class IControladorReserva{
         virtual void ingresarModoPago(int)=0;
         virtual string ingresarBanco(string)=0;
         virtual string ingresarFinanciera(string)=0;
+        virtual float obtenerDescuento(string)=0;
+        virtual float calcularPrecioTotal(int, int, int, string)=0;
         virtual bool confirmar()=0;
         virtual void reiniciar()=0;
         virtual void finalizar()=0;
+        virtual ~IControladorReserva() {}
 };
 #endif

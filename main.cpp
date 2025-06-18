@@ -24,7 +24,7 @@ IControladorUsuario* iUsuario = fabrica->getIControladorUsuario();
 IControladorFecha* iFecha = fabrica->getIControladorFecha();
 
 
-// Declaración de operaciones
+// Declaracion de operaciones
 void iniciarSesion();
 void cerrarSesion();
 void altaUsuario();
@@ -40,7 +40,7 @@ void cargarDatosPrueba();
 
 void menu();
 
-// Implementación del menú
+// Implementacion del menu
 void menu(){
 	system("clear");
 	cout <<"_____________________________________________" <<endl;
@@ -62,7 +62,7 @@ void menu(){
 	cout <<"OPCION: ";
 }
 
-// Estructura de funciones (vacías por ahora)
+// Estructura de funciones (vacias por ahora)
 void iniciarSesion() {
     system("clear");
     cout << "________I N I C I A R  S E S I O N________" << endl;
@@ -120,7 +120,7 @@ void altaPelicula() {
 	string titulo, sinopsis, poster;
 
 	cout << "Titulo: ";
-	cin.ignore(); // limpia el salto de línea previo
+	cin.ignore(); // limpia el salto de linea previo
 	getline(cin, titulo);
 
 	cout << "Sinopsis: ";
@@ -264,105 +264,164 @@ void altaFuncion() {
 
 
 void crearReserva() {
-	system("clear");
-	cout << "=== Crear reserva ===" << endl;
-	
-	if (!iSesion->sesionIniciada()){
+    system("clear");
+    cout << "_________C R E A R__R E S E R V A_________" << endl;
+    
+    if (!iSesion->sesionIniciada()) {
         cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
-		return;
-	}
+        return;
+    }
 
-	list<DtPelicula*> pelis = iReserva->listarPeliculas();
-    cout << "Peliculas disponibles:\n";
+    // Listar peliculas disponibles
+    list<DtPelicula*> pelis = iReserva->listarPeliculas();
+    if (pelis.empty()) {
+        cout << "No hay peliculas disponibles." << endl;
+        return;
+    }
+
+    cout << "\nPeliculas disponibles:\n";
     for (DtPelicula* p : pelis) {
         cout << "- " << *p << endl;
     }
 
+    // Seleccion de pelicula
     string titulo;
-    cout << "Ingrese el titulo de la pelicula: ";
+    cout << "\nIngrese el titulo de la pelicula (o 'cancelar' para salir): ";
     cin.ignore();
     getline(cin, titulo);
-	
-	DtPeliInfo* dtPeliInfo = iReserva->selectPeli(titulo);
-	cout << "- " << *dtPeliInfo << endl;
-
-	int eleccionInfo;
-	cout << "Desea ver informacion adicional de la pelicula?" << endl;
-	cout << "1. Si" << endl;
-	cout << "2. No" << endl;
-	cout << "Opcion: ";
-	cin.ignore();
-    cin >> eleccionInfo;
-
-	/*El usuario puede elegir si
-finalizar el caso de uso, o ver información adicional de dicha película. Si
-desea ver la información adicional, se listan los cines en los que pasan
-esa película. Se puede optar por finalizar, o seleccionar un cine. Si se
-selecciona un cine, se listan para esa película y ese cine las funciones
-existentes en el sistema posterior a la fecha y hora actual. El usuario
-puede repetir este proceso para otra película, si lo desea. Una vez elegida
-la película, selecciona la función que desea ver, y el sistema le solicita la
-cantidad de asientos que desea reservar. Una vez ingresada la cantidad, el
-sistema le pide que ingrese el modo de pago. El usuario debe indicar
-si se trata de una tarjeta de crédito o de débito. En caso de ser de débito
-debe ingresar el nombre del banco. En caso de ser de crédito debe
-especificar el nombre de la financiera, y el sistema le indica para esa
-financiera si tiene descuento y cuánto es. Finalmente, el usuario ve el
-precio total y puede confirmar o cancelar. Si confirma se crea la reserva
-en el sistema.
-*/
-
-// si eige "si" muestro los cines donde se pasa esa peli. "no" vuelve al principio?
-// obtengo el listado de cines filtrado
-// uso listarCinesPeli para tener la lista, printear en main
-if (eleccionInfo == 1){
-	list<DtCine*> cines = iReserva->listarCinesPeli();
-	cout << "Cines disponibles:\n";
-    for (DtCine* c : cines) {
-        cout << "- " << *c << endl;
+    
+    if (titulo == "cancelar") {
+        iReserva->finalizar();
+        return;
     }
 
-	int eleccionCine;
-	cout << "Desea continuar?" << endl;
-	cout << "1. Seleccionar cine" << endl;
-	cout << "2. Finalizar" << endl;
-	cout << "Opcion: ";
-	cin.ignore();
-    cin >> eleccionCine;
+    // Obtener informacion de la pelicula
+    DtPeliInfo* dtPeliInfo = iReserva->selectPeli(titulo);
+    if (!dtPeliInfo) {
+        cout << "Pelicula no encontrada." << endl;
+        iReserva->finalizar();
+        return;
+    }
 
-	if (eleccionCine == 1){
+    cout << "\nInformacion de la pelicula:\n" << *dtPeliInfo << endl;
 
-		// el usuario elige un cine
-		cout << "\nIngrese id del cine: ";
-		int idCine;
-		cin >> idCine;
+    // Preguntar si desea ver informacion adicional de la pelicula
+    int eleccionInfo;
+    cout << "\nDesea ver informacion adicional de la pelicula?" << endl;
+    cout << "1. Si" << endl;
+    cout << "2. No" << endl;
+    cout << "Opcion: ";
+    cin >> eleccionInfo;
 
-		list<DtFuncion*> funciones = iReserva->selectCine(idCine);
+    if (eleccionInfo == 1) {
+        // Listar cines donde se pasa la pelicula
+        list<DtCine*> cines = iReserva->listarCinesPeli();
+        if (cines.empty()) {
+            cout << "No hay cines disponibles para esta pelicula." << endl;
+            iReserva->finalizar();
+            return;
+        }
 
-	} else {
-		// borrar memoria
-		// finalizar();
-	}
-} else {
-	// borrar memoria
-	// finalizar();
-}
+        cout << "\nCines disponibles:\n";
+        for (DtCine* c : cines) {
+            cout << "- " << *c << endl;
+        }
 
+        // Seleccion de cine
+        int eleccionCine;
+        cout << "\n¿Desea continuar?" << endl;
+        cout << "1. Seleccionar cine" << endl;
+        cout << "2. Finalizar" << endl;
+        cout << "Opcion: ";
+        cin >> eleccionCine;
 
+        if (eleccionCine == 1) {
+            int idCine;
+            cout << "\nIngrese id del cine: ";
+            cin >> idCine;
 
-// al elegir un cine, miro dentro de sus salas 
-// en cada sala obtengo el listado de funciones
-// devuelvo las que sean mi pelicula
-// si son despues de la fecha hora sistema, las sumo a lista para devolver.
+            // Listar funciones disponibles
+            list<DtFuncion*> funciones = iReserva->selectCine(idCine);
+            if (funciones.empty()) {
+                cout << "No hay funciones disponibles para esta pelicula en este cine." << endl;
+                iReserva->finalizar();
+                return;
+            }
 
+            cout << "\nFunciones disponibles:\n";
+            for (DtFuncion* f : funciones) {
+                cout << "- " << *f << endl;
+            }
 
+            // Seleccion de funcion
+            int idFuncion;
+            cout << "\nIngrese id de la funcion: ";
+            cin >> idFuncion;
+            iReserva->selectFuncion(idFuncion);
 
+            // Ingreso de cantidad de asientos
+            int cantidadAsientos;
+            cout << "\nIngrese cantidad de asientos: ";
+            cin >> cantidadAsientos;
+            if (!iReserva->reservarAsientos(cantidadAsientos)) {
+                cout << "No hay suficientes asientos disponibles." << endl;
+                iReserva->finalizar();
+                return;
+            }
+
+            // Seleccion de modo de pago
+            int tipoPago;
+            cout << "\nSeleccione el modo de pago:" << endl;
+            cout << "1. Tarjeta de debito" << endl;
+            cout << "2. Tarjeta de credito" << endl;
+            cout << "Opcion: ";
+            cin >> tipoPago;
+            iReserva->ingresarModoPago(tipoPago);
+
+            string bancoFinanciera;
+            if (tipoPago == 1) {
+                cout << "Ingrese nombre del banco: ";
+                cin.ignore();
+                getline(cin, bancoFinanciera);
+                iReserva->ingresarBanco(bancoFinanciera);
+            } else {
+                cout << "Ingrese nombre de la financiera: ";
+                cin.ignore();
+                getline(cin, bancoFinanciera);
+                iReserva->ingresarFinanciera(bancoFinanciera);
+                float descuento = iReserva->obtenerDescuento(bancoFinanciera);
+                if (descuento > 0) {
+                    cout << "Descuento disponible: " << descuento << "%" << endl;
+                }
+            }
+
+            // Mostrar precio total y confirmar
+            float precioTotal = iReserva->calcularPrecioTotal(idFuncion, cantidadAsientos, tipoPago, bancoFinanciera);
+            cout << "\nPrecio total: $" << precioTotal << endl;
+
+            int confirmar;
+            cout << "\n¿Desea confirmar la reserva?" << endl;
+            cout << "1. Si" << endl;
+            cout << "2. No" << endl;
+            cout << "Opcion: ";
+            cin >> confirmar;
+
+            if (confirmar == 1) {
+                if (iReserva->confirmar()) {
+                    cout << "Reserva creada exitosamente." << endl;
+                } else {
+                    cout << "Error al crear la reserva." << endl;
+                }
+            }
+        }
+    }
+
+    iReserva->finalizar();
 }
 
 void verReservasPorPelicula() {
-	system("clear");
-	cout << "=== Ver reservas por película ===" << endl;
-	// TO DO: implementar lógica con iReserva
+	cout << "=== Ver reservas por pelicula ===" << endl;
+	// TO DO: implementar logica con iReserva
 }
 
 void eliminarPelicula() {
@@ -383,7 +442,7 @@ void eliminarPelicula() {
 
 	string titulo;
 	cout << "Ingrese el titulo de la pelicula a eliminar: ";
-	cin.ignore(); // limpia el salto de línea previo
+	cin.ignore(); // limpia el salto de linea previo
 	getline(cin, titulo);
 	iPelicula->ingresarTitulo(titulo);
 
@@ -467,7 +526,7 @@ void cargarDatosPrueba() {
 	iUsuario->altaUsuario("alice", "alicepass", "https://img.com/alice.jpg");
 	iUsuario->altaUsuario("trudy", "trudypass", "https://img.com/trudy.jpg");
 
-	// --- Alta de películas ---
+	// --- Alta de peliculas ---
 	iPelicula->altaPelicula("Pulp Fiction", "Historias entrecruzadas del crimen en Los Angeles", "pulpfiction.jpg");
 	iPelicula->altaPelicula("Kill Bill", "Una ex asesina busca venganza", "killbill.jpg");
 	iPelicula->altaPelicula("Django Unchained", "Un esclavo liberado en busca de su esposa", "django.jpg");
@@ -478,7 +537,7 @@ void cargarDatosPrueba() {
 	iAltaCine->ingresarCap(80);  // Sala 2
 	iAltaCine->altaCine(); // ID asumido: 1
 
-	// --- Alta de Cine 2: Cinemateca (Bartolomé Mitre) ---
+	// --- Alta de Cine 2: Cinemateca (Bartolome Mitre) ---
 	iAltaCine->ingresarDir("Bartolome Mitre", 1236);
 	iAltaCine->ingresarCap(90); // Sala 3
 	iAltaCine->ingresarCap(60); // Sala 4
@@ -486,17 +545,17 @@ void cargarDatosPrueba() {
 
 	// --- Alta de funciones ---
 
-	// Función Pulp Fiction en Cine 1, Sala 1
+	// Funcion Pulp Fiction en Cine 1, Sala 1
 	iAltaFuncion->ingresarTitulo("Pulp Fiction");
 	iAltaFuncion->ingresarIdCine(1);
 	iAltaFuncion->altaFuncion(1, DtHorario("20", "23"), DtFecha(14, 6, 2025));
 
-	// Función Kill Bill en Cine 1, Sala 2
+	// Funcion Kill Bill en Cine 1, Sala 2
 	iAltaFuncion->ingresarTitulo("Kill Bill");
 	iAltaFuncion->ingresarIdCine(1);
 	iAltaFuncion->altaFuncion(2, DtHorario("18", "20"), DtFecha(15, 6, 2025));
 
-	// Función Django en Cine 2, Sala 3
+	// Funcion Django en Cine 2, Sala 3
 	iAltaFuncion->ingresarTitulo("Django Unchained");
 	iAltaFuncion->ingresarIdCine(2);
 	iAltaFuncion->altaFuncion(3, DtHorario("21", "00"), DtFecha(16, 6, 2025));
@@ -507,13 +566,13 @@ void cargarDatosPrueba() {
 
 // Main principal
 int main() {
-	
+	// --- Alta de administrador ---
+	iUsuario->altaUsuario("admin", "admin", "https://pelicenter.com/admin.jpg");
 	int opcion;
 	menu();
 	cin >> opcion;
 	
-	// --- Alta de administrador ---
-	iUsuario->altaUsuario("admin", "admin", "https://pelicenter.com/admin.jpg");
+	
 
 	while(opcion != 13){
 		switch(opcion){
@@ -529,7 +588,7 @@ int main() {
 			case 10: modificarFechaSistema(); break;
 			case 11: consultarFechaSistema(); break;
 			case 12: cargarDatosPrueba(); break;
-			default: cout << "OPCIÓN INCORRECTA" << endl;
+			default: cout << "OPCION INCORRECTA" << endl;
 		}
 		sleep(3); // en Linux/macOS; usar Sleep(3000) en Windows
 		menu();

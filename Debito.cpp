@@ -1,20 +1,28 @@
 #include "Debito.h"
 
-Debito::Debito(){}
-Debito::Debito(string banco){
-	// Obtengo id del Debito anterior y le sumo 1
-    //this->id=id;
-	this->banco=banco;
+Debito::Debito() : Pago() {
+	banco = "";
 }
 
-string Debito::getBanco(){
-	return this->banco;
-}
-void Debito::setBanco(string banco){
-	this->banco=banco;
+void Debito::setBanco(std::string banco) {
+	this->banco = banco;
 }
 
-Debito::~Debito(){}
+std::string Debito::getBanco() {
+	return banco;
+}
+
+float Debito::getMonto() {
+	return monto;
+}
+
+void Debito::setMonto(float m) {
+	monto = m;
+}
+
+Debito::~Debito() {
+	// Destructor
+}
 
 /*
 DtReserva* DtReserva::obtenerDtReserva(){

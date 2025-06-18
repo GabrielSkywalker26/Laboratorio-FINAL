@@ -36,4 +36,9 @@ DtUsuario* Usuario::getDtUsuario() {
     return new DtUsuario(this->nickname, this->contrasena);
 }
 
+void Usuario::agregarReserva(Reserva* reserva) {
+    // Implementacion para agregar la reserva al usuario
+    // Por ejemplo: this->reservas.push_back(reserva);
+}
+
 Usuario::~Usuario() {}

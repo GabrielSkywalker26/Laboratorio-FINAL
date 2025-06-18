@@ -19,6 +19,7 @@ class ManejadorCine{
         void agregarCine(Cine*);
         bool existeCine(int);
         void eliminarCine(int);
+        Cine* find(int idCine);
         virtual ~ManejadorCine();
 };
 #endif

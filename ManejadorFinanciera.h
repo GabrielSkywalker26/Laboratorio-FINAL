@@ -20,6 +20,7 @@ class ManejadorFinanciera{
         void agregarFinanciera(Financiera*);
         bool existeFinanciera(string);
         void eliminarFinanciera(string);
+        float obtenerDescuento(string financiera);
         virtual ~ManejadorFinanciera();
 };
 #endif

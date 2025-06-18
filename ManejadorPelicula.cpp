@@ -13,13 +13,6 @@ ManejadorPelicula* ManejadorPelicula::getInstancia(){
     return instancia;
 }
 
-list<Pelicula*> ManejadorPelicula::getPeliculas(){
-    list<Pelicula*> lstPeliculas;
-    for (map<string,Pelicula*>::iterator it=this->peliculas.begin(); it!=peliculas.end(); ++it)
-        lstPeliculas.push_back(it->second);
-    return lstPeliculas;
-}
-
 Pelicula* ManejadorPelicula::buscarPelicula(string pelicula){
   map<string,Pelicula*>::iterator it = this->peliculas.find(pelicula);
   return it->second;
@@ -37,6 +30,13 @@ bool ManejadorPelicula::existePelicula(string pelicula){
 void ManejadorPelicula::eliminarPelicula(string pelicula){
   map<string,Pelicula*>::iterator it = this->peliculas.find(pelicula);
   this->peliculas.erase(it);
+}
+
+list<Pelicula*> ManejadorPelicula::getPeliculas() {
+    list<Pelicula*> lstPeliculas;
+    for (map<string,Pelicula*>::iterator it=this->peliculas.begin(); it!=peliculas.end(); ++it)
+        lstPeliculas.push_back(it->second);
+    return lstPeliculas;
 }
 
 ManejadorPelicula::~ManejadorPelicula(){}
