@@ -12,11 +12,13 @@
 
 class ControladorAltaCine: public IControladorAltaCine{
     private:
+        static ControladorAltaCine* instancia;
         DtDireccion direccion;
         list<int> capacidades;
+        ControladorAltaCine();
     public:
-		ControladorAltaCine();
-		~ControladorAltaCine();
+        static ControladorAltaCine* getInstancia();
+        ~ControladorAltaCine();
         void ingresarDir(string, int);
         void ingresarCap(int);
         bool altaCine();

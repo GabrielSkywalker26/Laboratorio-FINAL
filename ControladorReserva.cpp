@@ -40,7 +40,7 @@ list<DtPelicula*> ControladorReserva::listarPeliculas() {
 DtPeliInfo* ControladorReserva::selectPeli(string titulo) {
     tituloPelicula = titulo;
     Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
-    return peli ? peli->obtenerDtPeliInfo() : nullptr;
+    return peli ? peli->obtenerDtPeliInfo() : NULL;
 }
 
 list<DtCine*> ControladorReserva::listarCinesPeli() {

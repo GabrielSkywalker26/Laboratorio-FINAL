@@ -1,6 +1,6 @@
 #include "FechaSistema.h"
 
-FechaSistema* FechaSistema::instancia = nullptr;
+FechaSistema* FechaSistema::instancia = NULL;
 
 FechaSistema::FechaSistema() {
     // fecha por defecto: 1/1/2025 - 00:00
@@ -9,7 +9,7 @@ FechaSistema::FechaSistema() {
 }
 
 FechaSistema* FechaSistema::getInstancia() {
-    if (instancia == nullptr)
+    if (instancia == NULL)
         instancia = new FechaSistema();
     return instancia;
 }

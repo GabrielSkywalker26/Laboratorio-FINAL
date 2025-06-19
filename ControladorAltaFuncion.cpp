@@ -2,7 +2,15 @@
 
 #include <list>
 
+ControladorAltaFuncion* ControladorAltaFuncion::instancia = NULL;
+
 ControladorAltaFuncion::ControladorAltaFuncion(){}
+
+ControladorAltaFuncion* ControladorAltaFuncion::getInstancia() {
+    if (instancia == NULL)
+        instancia = new ControladorAltaFuncion();
+    return instancia;
+}
 
 ControladorAltaFuncion::~ControladorAltaFuncion(){}
 /*
@@ -78,7 +86,7 @@ list<DtSala*> ControladorAltaFuncion::listarSalas(){
 void ControladorAltaFuncion::altaFuncion(int idSala, DtHorario horario, DtFecha fecha) {
     // 1. Buscar la pelicula
     Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(this->titulo);
-    if (peli == nullptr) {
+    if (peli == NULL) {
         cout << "Error: no se encontro la pelicula." << endl;
         return;
     }
@@ -92,7 +100,7 @@ void ControladorAltaFuncion::altaFuncion(int idSala, DtHorario horario, DtFecha 
 
     // 4. Agregar la funcion a la sala correspondiente
     Cine* cine = ManejadorCine::getInstancia()->buscarCine(this->idCine);
-    if (cine == nullptr) {
+    if (cine == NULL) {
         cout << "Error: no se encontro el cine." << endl;
         return;
     }

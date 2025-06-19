@@ -3,7 +3,15 @@
 #include "Sesion.h"
 #include "DtUsuario.h"
 
+ControladorSesion* ControladorSesion::instancia = NULL;
+
 ControladorSesion::ControladorSesion(){}
+
+ControladorSesion* ControladorSesion::getInstancia() {
+    if (instancia == NULL)
+        instancia = new ControladorSesion();
+    return instancia;
+}
 
 ControladorSesion::~ControladorSesion(){}
 
@@ -33,8 +41,8 @@ bool ControladorSesion::cerrarSesion() {
 bool ControladorSesion::sesionIniciada() {
     DtUsuario* dtu = Sesion::getInstancia()->getDtUsuario();
 
-    //if (dtu != nullptr && dtu->getNickname() == nickname)
-    if (dtu != nullptr && dtu->getNickname() != "")
+    //if (dtu != NULL && dtu->getNickname() == nickname)
+    if (dtu != NULL && dtu->getNickname() != "")
         return true;
     else
         return false;
@@ -44,5 +52,5 @@ bool ControladorSesion::sesionIniciada() {
 Usuario* ControladorSesion::obtenerUsuario() {
     ManejadorUsuario* manejador = ManejadorUsuario::getInstancia();
     Usuario* user = manejador->buscarUsuario(this->nickname);
-    return user ? user : nullptr;
+    return user ? user : NULL;
 }

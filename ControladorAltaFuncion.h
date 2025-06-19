@@ -17,11 +17,13 @@
 
 class ControladorAltaFuncion: public IControladorAltaFuncion{
     private:
+        static ControladorAltaFuncion* instancia;
         string titulo; // Titulo de la pelicula
         int idCine;
+        ControladorAltaFuncion();
     public:
-		ControladorAltaFuncion();
-		~ControladorAltaFuncion();
+        static ControladorAltaFuncion* getInstancia();
+        ~ControladorAltaFuncion();
         void ingresarTitulo(string);
         void ingresarIdCine(int);
         list<DtPelicula*> listarPeliculas();

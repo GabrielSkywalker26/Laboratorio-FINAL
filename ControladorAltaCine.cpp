@@ -2,7 +2,15 @@
 
 #include <list>
 
+ControladorAltaCine* ControladorAltaCine::instancia = NULL;
+
 ControladorAltaCine::ControladorAltaCine(){}
+
+ControladorAltaCine* ControladorAltaCine::getInstancia() {
+    if (instancia == NULL)
+        instancia = new ControladorAltaCine();
+    return instancia;
+}
 
 ControladorAltaCine::~ControladorAltaCine(){}
 

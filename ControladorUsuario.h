@@ -11,8 +11,11 @@
 using namespace std;
 
 class ControladorUsuario : public IControladorUsuario {
-    public:
+    private:
+        static ControladorUsuario* instancia;
         ControladorUsuario();
+    public:
+        static ControladorUsuario* getInstancia();
         void altaUsuario(string nickname, string contrasena, string urlFoto);
         list<Usuario*> listarUsuarios();
         bool existeUsuario(string nickname);

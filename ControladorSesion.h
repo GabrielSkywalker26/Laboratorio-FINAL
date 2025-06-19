@@ -8,10 +8,12 @@
 
 class ControladorSesion: public IControladorSesion{
     private:
+        static ControladorSesion* instancia;
         string nickname;
+        ControladorSesion();
     public:
-		ControladorSesion();
-		~ControladorSesion();
+        static ControladorSesion* getInstancia();
+        ~ControladorSesion();
         bool iniciarSesion(string,string);
         bool cerrarSesion();
         bool sesionIniciada();

@@ -19,35 +19,31 @@ Fabrica* Fabrica::getInstancia() {
 }
 
 IControladorAltaCine* Fabrica::getIControladorAltaCine() {
-    return new ControladorAltaCine();
+    return ControladorAltaCine::getInstancia();
 }
 
 IControladorAltaFuncion* Fabrica::getIControladorAltaFuncion() {
-    return new ControladorAltaFuncion();
+    return ControladorAltaFuncion::getInstancia();
 }
 
 IControladorPelicula* Fabrica::getIControladorPelicula() {
-    return new ControladorPelicula();
+    return ControladorPelicula::getInstancia();
 }
 
 IControladorReserva* Fabrica::getIControladorReserva() {
-    //return new ControladorReserva();
-    /*if (ControladorReserva::getInstancia() == NULL)
-        ControladorReserva* instancia = new ControladorReserva();
-    return instancia;*/
     return ControladorReserva::getInstancia();
 }
 
 IControladorSesion* Fabrica::getIControladorSesion() {
-    return new ControladorSesion();
+    return ControladorSesion::getInstancia();
 }
 
 IControladorUsuario* Fabrica::getIControladorUsuario() {
-    return new ControladorUsuario();
+    return ControladorUsuario::getInstancia();
 }
 
 IControladorFecha* Fabrica::getIControladorFecha() {
-    return new ControladorFecha();
+    return ControladorFecha::getInstancia();
 }
 
 Fabrica::~Fabrica() {}

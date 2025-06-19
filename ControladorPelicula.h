@@ -11,10 +11,12 @@
 
 class ControladorPelicula: public IControladorPelicula{
     private:
+        static ControladorPelicula* instancia;
         string pelicula;
+        ControladorPelicula();
     public:
-		ControladorPelicula();
-		~ControladorPelicula();
+        static ControladorPelicula* getInstancia();
+        ~ControladorPelicula();
         bool altaPelicula(string, string, string);
         bool eliminarPelicula();
         void ingresarTitulo(string);
