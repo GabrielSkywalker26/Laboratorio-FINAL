@@ -3,6 +3,8 @@
 #include "ManejadorPelicula.h"
 #include "ManejadorCine.h"
 #include "ManejadorFinanciera.h"
+#include "ManejadorFuncion.h"
+#include "ManejadorUsuario.h"
 
 ControladorReserva* ControladorReserva::instancia = NULL;
 
@@ -10,11 +12,10 @@ ControladorReserva::ControladorReserva() {
     tituloPelicula = "";
     idCine = 0;
     idFuncion = 0;
+    usuarioNickname = "";
     cantidadAsientos = 0;
     tipoPago = 0;
     bancoFinanciera = "";
-    funcion = NULL;
-    usuario = NULL;
     pago = NULL;
 }
 
@@ -39,8 +40,12 @@ list<DtPelicula*> ControladorReserva::listarPeliculas() {
 
 DtPeliInfo* ControladorReserva::selectPeli(string titulo) {
     tituloPelicula = titulo;
-    Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
-    return peli ? peli->obtenerDtPeliInfo() : NULL;
+    Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(tituloPelicula);
+    if (peli != NULL) {
+        return peli->obtenerDtPeliInfo();
+    } else {
+        return NULL;
+    }
 }
 
 list<DtCine*> ControladorReserva::listarCinesPeli() {
@@ -49,7 +54,6 @@ list<DtCine*> ControladorReserva::listarCinesPeli() {
     if (peli) {
         list<Cine*> cines = ManejadorCine::getInstancia()->getCines();
         for (Cine* c : cines) {
-            // Si el cine tiene la pelicula
             if (c->checkPeliculas(peli->getId())) {
                 resultado.push_back(c->obtenerDtCine());
             }
@@ -59,22 +63,29 @@ list<DtCine*> ControladorReserva::listarCinesPeli() {
 }
 
 list<DtFuncion*> ControladorReserva::selectCine(int id) {
+    idCine = id;
     Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(tituloPelicula);
     Cine* cine = ManejadorCine::getInstancia()->buscarCine(id);
     return cine ? cine->listarFuncionesPeli(peli) : list<DtFuncion*>();
 }
 
 void ControladorReserva::selectFuncion(int id) {
-    funcion = ManejadorFuncion::getInstancia()->buscarFuncion(id);
+    idFuncion = id;
 }
 
 void ControladorReserva::ingresarUsuario(Usuario* usuario) {
-    this->usuario = usuario;
+    if (usuario != NULL)
+        usuarioNickname = usuario->getNickname();
 }
 
 bool ControladorReserva::reservarAsientos(int cant) {
     cantidadAsientos = cant;
-    return funcion && funcion->hayAsientosDisponibles(cant);
+    Funcion* funcion = ManejadorFuncion::getInstancia()->buscarFuncion(idFuncion);
+    if (funcion != NULL) {
+        return funcion->hayAsientosDisponibles(cant);
+    } else {
+        return false;
+    }
 }
 
 void ControladorReserva::ingresarModoPago(int tipo) {
@@ -102,11 +113,15 @@ string ControladorReserva::ingresarFinanciera(string financiera) {
 
 float ControladorReserva::obtenerDescuento(string financiera) {
     Financiera* fin = ManejadorFinanciera::getInstancia()->buscarFinanciera(financiera);
-    return fin ? fin->getDescuento() : 0;
+    if (fin != NULL) {
+        return fin->getDescuento();
+    } else {
+        return 0;
+    }
 }
 
 float ControladorReserva::calcularPrecioTotal(int idFuncion, int cantidadAsientos, int tipoPago, string bancoFinanciera) {
-    float precioBase = funcion->getPrecio() * cantidadAsientos;
+    float precioBase = ManejadorFuncion::getInstancia()->buscarFuncion(idFuncion)->getPrecio() * cantidadAsientos;
     if (tipoPago == 2) { // Si es credito
         float descuento = obtenerDescuento(bancoFinanciera);
         return precioBase * (1 - descuento/100);
@@ -115,6 +130,8 @@ float ControladorReserva::calcularPrecioTotal(int idFuncion, int cantidadAsiento
 }
 
 bool ControladorReserva::confirmar() {
+    Funcion* funcion = ManejadorFuncion::getInstancia()->buscarFuncion(idFuncion);
+    Usuario* usuario = ManejadorUsuario::getInstancia()->buscarUsuario(usuarioNickname);
     if (funcion != NULL && usuario != NULL && pago != NULL) {
         Reserva* reserva = new Reserva(funcion, usuario, cantidadAsientos, pago);
         funcion->agregarReserva(reserva);
@@ -128,14 +145,33 @@ void ControladorReserva::finalizar() {
     tituloPelicula = "";
     idCine = 0;
     idFuncion = 0;
+    usuarioNickname = "";
     cantidadAsientos = 0;
     tipoPago = 0;
     bancoFinanciera = "";
-    funcion = NULL;
-    usuario = NULL;
     pago = NULL;
 }
 
 void ControladorReserva::reiniciar() {
     // No se implementa en la nueva version
+}
+
+void ControladorReserva::liberarMemoria() {
+    for (Reserva* r : reservas) {
+        delete r;
+    }
+    reservas.clear();
+    if (pago != NULL) {
+        delete pago;
+        pago = NULL;
+    }
+}
+
+bool ControladorReserva::verificarDisponibilidadAsientos(int cantidad) {
+    Funcion* funcion = ManejadorFuncion::getInstancia()->buscarFuncion(idFuncion);
+    if (funcion != NULL) {
+        return funcion->hayAsientosDisponibles(cantidad);
+    } else {
+        return false;
+    }
 }

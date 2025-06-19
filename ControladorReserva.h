@@ -22,18 +22,15 @@ private:
     static ControladorReserva* instancia;
     
     // Atributos para el caso de uso
-    Pelicula* pelicula;
-    Cine* cine;
-    Funcion* funcion;
-    Usuario* usuario;
+    string tituloPelicula;
+    int idCine;
+    int idFuncion;
+    string usuarioNickname;
     int cantidadAsientos;
     int tipoPago;
     string bancoFinanciera;
     Pago* pago;
     list<Reserva*> reservas; // Lista local de reservas
-    string tituloPelicula;
-    int idCine;
-    int idFuncion;
 
     ControladorReserva();
 
