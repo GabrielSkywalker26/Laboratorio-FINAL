@@ -445,6 +445,16 @@ void crearReserva() {
                 getline(cin, bancoFinanciera);
                 iReserva->ingresarBanco(bancoFinanciera);
             } else {
+                // Mostrar financieras disponibles antes de pedir el nombre
+                list<Financiera*> financieras = ManejadorFinanciera::getInstancia()->getFinancieras();
+                if (!financieras.empty()) {
+                    cout << "\nFinancieras disponibles:" << endl;
+                    for (Financiera* f : financieras) {
+                        cout << "- " << f->getNombre() << " (Descuento: " << f->getDescuento() << "%)" << endl;
+                    }
+                } else {
+                    cout << "No hay financieras cargadas en el sistema." << endl;
+                }
                 cout << "Ingrese nombre de la financiera: ";
                 cin.ignore();
                 getline(cin, bancoFinanciera);
