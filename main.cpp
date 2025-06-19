@@ -10,6 +10,9 @@
 #include "IControladorSesion.h"
 #include "IControladorUsuario.h"
 #include "IControladorFecha.h"
+#include "ManejadorCine.h"
+#include "Sala.h"
+#include "Cine.h"
 
 using namespace std;
 
@@ -234,6 +237,25 @@ void altaFuncion() {
     cin >> idSala;
 
     // imprimir funciones de esa sala
+    Sala* salaSeleccionada = NULL;
+    Cine* cineSeleccionado = ManejadorCine::getInstancia()->buscarCine(idCine);
+    if (cineSeleccionado != NULL) {
+        for (Sala* s : cineSeleccionado->obtenerSalas()) {
+            if (s->getId() == idSala) {
+                salaSeleccionada = s;
+                break;
+            }
+        }
+    }
+    if (salaSeleccionada != NULL) {
+        list<DtFuncion*> funciones = salaSeleccionada->obtenerDtFunciones();
+        cout << "Funciones de la sala seleccionada:\n";
+        for (DtFuncion* f : funciones) {
+            cout << "- " << *f << endl;
+        }
+    } else {
+        cout << "Sala no encontrada." << endl;
+    }
 
     int dia, mes, anio;
     cout << "Ingrese la fecha de la funcion: " << endl;
