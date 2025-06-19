@@ -14,7 +14,6 @@ class DtFinanciera{
 		DtFinanciera(string, int);
 		~DtFinanciera();
 
-		friend bool operator <(const DtFinanciera&,const DtFinanciera&);
 		friend ostream& operator <<(ostream&,const DtFinanciera&);
 
 };

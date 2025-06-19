@@ -15,7 +15,6 @@ class DtPelicula{
 		DtPelicula(int,string,string);
 		~DtPelicula();
 
-		friend bool operator <(const DtPelicula&,const DtPelicula&);
 		friend ostream& operator <<(ostream&,const DtPelicula&);
 
 };

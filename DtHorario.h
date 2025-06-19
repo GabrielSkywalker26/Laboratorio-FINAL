@@ -6,16 +6,20 @@ using namespace std;
 
 class DtHorario{
 	private:
-		string horaComienzo;
-		string horaFin;
+		int horaComienzo;
+		int minComienzo;
+		int horaFin;
+		int minFin;
 	public:
 		DtHorario();
-		DtHorario(string, string);
-		string getHoraComienzo();
-		string getHoraFin();
+		DtHorario(int, int, int, int);
+		int getHoraComienzo();
+		int getMinComienzo();
+		int getHoraFin();
+		int getMinFin();
 		~DtHorario();
 
-		friend bool operator <(const DtHorario&,const DtHorario&);
+		friend bool operator >(const DtHorario&,const DtHorario&);
 		friend ostream& operator <<(ostream&,const DtHorario&);
 
 };

@@ -1,37 +1,36 @@
 #include "DtHorario.h"
 
 DtHorario::DtHorario(){}
-DtHorario::DtHorario(string horaComienzo, string horaFin){
-	this->horaComienzo=horaComienzo;
-	this->horaFin=horaFin;
+DtHorario::DtHorario(int hC, int mC, int hF, int mF){
+	this->horaComienzo = hC;
+	this->minComienzo = mC;
+	this->horaFin = hF;
+	this->minFin = mF;
 }
 
-string DtHorario::getHoraComienzo(){
+int DtHorario::getHoraComienzo(){
 	return this->horaComienzo;
 }
-string DtHorario::getHoraFin(){
+int DtHorario::getMinComienzo(){
+	return this->minComienzo;
+}
+int DtHorario::getHoraFin(){
 	return this->horaFin;
+}
+int DtHorario::getMinFin(){
+	return this->minFin;
 }
 
 DtHorario::~DtHorario(){}
 
-bool operator <(const DtHorario& dth1,const DtHorario& dth2){
-	bool retorno;
-	/*
-	if (dth1.anio < dth2.anio){
-		retorno=true;
-	}else if(dth1.anio == dth2.anio){
-		if (dth1.mes < dth2.mes){
-			retorno=true;
-		}else{
-			retorno=false;
-		}
-	}
-	*/
-	return retorno;
+bool operator >(const DtHorario& h1, const DtHorario& h2) {
+    if (h1.horaComienzo > h2.horaComienzo) return true;
+    if (h1.horaComienzo < h2.horaComienzo) return false;
+    return h1.minComienzo > h2.minComienzo;
 }
 
 ostream &operator<<(ostream & salida, const DtHorario & h){
-    salida << "Inicio: " << h.horaComienzo << ", Fin: " << h.horaFin;
+    salida << "Inicio: " << h.horaComienzo << ":" << (h.minComienzo < 10 ? "0" : "") << h.minComienzo
+           << ", Fin: " << h.horaFin << ":" << (h.minFin < 10 ? "0" : "") << h.minFin;
     return salida;
 }

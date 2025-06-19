@@ -19,6 +19,7 @@
 #include "Banco.h"
 #include "DtBanco.h"
 #include "ManejadorFuncion.h"
+#include "DtFinanciera.h"
 
 using namespace std;
 
@@ -282,33 +283,24 @@ void altaFuncion() {
     cout << "\nAnio: ";
     cin >> anio;
 
-    string horaComienzo, horaFin;
-    cout << "Ingrese la hora de comienzo de la funcion: " << endl;
+    int horaComienzo, minComienzo, horaFin, minFin;
+    cout << "Ingrese la hora de comienzo de la funcion (hora y minutos separados): " << endl;
+    cout << "Hora: ";
     cin >> horaComienzo;
-    cout << "Ingrese la hora de finalizacion de la funcion: " << endl;
+    cout << "Minutos: ";
+    cin >> minComienzo;
+    cout << "Ingrese la hora de finalizacion de la funcion (hora y minutos separados): " << endl;
+    cout << "Hora: ";
     cin >> horaFin;
+    cout << "Minutos: ";
+    cin >> minFin;
 
     DtFecha fechaFuncion(dia, mes, anio);
-    DtHorario horarioFuncion(horaComienzo, horaFin);
+    DtHorario horarioFuncion(horaComienzo, minComienzo, horaFin, minFin);
 
     iAltaFuncion->altaFuncion(idSala, horarioFuncion, fechaFuncion);
 	
-	// Ver de agregar la funcion
-	// Si todo salio bien agrego la peli a la lista de pelis del cine
-	// preguntar si el usuario quiere seguir agregando funciones
-
-    // Mostrar bancos disponibles
-    cout << "\nBancos disponibles para pago con debito:" << endl;
-    list<Banco*> bancos = ManejadorBanco::getInstancia()->getBancos();
-    for (Banco* b : bancos) {
-        cout << "- " << b->getNombre() << endl;
-    }
-    // Mostrar financieras disponibles
-    cout << "\nFinancieras disponibles para pago con credito (y su descuento):" << endl;
-    list<Financiera*> financieras = ManejadorFinanciera::getInstancia()->getFinancieras();
-    for (Financiera* f : financieras) {
-        cout << "- " << f->getNombre() << " (Descuento: " << f->getDescuento() << "%)" << endl;
-    }
+	cout << "Funcion registrada correctamente." << endl;
 }
 
 
@@ -450,7 +442,8 @@ void crearReserva() {
                 if (!financieras.empty()) {
                     cout << "\nFinancieras disponibles:" << endl;
                     for (Financiera* f : financieras) {
-                        cout << "- " << f->getNombre() << " (Descuento: " << f->getDescuento() << "%)" << endl;
+                        DtFinanciera dtf(f->getNombre(), f->getDescuento());
+                        cout << "- " << dtf << endl;
                     }
                 } else {
                     cout << "No hay financieras cargadas en el sistema." << endl;
@@ -534,25 +527,21 @@ void modificarFechaSistema() {
 
     cout << "_____M O D I F I C A R   F E C H A   D E L   S I S T E M A_____" << endl;
 
-    int dia, mes, anio;
-    string horaS;
-
-    // Ingreso paso a paso
+    int dia, mes, anio, horaS, minS;
     cout << "Ingrese el dia: ";
     cin >> dia;
-    
     cout << "Ingrese el mes: ";
     cin >> mes;
-    
     cout << "Ingrese el anio: ";
     cin >> anio;
-
-    cout << "Ingrese la hora del sitema (formato HH:MM): ";
+    cout << "Ingrese la hora del sistema (hora y minutos separados): ";
+    cout << "Hora: ";
     cin >> horaS;
+    cout << "Minutos: ";
+    cin >> minS;
 
-    // Crear objetos de fecha y horario
     DtFecha nuevaFecha(dia, mes, anio);
-    DtHorarioSistema nuevoHorario(horaS);
+    DtHorarioSistema nuevoHorario(horaS, minS);
 
     // Aplicar en controlador
     iFecha->modificarFecha(nuevaFecha, nuevoHorario);
@@ -593,48 +582,57 @@ void cargarDatosPrueba() {
 	cout << "_____C A R G A R   D A T O S   D E   P R U E B A_____" << endl;
 
 	// --- Alta de usuarios ---
+	cout << "Cargando usuarios..." << endl;
 	iUsuario->altaUsuario("bob", "bobpass", "https://img.com/bob.jpg");
 	iUsuario->altaUsuario("alice", "alicepass", "https://img.com/alice.jpg");
 	iUsuario->altaUsuario("trudy", "trudypass", "https://img.com/trudy.jpg");
 
 	// --- Alta de peliculas ---
+	cout << "Cargando peliculas..." << endl;
 	iPelicula->altaPelicula("Pulp Fiction", "Historias entrecruzadas del crimen en Los Angeles", "pulpfiction.jpg");
 	iPelicula->altaPelicula("Kill Bill", "Una ex asesina busca venganza", "killbill.jpg");
 	iPelicula->altaPelicula("Django Unchained", "Un esclavo liberado en busca de su esposa", "django.jpg");
 
 	// --- Alta de Cine 1: Life 21 (21 de Setiembre) ---
+	cout << "Cargando Cine 1..." << endl;
 	iAltaCine->ingresarDir("21 de Setiembre", 2721);
 	iAltaCine->ingresarCap(120); // Sala 1
 	iAltaCine->ingresarCap(80);  // Sala 2
 	iAltaCine->altaCine(); // ID asumido: 1
 
 	// --- Alta de Cine 2: Cinemateca (Bartolome Mitre) ---
+	cout << "Cargando Cine 2..." << endl;
 	iAltaCine->ingresarDir("Bartolome Mitre", 1236);
 	iAltaCine->ingresarCap(90); // Sala 3
 	iAltaCine->ingresarCap(60); // Sala 4
 	iAltaCine->altaCine(); // ID asumido: 2
 
 	// --- Alta de funciones ---
+	cout << "Cargando funciones..." << endl;
 
 	// Funcion Pulp Fiction en Cine 1, Sala 1
+	cout << "Creando funcion Pulp Fiction..." << endl;
 	iAltaFuncion->ingresarTitulo("Pulp Fiction");
 	iAltaFuncion->ingresarIdCine(1);
 	iAltaFuncion->ingresarPrecioFuncion(350);
-	iAltaFuncion->altaFuncion(1, DtHorario("20", "23"), DtFecha(14, 6, 2025));
+	iAltaFuncion->altaFuncion(1, DtHorario(20, 0, 23, 0), DtFecha(14, 6, 2025));
 
 	// Funcion Kill Bill en Cine 1, Sala 2
+	cout << "Creando funcion Kill Bill..." << endl;
 	iAltaFuncion->ingresarTitulo("Kill Bill");
 	iAltaFuncion->ingresarIdCine(1);
 	iAltaFuncion->ingresarPrecioFuncion(300);
-	iAltaFuncion->altaFuncion(2, DtHorario("18", "20"), DtFecha(15, 6, 2025));
+	iAltaFuncion->altaFuncion(2, DtHorario(18, 0, 20, 0), DtFecha(15, 6, 2025));
 
 	// Funcion Django en Cine 2, Sala 3
+	cout << "Creando funcion Django..." << endl;
 	iAltaFuncion->ingresarTitulo("Django Unchained");
 	iAltaFuncion->ingresarIdCine(2);
 	iAltaFuncion->ingresarPrecioFuncion(400);
-	iAltaFuncion->altaFuncion(3, DtHorario("21", "00"), DtFecha(16, 6, 2025));
+	iAltaFuncion->altaFuncion(3, DtHorario(21, 0, 23, 30), DtFecha(16, 6, 2025));
 
 	// --- Alta de financieras ---
+	cout << "Cargando financieras..." << endl;
 	ManejadorFinanciera::getInstancia()->agregarFinanciera(new Financiera("Visa", 10));
 	ManejadorFinanciera::getInstancia()->agregarFinanciera(new Financiera("Mastercard", 15));
 	ManejadorFinanciera::getInstancia()->agregarFinanciera(new Financiera("OCA", 5));
@@ -642,6 +640,7 @@ void cargarDatosPrueba() {
 	ManejadorFinanciera::getInstancia()->agregarFinanciera(new Financiera("Cabal", 8));
 
 	// --- Alta de bancos ---
+	cout << "Cargando bancos..." << endl;
 	ManejadorBanco::getInstancia()->agregarBanco(new Banco("Santander"));
 	ManejadorBanco::getInstancia()->agregarBanco(new Banco("BBVA"));
 	ManejadorBanco::getInstancia()->agregarBanco(new Banco("Itau"));
@@ -656,6 +655,7 @@ void cargarDatosPrueba() {
 int main() {
 	// --- Alta de administrador ---
 	iUsuario->altaUsuario("admin", "admin", "https://pelicenter.com/admin.jpg");
+	
 	int opcion;
 	menu();
 	cin >> opcion;

@@ -16,23 +16,14 @@ int DtFecha::getAnio(){
 }
 DtFecha::~DtFecha(){}
 
-bool operator <(const DtFecha& dtf1,const DtFecha& dtf2){
-	bool retorno;
-	if (dtf1.anio < dtf2.anio){
-		retorno=true;
-	}else if(dtf1.anio == dtf2.anio){
-		if (dtf1.mes < dtf2.mes){
-			retorno=true;
-		}else if(dtf1.mes == dtf2.mes){
-			if (dtf1.dia < dtf2.dia){
-				retorno=true;
-			}else{ 
-				retorno=false;
-			}
-		}
-	}
-	return retorno;
+bool operator >(const DtFecha& dtf1, const DtFecha& dtf2){
+	if (dtf1.anio > dtf2.anio) return true;
+	if (dtf1.anio < dtf2.anio) return false;
+	if (dtf1.mes > dtf2.mes) return true;
+	if (dtf1.mes < dtf2.mes) return false;
+	return dtf1.dia > dtf2.dia;
 }
+
 ostream& operator <<(ostream& salida,const DtFecha& dtf){
 	salida << dtf.dia << "/" << dtf.mes << "/" << dtf.anio <<endl;
 	return salida;

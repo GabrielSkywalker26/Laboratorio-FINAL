@@ -15,7 +15,7 @@ class DtFecha{
 		int getAnio();
 		~DtFecha();
 
-		friend bool operator <(const DtFecha&,const DtFecha&);
+		friend bool operator >(const DtFecha&,const DtFecha&);
 		friend ostream& operator <<(ostream&,const DtFecha&);
 
 };

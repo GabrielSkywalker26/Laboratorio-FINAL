@@ -8,9 +8,10 @@ DtFinanciera::DtFinanciera(string nombre,int descuento){
 
 DtFinanciera::~DtFinanciera(){}
 
-bool operator <(const DtFinanciera& dtf1,const DtFinanciera& dtf2){}
-
-ostream& operator <<(ostream& salida,const DtFinanciera& dtf){}
+ostream& operator <<(ostream& salida,const DtFinanciera& dtf){
+	salida << dtf.nombre << " (Descuento: " << dtf.descuento << "%)";
+	return salida;
+}
 /*
 bool operator <(const DtFinanciera& dtf1,const DtFinanciera& dtf2){
 	bool retorno;

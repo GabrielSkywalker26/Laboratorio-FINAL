@@ -5,7 +5,7 @@ FechaSistema* FechaSistema::instancia = NULL;
 FechaSistema::FechaSistema() {
     // fecha por defecto: 1/1/2025 - 00:00
     this->fecha = DtFecha(1, 1, 2025);
-    this->horario = DtHorarioSistema("00:00");
+    this->horario = DtHorarioSistema(0, 0);
 }
 
 FechaSistema* FechaSistema::getInstancia() {

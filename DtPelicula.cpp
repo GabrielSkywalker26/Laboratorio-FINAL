@@ -10,8 +10,6 @@ DtPelicula::DtPelicula(int id,string titulo, string poster){
 
 DtPelicula::~DtPelicula(){}
 
-bool operator <(const DtPelicula& dtf1,const DtPelicula& dtf2){}
-
 ostream& operator<<(ostream& salida, const DtPelicula& p) {
     salida << "Id: " << p.id << ", Titulo: " << p.titulo << ", Poster: " << p.poster;
     return salida;

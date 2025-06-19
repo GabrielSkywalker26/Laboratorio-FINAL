@@ -7,6 +7,7 @@
 #include "ManejadorUsuario.h"
 #include "ManejadorBanco.h"
 #include "DtBanco.h"
+#include "ControladorFecha.h"
 
 ControladorReserva* ControladorReserva::instancia = NULL;
 
@@ -67,7 +68,25 @@ list<DtCine*> ControladorReserva::listarCinesPeli() {
 list<DtFuncion*> ControladorReserva::selectCine(int id) {
     Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(tituloPelicula);
     Cine* cine = ManejadorCine::getInstancia()->buscarCine(id);
-    return cine ? cine->listarFuncionesPeli(peli) : list<DtFuncion*>();
+    list<DtFuncion*> todas = cine ? cine->listarFuncionesPeli(peli) : list<DtFuncion*>();
+    list<DtFuncion*> futuras;
+    // Obtener fecha y hora actual del sistema
+    DtFecha fechaActual = ControladorFecha::getInstancia()->getFecha();
+    DtHorarioSistema horaActual = ControladorFecha::getInstancia()->getHorario();
+    for (DtFuncion* f : todas) {
+        if (f->getFecha() > fechaActual) {
+            futuras.push_back(f);
+        } else if (!(fechaActual > f->getFecha())) { // Si es el mismo día
+            DtHorario hFuncion = f->getHorario();
+            DtHorarioSistema hActual = horaActual;
+            // Comparar hora de comienzo de la funcion con la hora actual
+            if (hFuncion.getHoraComienzo() > hActual.getHora() ||
+                (hFuncion.getHoraComienzo() == hActual.getHora() && hFuncion.getMinComienzo() > hActual.getMinuto())) {
+                futuras.push_back(f);
+            }
+        }
+    }
+    return futuras;
 }
 
 void ControladorReserva::selectFuncion(int id) {

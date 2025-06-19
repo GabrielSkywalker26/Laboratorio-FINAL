@@ -1,34 +1,28 @@
 #include "DtHorarioSistema.h"
 
 DtHorarioSistema::DtHorarioSistema(){}
-DtHorarioSistema::DtHorarioSistema(string hora){
-	this->hora=hora;
+DtHorarioSistema::DtHorarioSistema(int h, int m){
+	this->hora = h;
+	this->minuto = m;
 }
 
-string DtHorarioSistema::getHora(){
+int DtHorarioSistema::getHora(){
 	return this->hora;
 }
 
+int DtHorarioSistema::getMinuto(){
+	return this->minuto;
+}
 
 DtHorarioSistema::~DtHorarioSistema(){}
 
-bool operator <(const DtHorarioSistema& dth1,const DtHorarioSistema& dth2){
-	bool retorno;
-	/*
-	if (dth1.anio < dth2.anio){
-		retorno=true;
-	}else if(dth1.anio == dth2.anio){
-		if (dth1.mes < dth2.mes){
-			retorno=true;
-		}else{
-			retorno=false;
-		}
-	}
-	*/
-	return retorno;
+bool operator >(const DtHorarioSistema& h1, const DtHorarioSistema& h2) {
+    if (h1.hora > h2.hora) return true;
+    if (h1.hora < h2.hora) return false;
+    return h1.minuto > h2.minuto;
 }
 
 ostream &operator<<(ostream & salida, const DtHorarioSistema & h){
-    salida << "Hora: " << h.hora;
+    salida << "Hora: " << h.hora << ":" << (h.minuto < 10 ? "0" : "") << h.minuto;
     return salida;
 }

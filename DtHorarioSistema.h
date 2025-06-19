@@ -7,14 +7,16 @@ using namespace std;
 
 class DtHorarioSistema{
 	private:
-		string hora;
+		int hora;
+		int minuto;
 	public:
 		DtHorarioSistema();
-		DtHorarioSistema(string);
-		string getHora();
+		DtHorarioSistema(int, int);
+		int getHora();
+		int getMinuto();
 		~DtHorarioSistema();
 
-		friend bool operator <(const DtHorarioSistema&,const DtHorarioSistema&);
+		friend bool operator >(const DtHorarioSistema&,const DtHorarioSistema&);
 		friend ostream& operator <<(ostream&,const DtHorarioSistema&);
 
 };

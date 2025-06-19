@@ -23,7 +23,6 @@ class DtFuncion{
 		string getPeli();
 		int getId();
 
-		friend bool operator <(const DtFuncion&,const DtFuncion&);
 		friend ostream& operator <<(ostream&,const DtFuncion&);
 
 };
