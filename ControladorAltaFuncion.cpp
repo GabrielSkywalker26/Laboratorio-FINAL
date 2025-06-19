@@ -88,6 +88,7 @@ void ControladorAltaFuncion::altaFuncion(int idSala, DtHorario horario, DtFecha 
     Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(this->titulo);
     if (peli == NULL) {
         cout << "Error: no se encontro la pelicula." << endl;
+        finalizar();
         return;
     }
     int idPeli = peli->getId();
@@ -102,6 +103,7 @@ void ControladorAltaFuncion::altaFuncion(int idSala, DtHorario horario, DtFecha 
     Cine* cine = ManejadorCine::getInstancia()->buscarCine(this->idCine);
     if (cine == NULL) {
         cout << "Error: no se encontro el cine." << endl;
+        finalizar();
         return;
     }
 
@@ -111,13 +113,19 @@ void ControladorAltaFuncion::altaFuncion(int idSala, DtHorario horario, DtFecha 
             sala->agregarFuncion(idFuncion);
             cine->agregarPelicula(idPeli);
             cout << "Funcion registrada correctamente con ID: " << idFuncion << endl;
+            finalizar();
             return;
         }
     }
     
     // Si no encontro la sala
     cout << "Error: sala no encontrada en el cine." << endl;
+    finalizar();
+}
 
+void ControladorAltaFuncion::finalizar() {
+    titulo = "";
+    idCine = 0;
 }
 
 

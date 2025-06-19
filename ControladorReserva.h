@@ -54,7 +54,6 @@ public:
     float calcularPrecioTotal(int idFuncion, int cantidadAsientos, int tipoPago, string bancoFinanciera);
     bool confirmar();
     void finalizar();
-    void reiniciar();
     
     // Metodos privados
     void liberarMemoria();

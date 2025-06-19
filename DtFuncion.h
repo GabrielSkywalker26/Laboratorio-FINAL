@@ -12,12 +12,11 @@ class DtFuncion{
 		DtFecha fecha;
 		DtHorario horario;
 		int id;
-		static int ultimoId;
 		string peli;
 
 	public:
 		DtFuncion();
-		DtFuncion(DtFecha,DtHorario);
+		DtFuncion(int id, DtFecha, DtHorario);
 		~DtFuncion();
 		DtFecha getFecha();
 		DtHorario getHorario();

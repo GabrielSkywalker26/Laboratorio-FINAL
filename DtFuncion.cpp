@@ -1,10 +1,8 @@
 #include "DtFuncion.h"
 
-int DtFuncion::ultimoId = 0;
-
 DtFuncion::DtFuncion(){}
-DtFuncion::DtFuncion(DtFecha fecha,DtHorario horario){
-	this->id = ++ultimoId;
+DtFuncion::DtFuncion(int id, DtFecha fecha, DtHorario horario){
+	this->id = id;
 	this->fecha = fecha;
 	this->horario = horario;
 }

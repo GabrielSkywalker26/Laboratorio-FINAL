@@ -352,7 +352,7 @@ void crearReserva() {
 
         // Seleccion de cine
         int eleccionCine;
-        cout << "\n¿Desea continuar?" << endl;
+        cout << "\nDesea continuar?" << endl;
         cout << "1. Seleccionar cine" << endl;
         cout << "2. Finalizar" << endl;
         cout << "Opcion: ";
@@ -423,7 +423,7 @@ void crearReserva() {
             cout << "\nPrecio total: $" << precioTotal << endl;
 
             int confirmar;
-            cout << "\n¿Desea confirmar la reserva?" << endl;
+            cout << "\nDesea confirmar la reserva?" << endl;
             cout << "1. Si" << endl;
             cout << "2. No" << endl;
             cout << "Opcion: ";

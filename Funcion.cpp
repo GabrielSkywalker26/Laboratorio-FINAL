@@ -49,7 +49,7 @@ Pelicula *Funcion::getPelicula(){
 
 
 DtFuncion* Funcion::obtenerDtFuncion(){
-	DtFuncion* dtFuncion = new DtFuncion(this->fecha, this->horario);
+	DtFuncion* dtFuncion = new DtFuncion(this->id, this->fecha, this->horario);
 	return dtFuncion;
 }
 

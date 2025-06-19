@@ -32,6 +32,6 @@ class ControladorAltaFuncion: public IControladorAltaFuncion{
         void altaFuncion(int, DtHorario, DtFecha);
         bool existeFuncion(int);
         list<Funcion*> listarFunciones();
-        //void finalizar();
+        void finalizar();
 };
 #endif

@@ -48,8 +48,11 @@ list<DtFuncion*> Sala::obtenerDtFunciones(){
 	list<DtFuncion*> dTFunciones;
 	ManejadorFuncion* manejadorFuncion = ManejadorFuncion::getInstancia();
 	for (int f : funciones) {
-        DtFuncion* dtf = manejadorFuncion->buscarFuncion(f)->obtenerDtFuncion();
-		dTFunciones.push_back(dtf);
+        Funcion* funcion = manejadorFuncion->buscarFuncion(f);
+        if (funcion != NULL) {
+            DtFuncion* dtf = funcion->obtenerDtFuncion();
+            dTFunciones.push_back(dtf);
+        }
     }
 	return dTFunciones;
 }

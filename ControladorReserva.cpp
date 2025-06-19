@@ -39,7 +39,6 @@ list<DtPelicula*> ControladorReserva::listarPeliculas() {
 }
 
 DtPeliInfo* ControladorReserva::selectPeli(string titulo) {
-    tituloPelicula = titulo;
     Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(tituloPelicula);
     if (peli != NULL) {
         return peli->obtenerDtPeliInfo();
@@ -63,7 +62,6 @@ list<DtCine*> ControladorReserva::listarCinesPeli() {
 }
 
 list<DtFuncion*> ControladorReserva::selectCine(int id) {
-    idCine = id;
     Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(tituloPelicula);
     Cine* cine = ManejadorCine::getInstancia()->buscarCine(id);
     return cine ? cine->listarFuncionesPeli(peli) : list<DtFuncion*>();
@@ -150,10 +148,6 @@ void ControladorReserva::finalizar() {
     tipoPago = 0;
     bancoFinanciera = "";
     pago = NULL;
-}
-
-void ControladorReserva::reiniciar() {
-    // No se implementa en la nueva version
 }
 
 void ControladorReserva::liberarMemoria() {
