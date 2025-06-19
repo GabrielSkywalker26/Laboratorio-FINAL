@@ -12,6 +12,8 @@
 #include "Debito.h"
 #include "Pago.h"
 #include "Usuario.h"
+#include "ManejadorBanco.h"
+#include "DtBanco.h"
 #include <list>
 #include <string>
 
@@ -54,6 +56,9 @@ public:
     float calcularPrecioTotal(int idFuncion, int cantidadAsientos, int tipoPago, string bancoFinanciera);
     bool confirmar();
     void finalizar();
+    list<DtBanco*> listarBancos();
+    DtBanco* obtenerDtBanco(string nombre);
+    void reiniciar();
     
     // Metodos privados
     void liberarMemoria();

@@ -67,6 +67,10 @@ float Funcion::getPrecio() {
     return precio;
 }
 
+void Funcion::setPrecio(float precio) {
+    this->precio = precio;
+}
+
 void Funcion::agregarReserva(Reserva* reserva) {
     reservas.push_back(reserva);
 }

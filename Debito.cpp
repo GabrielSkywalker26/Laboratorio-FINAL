@@ -1,14 +1,18 @@
 #include "Debito.h"
+#include "DtBanco.h"
+#include <string>
+
+using namespace std;
 
 Debito::Debito() : Pago() {
 	banco = "";
 }
 
-void Debito::setBanco(std::string banco) {
+void Debito::setBanco(string banco) {
 	this->banco = banco;
 }
 
-std::string Debito::getBanco() {
+string Debito::getBanco() {
 	return banco;
 }
 
@@ -32,4 +36,9 @@ DtReserva* DtReserva::obtenerDtReserva(){
 */
 
 void Debito::agregarDtReserva(){
+}
+
+DtBanco* Debito::obtenerDtBanco(string banco) {
+	DtBanco* dtBanco = new DtBanco(banco);
+	return dtBanco;
 }

@@ -1,21 +1,25 @@
 #include "Reserva.h"
+#include "ManejadorFuncion.h"
 #include "Funcion.h"
-#include "Usuario.h"
+using namespace std;
 
 Reserva::Reserva() {
     costo = 0;
     cantEntradas = 0;
-    funcion = NULL;
-    usuario = NULL;
+    idFuncion = 0;
+    usuarioNickname = "";
     pago = NULL;
 }
 
-Reserva::Reserva(Funcion* f, Usuario* u, int cant, Pago* p) {
-    funcion = f;
-    usuario = u;
+Reserva::Reserva(int idFuncion, string usuarioNickname, int cant, Pago* p) {
+    this->idFuncion = idFuncion;
+    this->usuarioNickname = usuarioNickname;
     cantEntradas = cant;
     pago = p;
-    costo = p ? p->getMonto() : 0;
+    if (p != NULL)
+        costo = p->getMonto();
+    else
+        costo = 0;
 }
 
 float Reserva::getCosto() {
@@ -34,12 +38,12 @@ void Reserva::setCantEntradas(int c) {
     cantEntradas = c;
 }
 
-Funcion* Reserva::getFuncion() {
-    return funcion;
+int Reserva::getIdFuncion() {
+    return idFuncion;
 }
 
-Usuario* Reserva::getUsuario() {
-    return usuario;
+string Reserva::getUsuarioNickname() {
+    return usuarioNickname;
 }
 
 Pago* Reserva::getPago() {
@@ -51,7 +55,11 @@ Reserva::~Reserva() {
 }
 
 DtPelicula* Reserva::obtenerDtPelicula() {
-    return funcion->getPelicula()->obtenerDtPelicula();
+    Funcion* f = ManejadorFuncion::getInstancia()->buscarFuncion(idFuncion);
+    if (f != NULL)
+        return f->getPelicula()->obtenerDtPelicula();
+    else
+        return NULL;
 }
 
 /*

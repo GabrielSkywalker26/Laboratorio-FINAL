@@ -23,4 +23,5 @@ class ManejadorFinanciera{
         float obtenerDescuento(string financiera);
         virtual ~ManejadorFinanciera();
 };
+
 #endif

@@ -2,15 +2,17 @@
 #include "DtFinanciera.h"
 #include <string>
 
+using namespace std;
+
 Credito::Credito() : Pago() {
     financiera = "";
 }
 
-void Credito::setFinanciera(std::string financiera) {
+void Credito::setFinanciera(string financiera) {
     this->financiera = financiera;
 }
 
-std::string Credito::getFinanciera() {
+string Credito::getFinanciera() {
     return financiera;
 }
 

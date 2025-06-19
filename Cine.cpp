@@ -84,7 +84,7 @@ list<DtFuncion*> Cine::listarFuncionesPeli(Pelicula* pelicula) {
     list<DtFuncion*> funcionesPeli;
     for (Sala* sala : this->obtenerSalas()) {
         for (DtFuncion* dtf : sala->obtenerDtFunciones()) {
-            // Obtener la función real para verificar la película
+            // Obtener la funcion real para verificar la pelicula
             Funcion* f = ManejadorFuncion::getInstancia()->buscarFuncion(dtf->getId());
             if (f && f->getPelicula()->getId() == pelicula->getId()) {
                 funcionesPeli.push_back(dtf);

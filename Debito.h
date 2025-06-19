@@ -2,18 +2,22 @@
 #define DEBITO
 
 #include "Pago.h"
+#include "DtBanco.h"
 #include <string>
+
+using namespace std;
 
 class Debito : public Pago {
 private:
-	std::string banco;
+	string banco;
 
 public:
 	Debito();
-	void setBanco(std::string banco);
-	std::string getBanco();
-	float getMonto() override;
-	void setMonto(float m) override;
+	void setBanco(string banco);
+	string getBanco();
+	float getMonto();
+	void setMonto(float m);
+	DtBanco* obtenerDtBanco(string banco);
 	~Debito();
 	//DtReserva obtenerDtReserva();
 	void agregarDtReserva();

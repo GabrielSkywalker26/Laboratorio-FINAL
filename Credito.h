@@ -5,17 +5,19 @@
 #include "DtFinanciera.h"
 #include <string>
 
+using namespace std;
+
 class Credito : public Pago {
 private:
-	std::string financiera;
+	string financiera;
 
 public:
 	Credito();
-	void setFinanciera(std::string financiera);
-	std::string getFinanciera();
-	float getMonto() override;
-	void setMonto(float m) override;
-	DtFinanciera* obtenerDtFinanciera(std::string financiera);
+	void setFinanciera(string financiera);
+	string getFinanciera();
+	float getMonto();
+	void setMonto(float m);
+	DtFinanciera* obtenerDtFinanciera(string financiera);
 	~Credito();
 };
 

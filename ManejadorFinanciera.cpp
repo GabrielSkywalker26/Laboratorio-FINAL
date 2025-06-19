@@ -26,7 +26,7 @@ Financiera* ManejadorFinanciera::buscarFinanciera(string financiera){
 }
 
 void ManejadorFinanciera::agregarFinanciera(Financiera* financiera){
-    //financieras.insert(std::pair<string,Financiera*>(financiera->getCi(),financiera));
+    financieras.insert(std::pair<string,Financiera*>(financiera->getNombre(), financiera));
 }
 
 bool ManejadorFinanciera::existeFinanciera(string financiera){ 

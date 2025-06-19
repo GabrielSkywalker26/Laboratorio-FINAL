@@ -20,6 +20,7 @@ class ControladorAltaFuncion: public IControladorAltaFuncion{
         static ControladorAltaFuncion* instancia;
         string titulo; // Titulo de la pelicula
         int idCine;
+        float precioFuncion;
         ControladorAltaFuncion();
     public:
         static ControladorAltaFuncion* getInstancia();
@@ -33,5 +34,6 @@ class ControladorAltaFuncion: public IControladorAltaFuncion{
         bool existeFuncion(int);
         list<Funcion*> listarFunciones();
         void finalizar();
+        void ingresarPrecioFuncion(float precio);
 };
 #endif

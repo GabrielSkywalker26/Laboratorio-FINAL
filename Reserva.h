@@ -5,28 +5,25 @@
 #include "Pago.h"
 #include <iostream>
 
-class Funcion;
-class Usuario;
-
 using namespace std;
 
 class Reserva {
 private:
 	float costo;
 	int cantEntradas;
-	Funcion* funcion;
-	Usuario* usuario;
+	int idFuncion;
+	string usuarioNickname;
 	Pago* pago;
 
 public:
 	Reserva();
-	Reserva(Funcion* f, Usuario* u, int cant, Pago* p);
+	Reserva(int idFuncion, string usuarioNickname, int cant, Pago* p);
 	float getCosto();
 	void setCosto(float);
 	int getCantEntradas();
 	void setCantEntradas(int);
-	Funcion* getFuncion();
-	Usuario* getUsuario();
+	int getIdFuncion();
+	string getUsuarioNickname();
 	Pago* getPago();
 	~Reserva();
 	//DtReserva obtenerDtReserva();

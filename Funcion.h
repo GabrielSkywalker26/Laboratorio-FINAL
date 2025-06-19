@@ -37,5 +37,6 @@ class Funcion{
 		bool hayAsientosDisponibles(int cantidad);
 		float getPrecio();
 		void agregarReserva(Reserva* reserva);
+		void setPrecio(float precio);
 };
 #endif

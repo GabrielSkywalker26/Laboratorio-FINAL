@@ -94,6 +94,7 @@ void ControladorAltaFuncion::altaFuncion(int idSala, DtHorario horario, DtFecha 
     int idPeli = peli->getId();
     // 2. Crear la funcion
     Funcion* funcion = new Funcion(fecha, horario, peli);
+    funcion->setPrecio(this->precioFuncion);
     int idFuncion = funcion->getId();
 
     // 3. Registrar en ManejadorFuncion
@@ -126,6 +127,12 @@ void ControladorAltaFuncion::altaFuncion(int idSala, DtHorario horario, DtFecha 
 void ControladorAltaFuncion::finalizar() {
     titulo = "";
     idCine = 0;
+    precioFuncion = 0;
+}
+
+void ControladorAltaFuncion::ingresarPrecioFuncion(float precio) {
+    // Guardar el precio temporalmente para la proxima funcion a crear
+    this->precioFuncion = precio;
 }
 
 

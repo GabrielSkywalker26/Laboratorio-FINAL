@@ -5,6 +5,8 @@
 #include "ManejadorFinanciera.h"
 #include "ManejadorFuncion.h"
 #include "ManejadorUsuario.h"
+#include "ManejadorBanco.h"
+#include "DtBanco.h"
 
 ControladorReserva* ControladorReserva::instancia = NULL;
 
@@ -39,7 +41,8 @@ list<DtPelicula*> ControladorReserva::listarPeliculas() {
 }
 
 DtPeliInfo* ControladorReserva::selectPeli(string titulo) {
-    Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(tituloPelicula);
+    tituloPelicula = titulo;
+    Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
     if (peli != NULL) {
         return peli->obtenerDtPeliInfo();
     } else {
@@ -131,9 +134,9 @@ bool ControladorReserva::confirmar() {
     Funcion* funcion = ManejadorFuncion::getInstancia()->buscarFuncion(idFuncion);
     Usuario* usuario = ManejadorUsuario::getInstancia()->buscarUsuario(usuarioNickname);
     if (funcion != NULL && usuario != NULL && pago != NULL) {
-        Reserva* reserva = new Reserva(funcion, usuario, cantidadAsientos, pago);
+        Reserva* reserva = new Reserva(idFuncion, usuarioNickname, cantidadAsientos, pago);
         funcion->agregarReserva(reserva);
-        usuario->agregarReserva(reserva);
+        //usuario->agregarReserva(reserva);
         return true;
     }
     return false;
@@ -169,3 +172,23 @@ bool ControladorReserva::verificarDisponibilidadAsientos(int cantidad) {
         return false;
     }
 }
+
+list<DtBanco*> ControladorReserva::listarBancos() {
+    list<DtBanco*> resultado;
+    list<Banco*> bancos = ManejadorBanco::getInstancia()->getBancos();
+    for (Banco* b : bancos) {
+        resultado.push_back(new DtBanco(b->getNombre()));
+    }
+    return resultado;
+}
+
+DtBanco* ControladorReserva::obtenerDtBanco(string nombre) {
+    Banco* banco = ManejadorBanco::getInstancia()->buscarBanco(nombre);
+    if (banco != NULL) {
+        return new DtBanco(banco->getNombre());
+    } else {
+        return NULL;
+    }
+}
+
+void ControladorReserva::reiniciar() {}

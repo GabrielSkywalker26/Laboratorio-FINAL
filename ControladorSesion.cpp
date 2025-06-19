@@ -26,6 +26,7 @@ bool ControladorSesion::iniciarSesion(string nickname, string contrasenia) {
         Usuario* user = manejador->buscarUsuario(nickname);
         if (user->getContrasena() == contrasenia) {
             Sesion::getInstancia()->setDtUsuario(user->getDtUsuario());
+            this->nickname = nickname;
             return true;
         }
     }

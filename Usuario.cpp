@@ -1,4 +1,5 @@
 #include "Usuario.h"
+using namespace std;
 
 Usuario::Usuario() {}
 
@@ -36,9 +37,9 @@ DtUsuario* Usuario::getDtUsuario() {
     return new DtUsuario(this->nickname, this->contrasena);
 }
 
-void Usuario::agregarReserva(Reserva* reserva) {
+/*void Usuario::agregarReserva(string idReserva) {
     // Implementacion para agregar la reserva al usuario
-    // Por ejemplo: this->reservas.push_back(reserva);
-}
+    // Por ejemplo: this->reservas.push_back(idReserva);
+}*/
 
 Usuario::~Usuario() {}
