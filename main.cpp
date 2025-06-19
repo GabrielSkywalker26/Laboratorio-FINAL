@@ -11,6 +11,7 @@
 #include "IControladorUsuario.h"
 #include "IControladorFecha.h"
 #include "ManejadorCine.h"
+#include "ManejadorUsuario.h"
 #include "Sala.h"
 #include "Cine.h"
 #include "Financiera.h"
@@ -20,6 +21,7 @@
 #include "DtBanco.h"
 #include "ManejadorFuncion.h"
 #include "DtFinanciera.h"
+#include "ManejadorPelicula.h"
 
 using namespace std;
 
@@ -47,6 +49,10 @@ void eliminarPelicula();
 void modificarFechaSistema();
 void consultarFechaSistema();
 void cargarDatosPrueba();
+void puntuarPelicula();
+void comentarPelicula();
+void verInformacionPelicula();
+void verComentariosPuntajesPelicula();
 
 void menu();
 
@@ -67,7 +73,11 @@ void menu(){
 	cout <<"10. Modificar fecha del sistema" << endl;
 	cout <<"11. Consultar fecha del sistema" << endl;
 	cout <<"12. Cargar datos de prueba" << endl;
-	cout <<"13. Salir" << endl;
+	cout <<"13. Puntuar pelicula" << endl;
+	cout <<"14. Comentar pelicula" << endl;
+	cout <<"15. Ver informacion de pelicula" << endl;
+	cout <<"16. Ver comentarios y puntajes de pelicula" << endl;
+	cout <<"17. Salir" << endl;
 	cout <<"_____________________________________________" <<endl;
 	cout <<"OPCION: ";
 }
@@ -337,15 +347,15 @@ void crearReserva() {
         return;
     }
 
-    // Obtener informacion de la pelicula
-    DtPeliInfo* dtPeliInfo = iReserva->selectPeli(titulo);
-    if (!dtPeliInfo) {
+    // Verificar si la película existe usando el manejador
+    Pelicula* pelicula = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
+    if (!pelicula) {
         cout << "Pelicula no encontrada." << endl;
         iReserva->finalizar();
         return;
     }
 
-    cout << "\nInformacion de la pelicula:\n" << *dtPeliInfo << endl;
+    cout << "\nInformacion de la pelicula:\n" << *(pelicula->obtenerDtPelicula()) << endl;
 
     // Preguntar si desea ver informacion adicional de la pelicula
     int eleccionInfo;
@@ -392,7 +402,11 @@ void crearReserva() {
 
             cout << "\nFunciones disponibles:\n";
             for (DtFuncion* f : funciones) {
-                cout << "- " << *f << endl;
+                Funcion* fun = ManejadorFuncion::getInstancia()->buscarFuncion(f->getId());
+                if (fun)
+                    cout << "- " << *f << ", Precio: $" << fun->getPrecio() << endl;
+                else
+                    cout << "- " << *f << endl;
             }
 
             // Seleccion de funcion
@@ -484,8 +498,72 @@ void crearReserva() {
 }
 
 void verReservasPorPelicula() {
-	cout << "=== Ver reservas por pelicula ===" << endl;
-	// TO DO: implementar logica con iReserva
+    system("clear");
+    cout << "_________V E R__R E S E R V A S__P O R__P E L I C U L A_________" << endl;
+    
+    if (!iSesion->sesionIniciada()) {
+        cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
+        return;
+    }
+
+    // Listar todas las películas
+    list<DtPelicula*> todasLasPelis = iReserva->listarPeliculas();
+    if (todasLasPelis.empty()) {
+        cout << "No hay peliculas registradas en el sistema." << endl;
+        return;
+    }
+
+    cout << "\nPeliculas disponibles:\n";
+    for (DtPelicula* p : todasLasPelis) {
+        cout << "- " << *p << endl;
+    }
+
+    // Selección de película
+    string titulo;
+    cout << "\nIngrese el titulo de la pelicula para ver sus reservas: ";
+    cin.ignore();
+    getline(cin, titulo);
+
+    // Verificar si la película existe usando el manejador
+    Pelicula* pelicula = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
+    if (!pelicula) {
+        cout << "Pelicula no encontrada." << endl;
+        // Liberar memoria de los DTOs antes de salir
+        for (DtPelicula* p : todasLasPelis) {
+            delete p;
+        }
+        return;
+    }
+
+    // Obtener reservas de la película
+    list<DtReserva*> reservas = iReserva->obtenerReservasPorPelicula(titulo);
+    if (reservas.empty()) {
+        cout << "No se encontraron reservas para la pelicula '" << titulo << "'." << endl;
+        // Liberar memoria de los DTOs antes de salir
+        for (DtPelicula* p : todasLasPelis) {
+            delete p;
+        }
+        return;
+    }
+
+    cout << "\n=== RESERVAS PARA '" << titulo << "' ===" << endl;
+    cout << "Total de reservas: " << reservas.size() << endl;
+    cout << "----------------------------------------" << endl;
+    
+    for (DtReserva* r : reservas) {
+        cout << *r << endl;
+        cout << "----------------------------------------" << endl;
+    }
+    
+    // Liberar memoria de los DTOs
+    for (DtReserva* r : reservas) {
+        delete r;
+    }
+    
+    // Liberar memoria de los DtPelicula
+    for (DtPelicula* p : todasLasPelis) {
+        delete p;
+    }
 }
 
 void eliminarPelicula() {
@@ -647,9 +725,60 @@ void cargarDatosPrueba() {
 	ManejadorBanco::getInstancia()->agregarBanco(new Banco("Scotiabank"));
 	ManejadorBanco::getInstancia()->agregarBanco(new Banco("HSBC"));
 
+	// --- Crear reservas de prueba ---
+	cout << "Creando reservas de prueba..." << endl;
+	
+	// Reserva 1: Bob reserva 2 asientos para Kill Bill (Débito)
+	cout << "Creando reserva 1: Bob - Kill Bill..." << endl;
+	iReserva->selectPeli("Kill Bill");
+	iReserva->selectFuncion(2); // ID de la función Kill Bill
+	iReserva->ingresarUsuario(ManejadorUsuario::getInstancia()->buscarUsuario("bob"));
+	iReserva->reservarAsientos(2);
+	iReserva->ingresarModoPago(1); // Débito
+	iReserva->ingresarBanco("Santander");
+	iReserva->confirmar();
+	iReserva->finalizar();
+	
+	// Reserva 2: Alice reserva 1 asiento para Kill Bill (Crédito)
+	cout << "Creando reserva 2: Alice - Kill Bill..." << endl;
+	iReserva->selectPeli("Kill Bill");
+	iReserva->selectFuncion(2); // ID de la función Kill Bill
+	iReserva->ingresarUsuario(ManejadorUsuario::getInstancia()->buscarUsuario("alice"));
+	iReserva->reservarAsientos(1);
+	iReserva->ingresarModoPago(2); // Crédito
+	iReserva->ingresarFinanciera("Visa");
+	iReserva->confirmar();
+	iReserva->finalizar();
+	
+	// Reserva 3: Trudy reserva 3 asientos para Django (Débito)
+	cout << "Creando reserva 3: Trudy - Django..." << endl;
+	iReserva->selectPeli("Django Unchained");
+	iReserva->selectFuncion(3); // ID de la función Django
+	iReserva->ingresarUsuario(ManejadorUsuario::getInstancia()->buscarUsuario("trudy"));
+	iReserva->reservarAsientos(3);
+	iReserva->ingresarModoPago(1); // Débito
+	iReserva->ingresarBanco("BBVA");
+	iReserva->confirmar();
+	iReserva->finalizar();
+
 	cout << "Datos de prueba cargados correctamente." << endl;
 }
 
+void puntuarPelicula() {
+    // Implementación de la función puntuarPelicula
+}
+
+void comentarPelicula() {
+    // Implementación de la función comentarPelicula
+}
+
+void verInformacionPelicula() {
+    // Implementación de la función verInformacionPelicula
+}
+
+void verComentariosPuntajesPelicula() {
+    // Implementación de la función verComentariosPuntajesPelicula
+}
 
 // Main principal
 int main() {
@@ -662,7 +791,7 @@ int main() {
 	
 	
 
-	while(opcion != 13){
+	while(opcion != 17){
 		switch(opcion){
 			case 1: iniciarSesion(); break;
 			case 2: cerrarSesion(); break;
@@ -676,6 +805,10 @@ int main() {
 			case 10: modificarFechaSistema(); break;
 			case 11: consultarFechaSistema(); break;
 			case 12: cargarDatosPrueba(); break;
+			case 13: puntuarPelicula(); break;
+			case 14: comentarPelicula(); break;
+			case 15: verInformacionPelicula(); break;
+			case 16: verComentariosPuntajesPelicula(); break;
 			default: cout << "OPCION INCORRECTA" << endl;
 		}
 		sleep(3); // en Linux/macOS; usar Sleep(3000) en Windows

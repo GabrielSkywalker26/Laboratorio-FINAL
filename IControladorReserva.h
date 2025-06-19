@@ -11,6 +11,7 @@
 #include "DtPelicula.h"
 #include "Usuario.h"
 #include "DtBanco.h"
+#include "DtReserva.h"
 
 
 using namespace std;
@@ -34,6 +35,10 @@ class IControladorReserva{
         virtual void finalizar()=0;
         virtual list<DtBanco*> listarBancos()=0;
         virtual DtBanco* obtenerDtBanco(string)=0;
+        
+        // Método para consultar reservas por película
+        virtual list<DtReserva*> obtenerReservasPorPelicula(string titulo)=0;
+        
         virtual ~IControladorReserva() {}
 };
 #endif

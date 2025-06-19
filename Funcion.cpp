@@ -74,3 +74,7 @@ void Funcion::setPrecio(float precio) {
 void Funcion::agregarReserva(Reserva* reserva) {
     reservas.push_back(reserva);
 }
+
+list<Reserva*> Funcion::getReservas() {
+    return reservas;
+}

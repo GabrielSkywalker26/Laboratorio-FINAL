@@ -38,5 +38,6 @@ class Funcion{
 		float getPrecio();
 		void agregarReserva(Reserva* reserva);
 		void setPrecio(float precio);
+		list<Reserva*> getReservas();
 };
 #endif

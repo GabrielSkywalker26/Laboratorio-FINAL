@@ -153,6 +153,10 @@ bool ControladorReserva::confirmar() {
     Funcion* funcion = ManejadorFuncion::getInstancia()->buscarFuncion(idFuncion);
     Usuario* usuario = ManejadorUsuario::getInstancia()->buscarUsuario(usuarioNickname);
     if (funcion != NULL && usuario != NULL && pago != NULL) {
+        // Calcular el precio total y establecerlo en el objeto de pago
+        float precioTotal = calcularPrecioTotal(idFuncion, cantidadAsientos, tipoPago, bancoFinanciera);
+        pago->setMonto(precioTotal);
+        
         Reserva* reserva = new Reserva(idFuncion, usuarioNickname, cantidadAsientos, pago);
         funcion->agregarReserva(reserva);
         //usuario->agregarReserva(reserva);
@@ -211,3 +215,69 @@ DtBanco* ControladorReserva::obtenerDtBanco(string nombre) {
 }
 
 void ControladorReserva::reiniciar() {}
+
+list<DtReserva*> ControladorReserva::obtenerReservasPorPelicula(string titulo) {
+    list<DtReserva*> resultado;
+    Pelicula* pelicula = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
+    
+    // Si la película no existe, retornar lista vacía
+    if (!pelicula) {
+        return resultado;
+    }
+    
+    list<Cine*> cines = ManejadorCine::getInstancia()->getCines();
+    
+    for (Cine* c : cines) {
+        if (c->checkPeliculas(pelicula->getId())) {
+            list<DtFuncion*> funciones = c->listarFuncionesPeli(pelicula);
+            
+            for (DtFuncion* f : funciones) {
+                Funcion* funcion = ManejadorFuncion::getInstancia()->buscarFuncion(f->getId());
+                if (funcion) {
+                    list<Reserva*> reservas = funcion->getReservas();
+                    
+                    for (Reserva* r : reservas) {
+                        // Obtener información del pago
+                        string tipoPago = "";
+                        string bancoFinanciera = "";
+                        
+                        if (r->getPago()) {
+                            if (dynamic_cast<Debito*>(r->getPago())) {
+                                tipoPago = "Debito";
+                                bancoFinanciera = dynamic_cast<Debito*>(r->getPago())->getBanco();
+                            } else if (dynamic_cast<Credito*>(r->getPago())) {
+                                tipoPago = "Credito";
+                                bancoFinanciera = dynamic_cast<Credito*>(r->getPago())->getFinanciera();
+                            }
+                        }
+                        
+                        // Crear DtReserva
+                        DtReserva* dtReserva = new DtReserva(
+                            r->getIdFuncion(),
+                            titulo,
+                            c->getId(),
+                            f->getFecha().getDia(),
+                            f->getFecha().getMes(),
+                            f->getFecha().getAnio(),
+                            f->getHorario().getHoraComienzo(),
+                            f->getHorario().getMinComienzo(),
+                            r->getCantEntradas(),
+                            r->getCosto(),
+                            tipoPago,
+                            bancoFinanciera
+                        );
+                        
+                        resultado.push_back(dtReserva);
+                    }
+                    
+                    // Liberar memoria de los DtFuncion* creados
+                    for (DtFuncion* f : funciones) {
+                        delete f;
+                    }
+                }
+            }
+        }
+    }
+    
+    return resultado;
+}

@@ -1,6 +1,7 @@
 #include "DtFuncion.h"
 
 DtFuncion::DtFuncion(){}
+
 DtFuncion::DtFuncion(int id, DtFecha fecha, DtHorario horario){
 	this->id = id;
 	this->fecha = fecha;

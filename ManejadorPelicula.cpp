@@ -15,7 +15,11 @@ ManejadorPelicula* ManejadorPelicula::getInstancia(){
 
 Pelicula* ManejadorPelicula::buscarPelicula(string pelicula){
   map<string,Pelicula*>::iterator it = this->peliculas.find(pelicula);
-  return it->second;
+  if (it != this->peliculas.end()) {
+    return it->second;
+  } else {
+    return NULL;
+  }
 }
 
 void ManejadorPelicula::agregarPelicula(Pelicula* pelicula){
@@ -29,7 +33,9 @@ bool ManejadorPelicula::existePelicula(string pelicula){
 
 void ManejadorPelicula::eliminarPelicula(string pelicula){
   map<string,Pelicula*>::iterator it = this->peliculas.find(pelicula);
-  this->peliculas.erase(it);
+  if (it != this->peliculas.end()) {
+    this->peliculas.erase(it);
+  }
 }
 
 list<Pelicula*> ManejadorPelicula::getPeliculas() {

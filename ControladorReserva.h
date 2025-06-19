@@ -14,6 +14,9 @@
 #include "Usuario.h"
 #include "ManejadorBanco.h"
 #include "DtBanco.h"
+#include "Banco.h"
+#include "Financiera.h"
+#include "DtReserva.h"
 #include <list>
 #include <string>
 
@@ -59,6 +62,9 @@ public:
     list<DtBanco*> listarBancos();
     DtBanco* obtenerDtBanco(string nombre);
     void reiniciar();
+    
+    // Metodos para consultar reservas por película
+    list<DtReserva*> obtenerReservasPorPelicula(string titulo);
     
     // Metodos privados
     void liberarMemoria();
