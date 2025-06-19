@@ -11,6 +11,7 @@
 #include "Credito.h"
 #include "Debito.h"
 #include "Pago.h"
+#include "Usuario.h"
 #include <list>
 #include <string>
 
@@ -34,12 +35,10 @@ private:
     int idCine;
     int idFuncion;
 
-    // Metodos privados
-    void liberarMemoria();
-    bool verificarDisponibilidadAsientos(int cantidad);
+    ControladorReserva();
 
 public:
-    ControladorReserva();
+    
     static ControladorReserva* getInstancia();
     ~ControladorReserva();
 
@@ -49,6 +48,7 @@ public:
     list<DtCine*> listarCinesPeli();
     list<DtFuncion*> selectCine(int idCine);
     void selectFuncion(int idFuncion);
+    void ingresarUsuario(Usuario*);
     bool reservarAsientos(int cantidad);
     void ingresarModoPago(int tipoPago);
     string ingresarBanco(string banco);
@@ -58,6 +58,11 @@ public:
     bool confirmar();
     void finalizar();
     void reiniciar();
+    
+    // Metodos privados
+    void liberarMemoria();
+    bool verificarDisponibilidadAsientos(int cantidad);
+
 };
 
 #endif

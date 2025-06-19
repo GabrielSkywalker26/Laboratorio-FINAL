@@ -31,7 +31,11 @@ IControladorPelicula* Fabrica::getIControladorPelicula() {
 }
 
 IControladorReserva* Fabrica::getIControladorReserva() {
-    return new ControladorReserva();
+    //return new ControladorReserva();
+    /*if (ControladorReserva::getInstancia() == NULL)
+        ControladorReserva* instancia = new ControladorReserva();
+    return instancia;*/
+    return ControladorReserva::getInstancia();
 }
 
 IControladorSesion* Fabrica::getIControladorSesion() {

@@ -68,6 +68,10 @@ void ControladorReserva::selectFuncion(int id) {
     funcion = ManejadorFuncion::getInstancia()->buscarFuncion(id);
 }
 
+void ControladorReserva::ingresarUsuario(Usuario* usuario) {
+    this->usuario = usuario;
+}
+
 bool ControladorReserva::reservarAsientos(int cant) {
     cantidadAsientos = cant;
     return funcion && funcion->hayAsientosDisponibles(cant);

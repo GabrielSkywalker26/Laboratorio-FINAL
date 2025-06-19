@@ -233,6 +233,7 @@ void altaFuncion() {
 	int idSala;
     cin >> idSala;
 
+    // imprimir funciones de esa sala
 
     int dia, mes, anio;
     cout << "Ingrese la fecha de la funcion: " << endl;
@@ -407,6 +408,7 @@ void crearReserva() {
             cin >> confirmar;
 
             if (confirmar == 1) {
+                iReserva->ingresarUsuario(iSesion->obtenerUsuario());
                 if (iReserva->confirmar()) {
                     cout << "Reserva creada exitosamente." << endl;
                 } else {

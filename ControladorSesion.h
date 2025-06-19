@@ -2,6 +2,8 @@
 #define CONTROLADORSESION
 
 #include "IControladorSesion.h"
+#include "Usuario.h"
+
 #include <list>
 
 class ControladorSesion: public IControladorSesion{
@@ -13,5 +15,6 @@ class ControladorSesion: public IControladorSesion{
         bool iniciarSesion(string,string);
         bool cerrarSesion();
         bool sesionIniciada();
+        Usuario* obtenerUsuario();
 };
 #endif
