@@ -1,5 +1,10 @@
 #include "ControladorPelicula.h"
 
+#include <map>
+#include <string>
+#include <iostream>
+
+
 ControladorPelicula* ControladorPelicula::instancia = NULL;
 
 ControladorPelicula::ControladorPelicula(){}
@@ -89,4 +94,81 @@ bool ControladorPelicula::eliminarPelicula() {
     this->pelicula.clear();
     delete peli;
     return true;
+}
+
+// Métodos para puntajes - implementación súper simple
+void ControladorPelicula::puntuarPelicula(string titulo, string usuario, int puntaje) {
+    Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
+    if (peli) {
+        peli->agregarPuntaje(usuario, puntaje);
+    }
+}
+
+int ControladorPelicula::obtenerPuntajeUsuario(string titulo, string usuario) {
+    Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
+    return peli ? peli->obtenerPuntaje(usuario) : 0;
+}
+
+bool ControladorPelicula::usuarioYaPunto(string titulo, string usuario) {
+    Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
+    return peli ? peli->tienePuntaje(usuario) : false;
+}
+
+// Métodos para comentarios
+void ControladorPelicula::agregarComentario(string titulo, string usuario, string texto) {
+    Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
+    if (peli) {
+        Comentario* nuevoComentario = new Comentario(texto, usuario);
+        peli->agregarComentario(nuevoComentario);
+    }
+}
+
+void ControladorPelicula::agregarRespuestaComentario(string titulo, int idComentario, string usuario, string texto) {
+    Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
+    if (peli) {
+        Comentario* comentarioPadre = peli->buscarComentario(idComentario);
+        if (comentarioPadre) {
+            Comentario* respuesta = new Comentario(texto, usuario, comentarioPadre);
+            peli->agregarComentario(respuesta);
+        }
+    }
+}
+
+list<string> ControladorPelicula::listarComentarios(string titulo) {
+    list<string> resultado;
+    Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
+    if (peli) {
+        listarComentariosRecursivo(peli->getComentariosPrincipales(), resultado, 0);
+    }
+    return resultado;
+}
+
+void ControladorPelicula::listarComentariosRecursivo(list<Comentario*> comentarios, list<string>& resultado, int nivel) {
+    for (Comentario* c : comentarios) {
+        string indentacion = "";
+        for (int i = 0; i < nivel; i++) {
+            indentacion += "  ";
+        }
+        string comentarioStr = indentacion + c->getAutor() + ": " + c->getTexto();
+        resultado.push_back(comentarioStr);
+        
+        // Agregar respuestas recursivamente
+        if (!c->getRespuestas().empty()) {
+            listarComentariosRecursivo(c->getRespuestas(), resultado, nivel + 1);
+        }
+    }
+}
+
+list<string> ControladorPelicula::listarPuntajesIndividuales(string titulo) {
+    list<string> resultado;
+    Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
+    if (peli) {
+        // Obtener todos los puntajes del map
+        map<string, int> puntajes = peli->getPuntajes();
+        for (auto& par : puntajes) {
+            string puntajeStr = par.first + ": " + to_string(par.second);
+            resultado.push_back(puntajeStr);
+        }
+    }
+    return resultado;
 }

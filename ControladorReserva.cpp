@@ -290,24 +290,6 @@ list<DtReserva*> ControladorReserva::obtenerReservasPorPelicula(string titulo) {
     return resultado;
 }
 
-// Métodos para puntajes - implementación súper simple
-void ControladorReserva::puntuarPelicula(string titulo, string usuario, int puntaje) {
-    Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
-    if (peli) {
-        peli->agregarPuntaje(usuario, puntaje);
-    }
-}
-
-int ControladorReserva::obtenerPuntajeUsuario(string titulo, string usuario) {
-    Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
-    return peli ? peli->obtenerPuntaje(usuario) : 0;
-}
-
-bool ControladorReserva::usuarioYaPunto(string titulo, string usuario) {
-    Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
-    return peli ? peli->tienePuntaje(usuario) : false;
-}
-
 int ControladorReserva::obtenerCapacidadSala(int idFuncion) {
     // Buscar en todos los cines la sala que tiene esta función
     list<Cine*> cines = ManejadorCine::getInstancia()->getCines();
@@ -327,63 +309,4 @@ int ControladorReserva::obtenerCapacidadSala(int idFuncion) {
     
     // Si no se encuentra, retornar capacidad por defecto
     return 100;
-}
-
-// Métodos para comentarios
-void ControladorReserva::agregarComentario(string titulo, string usuario, string texto) {
-    Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
-    if (peli) {
-        Comentario* nuevoComentario = new Comentario(texto, usuario);
-        peli->agregarComentario(nuevoComentario);
-    }
-}
-
-void ControladorReserva::agregarRespuestaComentario(string titulo, int idComentario, string usuario, string texto) {
-    Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
-    if (peli) {
-        Comentario* comentarioPadre = peli->buscarComentario(idComentario);
-        if (comentarioPadre) {
-            Comentario* respuesta = new Comentario(texto, usuario, comentarioPadre);
-            peli->agregarComentario(respuesta);
-        }
-    }
-}
-
-list<string> ControladorReserva::listarComentarios(string titulo) {
-    list<string> resultado;
-    Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
-    if (peli) {
-        listarComentariosRecursivo(peli->getComentariosPrincipales(), resultado, 0);
-    }
-    return resultado;
-}
-
-void ControladorReserva::listarComentariosRecursivo(list<Comentario*> comentarios, list<string>& resultado, int nivel) {
-    for (Comentario* c : comentarios) {
-        string indentacion = "";
-        for (int i = 0; i < nivel; i++) {
-            indentacion += "  ";
-        }
-        string comentarioStr = indentacion + c->getAutor() + ": " + c->getTexto();
-        resultado.push_back(comentarioStr);
-        
-        // Agregar respuestas recursivamente
-        if (!c->getRespuestas().empty()) {
-            listarComentariosRecursivo(c->getRespuestas(), resultado, nivel + 1);
-        }
-    }
-}
-
-list<string> ControladorReserva::listarPuntajesIndividuales(string titulo) {
-    list<string> resultado;
-    Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
-    if (peli) {
-        // Obtener todos los puntajes del map
-        map<string, int> puntajes = peli->getPuntajes();
-        for (auto& par : puntajes) {
-            string puntajeStr = par.first + ": " + to_string(par.second);
-            resultado.push_back(puntajeStr);
-        }
-    }
-    return resultado;
 }

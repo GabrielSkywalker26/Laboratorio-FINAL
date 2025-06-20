@@ -789,15 +789,16 @@ void cargarDatosPrueba() {
 
 void puntuarPelicula() {
     system("clear");
-    cout << "_________P U N T U A R__P E L I C U L A_________" << endl;
-    
+
     if (!iSesion->sesionIniciada()) {
         cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
         return;
     }
 
+    cout << "_________P U N T U A R__P E L I C U L A_________" << endl;
+    
     // Listar películas
-    list<DtPelicula*> pelis = iReserva->listarPeliculas();
+    list<DtPelicula*> pelis = iPelicula->listarPeliculas();
     if (pelis.empty()) {
         cout << "No hay peliculas disponibles." << endl;
         return;
@@ -828,8 +829,8 @@ void puntuarPelicula() {
     string usuario = iSesion->obtenerUsuario()->getNickname();
     
     // Verificar si ya puntuó
-    if (iReserva->usuarioYaPunto(titulo, usuario)) {
-        int puntajeAnterior = iReserva->obtenerPuntajeUsuario(titulo, usuario);
+    if (iPelicula->usuarioYaPunto(titulo, usuario)) {
+        int puntajeAnterior = iPelicula->obtenerPuntajeUsuario(titulo, usuario);
         cout << "\nYa puntuaste esta pelicula con " << puntajeAnterior << " estrellas." << endl;
         cout << "Deseas modificar tu puntaje?" << endl;
         cout << "1. Si" << endl;
@@ -861,7 +862,7 @@ void puntuarPelicula() {
     }
 
     // Guardar puntaje
-    iReserva->puntuarPelicula(titulo, usuario, puntaje);
+    iPelicula->puntuarPelicula(titulo, usuario, puntaje);
     cout << "Puntaje registrado exitosamente." << endl;
 
     // Liberar memoria
@@ -872,13 +873,14 @@ void puntuarPelicula() {
 
 void comentarPelicula() {
     system("clear");
-    cout << "_________C O M E N T A R__P E L I C U L A_________" << endl;
-    
+
     if (!iSesion->sesionIniciada()) {
         cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
         return;
     }
 
+    cout << "_________C O M E N T A R__P E L I C U L A_________" << endl;
+    
     // Listar películas disponibles
     list<DtPelicula*> pelis = iReserva->listarPeliculas();
     if (pelis.empty()) {
@@ -910,7 +912,7 @@ void comentarPelicula() {
 
     // Listar comentarios existentes
     cout << "\n=== COMENTARIOS EXISTENTES ===" << endl;
-    list<string> comentarios = iReserva->listarComentarios(titulo);
+    list<string> comentarios = iPelicula->listarComentarios(titulo);
     if (comentarios.empty()) {
         cout << "No hay comentarios para esta pelicula." << endl;
     } else {
@@ -940,7 +942,7 @@ void comentarPelicula() {
             
             if (!comentario.empty()) {
                 string usuario = iSesion->obtenerUsuario()->getNickname();
-                iReserva->agregarComentario(titulo, usuario, comentario);
+                iPelicula->agregarComentario(titulo, usuario, comentario);
                 cout << "\nComentario registrado exitosamente." << endl;
             } else {
                 cout << "El comentario no puede estar vacio." << endl;
@@ -972,7 +974,7 @@ void comentarPelicula() {
                 if (!respuesta.empty()) {
                     string usuario = iSesion->obtenerUsuario()->getNickname();
                     // Por simplicidad, usamos el número como ID (en una implementación real usaríamos IDs únicos)
-                    iReserva->agregarRespuestaComentario(titulo, seleccion, usuario, respuesta);
+                    iPelicula->agregarRespuestaComentario(titulo, seleccion, usuario, respuesta);
                     cout << "\nRespuesta registrada exitosamente." << endl;
                 } else {
                     cout << "La respuesta no puede estar vacia." << endl;
@@ -987,7 +989,7 @@ void comentarPelicula() {
         }
         
         // Actualizar lista de comentarios
-        comentarios = iReserva->listarComentarios(titulo);
+        comentarios = iPelicula->listarComentarios(titulo);
     }
 
     cout << "\nProceso de comentarios finalizado." << endl;
@@ -1150,7 +1152,7 @@ void verComentariosPuntajesPelicula() {
     
     // Mostrar comentarios
     cout << "\nComentarios" << endl;
-    list<string> comentarios = iReserva->listarComentarios(titulo);
+    list<string> comentarios = iPelicula->listarComentarios(titulo);
     if (comentarios.empty()) {
         cout << "No hay comentarios para esta pelicula." << endl;
     } else {
@@ -1161,7 +1163,7 @@ void verComentariosPuntajesPelicula() {
     
     // Mostrar puntajes individuales
     cout << "\nPuntajes" << endl;
-    list<string> puntajes = iReserva->listarPuntajesIndividuales(titulo);
+    list<string> puntajes = iPelicula->listarPuntajesIndividuales(titulo);
     if (puntajes.empty()) {
         cout << "No hay puntajes para esta pelicula." << endl;
     } else {
