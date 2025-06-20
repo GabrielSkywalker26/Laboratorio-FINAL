@@ -317,13 +317,14 @@ void altaFuncion() {
 
 void crearReserva() {
     system("clear");
-    cout << "_________C R E A R__R E S E R V A_________" << endl;
     
     if (!iSesion->sesionIniciada()) {
         cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
         return;
     }
 
+    cout << "_________C R E A R__R E S E R V A_________" << endl;
+    
     // Listar peliculas disponibles
     list<DtPelicula*> pelis = iReserva->listarPeliculas();
     if (pelis.empty()) {
