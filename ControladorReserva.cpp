@@ -177,10 +177,6 @@ void ControladorReserva::finalizar() {
 }
 
 void ControladorReserva::liberarMemoria() {
-    for (Reserva* r : reservas) {
-        delete r;
-    }
-    reservas.clear();
     if (pago != NULL) {
         delete pago;
         pago = NULL;

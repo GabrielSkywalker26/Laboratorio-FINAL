@@ -35,7 +35,6 @@ private:
     int tipoPago;
     string bancoFinanciera;
     Pago* pago;
-    list<Reserva*> reservas; // Lista local de reservas
 
     ControladorReserva();
 
