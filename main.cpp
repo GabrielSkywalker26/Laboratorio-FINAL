@@ -226,9 +226,6 @@ void altaFuncion() {
 	
 	iAltaFuncion->ingresarTitulo(titulo);
 
-	// Filtramos por los cines donde se pasa la pelicula?
-	// O le sumamos esta pelicula al cine si no la tiene?
-
 	int idCine;
     list<DtCine*> cines = iAltaFuncion->listarCines();
     cout << "Cines disponibles:\n";
@@ -317,7 +314,7 @@ void altaFuncion() {
 
 void crearReserva() {
     system("clear");
-    
+
     if (!iSesion->sesionIniciada()) {
         cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
         return;
