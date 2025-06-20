@@ -2,7 +2,6 @@
 #define MANEJADORBANCO
 
 #include "Banco.h"
-#include "ManejadorBanco.h"
 
 #include <map>
 #include <list>
