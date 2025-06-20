@@ -9,7 +9,6 @@ using namespace std;
 class Banco {
 private:
     string nombre;
-    // Puedes agregar mas atributos si lo deseas, como sucursal o codigo
 public:
     Banco();
     Banco(string nombre);
