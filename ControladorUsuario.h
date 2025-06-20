@@ -16,7 +16,7 @@ class ControladorUsuario : public IControladorUsuario {
         ControladorUsuario();
     public:
         static ControladorUsuario* getInstancia();
-        void altaUsuario(string nickname, string contrasena, string urlFoto);
+        bool altaUsuario(string nickname, string contrasena, string urlFoto);
         list<Usuario*> listarUsuarios();
         bool existeUsuario(string nickname);
         virtual ~ControladorUsuario();

@@ -12,15 +12,17 @@ ControladorUsuario* ControladorUsuario::getInstancia() {
 
 ControladorUsuario::~ControladorUsuario(){}
 
-void ControladorUsuario::altaUsuario(string nickname, string contrasena, string urlFoto){
-
+bool ControladorUsuario::altaUsuario(string nickname, string contrasena, string urlFoto){
+    bool retorno = false;
     if (this->existeUsuario(nickname)) {
-        cout << "Ya existe un usuario con el nickname \"" << nickname << "\"." << endl;
+        cout << "Error! Ya existe un usuario con el nickname \"" << nickname << "\"." << endl;
     } else {
         Usuario* user = new Usuario(nickname, contrasena, urlFoto);
         ManejadorUsuario::getInstancia()->agregarUsuario(user);
-        cout << "Usuario registrado correctamente." << endl;
+        //cout << "Usuario registrado correctamente." << endl;
+        retorno = true;
     }
+    return retorno;
 }
 
 list<Usuario*> ControladorUsuario::listarUsuarios(){

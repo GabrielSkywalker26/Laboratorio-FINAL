@@ -6,7 +6,7 @@ using namespace std;
 
 class IControladorUsuario {
 public:
-    virtual void altaUsuario(string nickname, string contrasenia, string urlFoto) = 0;
+    virtual bool altaUsuario(string nickname, string contrasenia, string urlFoto) = 0;
     virtual bool existeUsuario(string nickname) = 0;
     virtual ~IControladorUsuario() {}
 };

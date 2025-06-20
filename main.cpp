@@ -130,15 +130,31 @@ void altaUsuario() {
     cout << "_________A L T A   U S U A R I O_________" << endl;
     
     string nickname, contrasena, url;
-    cout << "Nickname: ";
-    cin >> nickname;
-    cout << "Contrasena: ";
-    cin >> contrasena;
-    cout << "URL de la foto: ";
-    cin >> url;
 
-    iUsuario->altaUsuario(nickname, contrasena, url);
-
+    bool reingresar = true;
+    while (reingresar) {
+        cout << "Nickname: ";
+        cin >> nickname;
+        cout << "Contrasena: ";
+        cin >> contrasena;
+        cout << "URL de la foto: ";
+        cin >> url;
+        if (iUsuario->altaUsuario(nickname, contrasena, url)){
+            cout << "Usuario ingresasdo correctamente." << endl;
+            reingresar = false;
+        } else {
+            cout << "Desea volver a ingresar un usuario?" << endl;
+            int opcion;
+            cout << "1. Reingresar usuario" << endl;
+            cout << "2. Cancelar" << endl;
+            cout << "Opcion: ";
+            cin >> opcion;
+            if (opcion == 2) {
+                reingresar = false;
+                cout << "Regresando al menu de inicio..." << endl;
+            }
+        }
+    }
 }
 
 
