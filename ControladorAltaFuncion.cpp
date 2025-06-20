@@ -74,22 +74,24 @@ list<DtSala*> ControladorAltaFuncion::listarSalas(){
     
 	Cine* cine = ManejadorCine::getInstancia()->buscarCine(this->idCine);
 	list<DtSala*> listaDtSalas;
-    list<Sala*> salas = cine->obtenerSalas();
+    if (cine != nullptr){
+        list<Sala*> salas = cine->obtenerSalas();
 
-	for (Sala* s : salas) {
-        listaDtSalas.push_back(s->obtenerDtSala());
+        for (Sala* s : salas) {
+            listaDtSalas.push_back(s->obtenerDtSala());
+        }
     }
 	return listaDtSalas;
 }
 
 
-void ControladorAltaFuncion::altaFuncion(int idSala, DtHorario horario, DtFecha fecha) {
-    // 1. Buscar la pelicula
+bool ControladorAltaFuncion::altaFuncion(int idSala, DtHorario horario, DtFecha fecha) {
+    bool retorno = false;
     Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(this->titulo);
     if (peli == NULL) {
-        cout << "Error: no se encontro la pelicula." << endl;
-        finalizar();
-        return;
+        cout << "Error! No se encontro la pelicula." << endl;
+        //finalizar();
+        return false;
     }
     int idPeli = peli->getId();
     // 2. Crear la funcion
@@ -103,9 +105,9 @@ void ControladorAltaFuncion::altaFuncion(int idSala, DtHorario horario, DtFecha 
     // 4. Agregar la funcion a la sala correspondiente
     Cine* cine = ManejadorCine::getInstancia()->buscarCine(this->idCine);
     if (cine == NULL) {
-        cout << "Error: no se encontro el cine." << endl;
-        finalizar();
-        return;
+        cout << "Error! No se encontro el cine." << endl;
+        //finalizar();
+        return false;
     }
 
     // Recorremos las salas del cine para encontrar la correcta
@@ -113,19 +115,25 @@ void ControladorAltaFuncion::altaFuncion(int idSala, DtHorario horario, DtFecha 
         if (sala->getId() == idSala) {
             sala->agregarFuncion(idFuncion);
             cine->agregarPelicula(idPeli);
-            cout << "Funcion registrada correctamente con ID: " << idFuncion << endl;
-            finalizar();
-            return;
+            //cout << "Funcion registrada correctamente con ID: " << idFuncion << endl;
+            //finalizar();
+            retorno = true;
         }
     }
     
     // Si no encontro la sala
-    cout << "Error: sala no encontrada en el cine." << endl;
-    finalizar();
+    //finalizar();
+
+    if (retorno){
+        cout << "Funcion registrada correctamente con ID: " << idFuncion << endl;
+    } else {
+        cout << "Error! Sala no encontrada en el cine." << endl;
+    }
+    return retorno;
 }
 
 void ControladorAltaFuncion::finalizar() {
-    titulo = "";
+    //titulo = "";
     idCine = 0;
     precioFuncion = 0;
 }

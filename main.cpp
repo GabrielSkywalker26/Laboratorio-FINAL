@@ -273,7 +273,7 @@ void altaCine() {
             reingresar = false;
             cout << "Regresando al menu de inicio..." << endl;
         }
-        
+
         iAltaCine->finalizar();
     }
 
@@ -302,88 +302,109 @@ void altaFuncion() {
 	
 	iAltaFuncion->ingresarTitulo(titulo);
 
-	int idCine;
-    list<DtCine*> cines = iAltaFuncion->listarCines();
-    cout << "Cines disponibles:\n";
-    for (DtCine* c : cines) {
-        cout << "- " << *c << endl;
-    }
+    
+    bool reingresar = true;
+    int opcionReingresar;
 
-	cout << "Ingrese id del cine: ";
-    cin >> idCine;
+    while(reingresar){
+        int idCine;
+        list<DtCine*> cines = iAltaFuncion->listarCines();
+        cout << "Cines disponibles:\n";
+        for (DtCine* c : cines) {
+            cout << "- " << *c << endl;
+        }
 
-	iAltaFuncion->ingresarIdCine(idCine);
+        cout << "Ingrese id del cine: ";
+        cin >> idCine;
 
-	// Listar salas del cine seleccionado
+        iAltaFuncion->ingresarIdCine(idCine);
 
-    list<DtSala*> salas = iAltaFuncion->listarSalas();
-    cout << "Salas disponibles:\n";
-    for (DtSala* s : salas) {
-        cout << "- " << *s << endl;
-    }
-
-	cout << "Ingrese id de la sala: ";
-	int idSala;
-    cin >> idSala;
-
-    // imprimir funciones de esa sala
-    Sala* salaSeleccionada = NULL;
-    Cine* cineSeleccionado = ManejadorCine::getInstancia()->buscarCine(idCine);
-    if (cineSeleccionado != NULL) {
-        for (Sala* s : cineSeleccionado->obtenerSalas()) {
-            if (s->getId() == idSala) {
-                salaSeleccionada = s;
-                break;
+        // imprimir funciones de esa sala
+        Sala* salaSeleccionada = NULL;
+        Cine* cineSeleccionado = ManejadorCine::getInstancia()->buscarCine(idCine);
+        int idSala;
+        if (cineSeleccionado != NULL) {
+            // Listar salas del cine seleccionado
+            list<DtSala*> salas = iAltaFuncion->listarSalas();
+            cout << "Salas disponibles:\n";
+            for (DtSala* s : salas) {
+                cout << "- " << *s << endl;
             }
+            cout << "Ingrese id de la sala: ";
+            cin >> idSala;
+            for (Sala* s : cineSeleccionado->obtenerSalas()) {
+                if (s->getId() == idSala) {
+                    salaSeleccionada = s;
+                    break;
+                }
+            }
+        } else {
+            cout << "Error! Cine no encontrado." << endl;
         }
-    }
-    if (salaSeleccionada != NULL) {
-        list<DtFuncion*> funciones = salaSeleccionada->obtenerDtFunciones();
-        cout << "Funciones de la sala seleccionada:\n";
-        for (DtFuncion* f : funciones) {
-            Funcion* fun = ManejadorFuncion::getInstancia()->buscarFuncion(f->getId());
-            if (fun)
-                cout << "- " << *f << ", Precio: $" << fun->getPrecio() << endl;
-            else
-                cout << "- " << *f << endl;
+
+        if (salaSeleccionada != NULL) {
+            list<DtFuncion*> funciones = salaSeleccionada->obtenerDtFunciones();
+            cout << "Funciones de la sala seleccionada:\n";
+            for (DtFuncion* f : funciones) {
+                Funcion* fun = ManejadorFuncion::getInstancia()->buscarFuncion(f->getId());
+                if (fun)
+                    cout << "- " << *f << ", Precio: $" << fun->getPrecio() << endl;
+                else
+                    cout << "- " << *f << endl;
+            }
+        } else {
+            cout << "Error! Sala no encontrada." << endl;
         }
-    } else {
-        cout << "Sala no encontrada." << endl;
+
+        // Pedir precio de la funcion
+        float precioFuncion;
+        cout << "Ingrese el precio de la funcion: $";
+        cin >> precioFuncion;
+        iAltaFuncion->ingresarPrecioFuncion(precioFuncion);
+
+        int dia, mes, anio;
+        cout << "Ingrese la fecha de la funcion: " << endl;
+        cout << "Dia: ";
+        cin >> dia;
+        cout << "\nMes: ";
+        cin >> mes;
+        cout << "\nAnio: ";
+        cin >> anio;
+
+        int horaComienzo, minComienzo, horaFin, minFin;
+        cout << "Ingrese la hora de comienzo de la funcion (hora y minutos separados): " << endl;
+        cout << "Hora: ";
+        cin >> horaComienzo;
+        cout << "Minutos: ";
+        cin >> minComienzo;
+        cout << "Ingrese la hora de finalizacion de la funcion (hora y minutos separados): " << endl;
+        cout << "Hora: ";
+        cin >> horaFin;
+        cout << "Minutos: ";
+        cin >> minFin;
+
+        DtFecha fechaFuncion(dia, mes, anio);
+        DtHorario horarioFuncion(horaComienzo, minComienzo, horaFin, minFin);
+
+        if (!iAltaFuncion->altaFuncion(idSala, horarioFuncion, fechaFuncion)) {
+            cout << "Hubieron uno o mas errores al registrar la funcion." << endl;
+        }
+        
+        cout << "\nDesea agregar mas funciones? " << endl;
+        cout << "1. Si" << endl;
+        cout << "2. No" << endl;
+        cout << "Opcion: ";
+        cin >> opcionReingresar;
+                
+        if (opcionReingresar == 2) {
+            reingresar = false;
+            cout << "Regresando al menu de inicio..." << endl;
+        }
+
+        iAltaFuncion->finalizar();
+
     }
-
-    // Pedir precio de la funcion
-    float precioFuncion;
-    cout << "Ingrese el precio de la funcion: $";
-    cin >> precioFuncion;
-    iAltaFuncion->ingresarPrecioFuncion(precioFuncion);
-
-    int dia, mes, anio;
-    cout << "Ingrese la fecha de la funcion: " << endl;
-    cout << "Dia: ";
-    cin >> dia;
-    cout << "\nMes: ";
-    cin >> mes;
-    cout << "\nAnio: ";
-    cin >> anio;
-
-    int horaComienzo, minComienzo, horaFin, minFin;
-    cout << "Ingrese la hora de comienzo de la funcion (hora y minutos separados): " << endl;
-    cout << "Hora: ";
-    cin >> horaComienzo;
-    cout << "Minutos: ";
-    cin >> minComienzo;
-    cout << "Ingrese la hora de finalizacion de la funcion (hora y minutos separados): " << endl;
-    cout << "Hora: ";
-    cin >> horaFin;
-    cout << "Minutos: ";
-    cin >> minFin;
-
-    DtFecha fechaFuncion(dia, mes, anio);
-    DtHorario horarioFuncion(horaComienzo, minComienzo, horaFin, minFin);
-
-    iAltaFuncion->altaFuncion(idSala, horarioFuncion, fechaFuncion);
 	
-	cout << "Funcion registrada correctamente." << endl;
 }
 
 

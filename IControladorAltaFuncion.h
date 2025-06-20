@@ -20,7 +20,8 @@ class IControladorAltaFuncion{
         virtual list<DtPelicula*> listarPeliculas()=0;
         virtual list<DtCine*> listarCines()=0;
         virtual list<DtSala*> listarSalas()=0;
-        virtual void altaFuncion(int, DtHorario, DtFecha)=0;
+        virtual bool altaFuncion(int, DtHorario, DtFecha)=0;
         virtual void ingresarPrecioFuncion(float)=0;
+        virtual void finalizar()=0;
 };
 #endif
