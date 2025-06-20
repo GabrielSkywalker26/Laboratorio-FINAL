@@ -89,12 +89,27 @@ void iniciarSesion() {
     string nickname, contrasenia;
     cout << "Nickname: ";
     cin >> nickname;
-    cout << "Contrasenia: ";
-    cin >> contrasenia;
-    if (iSesion->iniciarSesion(nickname, contrasenia))
-        cout << "Sesion iniciada correctamente." << endl;
-	else
-        cout << "Error al iniciar sesion." << endl;
+    bool reingresar = true;
+    while (reingresar) {
+        cout << "Contrasenia: ";
+        cin >> contrasenia;
+        if (iSesion->iniciarSesion(nickname, contrasenia)) {
+            cout << "Sesion iniciada correctamente." << endl;
+            reingresar = false;
+        } else {
+            cout << "Error al iniciar sesion." << endl;
+            cout << "Desea volver a ingresar contrasenia o cancelar?" << endl;
+            int opcion;
+            cout << "1. Reingresar contrasenia" << endl;
+            cout << "2. Cancelar" << endl;
+            cout << "Opcion: ";
+            cin >> opcion;
+            if (opcion == 2) {
+                reingresar = false;
+                cout << "Regresando al menu de inicio..." << endl;
+            }
+        }
+    }
 }
 
 void cerrarSesion() {
