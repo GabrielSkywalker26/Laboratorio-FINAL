@@ -44,6 +44,7 @@ void ControladorAltaCine::ingresarDir(string calle, int numero){
     this->direccion = DtDireccion(calle, numero);
 }
 void ControladorAltaCine::finalizar(){
+    //ingresarDir(NULL,0);
     this->capacidades.clear();
 }
 

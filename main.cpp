@@ -215,39 +215,68 @@ void altaCine() {
 	
     string calle;
     int numero;
-
-    cout << "Calle: ";
-    cin.ignore();
-	getline(cin, calle);
-    cout << "Numero de puerta: ";
-    cin.ignore();
-    cin >> numero;
-
-	iAltaCine->ingresarDir(calle, numero);
-
-    int capacidad, opcion;
+    
+    bool reingresar = true;
     bool seguir = true;
+    int capacidad, opcion, opcionReingresar;
+    int confirmacion = 1;
 
-    // usuario quiere agregar sala
-    while(seguir){
-        cout << "Capacidad de la sala: ";
-        cin >> capacidad;
+    while(reingresar){
 
-		iAltaCine->ingresarCap(capacidad);
+        cout << "Calle: ";
+        cin.ignore();
+        getline(cin, calle);
+        cout << "Numero de puerta: ";
+        cin >> numero;
 
-        cout << "Continuar agregando salas? " << endl;
-        cout << "1. Seguir" << endl;
-	    cout << "2. Terminar" << endl;
-		cout << "Opcion: ";
-        cin >> opcion;
+        iAltaCine->ingresarDir(calle, numero);
+
+        // usuario quiere agregar sala
+        seguir = true;
+
+        while(seguir){
+            cout << "Capacidad de la sala: ";
+            cin >> capacidad;
+
+            iAltaCine->ingresarCap(capacidad);
+
+            cout << "Continuar agregando salas? " << endl;
+            cout << "1. Seguir" << endl;
+            cout << "2. Terminar" << endl;
+            cout << "Opcion: ";
+            cin >> opcion;
+            
+            if (opcion == 2) seguir = false;
+        }
+
+        cout << "Confirmar alta de cine? " << endl;
+        cout << "1. Si" << endl;
+        cout << "2. No" << endl;
+        cout << "Opcion: ";
+        cin >> confirmacion;
         
-        if (opcion == 2) seguir = false;
+        if (confirmacion == 1) {
+            if (iAltaCine->altaCine())
+                cout << "Cine registrado correctamente." << endl;
+            else
+                cout << "Error al registrar cine." << endl;
+        }else
+            cout << "No se ingreso el cine." << endl;
+        
+        cout << "\nDesea agregar mas cines? " << endl;
+        cout << "1. Si" << endl;
+        cout << "2. No" << endl;
+        cout << "Opcion: ";
+        cin >> opcionReingresar;
+                
+        if (opcionReingresar == 2) {
+            reingresar = false;
+            cout << "Regresando al menu de inicio..." << endl;
+        }
+        
+        iAltaCine->finalizar();
     }
 
-    if (iAltaCine->altaCine())
-		cout << "\n Cine registrado correctamente." << endl;
-	else
-		cout << "\n Error al registrar cine." << endl;
 }
 
 void altaFuncion() {
