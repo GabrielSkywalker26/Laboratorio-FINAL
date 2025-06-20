@@ -160,6 +160,11 @@ bool ControladorReserva::confirmar() {
     Funcion* funcion = ManejadorFuncion::getInstancia()->buscarFuncion(idFuncion);
     Usuario* usuario = ManejadorUsuario::getInstancia()->buscarUsuario(usuarioNickname);
     if (funcion != NULL && usuario != NULL && pago != NULL) {
+        // Verificar disponibilidad de asientos antes de confirmar
+        if (!funcion->hayAsientosDisponibles(cantidadAsientos)) {
+            return false; // No hay suficientes asientos disponibles
+        }
+        
         // Calcular el precio total y establecerlo en el objeto de pago
         float precioTotal = calcularPrecioTotal(idFuncion, cantidadAsientos, tipoPago, bancoFinanciera);
         pago->setMonto(precioTotal);

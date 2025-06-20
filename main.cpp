@@ -739,10 +739,17 @@ void cargarDatosPrueba() {
 	iReserva->selectPeli("Kill Bill");
 	iReserva->selectFuncion(2); // ID de la función Kill Bill
 	iReserva->ingresarUsuario(ManejadorUsuario::getInstancia()->buscarUsuario("bob"));
-	iReserva->reservarAsientos(2, 80); // Sala 2 tiene 80 asientos
+	// Obtener capacidad real de la sala dinámicamente para mostrar información
+	int capacidadSala2 = iReserva->obtenerCapacidadSala(2);
+	cout << "Capacidad de la sala 2 (Kill Bill): " << capacidadSala2 << " asientos" << endl;
+	iReserva->reservarAsientos(2, capacidadSala2);
 	iReserva->ingresarModoPago(1); // Débito
 	iReserva->ingresarBanco("Santander");
-	iReserva->confirmar();
+	if (iReserva->confirmar()) {
+		cout << "Reserva 1 creada exitosamente" << endl;
+	} else {
+		cout << "Error al crear reserva 1" << endl;
+	}
 	iReserva->finalizar();
 	
 	// Reserva 2: Alice reserva 1 asiento para Kill Bill (Crédito)
@@ -750,21 +757,31 @@ void cargarDatosPrueba() {
 	iReserva->selectPeli("Kill Bill");
 	iReserva->selectFuncion(2); // ID de la función Kill Bill
 	iReserva->ingresarUsuario(ManejadorUsuario::getInstancia()->buscarUsuario("alice"));
-	iReserva->reservarAsientos(1, 80); // Sala 2 tiene 80 asientos
+	iReserva->reservarAsientos(1, capacidadSala2);
 	iReserva->ingresarModoPago(2); // Crédito
 	iReserva->ingresarFinanciera("Visa");
-	iReserva->confirmar();
+	if (iReserva->confirmar()) {
+		cout << "Reserva 2 creada exitosamente" << endl;
+	} else {
+		cout << "Error al crear reserva 2" << endl;
+	}
 	iReserva->finalizar();
 	
 	// Reserva 3: Trudy reserva 3 asientos para Django (Débito)
 	cout << "Creando reserva 3: Trudy - Django..." << endl;
 	iReserva->selectPeli("Django Unchained");
-	iReserva->selectFuncion(3); // ID de la función Django
+	iReserva->selectFuncion(3);
 	iReserva->ingresarUsuario(ManejadorUsuario::getInstancia()->buscarUsuario("trudy"));
-	iReserva->reservarAsientos(3, 90); // Sala 3 tiene 90 asientos
-	iReserva->ingresarModoPago(1); // Débito
+	int capacidadSala3 = iReserva->obtenerCapacidadSala(3);
+	cout << "Capacidad de la sala 3 (Django): " << capacidadSala3 << " asientos" << endl;
+	iReserva->reservarAsientos(3, capacidadSala3);
+	iReserva->ingresarModoPago(1);
 	iReserva->ingresarBanco("BBVA");
-	iReserva->confirmar();
+	if (iReserva->confirmar()) {
+		cout << "Reserva 3 creada exitosamente" << endl;
+	} else {
+		cout << "Error al crear reserva 3" << endl;
+	}
 	iReserva->finalizar();
 
 	cout << "Datos de prueba cargados correctamente." << endl;

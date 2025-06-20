@@ -1,4 +1,5 @@
 #include "Funcion.h"
+#include "ManejadorCine.h"
 
 int Funcion::ultimoId = 0;
 
@@ -58,8 +59,25 @@ bool Funcion::hayAsientosDisponibles(int cantidad) {
     for (Reserva* r : reservas) {
         asientosReservados += r->getCantEntradas();
     }
-    // Suponiendo que la sala tiene una capacidad fija de 100 (ajustar si hay acceso a la sala real)
-    int capacidadSala = 100;
+    
+    // Obtener la capacidad real de la sala donde se emite esta función
+    int capacidadSala = 100; // Valor por defecto
+    list<Cine*> cines = ManejadorCine::getInstancia()->getCines();
+    
+    for (Cine* cine : cines) {
+        list<Sala*> salas = cine->obtenerSalas();
+        for (Sala* sala : salas) {
+            list<int> funcionesSala = sala->getFunciones();
+            for (int idF : funcionesSala) {
+                if (idF == this->id) {
+                    capacidadSala = sala->getCapacidad();
+                    return (asientosReservados + cantidad) <= capacidadSala;
+                }
+            }
+        }
+    }
+    
+    // Si no se encuentra la sala, usar capacidad por defecto
     return (asientosReservados + cantidad) <= capacidadSala;
 }
 
