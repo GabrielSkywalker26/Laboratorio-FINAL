@@ -169,21 +169,37 @@ void altaPelicula() {
 	cout << "_________A L T A   P E L I C U L A_________" << endl;
 
 	string titulo, sinopsis, poster;
+    
+    bool reingresar = true;
+    while (reingresar) {
 
-	cout << "Titulo: ";
-	cin.ignore(); // limpia el salto de linea previo
-	getline(cin, titulo);
+        cout << "Titulo: ";
+        cin.ignore(); // limpia el salto de linea previo
+        getline(cin, titulo);
 
-	cout << "Sinopsis: ";
-	getline(cin, sinopsis);
+        cout << "Sinopsis: ";
+        getline(cin, sinopsis);
 
-	cout << "URL del poster: ";
-	getline(cin, poster);
+        cout << "URL del poster: ";
+        getline(cin, poster);
 
-	if (iPelicula->altaPelicula(titulo, sinopsis, poster))
-		cout << "Pelicula registrada correctamente." << endl;
-	else
-		cout << "Error: ya existe una pelicula con ese titulo." << endl;
+        if (iPelicula->altaPelicula(titulo, sinopsis, poster)){
+            cout << "Pelicula registrada correctamente." << endl;
+            reingresar = false;
+        } else {
+            cout << "Error! Ya existe una pelicula con ese titulo." << endl;
+            cout << "Desea volver a ingresar una pelicula?" << endl;
+            int opcion;
+            cout << "1. Reingresar pelicula" << endl;
+            cout << "2. Cancelar" << endl;
+            cout << "Opcion: ";
+            cin >> opcion;
+            if (opcion == 2) {
+                reingresar = false;
+                cout << "Regresando al menu de inicio..." << endl;
+            }
+        }
+    }
 }
 
 

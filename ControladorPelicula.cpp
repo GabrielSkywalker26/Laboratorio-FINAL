@@ -14,7 +14,7 @@ ControladorPelicula* ControladorPelicula::getInstancia() {
 ControladorPelicula::~ControladorPelicula(){}
 
 bool ControladorPelicula::altaPelicula(string titulo, string sinopsis, string poster){
-
+    
     ManejadorPelicula* manejador = ManejadorPelicula::getInstancia();
        
     if (manejador->existePelicula(titulo))
