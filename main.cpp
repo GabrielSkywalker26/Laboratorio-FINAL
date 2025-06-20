@@ -82,9 +82,17 @@ void menu(){
 	cout <<"OPCION: ";
 }
 
-// Estructura de funciones (vacias por ahora)
+
 void iniciarSesion() {
     system("clear");
+
+    // Verificar si el usuario ha iniciado sesión
+    if (iSesion->sesionIniciada()){
+        cout << "\nDebes cerrar sesion para acceder a esta opcion." << endl;
+		return;
+	}
+
+
     cout << "________I N I C I A R  S E S I O N________" << endl;
     string nickname, contrasenia;
     cout << "Nickname: ";
@@ -113,7 +121,14 @@ void iniciarSesion() {
 }
 
 void cerrarSesion() {
-    system("clear");
+        system("clear");
+
+    // Verificar si el usuario ha iniciado sesión
+    if (!iSesion->sesionIniciada()){
+        cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
+		return;
+	}
+
     cout << "________C E R R A R  S E S I O N________" << endl;
     iSesion->cerrarSesion();
     cout << "Sesion cerrada." << endl;
@@ -960,7 +975,7 @@ void puntuarPelicula() {
 
     // Ingresar puntaje
     int puntaje;
-    cout << "\nIngrese tu puntaje (1-5 estrellas): ";
+    cout << "\nIngresa tu puntaje (1-5 estrellas): ";
     cin >> puntaje;
     
     if (puntaje < 1 || puntaje > 5) {
