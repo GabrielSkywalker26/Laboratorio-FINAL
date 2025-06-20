@@ -1,6 +1,7 @@
 #include "Pelicula.h"
 #include <list>
 #include "ManejadorPelicula.h"
+
 using namespace std;
 
 ManejadorPelicula* ManejadorPelicula::instancia = NULL;
@@ -23,7 +24,7 @@ Pelicula* ManejadorPelicula::buscarPelicula(string pelicula){
 }
 
 void ManejadorPelicula::agregarPelicula(Pelicula* pelicula){
-    peliculas.insert(std::pair<string,Pelicula*>(pelicula->getTitulo(),pelicula));
+    peliculas.insert(pair<string,Pelicula*>(pelicula->getTitulo(),pelicula));
 }
 
 bool ManejadorPelicula::existePelicula(string pelicula){ 

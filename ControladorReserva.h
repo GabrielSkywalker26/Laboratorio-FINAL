@@ -7,18 +7,21 @@
 #include "ManejadorFuncion.h"
 #include "ManejadorUsuario.h"
 #include "ManejadorFinanciera.h"
+#include "ManejadorBanco.h"
+#include "ControladorFecha.h"
 #include "Reserva.h"
 #include "Credito.h"
 #include "Debito.h"
 #include "Pago.h"
 #include "Usuario.h"
-#include "ManejadorBanco.h"
 #include "DtBanco.h"
 #include "Banco.h"
 #include "Financiera.h"
 #include "DtReserva.h"
+
 #include <list>
 #include <string>
+#include <iostream>
 
 using namespace std;
 

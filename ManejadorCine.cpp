@@ -1,6 +1,6 @@
 #include "Cine.h"
-#include <list>
 #include "ManejadorCine.h"
+
 using namespace std;
 
 ManejadorCine* ManejadorCine::instancia = NULL;
@@ -26,7 +26,7 @@ Cine* ManejadorCine::buscarCine(int idCine){
 }
 
 void ManejadorCine::agregarCine(Cine* cine){
-  cines.insert(std::pair<int,Cine*>(cine->getId(),cine));
+  cines.insert(pair<int,Cine*>(cine->getId(),cine));
 }
 
 bool ManejadorCine::existeCine(int idCine){ 

@@ -28,7 +28,7 @@ Usuario* ManejadorUsuario::buscarUsuario(string usuario){
 }
 
 void ManejadorUsuario::agregarUsuario(Usuario* usuario){
-    usuarios.insert(std::pair<string,Usuario*>(usuario->getNickname(),usuario));
+    usuarios.insert(pair<string,Usuario*>(usuario->getNickname(),usuario));
 }
 
 bool ManejadorUsuario::existeUsuario(string usuario){

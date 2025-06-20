@@ -9,8 +9,9 @@
 #include "Comentario.h"
 
 #include <list>
-#include "Comentario.h"
 #include <map>
+#include <string>
+#include <iostream>
 
 class ControladorPelicula: public IControladorPelicula{
     private:

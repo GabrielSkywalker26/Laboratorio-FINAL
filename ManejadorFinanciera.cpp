@@ -1,6 +1,5 @@
-#include "Financiera.h"
-#include <list>
 #include "ManejadorFinanciera.h"
+
 using namespace std;
 
 ManejadorFinanciera* ManejadorFinanciera::instancia = NULL;
@@ -26,7 +25,7 @@ Financiera* ManejadorFinanciera::buscarFinanciera(string financiera){
 }
 
 void ManejadorFinanciera::agregarFinanciera(Financiera* financiera){
-    financieras.insert(std::pair<string,Financiera*>(financiera->getNombre(), financiera));
+    financieras.insert(pair<string,Financiera*>(financiera->getNombre(), financiera));
 }
 
 bool ManejadorFinanciera::existeFinanciera(string financiera){ 

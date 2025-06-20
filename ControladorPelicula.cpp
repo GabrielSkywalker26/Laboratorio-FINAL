@@ -1,9 +1,5 @@
 #include "ControladorPelicula.h"
 
-#include <map>
-#include <string>
-#include <iostream>
-
 
 ControladorPelicula* ControladorPelicula::instancia = NULL;
 

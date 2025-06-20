@@ -1,6 +1,6 @@
 #include "Banco.h"
-#include <list>
-#include "ManejadorBanco.h"
+
+
 using namespace std;
 
 ManejadorBanco* ManejadorBanco::instancia = NULL;
@@ -28,7 +28,7 @@ Banco* ManejadorBanco::buscarBanco(string banco){
 }
 
 void ManejadorBanco::agregarBanco(Banco* banco){
-    bancos.insert(std::pair<string,Banco*>(banco->getNombre(), banco));
+    bancos.insert(pair<string,Banco*>(banco->getNombre(), banco));
 }
 
 bool ManejadorBanco::existeBanco(string banco){ 

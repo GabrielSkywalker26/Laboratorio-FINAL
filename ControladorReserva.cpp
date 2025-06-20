@@ -1,14 +1,5 @@
 #include "ControladorReserva.h"
-#include "Fabrica.h"
-#include "ManejadorPelicula.h"
-#include "ManejadorCine.h"
-#include "ManejadorFinanciera.h"
-#include "ManejadorFuncion.h"
-#include "ManejadorUsuario.h"
-#include "ManejadorBanco.h"
-#include "DtBanco.h"
-#include "ControladorFecha.h"
-#include <iostream>
+
 
 ControladorReserva* ControladorReserva::instancia = NULL;
 
