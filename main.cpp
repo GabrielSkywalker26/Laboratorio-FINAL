@@ -387,7 +387,7 @@ void altaFuncion() {
         DtHorario horarioFuncion(horaComienzo, minComienzo, horaFin, minFin);
 
         if (!iAltaFuncion->altaFuncion(idSala, horarioFuncion, fechaFuncion)) {
-            cout << "Hubieron uno o mas errores al registrar la funcion." << endl;
+            cout << "Hubo uno o mas errores al registrar la funcion." << endl;
         }
         
         cout << "\nDesea agregar mas funciones? " << endl;

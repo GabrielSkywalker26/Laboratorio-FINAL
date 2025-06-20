@@ -74,7 +74,7 @@ list<DtSala*> ControladorAltaFuncion::listarSalas(){
     
 	Cine* cine = ManejadorCine::getInstancia()->buscarCine(this->idCine);
 	list<DtSala*> listaDtSalas;
-    if (cine != nullptr){
+    if (cine != NULL){
         list<Sala*> salas = cine->obtenerSalas();
 
         for (Sala* s : salas) {
