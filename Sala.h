@@ -31,5 +31,6 @@ class Sala{
 		void agregarFuncion(int idFuncion);
 		void eliminarFuncion(int idFuncion);
 		list<DtFuncion*> obtenerDtFunciones();
+		list<int> getFunciones();
 };
 #endif

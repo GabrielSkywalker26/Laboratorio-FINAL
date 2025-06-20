@@ -98,11 +98,17 @@ void ControladorReserva::ingresarUsuario(Usuario* usuario) {
         usuarioNickname = usuario->getNickname();
 }
 
-bool ControladorReserva::reservarAsientos(int cant) {
+bool ControladorReserva::reservarAsientos(int cant, int capacidadSala) {
     cantidadAsientos = cant;
     Funcion* funcion = ManejadorFuncion::getInstancia()->buscarFuncion(idFuncion);
     if (funcion != NULL) {
-        return funcion->hayAsientosDisponibles(cant);
+        // Calcular asientos ya reservados
+        int asientosReservados = 0;
+        for (Reserva* r : funcion->getReservas()) {
+            asientosReservados += r->getCantEntradas();
+        }
+        // Verificar si hay suficientes asientos disponibles
+        return (asientosReservados + cant) <= capacidadSala;
     } else {
         return false;
     }
@@ -294,4 +300,25 @@ int ControladorReserva::obtenerPuntajeUsuario(string titulo, string usuario) {
 bool ControladorReserva::usuarioYaPunto(string titulo, string usuario) {
     Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
     return peli ? peli->tienePuntaje(usuario) : false;
+}
+
+int ControladorReserva::obtenerCapacidadSala(int idFuncion) {
+    // Buscar en todos los cines la sala que tiene esta función
+    list<Cine*> cines = ManejadorCine::getInstancia()->getCines();
+    
+    for (Cine* cine : cines) {
+        list<Sala*> salas = cine->obtenerSalas();
+        for (Sala* sala : salas) {
+            // Verificar si esta sala tiene la función
+            list<int> funcionesSala = sala->getFunciones();
+            for (int idF : funcionesSala) {
+                if (idF == idFuncion) {
+                    return sala->getCapacidad();
+                }
+            }
+        }
+    }
+    
+    // Si no se encuentra, retornar capacidad por defecto
+    return 100;
 }

@@ -364,6 +364,9 @@ void crearReserva() {
     cin >> eleccionInfo;
 
     if (eleccionInfo == 1) {
+        // Seleccionar la película en el controlador para que listarCinesPeli funcione
+        iReserva->selectPeli(titulo);
+        
         // Listar cines donde se pasa la pelicula
         list<DtCine*> cines = iReserva->listarCinesPeli();
         if (cines.empty()) {
@@ -417,8 +420,13 @@ void crearReserva() {
             int cantidadAsientos;
             cout << "\nIngrese cantidad de asientos: ";
             cin >> cantidadAsientos;
-            if (!iReserva->reservarAsientos(cantidadAsientos)) {
+            
+            // Obtener la capacidad real de la sala donde se emite la función
+            int capacidadSala = iReserva->obtenerCapacidadSala(idFuncion);
+            
+            if (!iReserva->reservarAsientos(cantidadAsientos, capacidadSala)) {
                 cout << "No hay suficientes asientos disponibles." << endl;
+                cout << "Capacidad de la sala: " << capacidadSala << " asientos." << endl;
                 iReserva->finalizar();
                 return;
             }
@@ -731,7 +739,8 @@ void cargarDatosPrueba() {
 	iReserva->selectPeli("Kill Bill");
 	iReserva->selectFuncion(2); // ID de la función Kill Bill
 	iReserva->ingresarUsuario(ManejadorUsuario::getInstancia()->buscarUsuario("bob"));
-	iReserva->reservarAsientos(2);
+	int capacidadSala1 = iReserva->obtenerCapacidadSala(2);
+	iReserva->reservarAsientos(2, capacidadSala1);
 	iReserva->ingresarModoPago(1); // Débito
 	iReserva->ingresarBanco("Santander");
 	iReserva->confirmar();
@@ -742,7 +751,8 @@ void cargarDatosPrueba() {
 	iReserva->selectPeli("Kill Bill");
 	iReserva->selectFuncion(2); // ID de la función Kill Bill
 	iReserva->ingresarUsuario(ManejadorUsuario::getInstancia()->buscarUsuario("alice"));
-	iReserva->reservarAsientos(1);
+	int capacidadSala2 = iReserva->obtenerCapacidadSala(2);
+	iReserva->reservarAsientos(1, capacidadSala2);
 	iReserva->ingresarModoPago(2); // Crédito
 	iReserva->ingresarFinanciera("Visa");
 	iReserva->confirmar();
@@ -753,7 +763,8 @@ void cargarDatosPrueba() {
 	iReserva->selectPeli("Django Unchained");
 	iReserva->selectFuncion(3); // ID de la función Django
 	iReserva->ingresarUsuario(ManejadorUsuario::getInstancia()->buscarUsuario("trudy"));
-	iReserva->reservarAsientos(3);
+	int capacidadSala3 = iReserva->obtenerCapacidadSala(3);
+	iReserva->reservarAsientos(3, capacidadSala3);
 	iReserva->ingresarModoPago(1); // Débito
 	iReserva->ingresarBanco("BBVA");
 	iReserva->confirmar();
@@ -909,17 +920,14 @@ void verInformacionPelicula() {
     cin >> eleccionInfo;
 
     if (eleccionInfo == 1) {
-        // Setear la película en el controlador para que listarCinesPeli funcione
+        // Seleccionar la película en el controlador para que listarCinesPeli funcione
         iReserva->selectPeli(titulo);
         
-        // Listar cines donde se pasa la película
+        // Listar cines donde se pasa la pelicula
         list<DtCine*> cines = iReserva->listarCinesPeli();
         if (cines.empty()) {
             cout << "No hay cines disponibles para esta pelicula." << endl;
-            // Liberar memoria
-            for (DtPelicula* p : todasLasPelis) {
-                delete p;
-            }
+            iReserva->finalizar();
             return;
         }
 
@@ -928,7 +936,7 @@ void verInformacionPelicula() {
             cout << "- " << *c << endl;
         }
 
-        // Preguntar si desea seleccionar un cine
+        // Seleccion de cine
         int eleccionCine;
         cout << "\nDesea seleccionar un cine para ver sus funciones?" << endl;
         cout << "1. Si" << endl;

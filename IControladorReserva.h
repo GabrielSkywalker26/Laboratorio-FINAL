@@ -24,7 +24,8 @@ class IControladorReserva{
         virtual list<DtFuncion*> selectCine(int)=0;
         virtual void selectFuncion(int)=0;
         virtual void ingresarUsuario(Usuario*)=0;
-        virtual bool reservarAsientos(int)=0;
+        virtual bool reservarAsientos(int, int)=0;
+        virtual int obtenerCapacidadSala(int idFuncion)=0;
         virtual void ingresarModoPago(int)=0;
         virtual string ingresarBanco(string)=0;
         virtual string ingresarFinanciera(string)=0;

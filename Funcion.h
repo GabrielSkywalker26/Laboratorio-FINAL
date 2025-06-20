@@ -20,7 +20,7 @@ class Funcion{
 		DtHorario horario; //cambiar por horario (horas mins)
 		Pelicula* pelicula;
 		static int ultimoId;
-		std::list<Reserva*> reservas;
+		list<Reserva*> reservas;
 		float precio;
 	public:
 		Funcion();

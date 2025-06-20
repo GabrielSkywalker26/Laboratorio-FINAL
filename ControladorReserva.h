@@ -50,7 +50,8 @@ public:
     list<DtFuncion*> selectCine(int idCine);
     void selectFuncion(int idFuncion);
     void ingresarUsuario(Usuario*);
-    bool reservarAsientos(int cantidad);
+    bool reservarAsientos(int cantidad, int capacidadSala);
+    int obtenerCapacidadSala(int idFuncion);
     void ingresarModoPago(int tipoPago);
     string ingresarBanco(string banco);
     string ingresarFinanciera(string financiera);

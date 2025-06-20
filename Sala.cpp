@@ -57,6 +57,10 @@ list<DtFuncion*> Sala::obtenerDtFunciones(){
 	return dTFunciones;
 }
 
+list<int> Sala::getFunciones() {
+	return funciones;
+}
+
 void Sala::eliminarFuncion(int idFuncion) {
     this->funciones.remove(idFuncion);
 }
