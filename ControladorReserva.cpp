@@ -277,3 +277,21 @@ list<DtReserva*> ControladorReserva::obtenerReservasPorPelicula(string titulo) {
     
     return resultado;
 }
+
+// Métodos para puntajes - implementación súper simple
+void ControladorReserva::puntuarPelicula(string titulo, string usuario, int puntaje) {
+    Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
+    if (peli) {
+        peli->agregarPuntaje(usuario, puntaje);
+    }
+}
+
+int ControladorReserva::obtenerPuntajeUsuario(string titulo, string usuario) {
+    Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
+    return peli ? peli->obtenerPuntaje(usuario) : 0;
+}
+
+bool ControladorReserva::usuarioYaPunto(string titulo, string usuario) {
+    Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
+    return peli ? peli->tienePuntaje(usuario) : false;
+}

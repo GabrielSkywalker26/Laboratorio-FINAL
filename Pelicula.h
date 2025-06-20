@@ -2,8 +2,8 @@
 #define PELICULA
 
 #include "DtPelicula.h"
-#include "DtCine.h"
 #include "DtPeliInfo.h"
+#include <map>
 
 #include<iostream>
 
@@ -15,6 +15,7 @@ class Pelicula{
 		string titulo;
 		string sinopsis;
 		string poster;
+		map<string, int> puntajes; // usuario -> puntaje (1-5)
 
 		static int ultimoId;
 	public:
@@ -32,5 +33,12 @@ class Pelicula{
 		DtPeliInfo* obtenerDtPeliInfo();
 		DtPeliInfo* getDtPeliInfo();
 		//DtCine getDtCines();
+		
+		// Métodos para puntajes
+		void agregarPuntaje(string usuario, int puntaje);
+		int obtenerPuntaje(string usuario);
+		bool tienePuntaje(string usuario);
+		float getPuntajePromedio();
+		int getCantidadPuntajes();
 };
 #endif

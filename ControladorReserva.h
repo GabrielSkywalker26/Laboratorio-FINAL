@@ -65,6 +65,11 @@ public:
     // Metodos para consultar reservas por película
     list<DtReserva*> obtenerReservasPorPelicula(string titulo);
     
+    // Métodos para puntajes
+    void puntuarPelicula(string titulo, string usuario, int puntaje);
+    int obtenerPuntajeUsuario(string titulo, string usuario);
+    bool usuarioYaPunto(string titulo, string usuario);
+    
     // Metodos privados
     void liberarMemoria();
     bool verificarDisponibilidadAsientos(int cantidad);

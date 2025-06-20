@@ -39,6 +39,11 @@ class IControladorReserva{
         // Método para consultar reservas por película
         virtual list<DtReserva*> obtenerReservasPorPelicula(string titulo)=0;
         
+        // Métodos para puntajes
+        virtual void puntuarPelicula(string titulo, string usuario, int puntaje)=0;
+        virtual int obtenerPuntajeUsuario(string titulo, string usuario)=0;
+        virtual bool usuarioYaPunto(string titulo, string usuario)=0;
+        
         virtual ~IControladorReserva() {}
 };
 #endif

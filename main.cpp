@@ -766,7 +766,86 @@ void cargarDatosPrueba() {
 }
 
 void puntuarPelicula() {
-    // Implementación de la función puntuarPelicula
+    system("clear");
+    cout << "_________P U N T U A R__P E L I C U L A_________" << endl;
+    
+    if (!iSesion->sesionIniciada()) {
+        cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
+        return;
+    }
+
+    // Listar películas
+    list<DtPelicula*> pelis = iReserva->listarPeliculas();
+    if (pelis.empty()) {
+        cout << "No hay peliculas disponibles." << endl;
+        return;
+    }
+
+    cout << "\nPeliculas disponibles:\n";
+    for (DtPelicula* p : pelis) {
+        cout << "- " << *p << endl;
+    }
+
+    // Seleccionar película
+    string titulo;
+    cout << "\nIngrese el titulo de la pelicula: ";
+    cin.ignore();
+    getline(cin, titulo);
+
+    // Verificar si la película existe
+    Pelicula* pelicula = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
+    if (!pelicula) {
+        cout << "Pelicula no encontrada." << endl;
+        // Liberar memoria
+        for (DtPelicula* p : pelis) {
+            delete p;
+        }
+        return;
+    }
+
+    string usuario = iSesion->obtenerUsuario()->getNickname();
+    
+    // Verificar si ya puntuó
+    if (iReserva->usuarioYaPunto(titulo, usuario)) {
+        int puntajeAnterior = iReserva->obtenerPuntajeUsuario(titulo, usuario);
+        cout << "\nYa puntuaste esta pelicula con " << puntajeAnterior << " estrellas." << endl;
+        cout << "Deseas modificar tu puntaje?" << endl;
+        cout << "1. Si" << endl;
+        cout << "2. No" << endl;
+        cout << "Opcion: ";
+        int modificar;
+        cin >> modificar;
+        if (modificar != 1) {
+            // Liberar memoria
+            for (DtPelicula* p : pelis) {
+                delete p;
+            }
+            return;
+        }
+    }
+
+    // Ingresar puntaje
+    int puntaje;
+    cout << "\nIngrese tu puntaje (1-5 estrellas): ";
+    cin >> puntaje;
+    
+    if (puntaje < 1 || puntaje > 5) {
+        cout << "Puntaje invalido. Debe ser entre 1 y 5." << endl;
+        // Liberar memoria
+        for (DtPelicula* p : pelis) {
+            delete p;
+        }
+        return;
+    }
+
+    // Guardar puntaje
+    iReserva->puntuarPelicula(titulo, usuario, puntaje);
+    cout << "Puntaje registrado exitosamente." << endl;
+
+    // Liberar memoria
+    for (DtPelicula* p : pelis) {
+        delete p;
+    }
 }
 
 void comentarPelicula() {
