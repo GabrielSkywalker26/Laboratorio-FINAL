@@ -45,6 +45,12 @@ class IControladorReserva{
         virtual int obtenerPuntajeUsuario(string titulo, string usuario)=0;
         virtual bool usuarioYaPunto(string titulo, string usuario)=0;
         
+        // Métodos para comentarios
+        virtual void agregarComentario(string titulo, string usuario, string texto)=0;
+        virtual void agregarRespuestaComentario(string titulo, int idComentario, string usuario, string texto)=0;
+        virtual list<string> listarComentarios(string titulo)=0;
+        virtual list<string> listarPuntajesIndividuales(string titulo)=0;
+        
         virtual ~IControladorReserva() {}
 };
 #endif

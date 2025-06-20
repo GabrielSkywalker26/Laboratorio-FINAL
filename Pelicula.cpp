@@ -33,10 +33,11 @@ void Pelicula::setPoster(string poster){
 };
 
 Pelicula::~Pelicula(){
-	int i;
-	/*
-	for(i=0;i<this->topePeliculas;i++)
-		delete this->salas[i];*/
+	// Liberar memoria de los comentarios
+	for (Comentario* c : comentarios) {
+		delete c;
+	}
+	comentarios.clear();
 }
 
 DtPelicula* Pelicula::obtenerDtPelicula(){
@@ -80,6 +81,62 @@ float Pelicula::getPuntajePromedio() {
 
 int Pelicula::getCantidadPuntajes() {
     return puntajes.size();
+}
+
+const map<string, int>& Pelicula::getPuntajes() {
+	return puntajes;
+}
+
+// Métodos para comentarios
+void Pelicula::agregarComentario(Comentario* comentario) {
+	if (comentario->esComentarioPrincipal()) {
+		// Es un comentario principal, agregarlo a la lista principal
+		comentarios.push_back(comentario);
+	} else {
+		// Es una respuesta, buscar el comentario padre y agregarlo como respuesta
+		Comentario* padre = comentario->getComentarioPadre();
+		if (padre) {
+			padre->agregarRespuesta(comentario);
+		}
+	}
+}
+
+list<Comentario*> Pelicula::getComentarios() {
+	return comentarios;
+}
+
+Comentario* Pelicula::buscarComentario(int idComentario) {
+	// Buscar en comentarios principales
+	for (Comentario* c : comentarios) {
+		if (c->getId() == idComentario) {
+			return c;
+		}
+		// Buscar en respuestas recursivamente
+		Comentario* encontrado = buscarComentarioRecursivo(c, idComentario);
+		if (encontrado) {
+			return encontrado;
+		}
+	}
+	return NULL;
+}
+
+Comentario* Pelicula::buscarComentarioRecursivo(Comentario* comentario, int idComentario) {
+	// Buscar en las respuestas del comentario
+	for (Comentario* respuesta : comentario->getRespuestas()) {
+		if (respuesta->getId() == idComentario) {
+			return respuesta;
+		}
+		// Buscar recursivamente en las respuestas de las respuestas
+		Comentario* encontrado = buscarComentarioRecursivo(respuesta, idComentario);
+		if (encontrado) {
+			return encontrado;
+		}
+	}
+	return NULL;
+}
+
+list<Comentario*> Pelicula::getComentariosPrincipales() {
+	return comentarios;
 }
 
 /*DtCine* getDtCines(){

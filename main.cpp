@@ -739,8 +739,7 @@ void cargarDatosPrueba() {
 	iReserva->selectPeli("Kill Bill");
 	iReserva->selectFuncion(2); // ID de la función Kill Bill
 	iReserva->ingresarUsuario(ManejadorUsuario::getInstancia()->buscarUsuario("bob"));
-	int capacidadSala1 = iReserva->obtenerCapacidadSala(2);
-	iReserva->reservarAsientos(2, capacidadSala1);
+	iReserva->reservarAsientos(2, 80); // Sala 2 tiene 80 asientos
 	iReserva->ingresarModoPago(1); // Débito
 	iReserva->ingresarBanco("Santander");
 	iReserva->confirmar();
@@ -751,8 +750,7 @@ void cargarDatosPrueba() {
 	iReserva->selectPeli("Kill Bill");
 	iReserva->selectFuncion(2); // ID de la función Kill Bill
 	iReserva->ingresarUsuario(ManejadorUsuario::getInstancia()->buscarUsuario("alice"));
-	int capacidadSala2 = iReserva->obtenerCapacidadSala(2);
-	iReserva->reservarAsientos(1, capacidadSala2);
+	iReserva->reservarAsientos(1, 80); // Sala 2 tiene 80 asientos
 	iReserva->ingresarModoPago(2); // Crédito
 	iReserva->ingresarFinanciera("Visa");
 	iReserva->confirmar();
@@ -763,8 +761,7 @@ void cargarDatosPrueba() {
 	iReserva->selectPeli("Django Unchained");
 	iReserva->selectFuncion(3); // ID de la función Django
 	iReserva->ingresarUsuario(ManejadorUsuario::getInstancia()->buscarUsuario("trudy"));
-	int capacidadSala3 = iReserva->obtenerCapacidadSala(3);
-	iReserva->reservarAsientos(3, capacidadSala3);
+	iReserva->reservarAsientos(3, 90); // Sala 3 tiene 90 asientos
 	iReserva->ingresarModoPago(1); // Débito
 	iReserva->ingresarBanco("BBVA");
 	iReserva->confirmar();
@@ -857,7 +854,131 @@ void puntuarPelicula() {
 }
 
 void comentarPelicula() {
-    // Implementación de la función comentarPelicula
+    system("clear");
+    cout << "_________C O M E N T A R__P E L I C U L A_________" << endl;
+    
+    if (!iSesion->sesionIniciada()) {
+        cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
+        return;
+    }
+
+    // Listar películas disponibles
+    list<DtPelicula*> pelis = iReserva->listarPeliculas();
+    if (pelis.empty()) {
+        cout << "No hay peliculas disponibles." << endl;
+        return;
+    }
+
+    cout << "\nPeliculas disponibles:\n";
+    for (DtPelicula* p : pelis) {
+        cout << "- " << *p << endl;
+    }
+
+    // Seleccionar película
+    string titulo;
+    cout << "\nIngrese el titulo de la pelicula: ";
+    cin.ignore();
+    getline(cin, titulo);
+
+    // Verificar si la película existe
+    Pelicula* pelicula = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
+    if (!pelicula) {
+        cout << "Pelicula no encontrada." << endl;
+        // Liberar memoria
+        for (DtPelicula* p : pelis) {
+            delete p;
+        }
+        return;
+    }
+
+    // Listar comentarios existentes
+    cout << "\n=== COMENTARIOS EXISTENTES ===" << endl;
+    list<string> comentarios = iReserva->listarComentarios(titulo);
+    if (comentarios.empty()) {
+        cout << "No hay comentarios para esta pelicula." << endl;
+    } else {
+        for (string comentario : comentarios) {
+            cout << comentario << endl;
+        }
+    }
+
+    // Ciclo para agregar comentarios
+    bool seguirComentando = true;
+    while (seguirComentando) {
+        cout << "\n=== AGREGAR COMENTARIO ===" << endl;
+        cout << "1. Crear nuevo comentario" << endl;
+        cout << "2. Responder a comentario existente" << endl;
+        cout << "3. Finalizar" << endl;
+        cout << "Opcion: ";
+        
+        int opcion;
+        cin >> opcion;
+
+        if (opcion == 1) {
+            // Crear nuevo comentario
+            string comentario;
+            cout << "\nIngrese su comentario: ";
+            cin.ignore();
+            getline(cin, comentario);
+            
+            if (!comentario.empty()) {
+                string usuario = iSesion->obtenerUsuario()->getNickname();
+                iReserva->agregarComentario(titulo, usuario, comentario);
+                cout << "\nComentario registrado exitosamente." << endl;
+            } else {
+                cout << "El comentario no puede estar vacio." << endl;
+            }
+        } else if (opcion == 2) {
+            // Responder a comentario existente
+            if (comentarios.empty()) {
+                cout << "\nNo hay comentarios para responder." << endl;
+                continue;
+            }
+            
+            cout << "\nComentarios disponibles para responder:" << endl;
+            int contador = 1;
+            for (string comentario : comentarios) {
+                cout << contador << ". " << comentario << endl;
+                contador++;
+            }
+            
+            cout << "\nSeleccione el numero del comentario al que desea responder: ";
+            int seleccion;
+            cin >> seleccion;
+            
+            if (seleccion >= 1 && seleccion <= comentarios.size()) {
+                string respuesta;
+                cout << "\nIngrese su respuesta: ";
+                cin.ignore();
+                getline(cin, respuesta);
+                
+                if (!respuesta.empty()) {
+                    string usuario = iSesion->obtenerUsuario()->getNickname();
+                    // Por simplicidad, usamos el número como ID (en una implementación real usaríamos IDs únicos)
+                    iReserva->agregarRespuestaComentario(titulo, seleccion, usuario, respuesta);
+                    cout << "\nRespuesta registrada exitosamente." << endl;
+                } else {
+                    cout << "La respuesta no puede estar vacia." << endl;
+                }
+            } else {
+                cout << "Seleccion invalida." << endl;
+            }
+        } else if (opcion == 3) {
+            seguirComentando = false;
+        } else {
+            cout << "Opcion invalida." << endl;
+        }
+        
+        // Actualizar lista de comentarios
+        comentarios = iReserva->listarComentarios(titulo);
+    }
+
+    cout << "\nProceso de comentarios finalizado." << endl;
+
+    // Liberar memoria
+    for (DtPelicula* p : pelis) {
+        delete p;
+    }
 }
 
 void verInformacionPelicula() {
@@ -969,7 +1090,73 @@ void verInformacionPelicula() {
 }
 
 void verComentariosPuntajesPelicula() {
-    // Implementación de la función verComentariosPuntajesPelicula
+    system("clear");
+    cout << "_________V E R__C O M E N T A R I O S__Y__P U N T A J E S__D E__P E L I C U L A_________" << endl;
+    
+    if (!iSesion->sesionIniciada()) {
+        cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
+        return;
+    }
+
+    // Listar películas disponibles
+    list<DtPelicula*> pelis = iReserva->listarPeliculas();
+    if (pelis.empty()) {
+        cout << "No hay peliculas disponibles." << endl;
+        return;
+    }
+
+    cout << "\nPeliculas disponibles:\n";
+    for (DtPelicula* p : pelis) {
+        cout << "- " << *p << endl;
+    }
+
+    // Seleccionar película
+    string titulo;
+    cout << "\nIngrese el titulo de la pelicula: ";
+    cin.ignore();
+    getline(cin, titulo);
+
+    // Verificar si la película existe
+    Pelicula* pelicula = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
+    if (!pelicula) {
+        cout << "Pelicula no encontrada." << endl;
+        // Liberar memoria
+        for (DtPelicula* p : pelis) {
+            delete p;
+        }
+        return;
+    }
+
+    // Mostrar información de la película según el formato especificado
+    cout << "\n" << pelicula->getTitulo() << endl;
+    cout << "Puntaje promedio: " << pelicula->getPuntajePromedio() << " (" << pelicula->getCantidadPuntajes() << " usuarios)" << endl;
+    
+    // Mostrar comentarios
+    cout << "\nComentarios" << endl;
+    list<string> comentarios = iReserva->listarComentarios(titulo);
+    if (comentarios.empty()) {
+        cout << "No hay comentarios para esta pelicula." << endl;
+    } else {
+        for (string comentario : comentarios) {
+            cout << comentario << endl;
+        }
+    }
+    
+    // Mostrar puntajes individuales
+    cout << "\nPuntajes" << endl;
+    list<string> puntajes = iReserva->listarPuntajesIndividuales(titulo);
+    if (puntajes.empty()) {
+        cout << "No hay puntajes para esta pelicula." << endl;
+    } else {
+        for (string puntaje : puntajes) {
+            cout << puntaje << endl;
+        }
+    }
+
+    // Liberar memoria
+    for (DtPelicula* p : pelis) {
+        delete p;
+    }
 }
 
 // Main principal

@@ -71,9 +71,16 @@ public:
     int obtenerPuntajeUsuario(string titulo, string usuario);
     bool usuarioYaPunto(string titulo, string usuario);
     
+    // Métodos para comentarios
+    void agregarComentario(string titulo, string usuario, string texto);
+    void agregarRespuestaComentario(string titulo, int idComentario, string usuario, string texto);
+    list<string> listarComentarios(string titulo);
+    list<string> listarPuntajesIndividuales(string titulo);
+    
     // Metodos privados
     void liberarMemoria();
     bool verificarDisponibilidadAsientos(int cantidad);
+    void listarComentariosRecursivo(list<Comentario*> comentarios, list<string>& resultado, int nivel);
 
 };
 

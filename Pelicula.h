@@ -3,7 +3,9 @@
 
 #include "DtPelicula.h"
 #include "DtPeliInfo.h"
+#include "Comentario.h"
 #include <map>
+#include <list>
 
 #include<iostream>
 
@@ -16,6 +18,7 @@ class Pelicula{
 		string sinopsis;
 		string poster;
 		map<string, int> puntajes; // usuario -> puntaje (1-5)
+		list<Comentario*> comentarios; // Lista de comentarios principales
 
 		static int ultimoId;
 	public:
@@ -40,5 +43,14 @@ class Pelicula{
 		bool tienePuntaje(string usuario);
 		float getPuntajePromedio();
 		int getCantidadPuntajes();
+		const map<string, int>& getPuntajes();
+		
+		// Métodos para comentarios
+		void agregarComentario(Comentario* comentario);
+		list<Comentario*> getComentarios();
+		Comentario* buscarComentario(int idComentario);
+		list<Comentario*> getComentariosPrincipales();
+	private:
+		Comentario* buscarComentarioRecursivo(Comentario* comentario, int idComentario);
 };
 #endif
