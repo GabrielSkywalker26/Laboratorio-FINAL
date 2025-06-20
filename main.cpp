@@ -122,6 +122,7 @@ void cerrarSesion() {
 void altaUsuario() {
     system("clear");
 
+    // Verificar si el usuario ha iniciado sesión
     if (!iSesion->sesionIniciada()){
         cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
 		return;
@@ -161,6 +162,7 @@ void altaUsuario() {
 void altaPelicula() {
 	system("clear");
 
+    // Verificar si el usuario ha iniciado sesión
     if (!iSesion->sesionIniciada()){
         cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
 		return;
@@ -206,6 +208,7 @@ void altaPelicula() {
 void altaCine() {
 	system("clear");
 
+    // Verificar si el usuario ha iniciado sesión
     if (!iSesion->sesionIniciada()){
         cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
 		return;
@@ -282,6 +285,7 @@ void altaCine() {
 void altaFuncion() {
     system("clear");
 
+    // Verificar si el usuario ha iniciado sesión
     if (!iSesion->sesionIniciada()){
         cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
 		return;
@@ -412,6 +416,7 @@ void altaFuncion() {
 void crearReserva() {
     system("clear");
 
+    // Verificar si el usuario ha iniciado sesión
     if (!iSesion->sesionIniciada()) {
         cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
         return;
@@ -602,12 +607,16 @@ void crearReserva() {
 
 void verReservasPorPelicula() {
     system("clear");
-    cout << "_________V E R__R E S E R V A S__P O R__P E L I C U L A_________" << endl;
-    
+
+    // Verificar si el usuario ha iniciado sesión
     if (!iSesion->sesionIniciada()) {
         cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
         return;
     }
+   
+
+    cout << "_________V E R__R E S E R V A S__P O R__P E L I C U L A_________" << endl;
+    
 
     // Listar todas las películas
     list<DtPelicula*> todasLasPelis = iReserva->listarPeliculas();
@@ -672,6 +681,7 @@ void verReservasPorPelicula() {
 void eliminarPelicula() {
 	system("clear");
 
+    // Verificar si el usuario ha iniciado sesión
     if (!iSesion->sesionIniciada()){
         cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
 		return;
@@ -701,6 +711,7 @@ void eliminarPelicula() {
 void modificarFechaSistema() {
     system("clear");
 
+    // Verificar si el usuario ha iniciado sesión
     if (!iSesion->sesionIniciada()){
         cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
 		return;
@@ -737,6 +748,7 @@ void modificarFechaSistema() {
 void consultarFechaSistema() {
     system("clear");
 
+    // Verificar si el usuario ha iniciado sesión
     if (!iSesion->sesionIniciada()){
         cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
 		return;
@@ -755,6 +767,7 @@ void consultarFechaSistema() {
 void cargarDatosPrueba() {
 	system("clear");
 
+    // Verificar si el usuario ha iniciado sesión
     if (!iSesion->sesionIniciada()){
         cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
 		return;
@@ -887,6 +900,7 @@ void cargarDatosPrueba() {
 void puntuarPelicula() {
     system("clear");
 
+    // Verificar si el usuario ha iniciado sesión
     if (!iSesion->sesionIniciada()) {
         cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
         return;
@@ -1099,14 +1113,18 @@ void comentarPelicula() {
 
 void verInformacionPelicula() {
     system("clear");
-    cout << "_________V E R__I N F O R M A C I O N__D E__P E L I C U L A_________" << endl;
-    
+
+    // Verificar si el usuario ha iniciado sesión
     if (!iSesion->sesionIniciada()) {
         cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
         return;
     }
 
-    // Listar todas las películas (reciclando función existente)
+
+    cout << "_________V E R__I N F O R M A C I O N__D E__P E L I C U L A_________" << endl;
+        
+
+    
     list<DtPelicula*> todasLasPelis = iReserva->listarPeliculas();
     if (todasLasPelis.empty()) {
         cout << "No hay peliculas registradas en el sistema." << endl;
@@ -1207,12 +1225,15 @@ void verInformacionPelicula() {
 
 void verComentariosPuntajesPelicula() {
     system("clear");
-    cout << "_________V E R__C O M E N T A R I O S__Y__P U N T A J E S__D E__P E L I C U L A_________" << endl;
-    
+
+    // Verificar si el usuario ha iniciado sesión
     if (!iSesion->sesionIniciada()) {
         cout << "\nDebes iniciar sesion para acceder a esta opcion." << endl;
         return;
     }
+
+    cout << "_________V E R__C O M E N T A R I O S__Y__P U N T A J E S__D E__P E L I C U L A_________" << endl;
+        
 
     // Listar películas disponibles
     list<DtPelicula*> pelis = iReserva->listarPeliculas();
@@ -1243,7 +1264,7 @@ void verComentariosPuntajesPelicula() {
         return;
     }
 
-    // Mostrar información de la película según el formato especificado
+    
     cout << "\n" << pelicula->getTitulo() << endl;
     cout << "Puntaje promedio: " << pelicula->getPuntajePromedio() << " (" << pelicula->getCantidadPuntajes() << " usuarios)" << endl;
     
@@ -1278,12 +1299,11 @@ void verComentariosPuntajesPelicula() {
 // Main principal
 int main() {
 	// --- Alta de administrador ---
-	iUsuario->altaUsuario("admin", "admin", "https://pelicenter.com/admin.jpg");
+	iUsuario->altaUsuario("admin", "admin", "https://pelicenter.com/admin/Easteregg.jpg");
 	
 	int opcion;
 	menu();
-	cin >> opcion;
-	
+	cin >> opcion;	
 	
 
 	while(opcion != 17){
@@ -1306,7 +1326,7 @@ int main() {
 			case 16: verComentariosPuntajesPelicula(); break;
 			default: cout << "OPCION INCORRECTA" << endl;
 		}
-		sleep(3); // en Linux/macOS; usar Sleep(3000) en Windows
+		sleep(3);
 		menu();
 		cin >> opcion;
 	}

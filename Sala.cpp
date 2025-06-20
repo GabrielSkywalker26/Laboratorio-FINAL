@@ -29,8 +29,8 @@ Sala::~Sala(){}
 
 
 DtSala* Sala::obtenerDtSala(){
-	
-	DtSala* dtSala = new DtSala(this->id, this->capacidad);
+	list<DtFuncion*> dTFunciones = this->obtenerDtFunciones();
+	DtSala* dtSala = new DtSala(this->id, this->capacidad, dTFunciones);
 	return dtSala;
 }
 
