@@ -33,6 +33,9 @@ void Pelicula::setPoster(string poster){
 };
 
 Pelicula::~Pelicula(){
+	// Liberar memoria de los puntajes
+	puntajes.clear();
+	
 	// Liberar memoria de los comentarios
 	for (Comentario* c : comentarios) {
 		delete c;
