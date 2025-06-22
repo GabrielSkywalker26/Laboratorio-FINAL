@@ -25,6 +25,7 @@ class ControladorPelicula: public IControladorPelicula{
         bool eliminarPelicula();
         void ingresarTitulo(string);
         list<DtPelicula*> listarPeliculas();
+        Pelicula* buscarPelicula(string titulo);
 
         // Métodos para puntajes
         void puntuarPelicula(string titulo, string usuario, int puntaje);
@@ -37,6 +38,5 @@ class ControladorPelicula: public IControladorPelicula{
         list<string> listarComentarios(string titulo);
         void listarComentariosRecursivo(list<Comentario*> comentarios, list<string>& resultado, int nivel);
 	    list<string> listarPuntajesIndividuales(string titulo);
-        
    };
 #endif

@@ -21,7 +21,6 @@
 #include "DtBanco.h"
 #include "ManejadorFuncion.h"
 #include "DtFinanciera.h"
-#include "ManejadorPelicula.h"
 
 using namespace std;
 
@@ -365,7 +364,7 @@ void altaFuncion() {
             list<DtFuncion*> funciones = salaSeleccionada->obtenerDtFunciones();
             cout << "Funciones de la sala seleccionada:\n";
             for (DtFuncion* f : funciones) {
-                Funcion* fun = ManejadorFuncion::getInstancia()->buscarFuncion(f->getId());
+                Funcion* fun = iAltaFuncion->buscarFuncion(f->getId());
                 if (fun)
                     cout << "- " << *f << ", Precio: $" << fun->getPrecio() << endl;
                 else
@@ -463,7 +462,7 @@ void crearReserva() {
     }
 
     // Verificar si la película existe usando el manejador
-    Pelicula* pelicula = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
+    Pelicula* pelicula = iPelicula->buscarPelicula(titulo);
     if (!pelicula) {
         cout << "Pelicula no encontrada." << endl;
         iReserva->finalizar();
@@ -520,7 +519,7 @@ void crearReserva() {
 
             cout << "\nFunciones disponibles:\n";
             for (DtFuncion* f : funciones) {
-                Funcion* fun = ManejadorFuncion::getInstancia()->buscarFuncion(f->getId());
+                Funcion* fun = iAltaFuncion->buscarFuncion(f->getId());
                 if (fun)
                     cout << "- " << *f << ", Precio: $" << fun->getPrecio() << endl;
                 else
@@ -575,7 +574,7 @@ void crearReserva() {
                 iReserva->ingresarBanco(bancoFinanciera);
             } else {
                 // Mostrar financieras disponibles antes de pedir el nombre
-                list<Financiera*> financieras = ManejadorFinanciera::getInstancia()->getFinancieras();
+                list<Financiera*> financieras = iReserva->getFinancieras();
                 if (!financieras.empty()) {
                     cout << "\nFinancieras disponibles:" << endl;
                     for (Financiera* f : financieras) {
@@ -652,7 +651,7 @@ void verReservasPorPelicula() {
     getline(cin, titulo);
 
     // Verificar si la película existe usando el manejador
-    Pelicula* pelicula = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
+    Pelicula* pelicula = iPelicula->buscarPelicula(titulo);
     if (!pelicula) {
         cout << "Pelicula no encontrada." << endl;
         // Liberar memoria de los DTOs antes de salir
@@ -942,7 +941,7 @@ void puntuarPelicula() {
     getline(cin, titulo);
 
     // Verificar si la película existe
-    Pelicula* pelicula = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
+    Pelicula* pelicula = iPelicula->buscarPelicula(titulo);
     if (!pelicula) {
         cout << "Pelicula no encontrada." << endl;
         // Liberar memoria
@@ -1026,7 +1025,7 @@ void comentarPelicula() {
     getline(cin, titulo);
 
     // Verificar si la película existe
-    Pelicula* pelicula = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
+    Pelicula* pelicula = iPelicula->buscarPelicula(titulo);
     if (!pelicula) {
         cout << "Pelicula no encontrada." << endl;
         // Liberar memoria
@@ -1166,7 +1165,7 @@ void verInformacionPelicula() {
     }
 
     // Obtener información de la película usando el manejador
-    Pelicula* pelicula = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
+    Pelicula* pelicula = iPelicula->buscarPelicula(titulo);
     if (!pelicula) {
         cout << "Pelicula no encontrada." << endl;
         // Liberar memoria antes de salir
@@ -1269,7 +1268,7 @@ void verComentariosPuntajesPelicula() {
     getline(cin, titulo);
 
     // Verificar si la película existe
-    Pelicula* pelicula = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
+   Pelicula* pelicula = iPelicula->buscarPelicula(titulo);
     if (!pelicula) {
         cout << "Pelicula no encontrada." << endl;
         // Liberar memoria

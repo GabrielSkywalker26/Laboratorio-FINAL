@@ -6,6 +6,7 @@
 
 #include"DtFecha.h"
 #include"DtPelicula.h"
+#include"Pelicula.h"
 
 
 
@@ -17,6 +18,7 @@ class IControladorPelicula{
         virtual bool eliminarPelicula()=0;
         virtual void ingresarTitulo(string)=0;
         virtual list<DtPelicula*> listarPeliculas()=0;
+        virtual Pelicula* buscarPelicula(string titulo)=0;
 
         // Métodos para puntajes
         virtual void puntuarPelicula(string titulo, string usuario, int puntaje)=0;

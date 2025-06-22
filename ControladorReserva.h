@@ -64,6 +64,7 @@ public:
     void finalizar();
     list<DtBanco*> listarBancos();
     DtBanco* obtenerDtBanco(string nombre);
+    list<Financiera*> getFinancieras();
     void reiniciar();
     
     // Metodos para consultar reservas por película

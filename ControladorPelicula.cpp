@@ -40,6 +40,10 @@ list<DtPelicula*> ControladorPelicula::listarPeliculas() {
     return infoPeliculas;
 }
 
+Pelicula* ControladorPelicula::buscarPelicula(string titulo){
+    return ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
+}
+
 
 bool ControladorPelicula::eliminarPelicula() {
 

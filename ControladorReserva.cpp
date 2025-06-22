@@ -213,6 +213,10 @@ DtBanco* ControladorReserva::obtenerDtBanco(string nombre) {
     }
 }
 
+list<Financiera*> ControladorReserva::getFinancieras() {
+    return ManejadorFinanciera::getInstancia()->getFinancieras();
+}
+
 void ControladorReserva::reiniciar() {}
 
 list<DtReserva*> ControladorReserva::obtenerReservasPorPelicula(string titulo) {

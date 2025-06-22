@@ -32,6 +32,7 @@ class ControladorAltaFuncion: public IControladorAltaFuncion{
         list<DtSala*> listarSalas();
         bool altaFuncion(int, DtHorario, DtFecha);
         bool existeFuncion(int);
+        Funcion* buscarFuncion(int idFuncion);
         list<Funcion*> listarFunciones();
         void finalizar();
         void ingresarPrecioFuncion(float precio);

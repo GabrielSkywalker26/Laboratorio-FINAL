@@ -13,12 +13,7 @@ ControladorAltaFuncion* ControladorAltaFuncion::getInstancia() {
 }
 
 ControladorAltaFuncion::~ControladorAltaFuncion(){}
-/*
-void ControladorAltaFuncion::altaFuncion(string peli, DtHorario horario, DtFecha fecha){
-    Funcion* u = new Funcion(DtFecha, string, Pelicula*);
-    ManejadorFuncion::getInstancia()->agregarFuncion(u);
-}
-*/
+
 list<Funcion*> ControladorAltaFuncion::listarFunciones(){
     return ManejadorFuncion::getInstancia()->getFunciones();
 }
@@ -27,10 +22,9 @@ bool ControladorAltaFuncion::existeFuncion(int idf){
     return ManejadorFuncion::getInstancia()->existeFuncion(idf);
 }
 
-
-// del .h
-// @TODO: comentar que realiza la funcion
-// Implementar metodo
+Funcion* ControladorAltaFuncion::buscarFuncion(int idFuncion){
+    return ManejadorFuncion::getInstancia()->buscarFuncion(idFuncion);
+}
 
 // Guardo el titulo de la pelicula seleccionada
 void ControladorAltaFuncion::ingresarTitulo(string titulo){
@@ -90,10 +84,10 @@ bool ControladorAltaFuncion::altaFuncion(int idSala, DtHorario horario, DtFecha 
     Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(this->titulo);
     if (peli == NULL) {
         cout << "Error! No se encontro la pelicula." << endl;
-        //finalizar();
         return false;
     }
     int idPeli = peli->getId();
+
     // 2. Crear la funcion
     Funcion* funcion = new Funcion(fecha, horario, peli);
     funcion->setPrecio(this->precioFuncion);
@@ -106,7 +100,6 @@ bool ControladorAltaFuncion::altaFuncion(int idSala, DtHorario horario, DtFecha 
     Cine* cine = ManejadorCine::getInstancia()->buscarCine(this->idCine);
     if (cine == NULL) {
         cout << "Error! No se encontro el cine." << endl;
-        //finalizar();
         return false;
     }
 
@@ -115,14 +108,9 @@ bool ControladorAltaFuncion::altaFuncion(int idSala, DtHorario horario, DtFecha 
         if (sala->getId() == idSala) {
             sala->agregarFuncion(idFuncion);
             cine->agregarPelicula(idPeli);
-            //cout << "Funcion registrada correctamente con ID: " << idFuncion << endl;
-            //finalizar();
             retorno = true;
         }
     }
-    
-    // Si no encontro la sala
-    //finalizar();
 
     if (retorno){
         cout << "Funcion registrada correctamente con ID: " << idFuncion << endl;
@@ -142,5 +130,3 @@ void ControladorAltaFuncion::ingresarPrecioFuncion(float precio) {
     // Guardar el precio temporalmente para la proxima funcion a crear
     this->precioFuncion = precio;
 }
-
-
