@@ -17,6 +17,7 @@ class IControladorPelicula{
         virtual bool altaPelicula(string, string, string)=0;
         virtual bool eliminarPelicula()=0;
         virtual void ingresarTitulo(string)=0;
+        virtual bool existePelicula(string)=0;
         virtual list<DtPelicula*> listarPeliculas()=0;
         virtual Pelicula* buscarPelicula(string titulo)=0;
 

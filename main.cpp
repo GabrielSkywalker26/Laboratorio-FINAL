@@ -309,6 +309,14 @@ void altaFuncion() {
 
     list<DtPelicula*> pelis = iAltaFuncion->listarPeliculas();
     cout << "Peliculas disponibles:\n";
+
+    // Listar las peliculas ingresadas
+    if (pelis.empty()) {
+        cout << "No hay peliculas ingresadas." << endl;
+        return;
+    }
+
+    // Hay peliculas entonces las listo
     for (DtPelicula* p : pelis) {
         cout << "- " << *p << endl;
     }
@@ -318,12 +326,15 @@ void altaFuncion() {
     cin.ignore();
     getline(cin, titulo);
 	
-	iAltaFuncion->ingresarTitulo(titulo);
-
+	if (iPelicula->existePelicula(titulo)){
+        iAltaFuncion->ingresarTitulo(titulo);
+    } else {
+        cout << "No existe la pelicula ingresada." << endl;
+        return;
+    }
     
-    bool reingresar = true;
     int opcionReingresar;
-
+    bool reingresar = true;
     while(reingresar){
         int idCine;
         list<DtCine*> cines = iAltaFuncion->listarCines();

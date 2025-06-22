@@ -1,11 +1,11 @@
 #include "ControladorUsuario.h"
 
-ControladorUsuario* ControladorUsuario::instancia = nullptr;
+ControladorUsuario* ControladorUsuario::instancia = NULL;
 
 ControladorUsuario::ControladorUsuario(){}
 
 ControladorUsuario* ControladorUsuario::getInstancia() {
-    if (instancia == nullptr)
+    if (instancia == NULL)
         instancia = new ControladorUsuario();
     return instancia;
 }

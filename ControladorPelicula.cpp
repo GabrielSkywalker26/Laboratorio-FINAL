@@ -29,6 +29,11 @@ void ControladorPelicula::ingresarTitulo(string titulo){
     this->pelicula=titulo;
 }
 
+bool ControladorPelicula::existePelicula(string titulo){
+    ManejadorPelicula* manejador = ManejadorPelicula::getInstancia();
+    return manejador->existePelicula(titulo);
+}
+
 list<DtPelicula*> ControladorPelicula::listarPeliculas() {
     list<DtPelicula*> infoPeliculas;
     list<Pelicula*> pelis = ManejadorPelicula::getInstancia()->getPeliculas();

@@ -24,6 +24,7 @@ class ControladorPelicula: public IControladorPelicula{
         bool altaPelicula(string, string, string);
         bool eliminarPelicula();
         void ingresarTitulo(string);
+        bool existePelicula(string);
         list<DtPelicula*> listarPeliculas();
         Pelicula* buscarPelicula(string titulo);
 
