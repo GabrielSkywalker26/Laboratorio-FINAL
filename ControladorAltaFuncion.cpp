@@ -36,6 +36,10 @@ void ControladorAltaFuncion::ingresarIdCine(int idCine){
     this->idCine = idCine;
 }
 
+Cine* ControladorAltaFuncion::buscarCine(){
+    return ManejadorCine::getInstancia()->buscarCine(this->idCine);
+}
+
 list<DtPelicula*> ControladorAltaFuncion::listarPeliculas(){
 
     list<DtPelicula*> infoPeliculas;

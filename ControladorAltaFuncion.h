@@ -5,6 +5,7 @@
 #include "ManejadorFuncion.h"
 #include "ManejadorPelicula.h"
 #include "ManejadorCine.h"
+#include "Cine.h"
 #include "Funcion.h"
 #include "DtCine.h"
 #include "DtFecha.h"
@@ -27,6 +28,7 @@ class ControladorAltaFuncion: public IControladorAltaFuncion{
         ~ControladorAltaFuncion();
         void ingresarTitulo(string);
         void ingresarIdCine(int);
+        Cine* buscarCine();
         list<DtPelicula*> listarPeliculas();
         list<DtCine*> listarCines();
         list<DtSala*> listarSalas();

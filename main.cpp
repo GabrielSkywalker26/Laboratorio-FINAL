@@ -350,7 +350,9 @@ void altaFuncion() {
 
         // imprimir funciones de esa sala
         Sala* salaSeleccionada = NULL;
-        Cine* cineSeleccionado = ManejadorCine::getInstancia()->buscarCine(idCine);
+        //Cine* cineSeleccionado = ManejadorCine::getInstancia()->buscarCine(idCine);
+        Cine* cineSeleccionado = iAltaFuncion->buscarCine();
+        
         int idSala;
         if (cineSeleccionado != NULL) {
             // Listar salas del cine seleccionado

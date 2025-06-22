@@ -40,9 +40,11 @@ list<Cine*> ControladorAltaCine::listarCines(){
 bool ControladorAltaCine::existeCine(int idCine){
     return ManejadorCine::getInstancia()->existeCine(idCine);
 }
+
 void ControladorAltaCine::ingresarDir(string calle, int numero){
     this->direccion = DtDireccion(calle, numero);
 }
+
 void ControladorAltaCine::finalizar(){
     //ingresarDir(NULL,0);
     this->capacidades.clear();

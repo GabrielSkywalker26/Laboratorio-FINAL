@@ -9,6 +9,7 @@
 #include"DtCine.h"
 #include"DtSala.h"
 #include"DtHorario.h"
+#include"Cine.h"
 #include"Funcion.h"
 
 
@@ -20,6 +21,7 @@ class IControladorAltaFuncion{
         virtual void ingresarIdCine(int)=0;
         virtual list<DtPelicula*> listarPeliculas()=0;
         virtual list<DtCine*> listarCines()=0;
+        virtual Cine* buscarCine()=0;
         virtual list<DtSala*> listarSalas()=0;
         virtual bool altaFuncion(int, DtHorario, DtFecha)=0;
         virtual void ingresarPrecioFuncion(float)=0;
