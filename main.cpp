@@ -43,7 +43,7 @@ void altaPelicula();
 void altaCine();
 void altaFuncion();
 void crearReserva();
-void verReservasPorPelicula();
+void verReservasDePelicula();
 void eliminarPelicula();
 void modificarFechaSistema();
 void consultarFechaSistema();
@@ -67,7 +67,7 @@ void menu(){
 	cout <<"5. Alta cine" << endl;
 	cout <<"6. Alta funcion" << endl;
 	cout <<"7. Crear reserva" << endl;
-	cout <<"8. Ver reservas por pelicula" << endl;
+	cout <<"8. Ver reservas de pelicula" << endl;
 	cout <<"9. Eliminar pelicula" << endl;
 	cout <<"10. Modificar fecha del sistema" << endl;
 	cout <<"11. Consultar fecha del sistema" << endl;
@@ -690,7 +690,7 @@ void crearReserva() {
     iReserva->finalizar();
 }
 
-void verReservasPorPelicula() {
+void verReservasDePelicula() {
     system("clear");
 
     // Verificar si el usuario ha iniciado sesión
@@ -1437,7 +1437,7 @@ int main() {
 			case 5: altaCine(); break;
 			case 6: altaFuncion(); break;
 			case 7: crearReserva(); break;
-			case 8: verReservasPorPelicula(); break;
+			case 8: verReservasDePelicula(); break;
 			case 9: eliminarPelicula(); break;
 			case 10: modificarFechaSistema(); break;
 			case 11: consultarFechaSistema(); break;
