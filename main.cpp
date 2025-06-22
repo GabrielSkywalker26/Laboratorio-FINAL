@@ -700,7 +700,7 @@ void verReservasPorPelicula() {
     }
    
 
-    cout << "_________V E R__R E S E R V A S__P O R__P E L I C U L A_________" << endl;
+    cout << "_________V E R__R E S E R V A S__D E__P E L I C U L A_________" << endl;
     
 
     // Listar todas las películas
