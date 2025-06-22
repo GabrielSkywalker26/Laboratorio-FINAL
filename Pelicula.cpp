@@ -36,9 +36,9 @@ Pelicula::~Pelicula(){
 	// Liberar memoria de los puntajes
 	puntajes.clear();
 	
-	// Liberar memoria de los comentarios
+	// Liberar memoria de los comentarios (incluyendo respuestas anidadas)
 	for (Comentario* c : comentarios) {
-		delete c;
+		eliminarComentarioRecursivo(c);
 	}
 	comentarios.clear();
 }
@@ -140,6 +140,20 @@ Comentario* Pelicula::buscarComentarioRecursivo(Comentario* comentario, int idCo
 
 list<Comentario*> Pelicula::getComentariosPrincipales() {
 	return comentarios;
+}
+
+void Pelicula::eliminarComentarioRecursivo(Comentario* comentario) {
+	if (comentario == NULL) {
+		return; // Protección contra puntero nulo
+	}
+	
+	// Eliminar primero todas las respuestas recursivamente
+	for (Comentario* respuesta : comentario->getRespuestas()) {
+		eliminarComentarioRecursivo(respuesta);
+	}
+	
+	// Luego eliminar el comentario principal
+	delete comentario;
 }
 
 /*DtCine* getDtCines(){

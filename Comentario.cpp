@@ -63,9 +63,7 @@ int Comentario::getNivelAnidacion() {
 }
 
 Comentario::~Comentario() {
-    // Liberar memoria de las respuestas
-    for (Comentario* respuesta : respuestas) {
-        delete respuesta;
-    }
-    respuestas.clear();
+    // NO eliminar las respuestas aquí para evitar doble eliminación
+    // Las respuestas se eliminan desde Pelicula::eliminarComentarioRecursivo()
+    respuestas.clear(); // Solo limpiar la lista, no eliminar los objetos
 } 

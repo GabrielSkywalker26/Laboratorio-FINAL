@@ -52,5 +52,6 @@ class Pelicula{
 		list<Comentario*> getComentariosPrincipales();
 	private:
 		Comentario* buscarComentarioRecursivo(Comentario* comentario, int idComentario);
+		void eliminarComentarioRecursivo(Comentario* comentario);
 };
 #endif

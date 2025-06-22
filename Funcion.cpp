@@ -42,7 +42,13 @@ void Funcion::setPelicula(Pelicula* pelicula){
 }
 */
 
-Funcion::~Funcion(){}
+Funcion::~Funcion(){
+	// Liberar memoria de las reservas
+	for (Reserva* r : reservas) {
+		delete r;
+	}
+	reservas.clear();
+}
 
 Pelicula *Funcion::getPelicula(){
 	return this->pelicula;
