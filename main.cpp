@@ -449,12 +449,14 @@ void crearReserva() {
 
     cout << "_________C R E A R__R E S E R V A_________" << endl;
     
+    list<DtPelicula*> pelis;
+
     string titulo;
     bool reingresarPelicula = true;
     while(reingresarPelicula){
 
         // Listar peliculas disponibles
-        list<DtPelicula*> pelis = iReserva->listarPeliculas();
+        pelis = iReserva->listarPeliculas();
         if (pelis.empty()) {
             cout << "No hay peliculas disponibles." << endl;
             cout << "Regresando al menu de inicio..." << endl;
@@ -955,6 +957,7 @@ void cargarDatosPrueba() {
 	iReserva->finalizar();
 
 	cout << "Datos de prueba cargados correctamente." << endl;
+    cout << "Regresando al menu de inicio..." << endl;
 }
 
 void puntuarPelicula() {
@@ -990,6 +993,7 @@ void puntuarPelicula() {
     Pelicula* pelicula = iPelicula->buscarPelicula(titulo);
     if (!pelicula) {
         cout << "Pelicula no encontrada." << endl;
+        cout << "Regresando al menu de inicio..." << endl;
         // Liberar memoria
         for (DtPelicula* p : pelis) {
             delete p;
@@ -1010,6 +1014,7 @@ void puntuarPelicula() {
         int modificar;
         cin >> modificar;
         if (modificar != 1) {
+            cout << "Regresando al menu de inicio..." << endl;
             // Liberar memoria
             for (DtPelicula* p : pelis) {
                 delete p;
@@ -1025,6 +1030,7 @@ void puntuarPelicula() {
     
     if (puntaje < 1 || puntaje > 5) {
         cout << "Puntaje invalido. Debe ser entre 1 y 5." << endl;
+        cout << "Regresando al menu de inicio..." << endl;
         // Liberar memoria
         for (DtPelicula* p : pelis) {
             delete p;
@@ -1035,6 +1041,7 @@ void puntuarPelicula() {
     // Guardar puntaje
     iPelicula->puntuarPelicula(titulo, usuario, puntaje);
     cout << "Puntaje registrado exitosamente." << endl;
+    cout << "Regresando al menu de inicio..." << endl;
 
     // Liberar memoria
     for (DtPelicula* p : pelis) {
@@ -1164,6 +1171,7 @@ void comentarPelicula() {
     }
 
     cout << "\nProceso de comentarios finalizado." << endl;
+    cout << "Regresando al menu de inicio..." << endl;
 
     // Liberar memoria
     for (DtPelicula* p : pelis) {
@@ -1182,105 +1190,136 @@ void verInformacionPelicula() {
 
 
     cout << "_________V E R__I N F O R M A C I O N__D E__P E L I C U L A_________" << endl;
-        
-
     
-    list<DtPelicula*> todasLasPelis = iReserva->listarPeliculas();
-    if (todasLasPelis.empty()) {
-        cout << "No hay peliculas registradas en el sistema." << endl;
-        return;
-    }
+    list<DtPelicula*> todasLasPelis;
 
-    cout << "\nPeliculas disponibles:\n";
-    for (DtPelicula* p : todasLasPelis) {
-        cout << "- " << *p << endl;
-    }
-
-    // Selección de película
-    string titulo;
-    cout << "\nIngrese el titulo de la pelicula (o 'cancelar' para salir): ";
-    cin.ignore();
-    getline(cin, titulo);
+    bool reingresarPelicula = true;
+    while(reingresarPelicula){
     
-    if (titulo == "cancelar") {
-        // Liberar memoria antes de salir
-        for (DtPelicula* p : todasLasPelis) {
-            delete p;
-        }
-        return;
-    }
-
-    // Obtener información de la película usando el manejador
-    Pelicula* pelicula = iPelicula->buscarPelicula(titulo);
-    if (!pelicula) {
-        cout << "Pelicula no encontrada." << endl;
-        // Liberar memoria antes de salir
-        for (DtPelicula* p : todasLasPelis) {
-            delete p;
-        }
-        return;
-    }
-    
-    // Mostrar póster y sinopsis
-    cout << "\n=== INFORMACION DE LA PELICULA ===" << endl;
-    cout << "Poster: " << pelicula->getPoster() << endl;
-    cout << "Sinopsis: " << pelicula->getSinopsis() << endl;
-
-    // Preguntar si desea ver información adicional
-    int eleccionInfo;
-    cout << "\nDesea ver informacion adicional de la pelicula?" << endl;
-    cout << "1. Si" << endl;
-    cout << "2. No" << endl;
-    cout << "Opcion: ";
-    cin >> eleccionInfo;
-
-    if (eleccionInfo == 1) {
-        // Seleccionar la película en el controlador para que listarCinesPeli funcione
-        iReserva->selectPeli(titulo);
-        
-        // Listar cines donde se pasa la pelicula
-        list<DtCine*> cines = iReserva->listarCinesPeli();
-        if (cines.empty()) {
-            cout << "No hay cines disponibles para esta pelicula." << endl;
-            iReserva->finalizar();
+        todasLasPelis = iReserva->listarPeliculas();
+        if (todasLasPelis.empty()) {
+            cout << "No hay peliculas registradas en el sistema." << endl;
             return;
         }
 
-        cout << "\nCines disponibles:\n";
-        for (DtCine* c : cines) {
-            cout << "- " << *c << endl;
+        cout << "\nPeliculas disponibles:\n";
+        for (DtPelicula* p : todasLasPelis) {
+            cout << "- " << *p << endl;
         }
 
-        // Seleccion de cine
-        int eleccionCine;
-        cout << "\nDesea seleccionar un cine para ver sus funciones?" << endl;
+        // Selección de película
+        string titulo;
+        cout << "\nIngrese el titulo de la pelicula (o 'cancelar' para salir): ";
+        cin.ignore();
+        getline(cin, titulo);
+        
+        if (titulo == "cancelar") {
+            cout << "Regresando al menu de inicio..." << endl;
+            // Liberar memoria antes de salir
+            for (DtPelicula* p : todasLasPelis) {
+                delete p;
+            }
+            return;
+        }
+
+        // Obtener información de la película usando el manejador
+        Pelicula* pelicula = iPelicula->buscarPelicula(titulo);
+        if (!pelicula) {
+            cout << "Pelicula no encontrada." << endl;
+            // Liberar memoria antes de salir
+            for (DtPelicula* p : todasLasPelis) {
+                delete p;
+            }
+            return;
+        }
+        
+        // Mostrar póster y sinopsis
+        cout << "\n=== INFORMACION DE LA PELICULA ===" << endl;
+        cout << "Poster: " << pelicula->getPoster() << endl;
+        cout << "Sinopsis: " << pelicula->getSinopsis() << endl;
+
+        // Preguntar si desea ver información adicional
+        int eleccionInfo;
+        cout << "\nDesea ver informacion adicional de la pelicula?" << endl;
         cout << "1. Si" << endl;
         cout << "2. No" << endl;
         cout << "Opcion: ";
-        cin >> eleccionCine;
+        cin >> eleccionInfo;
 
-        if (eleccionCine == 1) {
-            int idCine;
-            cout << "\nIngrese id del cine: ";
-            cin >> idCine;
-
-            // Listar funciones del cine (reciclando función existente)
-            list<DtFuncion*> funciones = iReserva->selectCine(idCine);
-            if (funciones.empty()) {
-                cout << "No hay funciones disponibles para esta pelicula en este cine." << endl;
-            } else {
-                cout << "\nFunciones disponibles:\n";
-                for (DtFuncion* f : funciones) {
-                    cout << "- " << *f << endl;
-                }
+        if (eleccionInfo == 1) {
+            // Seleccionar la película en el controlador para que listarCinesPeli funcione
+            iReserva->selectPeli(titulo);
+            
+            // Listar cines donde se pasa la pelicula
+            list<DtCine*> cines = iReserva->listarCinesPeli();
+            if (cines.empty()) {
+                cout << "No hay cines disponibles para esta pelicula." << endl;
+                iReserva->finalizar();
+                return;
             }
+
+            cout << "\nCines disponibles:\n";
+            for (DtCine* c : cines) {
+                cout << "- " << *c << endl;
+            }
+
+            // Seleccion de cine
+            int eleccionCine;
+            cout << "\nDesea seleccionar un cine para ver sus funciones?" << endl;
+            cout << "1. Si" << endl;
+            cout << "2. No" << endl;
+            cout << "Opcion: ";
+            cin >> eleccionCine;
+
+            if (eleccionCine == 1) {
+                int idCine;
+                cout << "\nIngrese id del cine: ";
+                cin >> idCine;
+
+                // Listar funciones del cine (reciclando función existente)
+                list<DtFuncion*> funciones = iReserva->selectCine(idCine);
+                if (funciones.empty()) {
+                    cout << "No hay funciones disponibles para esta pelicula en este cine." << endl;
+                } else {
+                    cout << "\nFunciones disponibles:\n";
+                    for (DtFuncion* f : funciones) {
+                        cout << "- " << *f << endl;
+                    }
+                }
+            } else {
+                reingresarPelicula = false;
+                iReserva->finalizar();
+                cout << "Regresando al menu de inicio..." << endl;
+                // Liberar memoria
+                for (DtPelicula* p : todasLasPelis) {
+                    delete p;
+                }
+                return;
+            }
+
+            int opcionPelicula;
+            cout << "\nDesea ver informacion de otra pelicula? " << endl;
+            cout << "1. Si" << endl;
+            cout << "2. No" << endl;
+            cout << "Opcion: ";
+            cin >> opcionPelicula;
+                    
+            if (opcionPelicula == 2) {
+                reingresarPelicula = false;
+            }
+        } else {
+            reingresarPelicula = false;
         }
     }
+    
+    iReserva->finalizar();
+    cout << "Regresando al menu de inicio..." << endl;
 
     // Liberar memoria
     for (DtPelicula* p : todasLasPelis) {
         delete p;
     }
+
 }
 
 void verComentariosPuntajesPelicula() {
