@@ -155,7 +155,7 @@ void altaUsuario() {
         cout << "URL de la foto: ";
         cin >> url;
         if (iUsuario->altaUsuario(nickname, contrasena, url)){
-            cout << "Usuario ingresasdo correctamente." << endl;
+            cout << "Usuario ingresado correctamente." << endl;
             reingresar = false;
         } else {
             cout << "Desea volver a ingresar un usuario?" << endl;
@@ -590,6 +590,13 @@ void crearReserva() {
     int cantidadAsientos;
     cout << "\nIngrese cantidad de asientos: ";
     cin >> cantidadAsientos;
+    
+    // Validar que la cantidad sea positiva
+    if (cantidadAsientos <= 0) {
+        cout << "Error: La cantidad de asientos a reservar debe ser mayor a cero." << endl;
+        iReserva->finalizar();
+        return;
+    }
     
     // Obtener la capacidad real de la sala donde se emite la función
     int capacidadSala = iReserva->obtenerCapacidadSala(idFuncion);
