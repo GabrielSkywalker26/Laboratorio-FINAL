@@ -94,12 +94,16 @@ void iniciarSesion() {
 
     cout << "________I N I C I A R  S E S I O N________" << endl;
     string nickname, contrasenia;
-    cout << "Nickname: ";
-    cin >> nickname;
+    
     bool reingresar = true;
     while (reingresar) {
+        cout << "Nickname: ";
+        cin.ignore();
+        getline(cin, nickname);
+        
         cout << "Contrasenia: ";
-        cin >> contrasenia;
+        getline(cin, contrasenia);
+        
         if (iSesion->iniciarSesion(nickname, contrasenia)) {
             cout << "Sesion iniciada correctamente." << endl;
             reingresar = false;
@@ -149,11 +153,15 @@ void altaUsuario() {
     bool reingresar = true;
     while (reingresar) {
         cout << "Nickname: ";
-        cin >> nickname;
+        cin.ignore();
+        getline(cin, nickname);
+        
         cout << "Contrasena: ";
-        cin >> contrasena;
+        getline(cin, contrasena);
+        
         cout << "URL de la foto: ";
-        cin >> url;
+        getline(cin, url);
+        
         if (iUsuario->altaUsuario(nickname, contrasena, url)){
             cout << "Usuario ingresado correctamente." << endl;
             reingresar = false;
