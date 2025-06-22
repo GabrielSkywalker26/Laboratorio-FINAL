@@ -25,6 +25,6 @@ bool operator >(const DtFecha& dtf1, const DtFecha& dtf2){
 }
 
 ostream& operator <<(ostream& salida,const DtFecha& dtf){
-	salida << dtf.dia << "/" << dtf.mes << "/" << dtf.anio <<endl;
+	salida << dtf.dia << "/" << dtf.mes << "/" << dtf.anio;
 	return salida;
 }

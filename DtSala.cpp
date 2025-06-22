@@ -26,7 +26,7 @@ list<DtFuncion*> DtSala::getFunciones(){
 }
 
 ostream& operator <<(ostream& salida,const DtSala& dts){
-	salida << "Id Sala: " << dts.id << " ,capacidad: " << dts.capacidad;
+	salida << "Id Sala: " << dts.id << ", capacidad: " << dts.capacidad;
 	
 	if (!dts.funciones.empty()) {
 		salida << "\n  Funciones programadas:";
