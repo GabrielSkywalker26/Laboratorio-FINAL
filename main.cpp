@@ -369,6 +369,9 @@ void altaFuncion() {
             }
         } else {
             cout << "Error! Cine no encontrado." << endl;
+            cout << "Regresando al menu de inicio..." << endl;
+            iAltaFuncion->finalizar();
+            return;
         }
 
         if (salaSeleccionada != NULL) {
@@ -383,6 +386,9 @@ void altaFuncion() {
             }
         } else {
             cout << "Error! Sala no encontrada." << endl;
+            cout << "Regresando al menu de inicio..." << endl;
+            iAltaFuncion->finalizar();
+            return;
         }
 
         // Pedir precio de la funcion
@@ -395,9 +401,9 @@ void altaFuncion() {
         cout << "Ingrese la fecha de la funcion: " << endl;
         cout << "Dia: ";
         cin >> dia;
-        cout << "\nMes: ";
+        cout << "Mes: ";
         cin >> mes;
-        cout << "\nAnio: ";
+        cout << "Anio: ";
         cin >> anio;
 
         int horaComienzo, minComienzo, horaFin, minFin;
