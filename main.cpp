@@ -109,9 +109,9 @@ void iniciarSesion() {
             reingresar = false;
         } else {
             cout << "Error al iniciar sesion." << endl;
-            cout << "Desea volver a ingresar contrasenia o cancelar?" << endl;
+            cout << "Desea volver a ingresar datos o cancelar?" << endl;
             int opcion;
-            cout << "1. Reingresar contrasenia" << endl;
+            cout << "1. Reingresar datos" << endl;
             cout << "2. Cancelar" << endl;
             cout << "Opcion: ";
             cin >> opcion;

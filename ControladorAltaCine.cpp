@@ -19,7 +19,6 @@ bool ControladorAltaCine::altaCine(){
     
     Sala* nuevaSala;
     for (int capacidad : this->capacidades) {
-        //cout << capacidad << "\n";
         nuevaSala = new Sala(capacidad);
         cine->agregarSalas(nuevaSala);
     }
@@ -46,7 +45,6 @@ void ControladorAltaCine::ingresarDir(string calle, int numero){
 }
 
 void ControladorAltaCine::finalizar(){
-    //ingresarDir(NULL,0);
     this->capacidades.clear();
 }
 
