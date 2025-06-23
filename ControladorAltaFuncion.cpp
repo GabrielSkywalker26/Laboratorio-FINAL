@@ -86,10 +86,6 @@ list<DtSala*> ControladorAltaFuncion::listarSalas(){
 bool ControladorAltaFuncion::altaFuncion(int idSala, DtHorario horario, DtFecha fecha) {
     bool retorno = false;
     Pelicula* peli = ManejadorPelicula::getInstancia()->buscarPelicula(this->titulo);
-    if (peli == NULL) {
-        cout << "Error! No se encontro la pelicula." << endl;
-        return false;
-    }
     int idPeli = peli->getId();
 
     // 2. Crear la funcion
@@ -102,10 +98,6 @@ bool ControladorAltaFuncion::altaFuncion(int idSala, DtHorario horario, DtFecha 
 
     // 4. Agregar la funcion a la sala correspondiente
     Cine* cine = ManejadorCine::getInstancia()->buscarCine(this->idCine);
-    if (cine == NULL) {
-        cout << "Error! No se encontro el cine." << endl;
-        return false;
-    }
 
     // Recorremos las salas del cine para encontrar la correcta
     for (Sala* sala : cine->obtenerSalas()) {
@@ -116,11 +108,6 @@ bool ControladorAltaFuncion::altaFuncion(int idSala, DtHorario horario, DtFecha 
         }
     }
 
-    if (retorno){
-        cout << "Funcion registrada correctamente con ID: " << idFuncion << endl;
-    } else {
-        cout << "Error! Sala no encontrada en el cine." << endl;
-    }
     return retorno;
 }
 

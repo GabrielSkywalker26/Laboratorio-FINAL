@@ -22,7 +22,10 @@ list<Cine*> ManejadorCine::getCines(){
 
 Cine* ManejadorCine::buscarCine(int idCine){
   map<int,Cine*>::iterator it = this->cines.find(idCine);
-  return it->second;
+  if (it != this->cines.end()) {
+    return it->second;
+  }
+  return NULL;
 }
 
 void ManejadorCine::agregarCine(Cine* cine){

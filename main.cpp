@@ -338,6 +338,8 @@ void altaFuncion() {
         iAltaFuncion->ingresarTitulo(titulo);
     } else {
         cout << "No existe la pelicula ingresada." << endl;
+        cout << "Regresando al menu de inicio..." << endl;
+            iAltaFuncion->finalizar();
         return;
     }
     
@@ -358,7 +360,6 @@ void altaFuncion() {
 
         // imprimir funciones de esa sala
         Sala* salaSeleccionada = NULL;
-        //Cine* cineSeleccionado = ManejadorCine::getInstancia()->buscarCine(idCine);
         Cine* cineSeleccionado = iAltaFuncion->buscarCine();
         
         int idSala;
@@ -431,7 +432,9 @@ void altaFuncion() {
         DtFecha fechaFuncion(dia, mes, anio);
         DtHorario horarioFuncion(horaComienzo, minComienzo, horaFin, minFin);
 
-        if (!iAltaFuncion->altaFuncion(idSala, horarioFuncion, fechaFuncion)) {
+        if (iAltaFuncion->altaFuncion(idSala, horarioFuncion, fechaFuncion)) {
+            cout << "Funcion registrada correctamente." << endl;
+        } else {
             cout << "Hubo uno o mas errores al registrar la funcion." << endl;
         }
         

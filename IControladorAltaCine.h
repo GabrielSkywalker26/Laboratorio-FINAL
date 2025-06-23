@@ -15,6 +15,7 @@ class IControladorAltaCine{
         virtual void ingresarDir(string, int)=0;
         virtual void ingresarCap(int)=0;
         virtual bool altaCine()=0;
+        virtual bool existeCine(int)=0;
         virtual void finalizar()=0;
 };
 #endif
