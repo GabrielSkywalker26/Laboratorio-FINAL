@@ -97,14 +97,16 @@ void iniciarSesion() {
 
     cout << "________I N I C I A R  S E S I O N________" << endl;
     string nickname, contrasenia;
-    
+
+    cout << "Nickname: ";
+    cin.ignore();
+    getline(cin, nickname);
+
     bool reingresar = true;
     while (reingresar) {
-        cout << "Nickname: ";
-        cin.ignore();
-        getline(cin, nickname);
-        
+
         cout << "Contrasenia: ";
+        cin.ignore();
         getline(cin, contrasenia);
         
         if (iSesion->iniciarSesion(nickname, contrasenia)) {
@@ -112,9 +114,9 @@ void iniciarSesion() {
             reingresar = false;
         } else {
             cout << "Error al iniciar sesion." << endl;
-            cout << "Desea volver a ingresar datos o cancelar?" << endl;
+            cout << "Desea volver a ingresar contrasenia o cancelar?" << endl;
             int opcion;
-            cout << "1. Reingresar datos" << endl;
+            cout << "1. Reingresar contrasenia" << endl;
             cout << "2. Cancelar" << endl;
             cout << "Opcion: ";
             cin >> opcion;
