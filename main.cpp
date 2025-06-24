@@ -11,12 +11,18 @@
 #include "IControladorUsuario.h"
 #include "IControladorFecha.h"
 #include "IControladorDatosPrueba.h"
-#include "Sala.h"
-#include "Cine.h"
-#include "Financiera.h"
-#include "Banco.h"
+
 #include "DtBanco.h"
+#include "DtCine.h"
+#include "DtSala.h"
+#include "DtFecha.h"
 #include "DtFinanciera.h"
+#include "DtFuncion.h"
+#include "DtHorario.h"
+#include "DtHorarioSistema.h"
+#include "DtPelicula.h"
+#include "DtReserva.h"
+
 
 using namespace std;
 
@@ -359,8 +365,8 @@ void altaFuncion() {
         iAltaFuncion->ingresarIdCine(idCine);
 
         // imprimir funciones de esa sala
-        Sala* salaSeleccionada = NULL;
-        Cine* cineSeleccionado = iAltaFuncion->buscarCine();
+        DtSala* salaSeleccionada = NULL;
+        DtCine* cineSeleccionado = iAltaFuncion->buscarCine();
         
         int idSala;
         if (cineSeleccionado != NULL) {
@@ -372,12 +378,14 @@ void altaFuncion() {
             }
             cout << "Ingrese id de la sala: ";
             cin >> idSala;
-            for (Sala* s : cineSeleccionado->obtenerSalas()) {
+            salaSeleccionada = iAltaFuncion->obtenerDtSala(idSala);
+            /*
+            for (DtSalaSala* s : cineSeleccionado->obtenerSalas()) {
                 if (s->getId() == idSala) {
                     salaSeleccionada = s;
                     break;
                 }
-            }
+            }*/
         } else {
             cout << "Error! Cine no encontrado." << endl;
             cout << "Regresando al menu de inicio..." << endl;
@@ -386,12 +394,11 @@ void altaFuncion() {
         }
 
         if (salaSeleccionada != NULL) {
-            list<DtFuncion*> funciones = salaSeleccionada->obtenerDtFunciones();
+            list<DtFuncion*> funciones = iAltaFuncion->obtenerDtFunciones(idSala);
             cout << "Funciones de la sala seleccionada:\n";
             for (DtFuncion* f : funciones) {
-                Funcion* fun = iAltaFuncion->buscarFuncion(f->getId());
-                if (fun)
-                    cout << "- " << *f << ", Precio: $" << fun->getPrecio() << endl;
+                if (f)
+                    cout << "- " << *f << ", Precio: $" << f->getPrecio() << endl;
                 else
                     cout << "- " << *f << endl;
             }
@@ -557,9 +564,8 @@ void crearReserva() {
 
                 cout << "\nFunciones disponibles:\n";
                 for (DtFuncion* f : funciones) {
-                    Funcion* fun = iAltaFuncion->buscarFuncion(f->getId());
-                    if (fun)
-                        cout << "- " << *f << ", Precio: $" << fun->getPrecio() << endl;
+                    if (f)
+                        cout << "- " << *f << ", Precio: $" << f->getPrecio() << endl;
                     else
                         cout << "- " << *f << endl;
                 }

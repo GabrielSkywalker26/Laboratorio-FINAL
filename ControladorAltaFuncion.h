@@ -13,7 +13,6 @@
 #include "DtPelicula.h"
 #include "DtSala.h"
 
-
 #include <list>
 
 class ControladorAltaFuncion: public IControladorAltaFuncion{
@@ -28,7 +27,7 @@ class ControladorAltaFuncion: public IControladorAltaFuncion{
         ~ControladorAltaFuncion();
         void ingresarTitulo(string);
         void ingresarIdCine(int);
-        Cine* buscarCine();
+        DtCine* buscarCine();
         list<DtPelicula*> listarPeliculas();
         list<DtCine*> listarCines();
         list<DtSala*> listarSalas();
@@ -38,5 +37,7 @@ class ControladorAltaFuncion: public IControladorAltaFuncion{
         list<Funcion*> listarFunciones();
         void finalizar();
         void ingresarPrecioFuncion(float precio);
+        DtSala* obtenerDtSala(int idSala);
+        list<DtFuncion*> obtenerDtFunciones(int idSala);
 };
 #endif

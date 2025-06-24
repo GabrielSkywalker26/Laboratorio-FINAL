@@ -36,8 +36,14 @@ void ControladorAltaFuncion::ingresarIdCine(int idCine){
     this->idCine = idCine;
 }
 
-Cine* ControladorAltaFuncion::buscarCine(){
-    return ManejadorCine::getInstancia()->buscarCine(this->idCine);
+DtCine* ControladorAltaFuncion::buscarCine(){
+    Cine* cine = ManejadorCine::getInstancia()->buscarCine(this->idCine);
+    if (cine != NULL) {
+        DtCine* dtCine = new DtCine(cine->getId(), cine->getDtDireccion());
+        return dtCine;
+    } else {
+        return NULL;
+    }
 }
 
 list<DtPelicula*> ControladorAltaFuncion::listarPeliculas(){
@@ -120,4 +126,40 @@ void ControladorAltaFuncion::finalizar() {
 void ControladorAltaFuncion::ingresarPrecioFuncion(float precio) {
     // Guardar el precio temporalmente para la proxima funcion a crear
     this->precioFuncion = precio;
+}
+
+DtSala* ControladorAltaFuncion::obtenerDtSala(int idSala) {
+    Cine* cine = ManejadorCine::getInstancia()->buscarCine(this->idCine);
+    if (cine != NULL) {
+        for (Sala* sala : cine->obtenerSalas()) {
+            if (sala->getId() == idSala) {
+                return sala->obtenerDtSala();
+            }
+        }
+    }
+    return NULL;
+}
+
+list<DtFuncion*> ControladorAltaFuncion::obtenerDtFunciones(int idSala){
+    list<DtFuncion*> dtFunciones;
+    Cine* cine = ManejadorCine::getInstancia()->buscarCine(this->idCine);
+    if (cine != NULL) {
+        for (Sala* sala : cine->obtenerSalas()) {
+            if (sala->getId() == idSala) {
+                for (int idFuncion : sala->getFunciones()) {
+                    Funcion* funcion = ManejadorFuncion::getInstancia()->buscarFuncion(idFuncion);
+                    if (funcion != NULL) {
+                        //DtFuncion(int id, DtFecha, DtHorario);
+                        //DtFecha fechaFuncion(dia, mes, anio);
+                        //DtHorario horarioFuncion(horaComienzo, minComienzo, horaFin, minFin);
+
+                        DtFuncion* dtFuncion = new DtFuncion(funcion->getId(), funcion->getFecha(), funcion->getHorario(), funcion->getPrecio());
+                        dtFunciones.push_back(dtFuncion);
+                    }
+                }
+                break; // Sala found, exit loop
+            }
+        }
+    }
+    return dtFunciones;
 }

@@ -6,6 +6,14 @@ DtFuncion::DtFuncion(int id, DtFecha fecha, DtHorario horario){
 	this->id = id;
 	this->fecha = fecha;
 	this->horario = horario;
+	this->precio = 0;
+}
+
+DtFuncion::DtFuncion(int id, DtFecha fecha, DtHorario horario, float precio){
+	this->id = id;
+	this->fecha = fecha;
+	this->horario = horario;
+	this->precio = precio;
 }
 
 DtFuncion::~DtFuncion(){}
@@ -16,6 +24,10 @@ string DtFuncion::getPeli(){
 
 int DtFuncion::getId() {
     return this->id;
+}
+
+float DtFuncion::getPrecio() {
+    return this->precio;
 }
 
 DtFecha DtFuncion::getFecha() {
