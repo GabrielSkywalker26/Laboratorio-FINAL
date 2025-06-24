@@ -10,16 +10,12 @@
 #include "IControladorSesion.h"
 #include "IControladorUsuario.h"
 #include "IControladorFecha.h"
-#include "ManejadorCine.h"
-#include "ManejadorUsuario.h"
+#include "IControladorDatosPrueba.h"
 #include "Sala.h"
 #include "Cine.h"
 #include "Financiera.h"
-#include "ManejadorFinanciera.h"
-#include "ManejadorBanco.h"
 #include "Banco.h"
 #include "DtBanco.h"
-#include "ManejadorFuncion.h"
 #include "DtFinanciera.h"
 
 using namespace std;
@@ -33,6 +29,7 @@ IControladorReserva* iReserva = fabrica->getIControladorReserva();
 IControladorSesion* iSesion = fabrica->getIControladorSesion();
 IControladorUsuario* iUsuario = fabrica->getIControladorUsuario();
 IControladorFecha* iFecha = fabrica->getIControladorFecha();
+IControladorDatosPrueba* iDatosPrueba = fabrica->getIControladorDatosPrueba();
 
 
 // Declaracion de operaciones
@@ -866,124 +863,7 @@ void cargarDatosPrueba() {
 
 	cout << "_____C A R G A R   D A T O S   D E   P R U E B A_____" << endl;
 
-	// --- Alta de usuarios ---
-	cout << "Cargando usuarios..." << endl;
-	iUsuario->altaUsuario("bob", "bobpass", "https://img.com/bob.jpg");
-	iUsuario->altaUsuario("alice", "alicepass", "https://img.com/alice.jpg");
-	iUsuario->altaUsuario("trudy", "trudypass", "https://img.com/trudy.jpg");
-
-	// --- Alta de peliculas ---
-	cout << "Cargando peliculas..." << endl;
-	iPelicula->altaPelicula("Pulp Fiction", "Historias entrecruzadas del crimen en Los Angeles", "pulpfiction.jpg");
-	iPelicula->altaPelicula("Kill Bill", "Una ex asesina busca venganza", "killbill.jpg");
-	iPelicula->altaPelicula("Django Unchained", "Un esclavo liberado en busca de su esposa", "django.jpg");
-
-	// --- Alta de Cine 1: Life 21 (21 de Setiembre) ---
-	cout << "Cargando Cine 1..." << endl;
-	iAltaCine->ingresarDir("21 de Setiembre", 2721);
-	iAltaCine->ingresarCap(120); // Sala 1
-	iAltaCine->ingresarCap(80);  // Sala 2
-	iAltaCine->altaCine(); // ID asumido: 1
-
-	// --- Alta de Cine 2: Cinemateca (Bartolome Mitre) ---
-	cout << "Cargando Cine 2..." << endl;
-	iAltaCine->ingresarDir("Bartolome Mitre", 1236);
-	iAltaCine->ingresarCap(90); // Sala 3
-	iAltaCine->ingresarCap(60); // Sala 4
-	iAltaCine->altaCine(); // ID asumido: 2
-
-	// --- Alta de funciones ---
-	cout << "Cargando funciones..." << endl;
-
-	// Funcion Pulp Fiction en Cine 1, Sala 1
-	cout << "Creando funcion Pulp Fiction..." << endl;
-	iAltaFuncion->ingresarTitulo("Pulp Fiction");
-	iAltaFuncion->ingresarIdCine(1);
-	iAltaFuncion->ingresarPrecioFuncion(350);
-	iAltaFuncion->altaFuncion(1, DtHorario(20, 0, 23, 0), DtFecha(14, 6, 2025));
-
-	// Funcion Kill Bill en Cine 1, Sala 2
-	cout << "Creando funcion Kill Bill..." << endl;
-	iAltaFuncion->ingresarTitulo("Kill Bill");
-	iAltaFuncion->ingresarIdCine(1);
-	iAltaFuncion->ingresarPrecioFuncion(300);
-	iAltaFuncion->altaFuncion(2, DtHorario(18, 0, 20, 0), DtFecha(15, 6, 2025));
-
-	// Funcion Django en Cine 2, Sala 3
-	cout << "Creando funcion Django..." << endl;
-	iAltaFuncion->ingresarTitulo("Django Unchained");
-	iAltaFuncion->ingresarIdCine(2);
-	iAltaFuncion->ingresarPrecioFuncion(400);
-	iAltaFuncion->altaFuncion(3, DtHorario(21, 0, 23, 30), DtFecha(16, 6, 2025));
-
-	// --- Alta de financieras ---
-	cout << "Cargando financieras..." << endl;
-	ManejadorFinanciera::getInstancia()->agregarFinanciera(new Financiera("Visa", 10));
-	ManejadorFinanciera::getInstancia()->agregarFinanciera(new Financiera("Mastercard", 15));
-	ManejadorFinanciera::getInstancia()->agregarFinanciera(new Financiera("OCA", 5));
-	ManejadorFinanciera::getInstancia()->agregarFinanciera(new Financiera("Diners", 20));
-	ManejadorFinanciera::getInstancia()->agregarFinanciera(new Financiera("Cabal", 8));
-
-	// --- Alta de bancos ---
-	cout << "Cargando bancos..." << endl;
-	ManejadorBanco::getInstancia()->agregarBanco(new Banco("Santander"));
-	ManejadorBanco::getInstancia()->agregarBanco(new Banco("BBVA"));
-	ManejadorBanco::getInstancia()->agregarBanco(new Banco("Itau"));
-	ManejadorBanco::getInstancia()->agregarBanco(new Banco("Scotiabank"));
-	ManejadorBanco::getInstancia()->agregarBanco(new Banco("HSBC"));
-
-	// --- Crear reservas de prueba ---
-	cout << "Creando reservas de prueba..." << endl;
-	
-	// Reserva 1: Bob reserva 2 asientos para Kill Bill (Débito)
-	cout << "Creando reserva 1: Bob - Kill Bill..." << endl;
-	iReserva->selectPeli("Kill Bill");
-	iReserva->selectFuncion(2); // ID de la función Kill Bill
-	iReserva->ingresarUsuario(ManejadorUsuario::getInstancia()->buscarUsuario("bob"));
-	// Obtener capacidad real de la sala dinámicamente para mostrar información
-	int capacidadSala2 = iReserva->obtenerCapacidadSala(2);
-	cout << "Capacidad de la sala 2 (Kill Bill): " << capacidadSala2 << " asientos" << endl;
-	iReserva->reservarAsientos(2, capacidadSala2);
-	iReserva->ingresarModoPago(1); // Débito
-	iReserva->ingresarBanco("Santander");
-	if (iReserva->confirmar()) {
-		cout << "Reserva 1 creada exitosamente" << endl;
-	} else {
-		cout << "Error al crear reserva 1" << endl;
-	}
-	iReserva->finalizar();
-	
-	// Reserva 2: Alice reserva 1 asiento para Kill Bill (Crédito)
-	cout << "Creando reserva 2: Alice - Kill Bill..." << endl;
-	iReserva->selectPeli("Kill Bill");
-	iReserva->selectFuncion(2); // ID de la función Kill Bill
-	iReserva->ingresarUsuario(ManejadorUsuario::getInstancia()->buscarUsuario("alice"));
-	iReserva->reservarAsientos(1, capacidadSala2);
-	iReserva->ingresarModoPago(2); // Crédito
-	iReserva->ingresarFinanciera("Visa");
-	if (iReserva->confirmar()) {
-		cout << "Reserva 2 creada exitosamente" << endl;
-	} else {
-		cout << "Error al crear reserva 2" << endl;
-	}
-	iReserva->finalizar();
-	
-	// Reserva 3: Trudy reserva 3 asientos para Django (Débito)
-	cout << "Creando reserva 3: Trudy - Django..." << endl;
-	iReserva->selectPeli("Django Unchained");
-	iReserva->selectFuncion(3);
-	iReserva->ingresarUsuario(ManejadorUsuario::getInstancia()->buscarUsuario("trudy"));
-	int capacidadSala3 = iReserva->obtenerCapacidadSala(3);
-	cout << "Capacidad de la sala 3 (Django): " << capacidadSala3 << " asientos" << endl;
-	iReserva->reservarAsientos(3, capacidadSala3);
-	iReserva->ingresarModoPago(1);
-	iReserva->ingresarBanco("BBVA");
-	if (iReserva->confirmar()) {
-		cout << "Reserva 3 creada exitosamente" << endl;
-	} else {
-		cout << "Error al crear reserva 3" << endl;
-	}
-	iReserva->finalizar();
+    iDatosPrueba->cargarDatos();
 
 	cout << "Datos de prueba cargados correctamente." << endl;
     cout << "Regresando al menu de inicio..." << endl;

@@ -8,6 +8,7 @@
 #include "IControladorSesion.h"
 #include "IControladorUsuario.h"
 #include "IControladorFecha.h"
+#include "IControladorDatosPrueba.h"
 
 class Fabrica {
 private:
@@ -23,6 +24,7 @@ public:
     IControladorSesion* getIControladorSesion();
     IControladorUsuario* getIControladorUsuario();
     IControladorFecha* getIControladorFecha();
+    IControladorDatosPrueba* getIControladorDatosPrueba();
 
     ~Fabrica();
 };

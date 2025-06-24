@@ -7,6 +7,7 @@
 #include "ControladorSesion.h"
 #include "ControladorUsuario.h"
 #include "ControladorFecha.h"
+#include "ControladorDatosPrueba.h"
 
 Fabrica* Fabrica::instancia = NULL;
 
@@ -44,6 +45,10 @@ IControladorUsuario* Fabrica::getIControladorUsuario() {
 
 IControladorFecha* Fabrica::getIControladorFecha() {
     return ControladorFecha::getInstancia();
+}
+
+IControladorDatosPrueba* Fabrica::getIControladorDatosPrueba() {
+    return ControladorDatosPrueba::getInstancia();
 }
 
 Fabrica::~Fabrica() {}
