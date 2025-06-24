@@ -157,7 +157,7 @@ list<DtFuncion*> ControladorAltaFuncion::obtenerDtFunciones(int idSala){
                         dtFunciones.push_back(dtFuncion);
                     }
                 }
-                break; // Sala found, exit loop
+                break; // Sala encontrada, salgo del loop
             }
         }
     }
