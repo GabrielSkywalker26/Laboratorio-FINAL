@@ -27,12 +27,18 @@ void Cine::setDtDireccion(DtDireccion direccion){
 }
 
 Cine::~Cine(){
+<<<<<<< HEAD
 	// Liberar memoria de las salas
 	for (int i = 0; i < this->topeSalas; i++) {
 		delete this->salas[i];
 	}
 	// Limpiar la lista de películas
 	peliculas.clear();
+=======
+	/*
+	for(i=0;i<this->topeSalas;i++)
+		delete this->salas[i];*/
+>>>>>>> f56b7fe21e45a791cc94d71d04ad4aa8d60d156d
 }
 
 
