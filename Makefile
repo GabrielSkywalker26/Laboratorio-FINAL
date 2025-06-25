@@ -1,6 +1,20 @@
-main: Fabrica.o ControladorAltaCine.o ControladorAltaFuncion.o ControladorFecha.o ControladorPelicula.o ControladorReserva.o ControladorSesion.o ControladorUsuario.o ControladorDatosPrueba.o ManejadorCine.o ManejadorFinanciera.o ManejadorBanco.o ManejadorFuncion.o ManejadorPelicula.o ManejadorUsuario.o DtCine.o DtDireccion.o DtFecha.o DtFinanciera.o DtBanco.o DtFuncion.o DtHorario.o DtHorarioSistema.o DtPelicula.o DtPeliInfo.o DtSala.o DtUsuario.o DtReserva.o Cine.o Credito.o Debito.o FechaSistema.o Financiera.o Banco.o Funcion.o Pelicula.o Pago.o Reserva.o Sala.o Sesion.o Usuario.o Comentario.o main.o
+CXX := g++
+CXXFLAGS := -std=c++17 -Wall -Wextra -pedantic -g
+TARGET := pelicenter
 
-	g++ Fabrica.o ControladorAltaCine.o ControladorAltaFuncion.o ControladorFecha.o ControladorPelicula.o ControladorReserva.o ControladorSesion.o ControladorUsuario.o ControladorDatosPrueba.o  ManejadorCine.o ManejadorFinanciera.o ManejadorBanco.o ManejadorFuncion.o ManejadorPelicula.o ManejadorUsuario.o DtCine.o DtDireccion.o DtFecha.o DtFinanciera.o DtBanco.o DtFuncion.o DtHorario.o DtHorarioSistema.o DtPelicula.o DtPeliInfo.o DtSala.o DtUsuario.o DtReserva.o Cine.o Credito.o Debito.o FechaSistema.o Financiera.o Banco.o Funcion.o Pelicula.o Pago.o Reserva.o Sala.o Sesion.o Usuario.o Comentario.o main.o -o pelicenter
+SRCS := $(wildcard *.cpp)
+OBJS := $(SRCS:.cpp=.o)
+
+$(TARGET): $(OBJS)
+	$(CXX) $^ -o $@
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+main: Fabrica.o ControladorAltaCine.o ControladorAltaFuncion.o ControladorFecha.o ControladorPelicula.o ControladorReserva.o ControladorSesion.o ControladorUsuario.o ManejadorCine.o ManejadorFinanciera.o ManejadorBanco.o ManejadorFuncion.o ManejadorPelicula.o ManejadorUsuario.o DtCine.o DtDireccion.o DtFecha.o DtFinanciera.o DtBanco.o DtFuncion.o DtHorario.o DtHorarioSistema.o DtPelicula.o DtPeliInfo.o DtSala.o DtUsuario.o DtReserva.o Cine.o Credito.o Debito.o FechaSistema.o Financiera.o Banco.o Funcion.o Pelicula.o Pago.o Reserva.o Sala.o Sesion.o Usuario.o Comentario.o main.o
+
+
+	g++ Fabrica.o ControladorAltaCine.o ControladorAltaFuncion.o ControladorFecha.o ControladorPelicula.o ControladorReserva.o ControladorSesion.o ControladorUsuario.o ManejadorCine.o ManejadorFinanciera.o ManejadorBanco.o ManejadorFuncion.o ManejadorPelicula.o ManejadorUsuario.o DtCine.o DtDireccion.o DtFecha.o DtFinanciera.o DtBanco.o DtFuncion.o DtHorario.o DtHorarioSistema.o DtPelicula.o DtPeliInfo.o DtSala.o DtUsuario.o DtReserva.o Cine.o Credito.o Debito.o FechaSistema.o Financiera.o Banco.o Funcion.o Pelicula.o Pago.o Reserva.o Sala.o Sesion.o Usuario.o Comentario.o main.o -o pelicenter
 
 
 ControladorAltaCine.o: ControladorAltaCine.cpp
@@ -10,7 +24,6 @@ ControladorPelicula.o: ControladorPelicula.cpp
 ControladorReserva.o: ControladorReserva.cpp
 ControladorSesion.o: ControladorSesion.cpp
 ControladorUsuario.o: ControladorUsuario.cpp
-ControladorDatosPrueba.o: ControladorDatosPrueba.cpp
 
 
 ManejadorCine.o: ManejadorCine.cpp

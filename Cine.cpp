@@ -27,7 +27,6 @@ void Cine::setDtDireccion(DtDireccion direccion){
 }
 
 Cine::~Cine(){
-	int i;
 	/*
 	for(i=0;i<this->topeSalas;i++)
 		delete this->salas[i];*/
