@@ -154,7 +154,7 @@ void ControladorPelicula::listarComentariosRecursivo(list<Comentario*> comentari
         for (int i = 0; i < nivel; i++) {
             indentacion += "  ";
         }
-        string comentarioStr = indentacion + c->getAutor() + ": " + c->getTexto();
+        string comentarioStr = indentacion + to_string(c->getId()) + ") " + c->getAutor() + ": " + c->getTexto();
         resultado.push_back(comentarioStr);
         
         // Agregar respuestas recursivamente

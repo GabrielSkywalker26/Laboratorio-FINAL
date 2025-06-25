@@ -101,13 +101,15 @@ void iniciarSesion() {
     cout << "Nickname: ";
     cin.ignore();
     getline(cin, nickname);
+    //cin >> nickname;
 
     bool reingresar = true;
     while (reingresar) {
 
         cout << "Contrasenia: ";
-        cin.ignore();
-        getline(cin, contrasenia);
+        //cin.ignore();
+        //getline(cin, contrasenia);
+        cin >> contrasenia;
         
         if (iSesion->iniciarSesion(nickname, contrasenia)) {
             cout << "Sesion iniciada correctamente." << endl;
@@ -1052,7 +1054,7 @@ void comentarPelicula() {
             cout << "\nComentarios disponibles para responder:" << endl;
             int contador = 1;
             for (string comentario : comentarios) {
-                cout << contador << ". " << comentario << endl;
+                cout << comentario << endl;
                 contador++;
             }
             
