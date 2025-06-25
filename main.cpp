@@ -101,16 +101,13 @@ void iniciarSesion() {
     cout << "Nickname: ";
     cin.ignore();
     getline(cin, nickname);
-    //cin >> nickname;
-
+   
     bool reingresar = true;
     while (reingresar) {
 
         cout << "Contrasenia: ";
-        //cin.ignore();
-        //getline(cin, contrasenia);
-        cin >> contrasenia;
-        
+        getline(cin, contrasenia);
+                
         if (iSesion->iniciarSesion(nickname, contrasenia)) {
             cout << "Sesion iniciada correctamente." << endl;
             reingresar = false;
@@ -122,6 +119,7 @@ void iniciarSesion() {
             cout << "2. Cancelar" << endl;
             cout << "Opcion: ";
             cin >> opcion;
+            cin.ignore();
             if (opcion == 2) {
                 reingresar = false;
                 cout << "Regresando al menu de inicio..." << endl;
@@ -349,7 +347,11 @@ void altaFuncion() {
     } else {
         cout << "No existe la pelicula ingresada." << endl;
         cout << "Regresando al menu de inicio..." << endl;
-            iAltaFuncion->finalizar();
+        // Liberar memoria de los DTOs
+        for (DtPelicula* p : pelis) {
+            delete p;
+        }
+        iAltaFuncion->finalizar();
         return;
     }
     
@@ -383,16 +385,18 @@ void altaFuncion() {
             cout << "Ingrese id de la sala: ";
             cin >> idSala;
             salaSeleccionada = iAltaFuncion->obtenerDtSala(idSala);
-            /*
-            for (DtSalaSala* s : cineSeleccionado->obtenerSalas()) {
-                if (s->getId() == idSala) {
-                    salaSeleccionada = s;
-                    break;
-                }
-            }*/
+            
+            // Liberar memoria de los DTOs de salas
+            for (DtSala* s : salas) {
+                delete s;
+            }
         } else {
             cout << "Error! Cine no encontrado." << endl;
             cout << "Regresando al menu de inicio..." << endl;
+            // Liberar memoria de los DTOs
+            for (DtCine* c : cines) {
+                delete c;
+            }
             iAltaFuncion->finalizar();
             return;
         }
@@ -406,9 +410,26 @@ void altaFuncion() {
                 else
                     cout << "- " << *f << endl;
             }
+            
+            // Liberar memoria de los DTOs de funciones
+            for (DtFuncion* f : funciones) {
+                delete f;
+            }
+            
+            // Liberar memoria del DTO de sala seleccionada
+            delete salaSeleccionada;
+            
+            // Liberar memoria del DTO de cine seleccionado
+            delete cineSeleccionado;
         } else {
             cout << "Error! Sala no encontrada." << endl;
             cout << "Regresando al menu de inicio..." << endl;
+            // Liberar memoria de los DTOs
+            for (DtCine* c : cines) {
+                delete c;
+            }
+            // Liberar memoria del DTO de cine seleccionado
+            delete cineSeleccionado;
             iAltaFuncion->finalizar();
             return;
         }
@@ -463,7 +484,11 @@ void altaFuncion() {
         iAltaFuncion->finalizar();
 
     }
-	
+    
+    // Liberar memoria de los DTOs al final
+    for (DtPelicula* p : pelis) {
+        delete p;
+    }
 }
 
 
@@ -505,6 +530,10 @@ void crearReserva() {
         
         if (titulo == "cancelar") {
             cout << "Regresando al menu de inicio..." << endl;
+            // Liberar memoria de los DTOs
+            for (DtPelicula* p : pelis) {
+                delete p;
+            }
             iReserva->finalizar();
             return;
         }
@@ -514,11 +543,17 @@ void crearReserva() {
         if (!pelicula) {
             cout << "Pelicula no encontrada." << endl;
             cout << "Regresando al menu de inicio..." << endl;
+            // Liberar memoria de los DTOs
+            for (DtPelicula* p : pelis) {
+                delete p;
+            }
             iReserva->finalizar();
             return;
         }
 
-        cout << "\nInformacion de la pelicula:\n" << *(pelicula->obtenerDtPelicula()) << endl;
+        DtPelicula* dtPelicula = pelicula->obtenerDtPelicula();
+        cout << "\nInformacion de la pelicula:\n" << *dtPelicula << endl;
+        delete dtPelicula; // Liberar el DTO creado
 
         // Preguntar si desea ver informacion adicional de la pelicula
         int eleccionInfo;
@@ -536,6 +571,10 @@ void crearReserva() {
             list<DtCine*> cines = iReserva->listarCinesPeli();
             if (cines.empty()) {
                 cout << "No hay cines disponibles para esta pelicula." << endl;
+                // Liberar memoria de los DTOs
+                for (DtPelicula* p : pelis) {
+                    delete p;
+                }
                 iReserva->finalizar();
                 return;
             }
@@ -562,6 +601,13 @@ void crearReserva() {
                 list<DtFuncion*> funciones = iReserva->selectCine(idCine);
                 if (funciones.empty()) {
                     cout << "No hay funciones disponibles para esta pelicula en este cine." << endl;
+                    // Liberar memoria de los DTOs
+                    for (DtPelicula* p : pelis) {
+                        delete p;
+                    }
+                    for (DtCine* c : cines) {
+                        delete c;
+                    }
                     iReserva->finalizar();
                     return;
                 }
@@ -585,10 +631,21 @@ void crearReserva() {
                     reingresarPelicula = false;
                 }
                 
+                // Liberar memoria de los DTOs
+                for (DtCine* c : cines) {
+                    delete c;
+                }
+                for (DtFuncion* f : funciones) {
+                    delete f;
+                }
                 iReserva->finalizar();
 
             } else {
                 cout << "Regresando al menu de inicio..." << endl;
+                // Liberar memoria de los DTOs
+                for (DtCine* c : cines) {
+                    delete c;
+                }
                 return;
             }
         } else {
@@ -597,9 +654,6 @@ void crearReserva() {
         }
 
     }
-
-
-            
 
     // Seleccion de funcion
     int idFuncion;
@@ -615,6 +669,10 @@ void crearReserva() {
     // Validar que la cantidad sea positiva
     if (cantidadAsientos <= 0) {
         cout << "Error: La cantidad de asientos a reservar debe ser mayor a cero." << endl;
+        // Liberar memoria de los DTOs
+        for (DtPelicula* p : pelis) {
+            delete p;
+        }
         iReserva->finalizar();
         return;
     }
@@ -625,6 +683,10 @@ void crearReserva() {
     if (!iReserva->reservarAsientos(cantidadAsientos, capacidadSala)) {
         cout << "No hay suficientes asientos disponibles." << endl;
         cout << "Capacidad de la sala: " << capacidadSala << " asientos." << endl;
+        // Liberar memoria de los DTOs
+        for (DtPelicula* p : pelis) {
+            delete p;
+        }
         iReserva->finalizar();
         return;
     }
@@ -697,9 +759,17 @@ void crearReserva() {
     } else {
         cout << "Reeserva cancelada." << endl;
         cout << "Regresando al menu de inicio..." << endl;
+        // Liberar memoria de los DTOs
+        for (DtPelicula* p : pelis) {
+            delete p;
+        }
         return;
     }
 
+    // Liberar memoria de los DTOs al final
+    for (DtPelicula* p : pelis) {
+        delete p;
+    }
     iReserva->finalizar();
 }
 
@@ -803,6 +873,11 @@ void eliminarPelicula() {
 		cout << "Pelicula eliminada correctamente." << endl;
 	else
 		cout << "Error: no se encontro la pelicula." << endl;
+		
+	// Liberar memoria de los DTOs
+	for (DtPelicula* p : pelis) {
+		delete p;
+	}
 }
 
 
@@ -1173,6 +1248,10 @@ void verInformacionPelicula() {
             list<DtCine*> cines = iReserva->listarCinesPeli();
             if (cines.empty()) {
                 cout << "No hay cines disponibles para esta pelicula." << endl;
+                // Liberar memoria antes de salir
+                for (DtPelicula* p : todasLasPelis) {
+                    delete p;
+                }
                 iReserva->finalizar();
                 return;
             }
@@ -1205,11 +1284,22 @@ void verInformacionPelicula() {
                         cout << "- " << *f << endl;
                     }
                 }
+                
+                // Liberar memoria de los DTOs
+                for (DtCine* c : cines) {
+                    delete c;
+                }
+                for (DtFuncion* f : funciones) {
+                    delete f;
+                }
             } else {
                 reingresarPelicula = false;
                 iReserva->finalizar();
                 cout << "Regresando al menu de inicio..." << endl;
                 // Liberar memoria
+                for (DtCine* c : cines) {
+                    delete c;
+                }
                 for (DtPelicula* p : todasLasPelis) {
                     delete p;
                 }

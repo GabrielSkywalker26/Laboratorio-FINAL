@@ -51,7 +51,11 @@ Pago* Reserva::getPago() {
 }
 
 Reserva::~Reserva() {
-    // No eliminamos los punteros porque son referencias a objetos que no nos pertenecen
+    // Liberar el objeto de pago si existe
+    if (pago != NULL) {
+        delete pago;
+        pago = NULL;
+    }
 }
 
 DtPelicula* Reserva::obtenerDtPelicula() {

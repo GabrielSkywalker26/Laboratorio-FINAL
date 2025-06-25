@@ -3,7 +3,6 @@
 
 #include "Pelicula.h"
 #include "DtFecha.h"
-#include "Pelicula.h"
 #include "DtFuncion.h"
 #include "DtHorario.h"
 #include "Reserva.h"

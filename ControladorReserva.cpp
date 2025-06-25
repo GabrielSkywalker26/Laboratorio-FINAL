@@ -272,12 +272,12 @@ list<DtReserva*> ControladorReserva::obtenerReservasPorPelicula(string titulo) {
                         
                         resultado.push_back(dtReserva);
                     }
-                    
-                    // Liberar memoria de los DtFuncion* creados
-                    for (DtFuncion* f : funciones) {
-                        delete f;
-                    }
                 }
+            }
+            
+            // Liberar memoria de los DtFuncion* creados DESPUÉS de usarlos
+            for (DtFuncion* f : funciones) {
+                delete f;
             }
         }
     }
